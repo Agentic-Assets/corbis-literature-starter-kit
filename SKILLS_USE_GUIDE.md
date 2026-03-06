@@ -57,6 +57,8 @@ The `latex_template/` folder contains a ready-to-use LaTeX template for empirica
 | Handle an R&R or draft referee responses | `referee-revision-response` |
 | Audit a paper before submission (simulated referee) | `pre-submission-review` |
 | Plan and generate publication-ready figures | `research-figure-design` |
+| Build a replication package for journal submission | `replication-package-builder` |
+| Recommend the best journal target for a paper | Use `/target` command (routes through journal profiles) |
 | Plan the full project from idea to submission | `research-pipeline-orchestrator` |
 | Stress-test a design or decision via structured debate | `research-debate` (invoke-only: `/debate`) |
 
@@ -80,9 +82,11 @@ Most papers move through these stages. The skills are designed to be used in rou
  5b. Figures      -->  research-figure-design
                        (+ python-empirical-code for implementation)
  6. Writing       -->  research-paper-writer
- 7. Pre-submit    -->  pre-submission-review
- 7. Presenting    -->  research-seminar-deck
- 8. Revision      -->  referee-revision-response
+ 6b. Targeting    -->  /target (journal profiles in references/)
+ 7. Replication   -->  replication-package-builder
+ 8. Pre-submit    -->  pre-submission-review
+ 8b. Presenting   -->  research-seminar-deck
+ 9. Revision      -->  referee-revision-response
 ```
 
 Use `research-pipeline-orchestrator` at any point to get a full roadmap or figure out what stage you're in.

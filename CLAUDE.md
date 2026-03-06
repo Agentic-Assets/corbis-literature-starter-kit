@@ -99,7 +99,7 @@ Key principles:
 
 ### Introduction paragraph 1 rule
 
-The opening paragraph of every introduction must be grounded in a recent, concrete industry event, policy change, or market development that directly motivates the research question. Cite industry reports, news articles, regulatory filings, or practitioner sources (e.g., Fed reports, NBER digests, Wall Street Journal, Financial Times, industry white papers). Do not open with an abstract literature gap. The reader should immediately see why this question matters *now*. Use `search_papers` with recent year filters to find motivating events when drafting introductions.
+The opening paragraph of every introduction must be grounded in a recent, concrete industry event, policy change, or market development that directly motivates the research question. Cite industry reports, news articles, regulatory filings, or practitioner sources (e.g., Fed reports, NBER digests, Wall Street Journal, Financial Times, industry white papers). Do not open with an abstract literature gap. The reader should immediately see why this question matters *now*. Use `search_papers` with recent year filters to find academic papers that reference motivating events. For news, trade press, or practitioner sources that `search_papers` cannot retrieve, ask the user to provide the source or URL.
 
 ## Project structure
 
