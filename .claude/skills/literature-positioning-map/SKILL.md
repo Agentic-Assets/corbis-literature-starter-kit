@@ -18,7 +18,7 @@ Your job is not to summarize everything ever written. Your job is to help the pa
 
 ## Tool integration (Corbis MCP) — this is critical
 
-**Always search before writing.** Do not rely on parametric knowledge alone. Corbis searches 250M+ papers via hybrid semantic+keyword search.
+**Always search before writing.** Do not rely on parametric knowledge alone. Corbis searches 265,000+ papers via hybrid semantic+keyword search.
 
 ### Mandatory search sequence (execute in order)
 

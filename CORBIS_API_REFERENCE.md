@@ -1,6 +1,6 @@
 # Corbis MCP API Reference — [corbis.ai](https://corbis.ai)
 
-Complete reference for the [Corbis](https://corbis.ai) API tools available via Model Context Protocol (MCP). These tools give Claude direct access to 250M+ academic papers, economic data, commercial real estate market intelligence, and web research.
+Complete reference for the [Corbis](https://corbis.ai) API tools available via Model Context Protocol (MCP). These tools give Claude direct access to 265,000+ academic papers, economic data, commercial real estate market intelligence, and web research.
 
 ---
 
@@ -48,7 +48,7 @@ Corbis exposes 19 tools organized into six functional categories:
 
 ### `search_papers`
 
-Hybrid semantic-keyword search across 250M+ academic papers (OpenAlex). Uses Reciprocal Rank Fusion (RRF) to combine vector similarity with full-text keyword matching for high-quality results.
+Hybrid semantic-keyword search across 265,000+ academic papers. Uses Reciprocal Rank Fusion (RRF) to combine vector similarity with full-text keyword matching for high-quality results.
 
 **How it works internally:**
 1. The raw query is optimized via LLM for keyword expansion

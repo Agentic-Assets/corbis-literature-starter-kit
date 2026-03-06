@@ -43,7 +43,7 @@ At every stage, actively use Corbis tools to provide concrete, evidence-based gu
 - `search_datasets` (topic keywords) → assess data feasibility early
 
 **Literature positioning stage:**
-- `literature_search` (Enterprise; fallback: multiple `search_papers` queries) (topic, `maxSearches: 3`) → comprehensive sweep across OpenAlex (250M+ papers)
+- `literature_search` (Enterprise; fallback: multiple `search_papers` queries) (topic, `maxSearches: 3`) → comprehensive sweep across 265,000+ papers
 - `get_paper_details` (paper IDs from search results) → read abstracts of close competitors
 - `internet_search` (Enterprise; fallback: `search_papers` for academic content, or ask user for URLs) (query: "site:ssrn.com" or "site:nber.org" + topic) → catch recent working papers
 - `export_citations` (paper IDs, format: `bibtex`) → generate bibliography entries for LaTeX
