@@ -17,12 +17,12 @@ ResearchTemplate/
   .env.example               # API keys and WRDS credentials template
   .gitignore                 # Configured for academic projects
   .claude/
-    skills/                  # 15 research skills (see below)
-    commands/                # 15 slash commands for quick access
+    skills/                  # 16 research skills (see below)
+    commands/                # 16 slash commands for quick access
     settings.json            # Pre-approved permissions and hooks
 ```
 
-### 15 research skills
+### 16 research skills
 
 | Skill | What it does |
 |---|---|
@@ -36,13 +36,14 @@ ResearchTemplate/
 | `asset-pricing-test-suite` | Portfolio sorts, alphas, Fama-MacBeth, signal novelty |
 | `research-paper-writer` | Draft introductions, abstracts, results prose |
 | `research-figure-design` | Plan and generate all common academic figure types |
+| `replication-package-builder` | Build replication packages for journal submission |
 | `research-debate` | Multi-round adversarial debate (invoke-only via `/debate`) |
 | `pre-submission-review` | 6-agent parallel audit simulating a hostile referee |
 | `research-seminar-deck` | Conference, seminar, and job-talk presentation design |
 | `referee-revision-response` | Parse referee reports, plan revisions, draft responses |
 | `research-pipeline-orchestrator` | Full project roadmap and stage diagnosis |
 
-### 15 slash commands
+### 16 slash commands
 
 Type these directly in Claude Code for quick access:
 
@@ -62,6 +63,7 @@ Type these directly in Claude Code for quick access:
 | `/referee` | Parse referee reports and draft responses |
 | `/roadmap` | Diagnose project stage and build a roadmap |
 | `/target` | Recommend the best journal target for a paper |
+| `/replicate` | Build a replication package for journal submission |
 | `/debate` | Run a structured multi-round debate on a research question |
 
 ### Built-in automation

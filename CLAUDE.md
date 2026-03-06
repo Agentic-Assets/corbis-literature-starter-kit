@@ -4,7 +4,7 @@ This project is a template and toolkit for producing empirical research papers t
 
 ## Skill routing — read this first
 
-Before responding to any research-related prompt, check whether one or more of the 15 installed skills (`.claude/skills/`) applies. If a skill matches, follow its workflow, deliverables, guardrails, and tool integration instructions. Multiple skills can be combined in a single response.
+Before responding to any research-related prompt, check whether one or more of the 16 installed skills (`.claude/skills/`) applies. If a skill matches, follow its workflow, deliverables, guardrails, and tool integration instructions. Multiple skills can be combined in a single response.
 
 **Routing quick reference:**
 
@@ -23,6 +23,7 @@ Before responding to any research-related prompt, check whether one or more of t
 | Presentation slides, talk outline           | `research-seminar-deck`          |
 | R&R, referee response, revision plan        | `referee-revision-response`      |
 | Figure planning and design for the paper     | `research-figure-design`         |
+| Replication package, provenance, archiving  | `replication-package-builder`    |
 | Full project roadmap, stage diagnosis       | `research-pipeline-orchestrator` |
 
 If unsure which skill applies, use `research-pipeline-orchestrator` to diagnose the stage.

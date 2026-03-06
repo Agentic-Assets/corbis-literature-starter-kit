@@ -28,8 +28,9 @@ If the user is vague, infer the most likely stage from the request instead of st
    - asset pricing tests for signal or factor papers
    - real-estate design checks for property, mortgage, urban, or spatial papers
 7. Paper drafting
-8. Revision and referee-response preparation
-9. Seminar or conference deck
+8. Replication package
+9. Revision and referee-response preparation
+10. Seminar or conference deck
 
 ## Tool integration (Corbis MCP)
 
