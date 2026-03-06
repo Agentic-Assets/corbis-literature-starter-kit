@@ -1,8 +1,8 @@
-# Academic Finance & Real Estate Research Template
+# Academic Research Template — Powered by Corbis
 
-A Claude Code project template for producing empirical research papers targeting top finance journals (JF, JFE, RFS, JFQA, MS) and real-estate journals (REE, JREFE, JRER, JUE, JHE).
+A Claude Code project template for producing empirical research papers targeting top finance journals (JF, JFE, RFS, JFQA, MS) and real-estate journals (REE, JREFE, JRER, JUE, JHE). Built with [Corbis](https://corbis.ai) integration for literature search, economic data, commercial real estate market intelligence, and citation management.
 
-This template turns Claude Code into a research co-pilot that understands the full lifecycle of an academic paper: from idea screening through literature review, identification design, data construction, empirical analysis, writing, pre-submission review, presentations, and referee responses.
+This template turns Claude Code into a research co-pilot that understands the full lifecycle of an academic paper: from idea screening through literature review, identification design, data construction, empirical analysis, writing, pre-submission review, presentations, and referee responses. Corbis MCP tools give Claude direct access to 250M+ academic papers, FRED economic series, CRE market data, and automated citation export throughout every stage.
 
 ## What's included
 
@@ -10,7 +10,7 @@ This template turns Claude Code into a research co-pilot that understands the fu
 ResearchTemplate/
   CLAUDE.md                  # Project instructions (loaded every session)
   SKILLS_USE_GUIDE.md        # When and how to use each skill
-  CORBIS_API_REFERENCE.md    # Corbis MCP tool documentation
+  CORBIS_API_REFERENCE.md    # Corbis MCP tool documentation (corbis.ai)
   latex_template/            # Publication-ready LaTeX paper template
   .env.example               # API keys and WRDS credentials template
   .gitignore                 # Configured for academic projects
@@ -75,7 +75,7 @@ Type these directly in Claude Code for quick access:
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) installed and configured
 - Python 3.10+
 - A LaTeX distribution (MacTeX, TeX Live, or MikTeX) for paper compilation
-- [Corbis MCP](https://corbis.ai) connected to Claude Code for literature search, economic data, and citations
+- [Corbis MCP](https://corbis.ai) connected to Claude Code — provides literature search (250M+ papers), FRED data, CRE market intelligence, and citation export
 
 ### 1. Clone or copy the template
 
@@ -184,9 +184,9 @@ The template enforces several conventions from top finance journals:
 - **Standard errors** clustered at the level of treatment variation
 - **Modern econometrics** by default (Callaway-Sant'Anna for staggered DiD, Roth pretrends)
 
-### Corbis MCP tools
+### Corbis MCP tools — [corbis.ai](https://corbis.ai)
 
-Most Corbis tools are available on all plans. Five tools require an enterprise subscription:
+[Corbis](https://corbis.ai) connects Claude to academic literature (250M+ papers via OpenAlex), FRED economic data, commercial real estate market intelligence, and citation management — all through the Model Context Protocol. Most tools are available on all plans. Five tools require an enterprise subscription:
 
 | All tiers | Enterprise only |
 |---|---|

@@ -1,6 +1,6 @@
-# Corbis MCP API Reference
+# Corbis MCP API Reference — [corbis.ai](https://corbis.ai)
 
-Complete reference for the Corbis API tools available via Model Context Protocol (MCP). These tools give Claude direct access to 250M+ academic papers, economic data, commercial real estate market intelligence, and web research.
+Complete reference for the [Corbis](https://corbis.ai) API tools available via Model Context Protocol (MCP). These tools give Claude direct access to 250M+ academic papers, economic data, commercial real estate market intelligence, and web research.
 
 ---
 
