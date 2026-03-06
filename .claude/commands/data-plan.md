@@ -17,4 +17,4 @@ Produce:
 8. FRED series needed (use `fred_search` to identify)
 9. Data appendix outline
 
-Use `search_datasets` to discover available data and `internet_search` for dataset documentation.
+Use `search_datasets` to discover available data.

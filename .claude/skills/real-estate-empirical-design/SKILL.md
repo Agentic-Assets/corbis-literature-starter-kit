@@ -92,12 +92,9 @@ Standard errors in real estate research require special attention:
 - `search_papers` (query: the specific RE design, e.g., "boundary discontinuity school district house prices", `matchCount: 10`) → find published papers using comparable methods in real estate.
 - `top_cited_articles` (journals: RE journals) → find seminal papers using comparable empirical designs in the real-estate literature.
 - `get_paper_details` (paper IDs) → read how they handle spatial dependence, measurement, and identification.
-- `literature_search` (Enterprise; fallback: multiple `search_papers` queries) (topic: the RE subfield, `maxSearches: 3`) → broader sweep for related empirical designs.
 
 ### Data discovery
 - `search_datasets` (query: "property transaction [geography]" or "mortgage origination") → find available data sources.
-- `internet_search` (Enterprise; fallback: `search_papers` for academic content, or ask user for URLs) (query: "[county/city] assessor data" or "[policy name] legislation text") → find institutional details, zoning codes, and policy documentation.
-- `read_web_page` (Enterprise) (URL of policy/legislation) → read the actual text of regulations being studied. If unavailable, ask the user to provide the URL directly.
 
 ### Housing and macro context via FRED
 - `fred_search` (keywords, e.g., "house price index" or "housing starts") → find relevant series.
@@ -125,8 +122,6 @@ Standard errors in real estate research require special attention:
 - Provide institutional context for referee responses
 
 ### Climate and environmental data
-- `internet_search` (Enterprise) (query: "FEMA flood map [location]" or "[state] wildfire risk data") → find environmental risk data sources.
-- `deep_research` (Enterprise; fallback: multiple `search_papers` queries) (topic: specific environmental policy + real estate) → comprehensive investigation when the institutional setting is complex.
 - `export_citations` (format: `bibtex`) → export BibTeX entries for design precedent papers cited in the real-estate design memo (e.g., boundary-discontinuity, spatial DiD, or hedonic methodology references). Offer this after the design memo is produced.
 - `format_citation` → format individual design-precedent citations for inline use in the memo.
 

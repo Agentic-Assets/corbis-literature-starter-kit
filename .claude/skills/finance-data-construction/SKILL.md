@@ -76,14 +76,12 @@ project/
   docs/          # Data appendix, merge audit
 ```
 
-When generating code, default to Stata unless the user specifies R or Python. Use clear variable names, comment every non-obvious step, and log all output.
+When generating code, default to Python. Use clear variable names, comment every non-obvious step, and log all output.
 
 ## Tool integration (Corbis MCP)
 
 ### Data discovery
 - `search_datasets` (topic keywords, e.g., "mortgage origination loan level") → discover datasets, coverage periods, and access paths.
-- `internet_search` (Enterprise; fallback: `search_papers` for academic content, or ask user for URLs) (query: "[dataset name] documentation" or "WRDS [database] manual") → find technical documentation.
-- `read_web_page` (Enterprise) (URL of dataset documentation page) → read data dictionaries, variable lists, and known issues. If unavailable, ask the user to provide the URL directly.
 
 ### Macro variables via FRED
 - `fred_search` (keywords, e.g., "house price index national") → find the right FRED series.

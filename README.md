@@ -11,11 +11,12 @@ ResearchTemplate/
   CLAUDE.md                  # Project instructions (loaded every session)
   SKILLS_USE_GUIDE.md        # When and how to use each skill
   CORBIS_API_REFERENCE.md    # Corbis MCP tool documentation (corbis.ai)
+  CORBIS_MCP_CLAUDE_CODE_GUIDE.md  # Step-by-step Corbis setup for Claude Code
   latex_template/            # Publication-ready LaTeX paper template
   .env.example               # API keys and WRDS credentials template
   .gitignore                 # Configured for academic projects
   .claude/
-    skills/                  # 14 research skills (see below)
+    skills/                  # 15 research skills (see below)
     commands/                # 14 slash commands for quick access
     settings.json            # Pre-approved permissions and hooks
 ```
@@ -39,7 +40,6 @@ ResearchTemplate/
 | `research-seminar-deck` | Conference, seminar, and job-talk presentation design |
 | `referee-revision-response` | Parse referee reports, plan revisions, draft responses |
 | `research-pipeline-orchestrator` | Full project roadmap and stage diagnosis |
-| `research-debate` | Multi-round adversarial debate on any research decision |
 
 ### 14 slash commands
 
@@ -75,16 +75,20 @@ Type these directly in Claude Code for quick access:
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) installed and configured
 - Python 3.10+
 - A LaTeX distribution (MacTeX, TeX Live, or MikTeX) for paper compilation
-- [Corbis MCP](https://corbis.ai) connected to Claude Code — provides literature search (265,000+ papers), FRED data, CRE market intelligence, and citation export
+- [Corbis MCP](https://corbis.ai) connected to Claude Code — provides literature search (265,000+ papers), FRED data, CRE market intelligence, and citation export (see setup guide below)
 
-### 1. Clone or copy the template
+### 1. Connect Corbis MCP
+
+Follow the steps in [`CORBIS_MCP_CLAUDE_CODE_GUIDE.md`](CORBIS_MCP_CLAUDE_CODE_GUIDE.md) to generate an API key and connect Corbis to Claude Code. This takes about 2 minutes and gives Claude access to all research tools.
+
+### 2. Clone or copy the template
 
 ```bash
 git clone <repo-url> my-paper
 cd my-paper
 ```
 
-### 2. Set up credentials
+### 3. Set up credentials
 
 ```bash
 cp .env.example .env
@@ -102,7 +106,7 @@ For WRDS, you also need PostgreSQL credentials in `~/.pgpass`:
 wrds-pgdata.wharton.upenn.edu:9737:wrds:YOUR_USERNAME:YOUR_PASSWORD
 ```
 
-### 3. Install Python packages
+### 4. Install Python packages
 
 ```bash
 pip install wrds linearmodels statsmodels pandas matplotlib numpy scipy \
@@ -110,7 +114,7 @@ pip install wrds linearmodels statsmodels pandas matplotlib numpy scipy \
   geopandas ruff
 ```
 
-### 4. Start a new paper
+### 5. Start a new paper
 
 Copy the LaTeX template into your project:
 
@@ -186,16 +190,15 @@ The template enforces several conventions from top finance journals:
 
 ### Corbis MCP tools — [corbis.ai](https://corbis.ai)
 
-[Corbis](https://corbis.ai) connects Claude to academic literature (265,000+ papers), FRED economic data, commercial real estate market intelligence, and citation management — all through the Model Context Protocol. Most tools are available on all plans. Five tools require an enterprise subscription:
+[Corbis](https://corbis.ai) connects Claude to academic literature (265,000+ papers), FRED economic data, commercial real estate market intelligence, and citation management — all through the Model Context Protocol. All skills use tools available on every Corbis plan:
 
-| All tiers | Enterprise only |
+| Category | Tools |
 |---|---|
-| `search_papers`, `get_paper_details`, `top_cited_articles` | `literature_search` |
-| `search_datasets`, `fred_search`, `fred_series_batch` | `internet_search`, `read_web_page` |
-| `get_market_data`, `compare_markets`, `search_markets` | `deep_research`, `query_corbis` |
-| `export_citations`, `format_citation` | |
-
-When enterprise tools are unavailable, skills automatically fall back to all-tier alternatives (e.g., multiple `search_papers` queries instead of `literature_search`).
+| Research & Papers | `search_papers`, `get_paper_details`, `top_cited_articles`, `search_datasets` |
+| Economic Data | `fred_search`, `fred_series_batch`, `get_national_macro` |
+| Market Intelligence | `get_market_data`, `compare_markets`, `search_markets` |
+| Citations | `export_citations`, `format_citation` |
+| Academic Identity | `find_academic_identity`, `confirm_academic_identity` |
 
 See `CORBIS_API_REFERENCE.md` for full documentation.
 
@@ -223,6 +226,7 @@ my-paper/
 | `CLAUDE.md` | Project instructions loaded every session (skill routing, defaults, writing rules) |
 | `SKILLS_USE_GUIDE.md` | Detailed guide: when to use each skill, example cases, multi-skill workflows |
 | `CORBIS_API_REFERENCE.md` | All 19 Corbis MCP tools with parameters, tier availability, and recommended chains |
+| `CORBIS_MCP_CLAUDE_CODE_GUIDE.md` | Step-by-step guide to connect Corbis MCP to Claude Code (API key, setup, troubleshooting) |
 
 ## License
 

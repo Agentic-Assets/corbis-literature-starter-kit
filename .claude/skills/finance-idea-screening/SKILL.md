@@ -35,7 +35,7 @@ Rate each dimension 1-5:
 
 1. Restate the idea in one sentence.
 2. Identify the mechanism or friction.
-3. Name the closest 3-5 papers (use `search_papers` or `literature_search` (Enterprise; fallback: multiple `search_papers` queries) to verify — do not guess).
+3. Name the closest 3-5 papers (use `search_papers` to verify — do not guess).
 4. State what is new relative to the closest papers — be specific about whether the novelty is in mechanism, data, identification, setting, or implication.
 5. Sketch the empirical design or theory-to-data bridge.
 6. Assess data feasibility (use `search_datasets` if the user's data source is unclear).
@@ -71,15 +71,11 @@ When asked to generate ideas (not just screen them):
 1. `search_papers` (query: the core question in natural language, `matchCount: 15`) → find closest existing work. Corbis uses hybrid semantic+keyword search over 265,000+ papers, so phrase the query like a research question, not keywords.
 2. `get_paper_details` (paper IDs from top 3-5 results) → read abstracts to confirm whether they truly overlap or just share vocabulary.
 3. `top_cited_articles` (field: e.g., "corporate finance", topic: e.g., "debt covenants") → identify seminal papers the user must know about.
-4. `internet_search` (Enterprise; fallback: `search_papers` for academic content, or ask user for URLs) (query: `"site:ssrn.com [topic] [year]"`) → catch recent working papers not yet indexed in OpenAlex.
+4. `search_papers` (same query, `minYear: 2023`) → catch recent working papers not yet indexed in OpenAlex.
 
 ### Data feasibility check
 - `search_datasets` (topic keywords) → discover available datasets and their coverage.
 - `fred_search` (keywords like "commercial real estate" or "bank lending") → find relevant FRED macro series for context or controls.
-
-### When the idea is complex or cross-disciplinary
-- `deep_research` (Enterprise; fallback: multiple `search_papers` queries) (topic description, `maxSearches: 3`) → comprehensive multi-source sweep when a simple search is insufficient.
-- `query_corbis` (Enterprise; fallback: call individual tools directly) (natural language question about the idea) → let the AI route across literature, data, and web sources.
 
 ### For real-estate ideas specifically
 - `get_market_data` (metro name) → current CRE fundamentals to assess whether the phenomenon is economically relevant now.

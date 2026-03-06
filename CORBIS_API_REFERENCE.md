@@ -358,20 +358,19 @@ Link or unlink the user's account to an OpenAlex author ID.
 1. `search_papers` — Initial broad search to map the landscape
 2. `top_cited_articles` — Find seminal papers in target journals
 3. `get_paper_details` — Deep-dive into the closest papers
-4. `literature_search`* — Multi-round synthesis with themes and inline citations
-5. `internet_search`* — Check SSRN/NBER for recent working papers
-6. `format_citation` / `export_citations` — Format references for the manuscript
+4. `search_papers` (with `minYear: 2023`) — Catch recent working papers
+5. `format_citation` / `export_citations` — Format references for the manuscript
 
 ### Idea Validation Workflow
 1. `search_papers` — Check if the idea has been studied before
-2. `internet_search`* — Check for recent working papers on SSRN
+2. `search_papers` (with `minYear: 2023`) — Check for recent working papers
 3. `search_datasets` — Assess data feasibility
 4. `fred_search` — Find relevant economic indicators for context
 
 ### Data Construction Workflow
 1. `search_datasets` — Discover available datasets
 2. `fred_search` + `fred_series_batch` — Pull macro variables
-3. `internet_search`* + `read_web_page`* — Check data documentation
+3. `search_papers` — Find papers that use similar data for methodology reference
 
 ### Real Estate Market Context
 1. `get_market_data` — Metro-level CRE data
@@ -383,7 +382,5 @@ Link or unlink the user's account to an OpenAlex author ID.
 ### Revision and Positioning Workflow
 1. `search_papers` — Verify claims about the literature
 2. `get_paper_details` — Read abstracts of papers referees mention
-3. `internet_search`* — Check for new papers published since submission
+3. `search_papers` (with `minYear`) — Check for new papers published since submission
 4. `format_citation` — Format new references added during revision
-
-*\* Enterprise only — see fallback alternatives in the tier availability table above*

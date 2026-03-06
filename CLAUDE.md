@@ -39,9 +39,7 @@ See `SKILLS_USE_GUIDE.md` for detailed guidance, example cases, and multi-skill 
 
 Corbis MCP tools are available for literature search, data discovery, market data, and citations. **Always search before asserting** — do not guess about novelty, literature, or data availability when you can check. See `CORBIS_API_REFERENCE.md` for the full API and tier details.
 
-**All tiers:** `search_papers`, `get_paper_details`, `top_cited_articles`, `search_datasets`, `fred_search`, `fred_series_batch`, `get_national_macro`, `get_market_data`, `compare_markets`, `search_markets`, `export_citations`, `format_citation`, `find_academic_identity`, `confirm_academic_identity`
-
-**Enterprise only:** `literature_search`, `internet_search`, `read_web_page`, `deep_research`, `query_corbis`. If unavailable, fall back to multiple `search_papers` queries or ask the user for specific URLs.
+**Available tools:** `search_papers`, `get_paper_details`, `top_cited_articles`, `search_datasets`, `fred_search`, `fred_series_batch`, `get_national_macro`, `get_market_data`, `compare_markets`, `search_markets`, `export_citations`, `format_citation`, `find_academic_identity`, `confirm_academic_identity`
 
 Key principles:
 
@@ -74,7 +72,7 @@ Key principles:
 
 ### Introduction paragraph 1 rule
 
-The opening paragraph of every introduction must be grounded in a recent, concrete industry event, policy change, or market development that directly motivates the research question. Cite industry reports, news articles, regulatory filings, or practitioner sources (e.g., Fed reports, NBER digests, Wall Street Journal, Financial Times, industry white papers). Do not open with an abstract literature gap. The reader should immediately see why this question matters *now*. Use `internet_search` to find recent motivating events when drafting introductions.
+The opening paragraph of every introduction must be grounded in a recent, concrete industry event, policy change, or market development that directly motivates the research question. Cite industry reports, news articles, regulatory filings, or practitioner sources (e.g., Fed reports, NBER digests, Wall Street Journal, Financial Times, industry white papers). Do not open with an abstract literature gap. The reader should immediately see why this question matters *now*. Use `search_papers` with recent year filters to find motivating events when drafting introductions.
 
 ## Project structure
 

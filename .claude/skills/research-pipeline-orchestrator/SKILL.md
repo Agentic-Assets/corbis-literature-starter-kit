@@ -43,9 +43,8 @@ At every stage, actively use Corbis tools to provide concrete, evidence-based gu
 - `search_datasets` (topic keywords) → assess data feasibility early
 
 **Literature positioning stage:**
-- `literature_search` (Enterprise; fallback: multiple `search_papers` queries) (topic, `maxSearches: 3`) → comprehensive sweep across 265,000+ papers
+- `search_papers` (multiple queries covering the topic) → comprehensive sweep across 265,000+ papers
 - `get_paper_details` (paper IDs from search results) → read abstracts of close competitors
-- `internet_search` (Enterprise; fallback: `search_papers` for academic content, or ask user for URLs) (query: "site:ssrn.com" or "site:nber.org" + topic) → catch recent working papers
 - `export_citations` (paper IDs, format: `bibtex`) → generate bibliography entries for LaTeX
 
 **Design and data stage:**
@@ -64,9 +63,6 @@ At every stage, actively use Corbis tools to provide concrete, evidence-based gu
 - `format_citation` (paper ID, style: `apa` or `chicago`) → generate formatted citations
 - `export_citations` (paper IDs, format: `bibtex`) → batch export references
 
-**When uncertain or complex:**
-- `query_corbis` (Enterprise; fallback: call individual tools directly) (natural language question) → let the AI route across all available tools
-- `deep_research` (Enterprise; fallback: multiple `search_papers` queries) (topic, `maxSearches: 4`) → comprehensive multi-source investigation
 
 ## What to produce
 

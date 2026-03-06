@@ -564,8 +564,3 @@ Every skill integrates Corbis MCP tools. The most commonly used:
 | `get_market_data` | CRE market fundamentals | real-estate-empirical-design |
 | `compare_markets` | Cross-metro comparisons | real-estate-empirical-design |
 | `search_datasets` | Discovering available data | finance-data-construction, idea-screening |
-| `literature_search`* | Comprehensive literature sweeps | literature-positioning-map, idea-screening |
-| `internet_search`* | SSRN/NBER working papers, policy docs | All skills |
-| `deep_research`* | Complex or fragmented literatures | literature-positioning-map, pipeline-orchestrator |
-
-*\* Enterprise only. If unavailable, use multiple `search_papers` queries as a fallback. See `CORBIS_API_REFERENCE.md` for full details and tier availability.*

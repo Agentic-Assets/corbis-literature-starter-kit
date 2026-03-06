@@ -32,11 +32,9 @@ Your job is not to summarize everything ever written. Your job is to help the pa
 
 **Step 3 — Outer ring (seminal and contextual):**
 - `top_cited_articles` (field + topic) → identify the canonical papers in each literature bucket.
-- `literature_search` (Enterprise; fallback: multiple `search_papers` queries) (topic: the broader research area, `maxSearches: 3`) → comprehensive sweep.
+- `search_papers` (multiple queries covering the broader research area) → comprehensive sweep.
 
 **Step 4 — Recent working papers (essential — these are scooping risks):**
-- `internet_search` (Enterprise; fallback: `search_papers` for academic content, or ask user for URLs) (query: `"site:ssrn.com [topic] [recent year]"`) → SSRN working papers.
-- `internet_search` (Enterprise) (query: `"site:nber.org [topic]"`) → NBER working papers.
 - `search_papers` (same core query, `minYear: 2023`) → very recent published or forthcoming papers.
 
 **Step 5 — Verify specific papers:**
@@ -46,9 +44,6 @@ Your job is not to summarize everything ever written. Your job is to help the pa
 - `format_citation` (paper ID, style: `apa` or `chicago`) → generate properly formatted citations for individual papers.
 - `export_citations` (list of paper IDs, format: `bibtex`) → batch export references for the LaTeX bibliography file. Use this after completing the literature map to give the user a ready-to-use .bib file.
 
-### When the landscape is complex
-- `deep_research` (Enterprise; fallback: multiple `search_papers` queries) (topic description, `maxSearches: 4`) → comprehensive multi-source investigation for fields with large or fragmented literatures.
-- `query_corbis` (Enterprise; fallback: call individual tools directly) (natural language question about the literature) → flexible routing when the search strategy is unclear.
 
 ## What to avoid
 

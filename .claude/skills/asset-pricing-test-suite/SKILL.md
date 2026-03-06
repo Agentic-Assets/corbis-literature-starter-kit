@@ -88,12 +88,9 @@ This section is mandatory. A signal with a large alpha but no implementable stra
 1. `search_papers` (query: the signal name + "return predictability" or "cross-section of returns", `matchCount: 15`) → check whether the signal or a close variant has been documented.
 2. `search_papers` (query: the economic mechanism behind the signal, `matchCount: 10`) → find papers with different signals but the same mechanism.
 3. `get_paper_details` (paper IDs from top results) → read abstracts to determine true overlap vs. superficial similarity.
-4. `internet_search` (Enterprise; fallback: `search_papers` for academic content, or ask user for URLs) (query: "site:github.com/OpenSourceAP" or "Chen Zimmermann [signal name]") → check the Chen-Zimmermann open-source asset pricing project for replication status.
-5. `internet_search` (Enterprise) (query: "site:ssrn.com [signal] cross-section stock returns") → catch recent working papers.
 
 ### Anomaly zoo context
 - `top_cited_articles` (field: "asset pricing", topic: "anomalies" or "return predictability") → identify the canonical papers the user must cite and benchmark against.
-- `literature_search` (Enterprise; fallback: multiple `search_papers` queries) (topic: "anomaly [signal category]", `maxSearches: 2`) → comprehensive sweep for related signals.
 
 ### Macro conditioning variables
 - `fred_search` (keywords like "investor sentiment" or "market volatility") → find series for conditional tests.
