@@ -96,6 +96,8 @@ Always give the user:
 
 **Cross-track papers**: Some papers (e.g., mortgage finance, housing and household portfolios, REIT pricing) could target either track. In these cases, lay out both paths with the trade-offs of each.
 
+Read `references/journal-targets.md` for per-journal profiles including fit inference, red flags, and development advice.
+
 ## Decision gates
 
 Build explicit go/no-go checkpoints into every roadmap:

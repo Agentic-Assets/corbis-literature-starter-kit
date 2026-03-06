@@ -39,7 +39,7 @@ Rate each dimension 1-5:
 4. State what is new relative to the closest papers — be specific about whether the novelty is in mechanism, data, identification, setting, or implication.
 5. Sketch the empirical design or theory-to-data bridge.
 6. Assess data feasibility (use `search_datasets` if the user's data source is unclear).
-7. Identify the likely journal track.
+7. Identify the likely journal track. Read `references/journal-targets.md` for detailed journal profiles including fit inference, red flags, and development advice.
 8. List the two or three biggest fatal risks.
 9. Apply the scoring rubric.
 

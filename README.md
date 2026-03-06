@@ -12,12 +12,13 @@ ResearchTemplate/
   SKILLS_USE_GUIDE.md        # When and how to use each skill
   CORBIS_API_REFERENCE.md    # Corbis MCP tool documentation (corbis.ai)
   CORBIS_MCP_CLAUDE_CODE_GUIDE.md  # Step-by-step Corbis setup for Claude Code
+  references/                # Journal profiles, targeting data
   latex_template/            # Publication-ready LaTeX paper template
   .env.example               # API keys and WRDS credentials template
   .gitignore                 # Configured for academic projects
   .claude/
     skills/                  # 15 research skills (see below)
-    commands/                # 14 slash commands for quick access
+    commands/                # 15 slash commands for quick access
     settings.json            # Pre-approved permissions and hooks
 ```
 
@@ -41,7 +42,7 @@ ResearchTemplate/
 | `referee-revision-response` | Parse referee reports, plan revisions, draft responses |
 | `research-pipeline-orchestrator` | Full project roadmap and stage diagnosis |
 
-### 14 slash commands
+### 15 slash commands
 
 Type these directly in Claude Code for quick access:
 
@@ -60,6 +61,7 @@ Type these directly in Claude Code for quick access:
 | `/review-paper` | Run a 6-agent pre-submission audit |
 | `/referee` | Parse referee reports and draft responses |
 | `/roadmap` | Diagnose project stage and build a roadmap |
+| `/target` | Recommend the best journal target for a paper |
 | `/debate` | Run a structured multi-round debate on a research question |
 
 ### Built-in automation

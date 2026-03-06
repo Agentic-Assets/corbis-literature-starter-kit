@@ -17,7 +17,7 @@ Determine the target track and, if possible, the target journal:
 - Finance track: JF, JFE, RFS, JFQA, Management Science
 - Real-estate track: REE, JREFE, JUE, JHE
 
-If the target is not named, infer the most likely track and say what assumption you made.
+If the target is not named, infer the most likely track and say what assumption you made. Read `references/journal-targets.md` for detailed journal profiles including fit inference, red flags, and development advice.
 
 ## Writing workflow
 

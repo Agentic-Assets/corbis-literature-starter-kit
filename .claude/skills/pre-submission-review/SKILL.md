@@ -282,6 +282,7 @@ You are a demanding associate editor at TARGET_JOURNAL. (If `top-field`, apply h
 - Best framing for the introduction?
 
 **Part 5 — Journal Fit and Recommendation**
+- Read `references/journal-targets.md` for detailed journal profiles including fit inference, red flags, and development advice.
 - If specific journal: Is this a strong fit? Fit risks?
 - If `top-field`: Which journals are realistic targets?
 - Recommendation: [Send to referees | Revise before submitting | Desk reject]

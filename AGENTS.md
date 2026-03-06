@@ -35,6 +35,32 @@ This skill is token-heavy (7+ agent calls). Do not trigger it automatically. Onl
 
 See `SKILLS_USE_GUIDE.md` for detailed guidance, example cases, and multi-skill workflows.
 
+## Journal targeting
+
+When recommending a journal target or shaping a paper for submission, read `references/journal-targets.md` for detailed per-journal profiles (editors, fees, fit inference, red flags, development advice) and `references/journal-profiles.json` for structured data.
+
+**Routing logic:**
+
+1. Classify the paper's true contribution (not just its data source): broad finance, specialized finance, broad real estate, real estate finance/economics, business-facing real estate, housing economics/policy, or urban/spatial economics.
+2. Apply hard filters first:
+   - No broad finance contribution → do not force JF, JFE, or RFS
+   - Core housing economics/policy → prefer JHE before RE specialty journals
+   - Core urban/spatial economics → prefer RSUE before RE specialty journals
+3. Score candidates on: topic fit, audience fit, novelty fit, method fit, contribution breadth, data/code readiness.
+4. Always output: top 3 targets ranked, rationale for each, 5 revisions to improve fit for the top target, 3 desk-reject risks, and mutable submission details to verify manually.
+
+**Quick routing:**
+- **JF**: first-order contribution, broad finance importance
+- **JFE**: strong financial economics core, mechanism or theory angle
+- **RFS**: major question + especially clean execution + broad implications
+- **JFQA**: rigorous finance with quantitative or specialized edge
+- **RoF**: innovative, cross-disciplinary, or emerging finance topics
+- **REE**: strongest broad real estate papers with general implications
+- **JREFE**: real estate grounded in finance or economics (mortgages, REITs, valuation)
+- **JRER**: real estate business relevance and decision-making audience
+- **JHE**: housing economics, affordability, zoning, rental markets, policy
+- **RSUE**: urban, spatial, regional economics with clear spatial dimension
+
 ## Research tool usage
 
 Corbis MCP tools are available for literature search, data discovery, market data, and citations. **Always search before asserting** — do not guess about novelty, literature, or data availability when you can check. See `CORBIS_API_REFERENCE.md` for the full API and tier details.
