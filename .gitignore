@@ -1,0 +1,57 @@
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+_minted-*/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# Data (raw data should not be committed)
+raw/
+*.csv
+*.dta
+*.sas7bdat
+*.parquet
+*.feather
+*.xlsx
+*.xls
+
+# But allow template and reference files
+!latex_template/**
+!*.bib
+!*.bst
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Credentials
+.env
+*.pgpass
+credentials*
+
+# Large output files
+output/figures/*.png
+output/figures/*.pdf
+output/tables/*.tex
