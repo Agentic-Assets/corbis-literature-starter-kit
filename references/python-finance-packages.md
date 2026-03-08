@@ -27,58 +27,6 @@
 | `arch` | GARCH, volatility models | Time-series finance |
 | `pyblp` | BLP demand estimation | Structural IO/RE |
 
-## requirements.txt template
-
-```
-pandas>=2.0
-numpy>=1.24
-matplotlib>=3.7
-seaborn>=0.12
-statsmodels>=0.14
-linearmodels>=5.3
-scipy>=1.10
-wrds>=3.1
-```
-
-## Key API patterns
-
-### linearmodels
-
-```python
-# Panel OLS
-from linearmodels.panel import PanelOLS
-# Must set multi-index: df.set_index(['entity', 'time'])
-model = PanelOLS.from_formula('y ~ x + EntityEffects + TimeEffects', data=df)
-result = model.fit(cov_type='clustered', cluster_entity=True)
-
-# Fama-MacBeth
-from linearmodels.asset_pricing import FamaMacBeth
-model = FamaMacBeth.from_formula('ret ~ x1 + x2', data=df)
-result = model.fit(cov_type='kernel', bandwidth=6)
-
-# IV
-from linearmodels.iv import IV2SLS
-model = IV2SLS.from_formula('y ~ x2 + [x1 ~ z1 + z2]', data=df)
-```
-
-### statsmodels
-
-```python
-import statsmodels.formula.api as smf
-
-# OLS with formula
-result = smf.ols('y ~ x1 + x2 + C(industry)', data=df).fit()
-
-# Clustered SEs
-result_cl = result.get_robustcov_results(cov_type='cluster', groups=df['firm_id'])
-
-# Logit/Probit
-result = smf.logit('default ~ ltv + dti + fico', data=df).fit()
-
-# Newey-West
-result = smf.ols('y ~ x', data=df).fit(cov_type='HAC', cov_kwds={'maxlags': 6})
-```
-
 ## Common pitfalls
 
 - `linearmodels` requires a MultiIndex (entity, time) — set it before estimation

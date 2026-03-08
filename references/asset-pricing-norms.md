@@ -27,7 +27,6 @@
 - Liquidity and trading-cost discussion: bid-ask spread, Amihud illiquidity
 - Turnover and implementability: monthly turnover rate, capacity estimates
 - Delisting returns: use CRSP delisting returns, not just last trading day
-- Standard factor benchmarks for alpha attribution (see above)
 - Out-of-sample or post-publication checks when relevant
 - Multiple-testing awareness: Harvey-Liu-Zhu (2016) suggest t > 3.0 threshold when many signals searched
 - Anomaly zoo context: position relative to Chen-Zimmermann (2022) replication project
@@ -43,7 +42,6 @@
 - Gu, Kelly, and Xiu (2020): ML methods can capture substantial cross-sectional return predictability
 - A new characteristic should be assessed against ML-based expected return models
 - If ML subsumes the signal, the contribution must come from economic interpretation, not prediction alone
-- Consider variable importance measures from ML models as supporting evidence
 
 ## Reporting
 - Explain exactly how the signal is lagged and standardized
