@@ -7,11 +7,13 @@ Run the `finance-idea-screening` skill on this idea:
 $ARGUMENTS
 
 Steps:
-1. Restate the idea in one sentence.
-2. Search for closest papers using `search_papers` (do not skip this).
-3. Score on 5 dimensions (question, mechanism, design, data, audience) using the 1-5 rubric.
-4. Apply decision rules: Go (>=18, no 1s) / Revise (13-17) / Kill (<=12 or any 1).
-5. Identify the 2-3 biggest fatal risks.
-6. Recommend journal track.
+1. Run Stage 0 desk-editor screen (four quick questions). If weak, stop early with Revise/Kill.
+2. Restate the idea in one sentence (question-first framing — not "Using X data...").
+3. Search for closest papers using `search_papers` (do not skip this).
+4. Score on 6 dimensions (question, importance, contribution, mechanism, bridge, data) using the 1-5 rubric.
+5. Apply decision rules: Top-3 Go (importance>=4, contribution>=4, bridge>=4, no dim<3, <=3 hurdles) / Field-journal Go (all>=3, total>=18) / Revise / Kill.
+6. Run the three stress tests (null-result value, simultaneous-discovery, syllabus sentence).
+7. Identify the 2-3 essential hurdles and apply the revision-feasibility rule.
+8. Recommend journal track and describe the killer exhibit.
 
 Produce a complete Idea Card.
