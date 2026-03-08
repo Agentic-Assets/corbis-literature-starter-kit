@@ -1,6 +1,6 @@
 # Project: Academic Finance & Real Estate Research — Powered by Corbis
 
-This project is a template and toolkit for producing empirical research papers targeting top finance journals (JF, JFE, RFS, JFQA, MS) and real-estate journals (REE, JREFE, JRER, JUE, JHE). Corbis MCP tools (corbis.ai) provide literature search, economic data, CRE market intelligence, and citation management throughout the research pipeline.
+This project is a template and toolkit for producing empirical research papers targeting top finance journals (JF, JFE, RFS, JFQA, RoF) and real-estate journals (REE, JREFE, JRER, JHE, RSUE). Corbis MCP tools (corbis.ai) provide literature search, economic data, CRE market intelligence, and citation management throughout the research pipeline.
 
 ## Skill routing — read this first
 

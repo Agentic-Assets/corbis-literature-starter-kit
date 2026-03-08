@@ -25,8 +25,8 @@ Recognized journal names (case-insensitive):
 | Category | Journals |
 |---|---|
 | Top-5 economics | `AER`, `QJE`, `JPE`, `Econometrica`, `REStud` |
-| Finance | `JF`, `JFE`, `RFS`, `JFQA`, `MS` |
-| Real estate / urban | `REE`, `JREFE`, `JUE`, `JHE` |
+| Finance | `JF`, `JFE`, `RFS`, `JFQA`, `RoF`, `MS` |
+| Real estate / urban | `REE`, `JREFE`, `JRER`, `JHE`, `RSUE`, `JUE` |
 | Other finance | `RCFS`, `JBF`, `JCF`, `JMCB` |
 | Macro | `AEJMacro`, `JME`, `RED` |
 
@@ -225,20 +225,20 @@ You are a journal production editor reviewing completeness and self-containednes
    - SE computation method and clustering level
    - Significance star definitions
    - Whether reporting SEs, t-stats, or p-values
-4. **t-statistics**: Tables should report t-statistics in parentheses below coefficients (not standard errors, not p-values). Flag any table that reports standard errors or p-values instead of t-statistics.
-5. **Observations**: N reported in every column?
-6. **Cross-referencing**: Every table cited in text?
-7. **Formatting consistency**: Consistent notation for FE indicators, decimal places, stars.
+5. **t-statistics**: Tables should report t-statistics in parentheses below coefficients (not standard errors, not p-values). Flag any table that reports standard errors or p-values instead of t-statistics.
+6. **Observations**: N reported in every column?
+7. **Cross-referencing**: Every table cited in text?
+8. **Formatting consistency**: Consistent notation for FE indicators, decimal places, stars.
 
 **For every figure, check:**
 
 1. **Float structure**: Caption → label → `\floatnotes{...}` above the figure → `\centering` + `\includegraphics`. Flag any figure where the note appears below the image.
 2. **Title/caption**: Self-contained?
 3. **Axis labels**: Both axes labeled with units?
-3. **Legend**: Present if multiple series?
-4. **Confidence intervals**: Shown for binscatters, coefficient plots, event studies?
-5. **Notes completeness**: Sample, what is plotted, controls absorbed, data source.
-6. **Cross-referencing**: Every figure cited in text?
+4. **Legend**: Present if multiple series?
+5. **Confidence intervals**: Shown for binscatters, coefficient plots, event studies?
+6. **Notes completeness**: Sample, what is plotted, controls absorbed, data source.
+7. **Cross-referencing**: Every figure cited in text?
 
 **Output format:**
 ```

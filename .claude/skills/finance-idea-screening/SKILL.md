@@ -96,9 +96,9 @@ Also provide:
 
 ## Journal-fit logic
 
-**Finance-track ideas** should look capable of a concise, high-powered contribution with credible identification and broad finance relevance. JF/JFE/RFS want a result that changes how the field thinks about something. JFQA and Management Science are slightly more receptive to careful empirical work on narrower questions.
+**Finance-track ideas** should look capable of a concise, high-powered contribution with credible identification and broad finance relevance. JF/JFE/RFS want a result that changes how the field thinks about something. JFQA and RoF are slightly more receptive to careful empirical work on narrower or cross-disciplinary questions.
 
-**Real-estate-track ideas** can lean more heavily on institutional setting, property-market detail, and spatial or policy structure, but they still need a clean contribution and a strong empirical design. REE and JREFE value institutional knowledge. JUE and JHE want broader urban/housing economics framing.
+**Real-estate-track ideas** can lean more heavily on institutional setting, property-market detail, and spatial or policy structure, but they still need a clean contribution and a strong empirical design. REE and JREFE value institutional knowledge. RSUE and JHE want broader urban/housing economics framing.
 
 Read if needed:
 - references/journal-targets.md

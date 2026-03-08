@@ -14,8 +14,8 @@ Convert a design and set of results into prose that is concise, credible, and jo
 ## First move
 
 Determine the target track and, if possible, the target journal:
-- Finance track: JF, JFE, RFS, JFQA, Management Science
-- Real-estate track: REE, JREFE, JUE, JHE
+- Finance track: JF, JFE, RFS, JFQA, RoF
+- Real-estate track: REE, JREFE, JHE, RSUE
 
 If the target is not named, infer the most likely track and say what assumption you made. Read `references/journal-targets.md` for detailed journal profiles including fit inference, red flags, and development advice.
 
@@ -102,11 +102,11 @@ Total: **40-50 pages** including tables, figures, and references.
 
 JF and RFS tend toward the shorter end (~40-45 pages). JFE accommodates slightly longer papers (~45-55).
 
-### JFQA / Management Science
+### JFQA / RoF
 
-Total: **35-50 pages**. JFQA is compact. MS allows more institutional detail.
+Total: **35-50 pages**. JFQA is compact. RoF accommodates cross-disciplinary and emerging topics.
 
-### Real-estate track (REE, JREFE, JUE, JHE)
+### Real-estate track (REE, JREFE, JHE, RSUE)
 
 Total: **35-55 pages** including tables, figures, and references.
 
@@ -123,7 +123,7 @@ Total: **35-55 pages** including tables, figures, and references.
 | References | 2-4 | Typically 30-60 references. |
 | Tables & Figures | 8-15 | Maps count as figures. RE papers often have more figures than finance papers. |
 
-REE and JUE tend shorter (~35-45). JREFE allows more length (~40-55).
+REE and RSUE tend shorter (~35-45). JREFE allows more length (~40-55).
 
 ### Internet Appendix
 
@@ -151,7 +151,7 @@ The paper may be under-developed. Check:
 
 **Finance track (JF/JFE/RFS)**: ~100 words. Structure: question, design, main finding with magnitude, implication. No citations, no "this paper" opening.
 
-**JFQA / Management Science**: Up to 150 words. Slightly more room for context.
+**JFQA / RoF**: Up to 150 words. Slightly more room for context.
 
 **REE**: ~100 words, italicized, readable by a layperson, independent of the paper.
 

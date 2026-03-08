@@ -474,7 +474,7 @@ Produces a consolidated report saved to `PRE_SUBMISSION_REVIEW_[date].md` with p
 
 | Step | Skill | What you get |
 |---|---|---|
-| 1 | `finance-idea-screening` | Novelty check, scoring, journal-track recommendation (REE vs. JUE) |
+| 1 | `finance-idea-screening` | Novelty check, scoring, journal-track recommendation (REE vs. RSUE) |
 | 2 | `literature-positioning-map` | Closest papers (Arefeva et al., Chen et al.), differentiation |
 | 3 | `finance-identification-design` | Boundary RD design memo, spatial inference plan |
 | 3b | `real-estate-empirical-design` | RE-specific: hedonic vs. repeat-sales, measurement issues, CRE market data for treated zones |
@@ -541,7 +541,7 @@ Use `research-pipeline-orchestrator` when you're unsure which skill to start wit
 
 Most skills work for both tracks. The key differences:
 
-| Dimension | Finance track (JF/JFE/RFS/JFQA/MS) | Real-estate track (REE/JREFE/JUE/JHE) |
+| Dimension | Finance track (JF/JFE/RFS/JFQA/RoF) | Real-estate track (REE/JREFE/JHE/RSUE) |
 |---|---|---|
 | Contribution style | Must generalize beyond the setting | Can lean on institutional detail |
 | Identification | Sharp causal design expected | Spatial designs, boundary RD more common |
