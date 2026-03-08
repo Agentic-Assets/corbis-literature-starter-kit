@@ -109,14 +109,18 @@ When generating code or organizing files for a research project, follow this str
 project/
   raw/           # Untouched source data (read-only)
   build/         # Cleaning and merge scripts + intermediate data
-  analysis/      # Scripts producing tables and figures
+  explore/       # Throwaway exploration scripts (delete freely)
+  analysis/      # Promoted scripts producing final tables and figures
   output/
     tables/      # .tex files
     figures/     # .pdf or .png
+  notes/         # Lab notebook and working notes (.md)
   codebook/      # Variable definitions
   utils/         # Shared helper functions
   paper/         # LaTeX manuscript (copy of latex_template/)
 ```
+
+**Workflow**: Exploration scripts go in `explore/`. When a test produces a keeper, move the script to `analysis/` and log the result in `notes/lab_notebook.md`. Once the table/figure set is complete, use the lab notebook to transition to writing the paper.
 
 ## What not to do
 

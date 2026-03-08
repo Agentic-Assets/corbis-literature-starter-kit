@@ -88,8 +88,10 @@ This section is mandatory. A signal with a large alpha but no implementable stra
 1. `search_papers` (query: the signal name + "return predictability" or "cross-section of returns", `matchCount: 15`) → check whether the signal or a close variant has been documented.
 2. `search_papers` (query: the economic mechanism behind the signal, `matchCount: 10`) → find papers with different signals but the same mechanism.
 3. `get_paper_details` (paper IDs from top results) → read abstracts to determine true overlap vs. superficial similarity.
+
 ### Anomaly zoo context
 - `top_cited_articles` (field: "asset pricing", topic: "anomalies" or "return predictability") → identify the canonical papers the user must cite and benchmark against.
+
 ### Macro conditioning variables
 - `fred_search` (keywords like "investor sentiment" or "market volatility") → find series for conditional tests.
 - `fred_series_batch` (series IDs, e.g., `["VIXCLS","BAMLC0A0CM","T10Y2Y","UMCSENT"]`) → pull conditioning variables for time-series variation tests.
@@ -98,6 +100,10 @@ This section is mandatory. A signal with a large alpha but no implementable stra
 - `search_papers` (query: specific methodology, e.g., "Fama-MacBeth Newey-West", `minYear: 2018`) → find recent applied examples of the testing framework.
 - `export_citations` (format: `bibtex`) → export BibTeX entries for methodological and anomaly-zoo references cited in the test matrix and contribution statement (e.g., Harvey-Liu-Zhu, Chen-Zimmermann, Gu-Kelly-Xiu). Offer this after the test matrix is produced.
 - `format_citation` → format individual references for the anomaly-positioning discussion.
+
+## LaTeX output — write to `.tex` files
+
+**Before generating any table or figure LaTeX, read `latex_template/academic_paper_template.tex`** to see the template's custom commands (`\floatnotes`, `\sym`) and formatting examples. Write all table LaTeX to `output/tables/*.tex` files and all figure float wrappers to `output/figures/*.tex` files. Do not put LaTeX content in the chat for the user to copy-paste.
 
 ## Deliverables
 

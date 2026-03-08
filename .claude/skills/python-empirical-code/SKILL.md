@@ -386,6 +386,123 @@ def alpha_table(port_returns, factor_df, models=['CAPM', 'FF3', 'FF5']):
     return pd.DataFrame(results)
 ```
 
+## Exploratory analysis mode
+
+The early stage of a project involves running many tests to discover what works. Most will be tossed. The goal is fast iteration, not publication-ready output. This section supports that workflow.
+
+### Principles
+
+- **Speed over polish.** Exploration scripts go in `explore/`, not `analysis/`. They do not need clean LaTeX output, careful labels, or final formatting.
+- **Log what matters.** Print the coefficient, t-stat, N, and R-squared to the console. That's enough to decide keep/toss.
+- **Keep winners, toss losers.** When a test works, move the script to `analysis/` and clean it up. When it doesn't, delete it or leave it in `explore/` with a comment about why it failed.
+- **Update the lab notebook.** After each round of exploration, update `notes/lab_notebook.md` (see `finance-empirical-analysis` skill, assets/lab-notebook-template.md).
+
+### Quick exploration function
+
+```python
+def explore_reg(df, y, x_list, fe=None, cluster=None, controls=None, label=None):
+    """
+    Run a quick regression and print a one-line summary.
+    For exploration only — not for publication tables.
+
+    Parameters
+    ----------
+    df : DataFrame
+    y : str, dependent variable
+    x_list : list of str, variables to test (runs one regression per variable)
+    fe : str or list of str, fixed-effect columns (entity, time)
+    cluster : str, clustering variable
+    controls : list of str, control variables to include in every spec
+    label : str, label for this batch (printed in output)
+    """
+    from linearmodels.panel import PanelOLS
+    import statsmodels.formula.api as smf
+
+    if label:
+        print(f"\n{'='*60}\n{label}\n{'='*60}")
+    print(f"{'Variable':<30} {'Coef':>10} {'t-stat':>10} {'N':>10} {'R2':>8}")
+    print('-' * 72)
+
+    for x in x_list:
+        try:
+            rhs = [x] + (controls or [])
+            if fe:
+                # Panel regression with FE
+                fe_cols = fe if isinstance(fe, list) else [fe]
+                df_reg = df.set_index(fe_cols)[[y] + rhs].dropna()
+                formula = f'{y} ~ 1 + {" + ".join(rhs)} + EntityEffects'
+                res = PanelOLS.from_formula(formula, df_reg).fit(
+                    cov_type='clustered', cluster_entity=True if cluster is None else False,
+                    clusters=df_reg[cluster] if cluster and cluster in df_reg.columns else None
+                )
+            else:
+                # Simple OLS
+                formula = f'{y} ~ {" + ".join(rhs)}'
+                res = smf.ols(formula, df.dropna(subset=[y] + rhs)).fit(
+                    cov_type='cluster', cov_kwds={'groups': df.dropna(subset=[y] + rhs)[cluster]}
+                    if cluster else {}
+                )
+            coef = res.params[x]
+            tval = res.tvalues[x]
+            nobs = int(res.nobs)
+            r2 = getattr(res, 'rsquared_adj', getattr(res, 'rsquared', float('nan')))
+            print(f'{x:<30} {coef:>10.4f} {tval:>10.2f} {nobs:>10,} {r2:>8.3f}')
+        except Exception as e:
+            print(f'{x:<30} {"FAILED":>10} — {str(e)[:40]}')
+```
+
+### Batch exploration pattern
+
+```python
+# Run the same spec across multiple dependent variables
+dep_vars = ['spread', 'log_spread', 'yield', 'rating_num']
+for y in dep_vars:
+    explore_reg(df, y=y, x_list=['disclosure_quality'],
+                controls=['log_assets', 'leverage', 'profitability'],
+                fe=['firm_id', 'year'], cluster='firm_id',
+                label=f'Dep var: {y}')
+
+# Run the same dep var against multiple candidate explanatory variables
+candidates = ['disclosure_quality', 'transparency_score', 'readability',
+              'analyst_following', 'inst_ownership']
+explore_reg(df, y='spread', x_list=candidates,
+            controls=['log_assets', 'leverage'], fe=['firm_id', 'year'],
+            cluster='firm_id', label='Candidate RHS variables')
+
+# Run across subsamples
+for name, mask in [('Full', df.index == df.index),
+                   ('Large firms', df['size_q'] >= 3),
+                   ('Small firms', df['size_q'] <= 2)]:
+    explore_reg(df[mask], y='spread', x_list=['disclosure_quality'],
+                controls=['log_assets', 'leverage'],
+                fe=['firm_id', 'year'], cluster='firm_id',
+                label=f'Sample: {name}')
+```
+
+### Exploration project structure
+
+During the exploratory phase, use this layout:
+
+```
+project/
+  raw/               # Untouched source data
+  build/             # Cleaning scripts + intermediate data
+  explore/           # Throwaway exploration scripts (delete freely)
+    try_alt_depvars.py
+    try_mechanism_channels.py
+    try_subsamples.py
+  analysis/          # Promoted scripts that produce final tables (clean code)
+  output/
+    tables/          # .tex files
+    figures/         # .pdf or .png
+  notes/
+    lab_notebook.md  # Running log of what worked and what didn't
+  utils/             # Shared helpers
+  paper/             # LaTeX manuscript (copy of latex_template/)
+```
+
+The `explore/` folder is a scratch pad. Scripts here are meant to be fast and disposable. When a test produces a result worth keeping, move and clean the script into `analysis/` and log the result in `notes/lab_notebook.md`.
+
 ## Publication-ready tables
 
 ### Write tables to `.tex` files — not to chat
@@ -830,7 +947,8 @@ project/
     02_clean_compustat.py
     03_merge_ccm.py
     04_construct_variables.py
-  analysis/              # Scripts that produce tables and figures
+  explore/               # Throwaway exploration scripts (delete freely)
+  analysis/              # Promoted scripts that produce final tables and figures
     01_summary_stats.py
     02_baseline_regression.py
     03_robustness.py
@@ -840,15 +958,20 @@ project/
     tables/              # .tex files
     figures/             # .pdf or .png files
     logs/                # Regression logs and diagnostics
+  notes/
+    lab_notebook.md      # Running log: what worked, what didn't, emerging narrative
   codebook/              # Variable definitions
   utils/                 # Shared helper functions
     data_utils.py        # Winsorize, merge helpers, date alignment
     table_utils.py       # LaTeX table generation
     figure_utils.py      # Figure defaults and plot functions
     portfolio_utils.py   # Portfolio sort and alpha functions (AP papers)
+  paper/                 # LaTeX manuscript (copy of latex_template/)
   run_all.py             # Master script that executes the full pipeline
   requirements.txt       # Pin all package versions
 ```
+
+Exploration scripts go in `explore/`. When a test works, move the script to `analysis/` and log the result in `notes/lab_notebook.md`. The `run_all.py` master script runs only `build/` and `analysis/` scripts (not `explore/`).
 
 ### Master script
 

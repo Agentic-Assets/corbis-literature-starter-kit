@@ -19,6 +19,20 @@ Determine the target track and, if possible, the target journal:
 
 If the target is not named, infer the most likely track and say what assumption you made. Read `references/journal-targets.md` for detailed journal profiles including fit inference, red flags, and development advice.
 
+## Starting from exploration notes (discovery-to-paper bridge)
+
+If the user has a lab notebook (`notes/lab_notebook.md`) or similar exploration notes with results and a narrative, use that as the starting input. The bridge workflow is:
+
+1. **Read the lab notebook.** Look for: the emerging narrative section, the table/figure candidates list, and the "what didn't work" section.
+2. **Extract the story spine** from the narrative: question, mechanism, main finding, supporting evidence, what was ruled out.
+3. **Map table candidates to the standard table sequence** (summary stats → baseline → robustness → mechanism → heterogeneity → extensions). Reorder or consolidate if needed. Flag gaps (e.g., "you have mechanism tests but no robustness table addressing [threat]").
+4. **Draft the paper outline** as a structured plan: section-by-section with the table/figure each section references and the key point each section makes.
+5. **Copy the LaTeX template** into `paper/` if it doesn't exist, then start writing sections directly into the `.tex` file.
+
+The lab notebook's "what didn't work" section is valuable: null results often sharpen the contribution by showing what the effect is *not*. Use these to inform the robustness and mechanism discussion.
+
+If there is no lab notebook but the user has a loose set of results and notes, ask them to provide: (a) the main finding in one sentence, (b) the list of tables/figures they want in the paper, and (c) the economic story they believe is emerging. That is enough to start.
+
 ## Writing workflow
 
 1. Build the story spine:

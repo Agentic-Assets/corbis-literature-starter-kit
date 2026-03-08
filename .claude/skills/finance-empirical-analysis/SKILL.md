@@ -9,6 +9,20 @@ Organize the empirical section so that each table answers a clear question and e
 
 ## Workflow
 
+### Exploration phase (discovering the results)
+
+Before the table sequence is finalized, the user will typically run many tests to see what works. Support this phase with:
+
+1. **Initialize a lab notebook.** Copy `assets/lab-notebook-template.md` to `notes/lab_notebook.md`. This is the running log of what was tested, what worked, what didn't, and the emerging economic narrative.
+2. **Help design exploration batches.** Suggest sets of tests to run together: alternative dependent variables, candidate explanatory variables, subsample splits, mechanism proxies. Use the `explore_reg()` function from the `python-empirical-code` skill for fast iteration.
+3. **Log results.** After each batch, update the lab notebook with the question, what was run, the result, and the verdict (keep/toss/modify).
+4. **Update the emerging narrative.** As results accumulate, periodically revise the "Emerging narrative" section of the lab notebook to reflect the current economic story.
+5. **Identify the table candidates.** When exploration is mostly done, populate the "Table and figure candidates" section of the lab notebook.
+
+### Paper-ready phase (organizing for the paper)
+
+Once the table candidates are identified:
+
 1. Define the empirical sequence before discussing estimates.
 2. Build a table and figure plan using assets/table-plan-template.md.
 3. Start with sample description and summary statistics.
@@ -17,6 +31,8 @@ Organize the empirical section so that each table answers a clear question and e
 6. Group robustness checks by threat category.
 7. Separate mechanism, heterogeneity, and external-validity evidence.
 8. Draft paragraph-ready interpretations.
+
+The transition from exploration to paper-ready happens when the lab notebook's "Ready to write?" checklist is complete.
 
 ## Standard table sequence for empirical finance papers
 
