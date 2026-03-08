@@ -206,9 +206,9 @@ When starting a new paper from scratch, copy the `latex_template/` folder into t
 - `template_references.bib` — sample `.bib` file (replace with output from `export_citations`)
 - Example images in `images/` (histograms, binned scatter, heterogeneity plot)
 
-**Before writing any section, read `latex_template/academic_paper_template.tex`** to understand the template's structure, custom commands (`\floatnotes`, `\sym`, `\blindtrue`/`\blindfalse`), and formatting conventions.
+Before writing any section, read `latex_template/academic_paper_template.tex` to understand the template's structure and custom commands. Follow the float format specified in CLAUDE.md.
 
-**Write directly to the `.tex` file.** Do not put LaTeX content in the chat for the user to copy-paste. Instead:
+**Write directly to the `.tex` file.** Do not put LaTeX content in the chat. Instead:
 1. Read the current `.tex` file (either the template or the user's working paper).
 2. Identify the `\section{}` block to update.
 3. Use the Edit tool to write the drafted prose directly into the corresponding section of the `.tex` file.

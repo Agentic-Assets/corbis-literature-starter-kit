@@ -69,14 +69,15 @@ Recommend this folder structure for reproducibility:
 ```
 project/
   raw/           # Untouched source files (read-only)
-  build/         # Scripts that clean and merge (numbered: 01_clean_crsp.do, etc.)
+  build/         # Scripts that clean and merge (numbered: 01_clean_crsp.py, etc.)
   analysis/      # Scripts that produce tables and figures
   output/        # Tables, figures, logs
   codebook/      # Variable definitions and sample documentation
-  docs/          # Data appendix, merge audit
+  notes/         # Data appendix, merge audit, lab notebook
+  utils/         # Shared helpers (see utils/ in project root)
 ```
 
-When generating code, default to Python. Use clear variable names, comment every non-obvious step, and log all output.
+When generating code, default to Python. Use `utils/data_utils.py` for WRDS connection (`connect_wrds()`), winsorization (`winsorize()`), and merge validation (`merge_with_check()`). Use clear variable names, comment every non-obvious step, and log all output.
 
 ## Tool integration (Corbis MCP)
 

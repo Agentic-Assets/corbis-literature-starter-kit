@@ -14,7 +14,7 @@ Organize the empirical section so that each table answers a clear question and e
 Before the table sequence is finalized, the user will typically run many tests to see what works. Support this phase with:
 
 1. **Initialize a lab notebook.** Copy `assets/lab-notebook-template.md` to `notes/lab_notebook.md`. This is the running log of what was tested, what worked, what didn't, and the emerging economic narrative.
-2. **Help design exploration batches.** Suggest sets of tests to run together: alternative dependent variables, candidate explanatory variables, subsample splits, mechanism proxies. Use the `explore_reg()` function from the `python-empirical-code` skill for fast iteration.
+2. **Help design exploration batches.** Suggest sets of tests to run together: alternative dependent variables, candidate explanatory variables, subsample splits, mechanism proxies. Use `utils.regression_utils.explore_reg()` for fast iteration.
 3. **Log results.** After each batch, update the lab notebook with the question, what was run, the result, and the verdict (keep/toss/modify).
 4. **Update the emerging narrative.** As results accumulate, periodically revise the "Emerging narrative" section of the lab notebook to reflect the current economic story.
 5. **Identify the table candidates.** When exploration is mostly done, populate the "Table and figure candidates" section of the lab notebook.
@@ -58,18 +58,11 @@ For every main result, write the interpretation in this order:
 
 ## Table and figure formatting — write to `.tex` files
 
-**Before generating any table or figure LaTeX, read `latex_template/academic_paper_template.tex`** to see the template's custom commands (`\floatnotes`, `\sym`) and working examples of every float type.
+Follow the float format specified in CLAUDE.md. Before first use, read `latex_template/academic_paper_template.tex` for the template's custom commands (`\floatnotes`, `\sym`) and working examples.
 
-**Write all table and figure LaTeX to `.tex` files** in `output/tables/` and `output/figures/` respectively. Do not put LaTeX content in the chat for the user to copy-paste. Use the Write or Edit tool to save each float to its own file (e.g., `output/tables/tab_summary.tex`, `output/tables/tab_baseline.tex`). These files can then be `\input{}` into the main paper `.tex` file.
+Write all table and figure LaTeX to `output/tables/*.tex` and `output/figures/*.tex`. Do not put LaTeX in the chat. Each float gets its own file (e.g., `output/tables/tab_summary.tex`), included in the paper via `\input{}`. Use `utils.table_utils.reg_to_latex()` for programmatic table generation.
 
-All tables and figures must follow the float format in the template:
-1. `\caption{Descriptive Title}` at the top
-2. `\label{tab:name}\vspace{-2.5ex}` immediately after
-3. `\floatnotes{...}` with a self-contained descriptive note *above* the table/figure body (not below it). The note should state: what the table reports, the sample, clustering level, and "t-statistics in parentheses."
-4. Table body using `booktabs` (`\toprule`/`\midrule`/`\bottomrule`), `\sym{}` for stars, t-stats in parentheses with `\\[0.5ex]` spacing
-5. Significance legend as last row inside `tabular`: `\sym{*} $p<0.10$, \sym{**} $p<0.05$, \sym{***} $p<0.01$`
-
-The `\floatnotes` command renders as a scriptsize quotation. See the template for examples.
+Table notes must be self-contained: state what the table reports, the sample, clustering level, and "t-statistics in parentheses."
 
 ## Statistical significance reporting
 

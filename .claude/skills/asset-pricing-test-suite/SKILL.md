@@ -103,7 +103,7 @@ This section is mandatory. A signal with a large alpha but no implementable stra
 
 ## LaTeX output — write to `.tex` files
 
-**Before generating any table or figure LaTeX, read `latex_template/academic_paper_template.tex`** to see the template's custom commands (`\floatnotes`, `\sym`) and formatting examples. Write all table LaTeX to `output/tables/*.tex` files and all figure float wrappers to `output/figures/*.tex` files. Do not put LaTeX content in the chat for the user to copy-paste.
+Follow the float format specified in CLAUDE.md. Before first use, read `latex_template/academic_paper_template.tex` for the template's custom commands. Write tables to `output/tables/*.tex` and figure wrappers to `output/figures/*.tex`. Use `utils.table_utils.reg_to_latex()` for programmatic table generation and `utils.regression_utils.portfolio_sort()` / `alpha_table()` for the core AP tests.
 
 ## Deliverables
 

@@ -55,6 +55,14 @@ Read `references/python-finance-packages.md` for versions, API patterns, and com
 - Comment the *why*, not the *what*
 - Docstring at the top of every script: purpose, inputs, outputs
 
+## Shared utilities
+
+The `utils/` module at the project root provides ready-to-use helpers. Import them in any script:
+- `utils.data_utils`: `connect_wrds()`, `winsorize()`, `merge_with_check()`, `align_fiscal_to_calendar()`
+- `utils.table_utils`: `reg_to_latex()`, `summary_stats_latex()`
+- `utils.figure_utils`: `set_publication_defaults()`, `plot_event_study()`, `plot_binned_scatter()`, `coef_plot()`, `COLORS`
+- `utils.regression_utils`: `explore_reg()`, `portfolio_sort()`, `alpha_table()`
+
 ## Code examples
 
 For complete, ready-to-use code templates, read `assets/code-examples.md`. It covers:
@@ -72,11 +80,7 @@ For complete, ready-to-use code templates, read `assets/code-examples.md`. It co
 
 ## LaTeX table/figure format
 
-Before generating any table or figure, read `latex_template/academic_paper_template.tex` for the template's custom commands (`\floatnotes`, `\sym`).
-
-All floats must follow: `\caption{Title}` → `\label{}\vspace{-2.5ex}` → `\floatnotes{note}` *above* the body → table/figure body. Notes go between the caption and the content, not below.
-
-Write tables to `output/tables/*.tex` files. Write figures to `output/figures/`. Do not put LaTeX in the chat.
+Follow the float format specified in CLAUDE.md. Before first use, read `latex_template/academic_paper_template.tex` for the template's custom commands (`\floatnotes`, `\sym`). Use `utils.table_utils.reg_to_latex()` and `utils.table_utils.summary_stats_latex()` to generate compliant tables programmatically.
 
 ## Exploration workflow
 

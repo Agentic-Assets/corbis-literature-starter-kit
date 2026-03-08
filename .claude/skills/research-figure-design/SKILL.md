@@ -106,7 +106,7 @@ Every figure must have a self-contained note including:
 
 ## LaTeX float format
 
-Write each figure's LaTeX float wrapper to `output/figures/*.tex`. Do not put float LaTeX in the chat. Before generating any float, read `latex_template/academic_paper_template.tex`.
+Follow the float format specified in CLAUDE.md. Write each figure's LaTeX float wrapper to `output/figures/*.tex`. Do not put float LaTeX in the chat. Use `utils.figure_utils` for `set_publication_defaults()`, `plot_event_study()`, `plot_binned_scatter()`, `coef_plot()`, and the shared `COLORS` palette.
 
 Structure: caption on top, descriptive note between caption and figure, figure below:
 ```latex
