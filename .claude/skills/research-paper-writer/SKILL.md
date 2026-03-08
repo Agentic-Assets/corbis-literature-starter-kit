@@ -15,7 +15,7 @@ Convert a design and set of results into prose that is concise, credible, and jo
 
 Determine the target track and, if possible, the target journal:
 - Finance track: JF, JFE, RFS, JFQA, RoF
-- Real-estate track: REE, JREFE, JHE, RSUE
+- Real-estate track: REE, JREFE, JRER, JHE, RSUE
 
 If the target is not named, infer the most likely track and say what assumption you made. Read `references/journal-targets.md` for detailed journal profiles including fit inference, red flags, and development advice.
 
@@ -151,7 +151,9 @@ The paper may be under-developed. Check:
 
 **Finance track (JF/JFE/RFS)**: ~100 words. Structure: question, design, main finding with magnitude, implication. No citations, no "this paper" opening.
 
-**JFQA / RoF**: Up to 150 words. Slightly more room for context.
+**JFQA**: ~100 words. Compact. Similar constraints to JF/JFE/RFS.
+
+**RoF**: Up to 150 words. Slightly more room for context and cross-disciplinary framing.
 
 **REE**: ~100 words, italicized, readable by a layperson, independent of the paper.
 

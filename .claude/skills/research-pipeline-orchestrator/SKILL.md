@@ -13,7 +13,7 @@ First classify the project along four dimensions:
 - Domain: corporate finance, investments, empirical asset pricing, household finance, real estate, or urban economics
 - Stage: idea, literature positioning, design, data, analysis, writing, revision, or presentation
 - Output needed now: memo, code plan, table plan, manuscript text, response letter, or deck
-- Journal track: finance (JF/JFE/RFS/JFQA/RoF), real estate (REE/JREFE/JHE/RSUE), or undecided
+- Journal track: finance (JF/JFE/RFS/JFQA/RoF), real estate (REE/JREFE/JRER/JHE/RSUE), or undecided
 
 If the user is vague, infer the most likely stage from the request instead of stalling.
 

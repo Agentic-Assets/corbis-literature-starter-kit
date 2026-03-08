@@ -115,7 +115,7 @@ Read if needed:
 ## Output format
 
 ```
-# Idea assessment
+# Idea Card
 ## Research question (one sentence)
 ## Mechanism / friction
 ## Why this could matter
