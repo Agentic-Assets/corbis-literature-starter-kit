@@ -388,6 +388,10 @@ def alpha_table(port_returns, factor_df, models=['CAPM', 'FF3', 'FF5']):
 
 ## Publication-ready tables
 
+### Write tables to `.tex` files — not to chat
+
+**Always save generated LaTeX tables to `.tex` files** in `output/tables/`. Do not put table LaTeX in the chat for the user to copy-paste. Before generating any table, read `latex_template/academic_paper_template.tex` to see the template's custom commands (`\floatnotes`, `\sym`) and formatting examples. Always pass a `filename` argument to `reg_to_latex()` and `summary_stats_latex()`.
+
 ### LaTeX table/figure format (match the LaTeX template)
 
 All generated tables and figures must follow the formatting in `latex_template/academic_paper_template.tex`:

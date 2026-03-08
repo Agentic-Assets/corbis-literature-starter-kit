@@ -101,6 +101,10 @@ This section is mandatory. A signal with a large alpha but no implementable stra
 - `export_citations` (format: `bibtex`) → export BibTeX entries for methodological and anomaly-zoo references cited in the test matrix and contribution statement (e.g., Harvey-Liu-Zhu, Chen-Zimmermann, Gu-Kelly-Xiu). Offer this after the test matrix is produced.
 - `format_citation` → format individual references for the anomaly-positioning discussion.
 
+## LaTeX output — write to `.tex` files
+
+**Before generating any table or figure LaTeX, read `latex_template/academic_paper_template.tex`** to see the template's custom commands (`\floatnotes`, `\sym`) and formatting examples. Write all table LaTeX to `output/tables/*.tex` files and all figure float wrappers to `output/figures/*.tex` files. Do not put LaTeX content in the chat for the user to copy-paste.
+
 ## Deliverables
 
 Produce:

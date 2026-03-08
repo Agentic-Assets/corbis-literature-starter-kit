@@ -185,27 +185,33 @@ Produce one or more of:
 
 Use assets/introduction-skeleton.md when building from scratch.
 
-## LaTeX template
+## LaTeX template — write to file, not to chat
 
-When starting a new paper from scratch, copy the `latex_template/` folder from the project root. It contains:
+When starting a new paper from scratch, copy the `latex_template/` folder into the project's `paper/` directory. It contains:
 - `academic_paper_template.tex` — full paper structure matching the section sequence above, with blind-review toggle, `jf.bst` bibliography style, example tables/figures, and appendix
 - `template_references.bib` — sample `.bib` file (replace with output from `export_citations`)
 - Example images in `images/` (histograms, binned scatter, heterogeneity plot)
 
-The template sections (Introduction, Related Literature, Data, Empirical Design, Results, Robustness, Conclusion, Appendix) align with the writing workflow above. Draft each section using this skill, then paste into the corresponding `\section{}` in the `.tex` file.
+**Before writing any section, read `latex_template/academic_paper_template.tex`** to understand the template's structure, custom commands (`\floatnotes`, `\sym`, `\blindtrue`/`\blindfalse`), and formatting conventions.
+
+**Write directly to the `.tex` file.** Do not put LaTeX content in the chat for the user to copy-paste. Instead:
+1. Read the current `.tex` file (either the template or the user's working paper).
+2. Identify the `\section{}` block to update.
+3. Use the Edit tool to write the drafted prose directly into the corresponding section of the `.tex` file.
+4. If the paper `.tex` file does not exist yet, copy the template and then edit it.
+
+The template sections (Introduction, Related Literature, Data, Empirical Design, Results, Robustness, Conclusion, Appendix) align with the writing workflow above.
 
 ## Output format
 
+Write all LaTeX content directly to the `.tex` file in the project's `paper/` directory. In the chat, provide only:
 ```
-# Draft package
+# Draft summary
 ## Target journal or track
 ## Title options (3-5)
-## Abstract (targeted word count)
-## Introduction (7-paragraph structure)
-## Key contribution paragraph
-## Results prose (with magnitudes)
-## Conclusion
+## What was written (section names and brief description)
 ## Claims to soften (list any overclaims found)
+## File path where content was written
 ```
 
 ## Tool integration (Corbis MCP)

@@ -40,9 +40,13 @@ For every main result, write the interpretation in this order:
 4. **Interpret cautiously**: "This is consistent with [mechanism] but does not rule out [alternative]."
 5. **State the limit**: "The design identifies the effect of [narrow thing], not [broader claim the reader might infer]."
 
-## Table and figure formatting
+## Table and figure formatting — write to `.tex` files
 
-All tables and figures must follow the float format in `latex_template/academic_paper_template.tex`:
+**Before generating any table or figure LaTeX, read `latex_template/academic_paper_template.tex`** to see the template's custom commands (`\floatnotes`, `\sym`) and working examples of every float type.
+
+**Write all table and figure LaTeX to `.tex` files** in `output/tables/` and `output/figures/` respectively. Do not put LaTeX content in the chat for the user to copy-paste. Use the Write or Edit tool to save each float to its own file (e.g., `output/tables/tab_summary.tex`, `output/tables/tab_baseline.tex`). These files can then be `\input{}` into the main paper `.tex` file.
+
+All tables and figures must follow the float format in the template:
 1. `\caption{Descriptive Title}` at the top
 2. `\label{tab:name}\vspace{-2.5ex}` immediately after
 3. `\floatnotes{...}` with a self-contained descriptive note *above* the table/figure body (not below it). The note should state: what the table reports, the sample, clustering level, and "t-statistics in parentheses."
