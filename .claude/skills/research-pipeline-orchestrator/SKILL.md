@@ -13,7 +13,7 @@ First classify the project along four dimensions:
 - Domain: corporate finance, investments, empirical asset pricing, household finance, real estate, or urban economics
 - Stage: idea, literature positioning, design, data, analysis, writing, revision, or presentation
 - Output needed now: memo, code plan, table plan, manuscript text, response letter, or deck
-- Journal track: finance (JF/JFE/RFS/JFQA/MS), real estate (REE/JREFE/JUE/JHE), or undecided
+- Journal track: finance (JF/JFE/RFS/JFQA/RoF), real estate (REE/JREFE/JRER/JHE/RSUE), or undecided
 
 If the user is vague, infer the most likely stage from the request instead of stalling.
 
@@ -29,8 +29,9 @@ If the user is vague, infer the most likely stage from the request instead of st
    - real-estate design checks for property, mortgage, urban, or spatial papers
 7. Paper drafting
 8. Replication package
-9. Revision and referee-response preparation
+9. Pre-submission review
 10. Seminar or conference deck
+11. Revision and referee-response preparation
 
 ## Tool integration (Corbis MCP)
 
@@ -91,9 +92,9 @@ Always give the user:
 
 ## Routing logic
 
-**Finance track** (JF, JFE, RFS, JFQA, Management Science): Sharp question, credible identification, disciplined theory-mechanism connection, concise exposition. The contribution must generalize beyond the specific setting.
+**Finance track** (JF, JFE, RFS, JFQA, RoF): Sharp question, credible identification, disciplined theory-mechanism connection, concise exposition. The contribution must generalize beyond the specific setting.
 
-**Real-estate track** (REE, JREFE, JUE, JHE): Can lean more heavily on institutional setting, property-market detail, spatial or policy structure, but still needs a clean contribution and strong empirical design. JUE and JHE reward broader urban/housing economics framing.
+**Real-estate track** (REE, JREFE, JHE, RSUE): Can lean more heavily on institutional setting, property-market detail, spatial or policy structure, but still needs a clean contribution and strong empirical design. RSUE and JHE reward broader urban/housing economics framing.
 
 **Cross-track papers**: Some papers (e.g., mortgage finance, housing and household portfolios, REIT pricing) could target either track. In these cases, lay out both paths with the trade-offs of each.
 

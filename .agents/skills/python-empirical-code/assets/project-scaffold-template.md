@@ -13,7 +13,8 @@
     02_[source2].py
     03_merge.py
     04_variables.py
-  analysis/                  # Scripts producing tables and figures
+  explore/                   # Throwaway exploration scripts (delete freely)
+  analysis/                  # Promoted scripts producing final tables and figures
     01_summary_stats.py
     02_baseline.py
     03_robustness.py
@@ -23,6 +24,8 @@
     tables/                  # .tex files for LaTeX
     figures/                 # .pdf or .png at 300 DPI
     logs/                    # Console output and diagnostics
+  notes/
+    lab_notebook.md          # Running log: what worked, what didn't, emerging narrative
   codebook/
     variables.md             # Variable definitions with formulas
     sample_flow.md           # Observation counts at each filter stage
@@ -30,10 +33,15 @@
     data_utils.py            # winsorize(), merge helpers, date alignment
     table_utils.py           # reg_to_latex(), summary_stats_latex()
     figure_utils.py          # Plot defaults, event_study_plot(), coef_plot()
+  paper/                     # LaTeX manuscript (copy of latex_template/)
   run_all.py                 # Master pipeline script
   requirements.txt           # Pinned package versions
   README.md                  # What the project does and how to run it
 ```
+
+## Workflow
+
+Exploration scripts go in `explore/`. Run many tests quickly to discover what works. When a test produces a result worth keeping, move the script to `analysis/` and log it in `notes/lab_notebook.md`. Once the table/figure set is complete and the lab notebook narrative is coherent, transition to writing the paper in `paper/`.
 
 ## Data sources
 

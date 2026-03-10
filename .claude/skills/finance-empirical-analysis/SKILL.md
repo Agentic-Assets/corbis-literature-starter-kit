@@ -9,6 +9,20 @@ Organize the empirical section so that each table answers a clear question and e
 
 ## Workflow
 
+### Exploration phase (discovering the results)
+
+Before the table sequence is finalized, the user will typically run many tests to see what works. Support this phase with:
+
+1. **Initialize a lab notebook.** Copy `assets/lab-notebook-template.md` to `notes/lab_notebook.md`. This is the running log of what was tested, what worked, what didn't, and the emerging economic narrative.
+2. **Help design exploration batches.** Suggest sets of tests to run together: alternative dependent variables, candidate explanatory variables, subsample splits, mechanism proxies. Use `utils.regression_utils.explore_reg()` for fast iteration.
+3. **Log results.** After each batch, update the lab notebook with the question, what was run, the result, and the verdict (keep/toss/modify).
+4. **Update the emerging narrative.** As results accumulate, periodically revise the "Emerging narrative" section of the lab notebook to reflect the current economic story.
+5. **Identify the table candidates.** When exploration is mostly done, populate the "Table and figure candidates" section of the lab notebook.
+
+### Paper-ready phase (organizing for the paper)
+
+Once the table candidates are identified:
+
 1. Define the empirical sequence before discussing estimates.
 2. Build a table and figure plan using assets/table-plan-template.md.
 3. Start with sample description and summary statistics.
@@ -17,6 +31,8 @@ Organize the empirical section so that each table answers a clear question and e
 6. Group robustness checks by threat category.
 7. Separate mechanism, heterogeneity, and external-validity evidence.
 8. Draft paragraph-ready interpretations.
+
+The transition from exploration to paper-ready happens when the lab notebook's "Ready to write?" checklist is complete.
 
 ## Standard table sequence for empirical finance papers
 
@@ -40,16 +56,13 @@ For every main result, write the interpretation in this order:
 4. **Interpret cautiously**: "This is consistent with [mechanism] but does not rule out [alternative]."
 5. **State the limit**: "The design identifies the effect of [narrow thing], not [broader claim the reader might infer]."
 
-## Table and figure formatting
+## Table and figure formatting — write to `.tex` files
 
-All tables and figures must follow the float format in `latex_template/academic_paper_template.tex`:
-1. `\caption{Descriptive Title}` at the top
-2. `\label{tab:name}\vspace{-2.5ex}` immediately after
-3. `\floatnotes{...}` with a self-contained descriptive note *above* the table/figure body (not below it). The note should state: what the table reports, the sample, clustering level, and "t-statistics in parentheses."
-4. Table body using `booktabs` (`\toprule`/`\midrule`/`\bottomrule`), `\sym{}` for stars, t-stats in parentheses with `\\[0.5ex]` spacing
-5. Significance legend as last row inside `tabular`: `\sym{*} $p<0.10$, \sym{**} $p<0.05$, \sym{***} $p<0.01$`
+Follow the float format specified in CLAUDE.md. Before first use, read `latex_template/academic_paper_template.tex` for the template's custom commands (`\floatnotes`, `\sym`) and working examples.
 
-The `\floatnotes` command renders as a scriptsize quotation. See the template for examples.
+Write all table and figure LaTeX to `output/tables/*.tex` and `output/figures/*.tex`. Do not put LaTeX in the chat. Each float gets its own file (e.g., `output/tables/tab_summary.tex`), included in the paper via `\input{}`. Use `utils.table_utils.reg_to_latex()` for programmatic table generation.
+
+Table notes must be self-contained: state what the table reports, the sample, clustering level, and "t-statistics in parentheses."
 
 ## Statistical significance reporting
 

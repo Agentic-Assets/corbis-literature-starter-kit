@@ -1,16 +1,17 @@
 # Project: Academic Finance & Real Estate Research — Powered by Corbis
 
-This project is a template and toolkit for producing empirical research papers targeting top finance journals (JF, JFE, RFS, JFQA, MS) and real-estate journals (REE, JREFE, JRER, JUE, JHE). Corbis MCP tools (corbis.ai) provide literature search, economic data, CRE market intelligence, and citation management throughout the research pipeline.
+This project is a template and toolkit for producing empirical research papers targeting top finance journals (JF, JFE, RFS, JFQA, RoF) and real-estate journals (REE, JREFE, JRER, JHE, RSUE). Corbis MCP tools (corbis.ai) provide literature search, economic data, CRE market intelligence, and citation management throughout the research pipeline.
 
 ## Skill routing — read this first
 
-Before responding to any research-related prompt, check whether one or more of the 16 installed skills (`.claude/skills/`) applies. If a skill matches, follow its workflow, deliverables, guardrails, and tool integration instructions. Multiple skills can be combined in a single response.
+Before responding to any research-related prompt, check whether one or more of the 17 installed skills (`.claude/skills/`) applies. If a skill matches, follow its workflow, deliverables, guardrails, and tool integration instructions. Multiple skills can be combined in a single response.
 
 **Routing quick reference:**
 
 | User is asking about...                     | Use skill                          |
 | ------------------------------------------- | ---------------------------------- |
-| Research idea, brainstorming, novelty check | `finance-idea-screening`         |
+| Idea generation, brainstorming from a topic  | `research-idea-generator`        |
+| Screen/evaluate a specific research idea     | `finance-idea-screening`         |
 | Literature, contribution, related work      | `literature-positioning-map`     |
 | Identification, DiD, IV, RD, threats        | `finance-identification-design`  |
 | Real estate design, spatial, hedonic, CRE   | `real-estate-empirical-design`   |
@@ -81,8 +82,8 @@ Key principles:
 - **WRDS access**: Set `WRDS_USERNAME` in `.env`. Credentials in `~/.pgpass`. Connect with `wrds.Connection(wrds_username=os.getenv('WRDS_USERNAME'))`. Available: crsp, comp, ibes, tfn, dealscan, tr_dealscan, trace, optionm, boardex, ciq, risk, ff, frb, bank, wrdsapps. Not available: fisd, kld, mfl, rpna, taq.
 - **Public data APIs**: API keys in `.env` (copy from `.env.example`). Packages installed: `fredapi`, `pandas-datareader`, `yfinance`, `sec-edgar-downloader`. Load keys with `from dotenv import load_dotenv; load_dotenv()`. If a key is missing, point user to `.env.example`.
 - **Language**: Python (using `linearmodels`, `statsmodels`, `pandas`, `matplotlib`). See `python-empirical-code` skill for stack and conventions.
-- **LaTeX template**: `latex_template/` — copy this folder when starting a new paper. Uses `jf.bst` bibliography style.
-- **Output format**: LaTeX tables (`.tex`) and 300 DPI figures (`.pdf` or `.png`) ready for the paper template. All floats must follow the template format: `\caption{Title}` → `\label{}\vspace{-2.5ex}` → `\floatnotes{descriptive note}` *above* the body → table/figure body. Notes go between the caption and the content, not below.
+- **LaTeX template**: `latex_template/` — copy this folder when starting a new paper. Uses `jf.bst` bibliography style. **Always read `latex_template/academic_paper_template.tex` before generating any LaTeX output** to use the template's custom commands and formatting.
+- **Output format**: Write LaTeX tables to `output/tables/*.tex` files and figure float wrappers to `output/figures/*.tex` files. Do not put LaTeX content in the chat for the user to copy-paste. Save figures as 300 DPI `.pdf` or `.png`. All floats must follow the template format: `\caption{Title}` → `\label{}\vspace{-2.5ex}` → `\floatnotes{descriptive note}` *above* the body → table/figure body. Notes go between the caption and the content, not below. Paper prose should be written directly into the `.tex` file using the Edit tool.
 - **Statistical significance**: Report t-statistics (in parentheses) as the primary measure of statistical significance in tables and text. Not standard errors, not p-values. t-statistics in parentheses below coefficients in regression tables.
 - **Standard errors**: Cluster at the level of treatment variation. Do not default to heteroskedasticity-robust only.
 - **Econometric methods**: Use modern estimators when appropriate (Callaway-Sant'Anna for staggered DiD, Roth pretrends sensitivity, Oster bounds). Flag when TWFE is inappropriate.
@@ -109,14 +110,18 @@ When generating code or organizing files for a research project, follow this str
 project/
   raw/           # Untouched source data (read-only)
   build/         # Cleaning and merge scripts + intermediate data
-  analysis/      # Scripts producing tables and figures
+  explore/       # Throwaway exploration scripts (delete freely)
+  analysis/      # Promoted scripts producing final tables and figures
   output/
     tables/      # .tex files
     figures/     # .pdf or .png
+  notes/         # Lab notebook and working notes (.md)
   codebook/      # Variable definitions
   utils/         # Shared helper functions
   paper/         # LaTeX manuscript (copy of latex_template/)
 ```
+
+**Workflow**: Exploration scripts go in `explore/`. When a test produces a keeper, move the script to `analysis/` and log the result in `notes/lab_notebook.md`. Once the table/figure set is complete, use the lab notebook to transition to writing the paper.
 
 ## What not to do
 

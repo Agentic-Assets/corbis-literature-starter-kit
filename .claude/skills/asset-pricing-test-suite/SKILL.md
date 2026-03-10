@@ -101,6 +101,10 @@ This section is mandatory. A signal with a large alpha but no implementable stra
 - `export_citations` (format: `bibtex`) → export BibTeX entries for methodological and anomaly-zoo references cited in the test matrix and contribution statement (e.g., Harvey-Liu-Zhu, Chen-Zimmermann, Gu-Kelly-Xiu). Offer this after the test matrix is produced.
 - `format_citation` → format individual references for the anomaly-positioning discussion.
 
+## LaTeX output — write to `.tex` files
+
+Follow the float format specified in CLAUDE.md. Before first use, read `latex_template/academic_paper_template.tex` for the template's custom commands. Write tables to `output/tables/*.tex` and figure wrappers to `output/figures/*.tex`. Use `utils.table_utils.reg_to_latex()` for programmatic table generation and `utils.regression_utils.portfolio_sort()` / `alpha_table()` for the core AP tests.
+
 ## Deliverables
 
 Produce:

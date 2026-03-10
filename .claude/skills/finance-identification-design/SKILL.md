@@ -88,6 +88,8 @@ Map every identified threat to a specific diagnostic:
 
 ## Real-estate-specific checks
 
+These are quick checks. For deeper RE design guidance (hedonic, repeat-sales, boundary RD, spatial DiD, CRE, mortgage, climate), use the `real-estate-empirical-design` skill.
+
 - Does the design account for spatial autocorrelation in the error structure?
 - Is the geographic unit of analysis appropriate (property, block, tract, ZIP, MSA)?
 - Are boundary designs vulnerable to sorting across boundaries?

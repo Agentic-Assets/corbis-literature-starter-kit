@@ -14,10 +14,24 @@ Convert a design and set of results into prose that is concise, credible, and jo
 ## First move
 
 Determine the target track and, if possible, the target journal:
-- Finance track: JF, JFE, RFS, JFQA, Management Science
-- Real-estate track: REE, JREFE, JUE, JHE
+- Finance track: JF, JFE, RFS, JFQA, RoF
+- Real-estate track: REE, JREFE, JRER, JHE, RSUE
 
 If the target is not named, infer the most likely track and say what assumption you made. Read `references/journal-targets.md` for detailed journal profiles including fit inference, red flags, and development advice.
+
+## Starting from exploration notes (discovery-to-paper bridge)
+
+If the user has a lab notebook (`notes/lab_notebook.md`) or similar exploration notes with results and a narrative, use that as the starting input. The bridge workflow is:
+
+1. **Read the lab notebook.** Look for: the emerging narrative section, the table/figure candidates list, and the "what didn't work" section.
+2. **Extract the story spine** from the narrative: question, mechanism, main finding, supporting evidence, what was ruled out.
+3. **Map table candidates to the standard table sequence** (summary stats → baseline → robustness → mechanism → heterogeneity → extensions). Reorder or consolidate if needed. Flag gaps (e.g., "you have mechanism tests but no robustness table addressing [threat]").
+4. **Draft the paper outline** as a structured plan: section-by-section with the table/figure each section references and the key point each section makes.
+5. **Copy the LaTeX template** into `paper/` if it doesn't exist, then start writing sections directly into the `.tex` file.
+
+The lab notebook's "what didn't work" section is valuable: null results often sharpen the contribution by showing what the effect is *not*. Use these to inform the robustness and mechanism discussion.
+
+If there is no lab notebook but the user has a loose set of results and notes, ask them to provide: (a) the main finding in one sentence, (b) the list of tables/figures they want in the paper, and (c) the economic story they believe is emerging. That is enough to start.
 
 ## Writing workflow
 
@@ -88,11 +102,11 @@ Total: **40-50 pages** including tables, figures, and references.
 
 JF and RFS tend toward the shorter end (~40-45 pages). JFE accommodates slightly longer papers (~45-55).
 
-### JFQA / Management Science
+### JFQA / RoF
 
-Total: **35-50 pages**. JFQA is compact. MS allows more institutional detail.
+Total: **35-50 pages**. JFQA is compact. RoF accommodates cross-disciplinary and emerging topics.
 
-### Real-estate track (REE, JREFE, JUE, JHE)
+### Real-estate track (REE, JREFE, JHE, RSUE)
 
 Total: **35-55 pages** including tables, figures, and references.
 
@@ -109,7 +123,7 @@ Total: **35-55 pages** including tables, figures, and references.
 | References | 2-4 | Typically 30-60 references. |
 | Tables & Figures | 8-15 | Maps count as figures. RE papers often have more figures than finance papers. |
 
-REE and JUE tend shorter (~35-45). JREFE allows more length (~40-55).
+REE and RSUE tend shorter (~35-45). JREFE allows more length (~40-55).
 
 ### Internet Appendix
 
@@ -137,7 +151,9 @@ The paper may be under-developed. Check:
 
 **Finance track (JF/JFE/RFS)**: ~100 words. Structure: question, design, main finding with magnitude, implication. No citations, no "this paper" opening.
 
-**JFQA / Management Science**: Up to 150 words. Slightly more room for context.
+**JFQA**: ~100 words. Compact. Similar constraints to JF/JFE/RFS.
+
+**RoF**: Up to 150 words. Slightly more room for context and cross-disciplinary framing.
 
 **REE**: ~100 words, italicized, readable by a layperson, independent of the paper.
 
@@ -185,27 +201,33 @@ Produce one or more of:
 
 Use assets/introduction-skeleton.md when building from scratch.
 
-## LaTeX template
+## LaTeX template — write to file, not to chat
 
-When starting a new paper from scratch, copy the `latex_template/` folder from the project root. It contains:
+When starting a new paper from scratch, copy the `latex_template/` folder into the project's `paper/` directory. It contains:
 - `academic_paper_template.tex` — full paper structure matching the section sequence above, with blind-review toggle, `jf.bst` bibliography style, example tables/figures, and appendix
 - `template_references.bib` — sample `.bib` file (replace with output from `export_citations`)
 - Example images in `images/` (histograms, binned scatter, heterogeneity plot)
 
-The template sections (Introduction, Related Literature, Data, Empirical Design, Results, Robustness, Conclusion, Appendix) align with the writing workflow above. Draft each section using this skill, then paste into the corresponding `\section{}` in the `.tex` file.
+Before writing any section, read `latex_template/academic_paper_template.tex` to understand the template's structure and custom commands. Follow the float format specified in CLAUDE.md.
+
+**Write directly to the `.tex` file.** Do not put LaTeX content in the chat. Instead:
+1. Read the current `.tex` file (either the template or the user's working paper).
+2. Identify the `\section{}` block to update.
+3. Use the Edit tool to write the drafted prose directly into the corresponding section of the `.tex` file.
+4. If the paper `.tex` file does not exist yet, copy the template and then edit it.
+
+The template sections (Introduction, Related Literature, Data, Empirical Design, Results, Robustness, Conclusion, Appendix) align with the writing workflow above.
 
 ## Output format
 
+Write all LaTeX content directly to the `.tex` file in the project's `paper/` directory. In the chat, provide only:
 ```
-# Draft package
+# Draft summary
 ## Target journal or track
 ## Title options (3-5)
-## Abstract (targeted word count)
-## Introduction (7-paragraph structure)
-## Key contribution paragraph
-## Results prose (with magnitudes)
-## Conclusion
+## What was written (section names and brief description)
 ## Claims to soften (list any overclaims found)
+## File path where content was written
 ```
 
 ## Tool integration (Corbis MCP)

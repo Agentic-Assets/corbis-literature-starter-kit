@@ -880,9 +880,13 @@ Use the note templates provided with each figure type above.
 - Do not leave axis labels as raw variable names from the DataFrame.
 - For maps, always include a scale indicator or recognizable geographic context.
 
-## LaTeX float format (match the template)
+## LaTeX float format — write to `.tex` files
 
-Every figure must include a LaTeX float wrapper that follows `latex_template/academic_paper_template.tex`. The structure is: **caption on top, descriptive note between caption and figure, figure below**.
+**Before generating any figure float, read `latex_template/academic_paper_template.tex`** to see the template's custom commands (`\floatnotes`, `\sym`) and working examples of figure floats.
+
+**Write each figure's LaTeX float wrapper to a `.tex` file** in `output/figures/` (e.g., `output/figures/fig_event_study.tex`). Do not put float LaTeX in the chat for the user to copy-paste. These files can then be `\input{}` into the main paper `.tex` file.
+
+Every figure must include a LaTeX float wrapper that follows the template. The structure is: **caption on top, descriptive note between caption and figure, figure below**.
 
 ```latex
 \begin{figure}[!htbp]
@@ -903,6 +907,7 @@ The `\floatnotes` command (defined in the template) renders as a scriptsize quot
 
 ## Output format
 
+Write all figure Python code to `analysis/` scripts and all LaTeX float wrappers to `output/figures/*.tex` files. In the chat, provide only:
 ```
 # Figure plan
 ## Figures for the main paper (with placement rationale)
@@ -913,8 +918,7 @@ The `\floatnotes` command (defined in the template) renders as a scriptsize quot
   - What message it conveys
   - Figure type (from catalog)
   - Data requirements
-  - Python code
-  - LaTeX float wrapper (caption + label + floatnotes + includegraphics)
+  - File paths: Python script, output image, LaTeX float wrapper
 ```
 
 ## Example prompts
