@@ -1,6 +1,6 @@
 # Skills Use Guide — Powered by Corbis
 
-How to use the 16 Claude research skills across the lifecycle of a finance or real-estate paper. All skills integrate with [Corbis](https://corbis.ai) MCP tools for literature search, economic data, CRE market intelligence, and citation management.
+How to use the 17 Claude research skills across the lifecycle of a finance or real-estate paper. All skills integrate with [Corbis](https://corbis.ai) MCP tools for literature search, economic data, CRE market intelligence, and citation management.
 
 ---
 
@@ -44,7 +44,8 @@ The `latex_template/` folder contains a ready-to-use LaTeX template for empirica
 
 | You want to... | Use this skill |
 |---|---|
-| Brainstorm or vet a research idea | `finance-idea-screening` |
+| Generate ideas from a topic area (10 ranked ideas) | `research-idea-generator` |
+| Screen or evaluate a specific research idea | `finance-idea-screening` |
 | Map the literature and sharpen your contribution | `literature-positioning-map` |
 | Design or stress-test your identification strategy | `finance-identification-design` |
 | Handle spatial, hedonic, repeat-sales, or CRE-specific design | `real-estate-empirical-design` |
@@ -69,7 +70,8 @@ The `latex_template/` folder contains a ready-to-use LaTeX template for empirica
 Most papers move through these stages. The skills are designed to be used in roughly this order, though you'll loop back often.
 
 ```
- 1. Idea          -->  finance-idea-screening
+ 0. Brainstorm    -->  research-idea-generator
+ 1. Idea screen   -->  finance-idea-screening
  2. Literature    -->  literature-positioning-map
  3. Design        -->  finance-identification-design
                        (+ real-estate-empirical-design if RE)
@@ -120,27 +122,54 @@ Use `research-pipeline-orchestrator` at any point to get a full roadmap or figur
 
 ## Detailed guidance by stage
 
+### Stage 0: Idea generation (brainstorming)
+
+**Skill:** `research-idea-generator`
+
+**When to invoke:**
+- You have a broad topic area but no specific idea yet
+- You want to explore a subfield systematically for publishable questions
+- You have access to a dataset and want to find the best question it can answer
+- You want creative, high-impact ideas that go beyond gap-filling
+
+**What it does:**
+- Applies 10 structured heuristic lenses (literature gaps, conflicting findings, cross-pollination, first principles, new data x old question, mechanism decomposition, boundary conditions, policy shocks, model meets data, unification)
+- Searches the literature at each step to verify novelty
+- Produces an Idea Menu with 10 ranked ideas and expanded Idea Sketches for the top 3
+- Recommends which idea to screen first with `/idea`
+
+**Example prompts:**
+- `/brainstorm behavioral asset pricing`
+- `/brainstorm climate risk and real estate`
+- `/brainstorm intermediary asset pricing and credit markets`
+- "I have Revelio Labs workforce data — brainstorm ideas in corporate finance."
+
+**Next step:** Run `/idea` on the most promising candidate for full screening.
+
+---
+
 ### Stage 1: Idea screening
 
 **Skill:** `finance-idea-screening`
 
 **When to invoke:**
-- You have a rough topic and want to know if it's publishable
-- You want to generate ideas from a dataset, friction, or policy change
+- You have a specific idea and want to know if it's publishable
 - You need to decide between multiple ideas
 - A coauthor pitches something and you want a quick assessment
 
 **What it does:**
-- Scores the idea on 5 dimensions (question, mechanism, design, data, audience)
+- Runs a Stage 0 desk-editor screen (4 quick questions) to kill weak ideas early
+- Scores the idea on 6 dimensions (question, importance, contribution, mechanism, bridge, data)
 - Searches the literature to verify novelty (uses Corbis `search_papers` and `top_cited_articles`)
-- Produces a Go / Revise / Kill verdict with specific reasoning
-- Identifies the 2-3 fatal risks that could sink the paper
+- Produces a Top-3 Go / Field-journal Go / Revise / Kill verdict with specific reasoning
+- Runs 3 stress tests (null-result value, simultaneous-discovery, syllabus sentence)
+- Identifies the 2-3 essential hurdles and applies the revision-feasibility rule
 
 **Example prompts:**
-- "I have access to fintech lending data — what could I do with it?"
-- "Is this housing-supply idea strong enough for REE?"
+- `/idea Does stripping leverage from equity returns resolve the equity-credit disconnect?`
+- `/idea Is this housing-supply idea strong enough for REE?`
 - "Screen these three corporate-finance ideas and rank them."
-- "Generate ideas that exploit the 2023 banking stress as a natural experiment."
+- `/idea How does AI adoption in finance firms affect their stock return predictability?`
 
 ---
 

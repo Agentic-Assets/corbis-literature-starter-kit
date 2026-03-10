@@ -4,13 +4,14 @@ This project is a template and toolkit for producing empirical research papers t
 
 ## Skill routing — read this first
 
-Before responding to any research-related prompt, check whether one or more of the 16 installed skills (`.claude/skills/`) applies. If a skill matches, follow its workflow, deliverables, guardrails, and tool integration instructions. Multiple skills can be combined in a single response.
+Before responding to any research-related prompt, check whether one or more of the 17 installed skills (`.claude/skills/`) applies. If a skill matches, follow its workflow, deliverables, guardrails, and tool integration instructions. Multiple skills can be combined in a single response.
 
 **Routing quick reference:**
 
 | User is asking about...                     | Use skill                          |
 | ------------------------------------------- | ---------------------------------- |
-| Research idea, brainstorming, novelty check | `finance-idea-screening`         |
+| Idea generation, brainstorming from a topic  | `research-idea-generator`        |
+| Screen/evaluate a specific research idea     | `finance-idea-screening`         |
 | Literature, contribution, related work      | `literature-positioning-map`     |
 | Identification, DiD, IV, RD, threats        | `finance-identification-design`  |
 | Real estate design, spatial, hedonic, CRE   | `real-estate-empirical-design`   |
