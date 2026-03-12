@@ -97,6 +97,7 @@ Key principles:
 - Do not use em dashes. Use commas, parentheses, colons, or separate sentences instead.
 - Do not claim "first" or "to our knowledge" without verifying via literature search.
 - Every claim must be supported by the identification strategy — do not overclaim.
+- **Theory and model exposition**: When discussing theoretical models, lead with the economic intuition and story. Place Greek letters and formal notation in parentheses after the plain-language explanation. The reader should grasp the mechanism from the prose alone; notation confirms the mapping, it does not carry the argument.
 
 ### Introduction paragraph 1 rule
 

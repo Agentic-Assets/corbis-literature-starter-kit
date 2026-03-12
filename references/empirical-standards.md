@@ -55,11 +55,11 @@
 
 ### Before estimation
 - Define the unit of observation, sampling frame, and time aggregation.
-- Write down the estimand in plain English and in notation.
+- Write down the estimand in plain English and in notation. Lead with the plain-English description; notation follows in parentheses or in a displayed equation after the intuition is clear.
 - Define treatment, outcome, timing, and comparison set.
 
 ### Baseline specification
-- State the baseline specification in notation and plain English.
+- State the baseline specification in plain English first, then in notation. The reader should understand what the regression does from the prose before seeing the equation.
 - Explain fixed effects, clustering, and variation used for identification.
 - Tie each control to a threat or precision goal — no kitchen-sink controls.
 - Standard errors clustered at the level of treatment variation.

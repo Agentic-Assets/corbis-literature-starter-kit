@@ -13,10 +13,10 @@ Move from a broad hypothesis to a defensible estimand, comparison set, specifica
 
 ## Workflow
 
-1. Define the estimand in plain English and in notation.
+1. Define the estimand in plain English first, then in notation. Lead with the economic meaning; the formal expression follows in parentheses or a displayed equation after the intuition is established.
 2. Define the unit of observation and treatment timing.
 3. State the source of variation and why it is plausibly exogenous.
-4. Write the baseline specification in words and notation.
+4. Write the baseline specification in words first, then in notation. The reader should understand what the regression does from the prose before seeing the equation.
 5. List the key threats (use the threat taxonomy below).
 6. Match each threat to a diagnostic, design tweak, falsification, or stated limitation.
 7. Separate main-effect tests, mechanism tests, and heterogeneity tests.

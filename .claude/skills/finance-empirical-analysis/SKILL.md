@@ -56,6 +56,8 @@ For every main result, write the interpretation in this order:
 4. **Interpret cautiously**: "This is consistent with [mechanism] but does not rule out [alternative]."
 5. **State the limit**: "The design identifies the effect of [narrow thing], not [broader claim the reader might infer]."
 
+When referencing model predictions or theoretical variables in results discussion, describe the economic concept first and place the notation in parentheses. BAD: "The coefficient on β₂ is positive." GOOD: "The coefficient on AI adoption intensity (β₂) is positive, indicating that..."
+
 ## Table and figure formatting — write to `.tex` files
 
 Follow the float format specified in CLAUDE.md. Before first use, read `latex_template/academic_paper_template.tex` for the template's custom commands (`\floatnotes`, `\sym`) and working examples.
@@ -73,13 +75,17 @@ Table notes must be self-contained: state what the table reports, the sample, cl
 
 ## Economic magnitude translations
 
-Always convert coefficients into economically meaningful units:
-- Standard-deviation changes in the dependent variable
-- Dollar or percentage-point changes relative to the sample mean
-- Comparison to other known effects in the literature
-- Back-of-envelope welfare or policy implications when appropriate
+Always convert coefficients into economically meaningful units using a three-tier approach:
 
-Avoid: "a one-unit increase in X leads to a beta increase in Y" without contextualizing what a one-unit increase means economically.
+1. **Statistical units** (minimum): SD change in the dependent variable, percentage-point change relative to sample mean.
+2. **Real-world units** (standard): dollar amounts, basis points, square feet, months of rent, jobs gained or lost.
+3. **Anchored comparison** (best): compare to a familiar quantity the reader already grasps (a known effect from prior literature, a typical firm decision, a common policy change, or a household-scale equivalent).
+
+- BAD: "A one-unit increase in X leads to a beta increase in Y."
+- BETTER: "A one-SD increase in X is associated with a 2.3 percentage-point decline in Y, relative to a sample mean of 8.1%."
+- BEST: "A one-SD increase in X reduces Y by roughly $4.7 million per firm per year, comparable to the average annual R&D budget cut documented by Brown, Fazzari, and Petersen (2009) during credit contractions."
+
+The goal is for a reader who has never seen the data to immediately understand whether the effect is large or small. If the magnitude sentence requires the reader to look up the sample mean or the SD to interpret it, add another layer.
 
 ## Robustness categories
 

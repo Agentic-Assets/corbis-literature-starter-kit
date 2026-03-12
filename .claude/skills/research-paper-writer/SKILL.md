@@ -65,6 +65,16 @@ If there is no lab notebook but the user has a loose set of results and notes, a
 
 **Paragraph 7 — Broader implication and roadmap**: What is the economic lesson? Brief roadmap of the paper's sections.
 
+## Theory and model sections
+
+When the paper includes a theoretical model:
+- Lead every discussion of model components with the economic story. Place Greek letters and notation in parentheses after the intuitive explanation.
+- BAD: "When $\gamma > \bar{\gamma}$, the equilibrium shifts to full separation."
+- GOOD: "When the information precision of informed traders (γ) exceeds a threshold (γ̄), uninformed traders exit the market entirely, and the equilibrium shifts to full separation."
+- Introduce each parameter by its economic role before assigning it a symbol.
+- State propositions and predictions in plain language first. Reference the formal result (Proposition 1, Equation 3) afterward.
+- The reader should be able to follow the model's logic from prose alone. Notation confirms; it does not carry the argument.
+
 ## Style rules
 
 - Front-load the contribution. A referee decides whether to engage in the first two pages.
@@ -173,11 +183,11 @@ Generate 3-5 options ranging from descriptive to evocative. Flag which style fit
 Follow the interpretation protocol from the finance-empirical-analysis skill:
 1. State the result
 2. Name the specification
-3. Quantify the magnitude
+3. Quantify the magnitude (use the three-tier approach: statistical units → real-world units → anchored comparison to a familiar quantity the reader already grasps)
 4. Interpret cautiously
 5. State the limit
 
-Do not narrate columns ("Column 1 shows...Column 2 shows..."). Lead with the economic point.
+Do not narrate columns ("Column 1 shows...Column 2 shows..."). Lead with the economic point. When quantifying magnitude, the reader should immediately understand whether the effect is large or small without looking up sample statistics.
 
 When discussing statistical significance in text, reference the t-statistic: "the coefficient is -0.013 (t = -4.36)" not "the coefficient is -0.013 (SE = 0.003)" or "p < 0.01". Tables should report t-statistics in parentheses below coefficients.
 

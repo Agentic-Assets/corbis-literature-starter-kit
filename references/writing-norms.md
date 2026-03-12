@@ -22,6 +22,13 @@ Answer these questions early:
 6. What literatures are affected?
 7. What are the economic implications?
 
+## Theory and model exposition
+- When discussing a theoretical model, lead with the economic story and intuition. Place Greek letters and formal notation in parentheses after the plain-language explanation.
+- BAD: "An increase in $\alpha$ raises $\pi$ through the complementarity channel."
+- GOOD: "An increase in the firm's AI adoption intensity ($\alpha$) raises operating profit ($\pi$) because AI-augmented workers complete tasks faster, reducing per-unit costs."
+- Every model parameter should be introduced with its economic meaning first. The reader should understand the mechanism from the prose alone; the notation confirms the mapping.
+- For model predictions, state the testable implication in words before referencing the proposition or equation number.
+
 ## Results writing protocol
 - Lead each paragraph with the empirical point, not with a table number.
 - BAD: "Table 3, Column 2 shows that the coefficient on X is 0.023 (t = 4.2)."
@@ -36,6 +43,20 @@ Answer these questions early:
 - Translate into real-world units: dollars, percentage points, standard deviations, relative to the mean.
 - Compare to benchmarks when available: "This effect is comparable in magnitude to [known effect from prior literature]."
 - Do not rely on stars alone. Report t-statistics alongside coefficients.
+
+### Making magnitudes intuitive (tiered translation)
+
+A magnitude translation is only useful if the reader immediately grasps whether the effect is large or small. Use a three-tier approach:
+
+1. **Statistical units** (minimum): SD change, percentage-point change relative to the sample mean.
+2. **Real-world units** (standard): dollars per firm, basis points of return, square feet, months of rent.
+3. **Anchored comparison** (best): compare to a familiar quantity the reader already understands.
+
+- BAD (mechanical): "A one-standard-deviation increase in AI adoption is associated with a 0.8 percentage-point increase in NOI margin."
+- BETTER (real-world units): "A one-standard-deviation increase in AI adoption is associated with a 0.8 percentage-point increase in NOI margin, equivalent to roughly $1.2 million in additional annual operating income for the median REIT."
+- BEST (anchored): "A one-standard-deviation increase in AI adoption is associated with roughly $1.2 million in additional annual operating income for the median REIT, comparable to the cost savings from a typical energy retrofit (Eichholtz, Kok, and Quigley, 2013)."
+
+The anchored version works because it connects to something the reader already knows. Good anchors include: known effects from prior literature, familiar policy changes, typical firm decisions, or household-scale equivalents.
 
 ## Related literature
 - Do not dump a long neutral summary.
