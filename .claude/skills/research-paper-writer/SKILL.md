@@ -83,7 +83,7 @@ When the paper includes a theoretical model:
 - Do not use "crucially," "importantly," "interestingly," or other filler intensifiers.
 - Report economic magnitudes, not only sign and significance.
 - Make table and figure notes self-contained. A reader who sees only the float should understand it without the body text.
-- Follow the LaTeX template float format: `\caption{Title}` → `\label{}\vspace{-2.5ex}` → `\floatnotes{...}` (descriptive note *above* the table/figure body, not below it) → table/figure body. The note goes between the caption and the content.
+- Follow `references/latex-formatting-reference.md` for all float structure, table templates, figure templates, equation formatting, and custom commands. Read it before writing any LaTeX.
 - Keep footnotes sparse unless the target journal expects them (JREFE uses footnotes more freely).
 - Avoid giant generic literature dumps.
 - Do not promise more than the design can support.

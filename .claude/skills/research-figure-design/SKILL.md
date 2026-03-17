@@ -106,18 +106,9 @@ Every figure must have a self-contained note including:
 
 ## LaTeX float format
 
-Follow the float format specified in CLAUDE.md. Write each figure's LaTeX float wrapper to `output/figures/*.tex`. Do not put float LaTeX in the chat. Use `utils.figure_utils` for `set_publication_defaults()`, `plot_event_study()`, `plot_binned_scatter()`, `coef_plot()`, and the shared `COLORS` palette.
+Follow `references/latex-formatting-reference.md` for all figure float structure, templates (single figure, multi-panel), custom commands (`\floatnotes`), dimensions, and the required element ordering. Read it before writing any LaTeX.
 
-Structure: caption on top, descriptive note between caption and figure, figure below:
-```latex
-\begin{figure}[!htbp]
-\caption{Descriptive Title}
-\label{fig:name}\vspace{-2.5ex}
-\floatnotes{This figure plots [what]. [Sample]. [Method]. [CI/SE details].}
-\centering
-\includegraphics[width=\textwidth]{./output/figures/name.pdf}
-\end{figure}
-```
+Write each figure's LaTeX float wrapper to `output/figures/*.tex`. Do not put float LaTeX in the chat. Use `utils.figure_utils` for `set_publication_defaults()`, `plot_event_study()`, `plot_binned_scatter()`, `coef_plot()`, and the shared `COLORS` palette.
 
 ## Tool integration (Corbis MCP)
 

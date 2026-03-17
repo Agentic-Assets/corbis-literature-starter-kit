@@ -60,7 +60,7 @@ When referencing model predictions or theoretical variables in results discussio
 
 ## Table and figure formatting — write to `.tex` files
 
-Follow the float format specified in CLAUDE.md. Before first use, read `latex_template/academic_paper_template.tex` for the template's custom commands (`\floatnotes`, `\sym`) and working examples.
+Follow `references/latex-formatting-reference.md` for all float structure, table templates (summary stats, regression, heterogeneity, variable definitions), figure templates, custom commands (`\floatnotes`, `\sym`, column types `Y`/`L`), and the required element ordering. Read it before writing any LaTeX.
 
 Write all table and figure LaTeX to `output/tables/*.tex` and `output/figures/*.tex`. Do not put LaTeX in the chat. Each float gets its own file (e.g., `output/tables/tab_summary.tex`), included in the paper via `\input{}`. Use `utils.table_utils.reg_to_latex()` for programmatic table generation.
 
