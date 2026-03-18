@@ -36,6 +36,15 @@
 
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
 
+% Capitalized autoref names for clickable cross-references
+\renewcommand{\figureautorefname}{Figure}
+\renewcommand{\tableautorefname}{Table}
+\renewcommand{\sectionautorefname}{Section}
+\renewcommand{\subsectionautorefname}{Section}
+\newcommand{\propositionautorefname}{Proposition}
+\newcommand{\hypothesisautorefname}{Hypothesis}
+\newcommand{\appendixautorefname}{Appendix}
+
 \newcommand{\runningtitle}{Academic Paper Template}
 \newcommand{\papertitle}{Reusable Academic Paper Template: Example Layout for Empirical Research}
 \newcommand{\paperauthorone}{First Author}
@@ -119,9 +128,9 @@ For illustration, suppose the paper studies whether better disclosure lowers fin
 
 A second paragraph in the introduction typically explains the research design at a high level. Here, the placeholder design uses panel regressions with firm and year fixed effects, standard controls, and clustered standard errors following \citet{petersen2009estimating}. It also flags endogeneity concerns and previews the kinds of robustness checks discussed by \citet{angrist2009mostly}.\footnote{Use footnotes sparingly. They work best for brief institutional details, measurement clarifications, or secondary discussion that would otherwise interrupt the main argument.}
 
-A third paragraph often summarizes the paper's contributions. In a completed draft, this is where you would explain what is new relative to prior work, why the data or identification strategy is informative, and how the magnitudes matter economically. The sample tables/figures at the end of the document show common formatting choices for descriptive statistics, baseline regressions, heterogeneity tests, and visual summaries. For example, Table~\ref{tab:summary} presents summary statistics, Table~\ref{tab:baseline} presents a baseline regression layout, and Figure~\ref{fig:binned_scatter} shows a standard binned-scatter figure.
+A third paragraph often summarizes the paper's contributions. In a completed draft, this is where you would explain what is new relative to prior work, why the data or identification strategy is informative, and how the magnitudes matter economically. The sample tables/figures at the end of the document show common formatting choices for descriptive statistics, baseline regressions, heterogeneity tests, and visual summaries. For example, \autoref{tab:summary} presents summary statistics, \autoref{tab:baseline} presents a baseline regression layout, and \autoref{fig:binned_scatter} shows a standard binned-scatter figure.
 
-The remainder of the paper proceeds as follows. Section~\ref{sec:literature} illustrates how to position the study in the literature and develop hypotheses. Section~\ref{sec:data} describes the sample and variable construction. Section~\ref{sec:design} presents an example empirical specification. Sections~\ref{sec:results} and \ref{sec:additional} show a typical flow for main results, heterogeneity, and robustness. The appendix provides an example supplementary section and a variable-definition table.
+The remainder of the paper proceeds as follows. \autoref{sec:literature} illustrates how to position the study in the literature and develop hypotheses. \autoref{sec:data} describes the sample and variable construction. \autoref{sec:design} presents an example empirical specification. \autoref{sec:results} and \autoref{sec:additional} show a typical flow for main results, heterogeneity, and robustness. The appendix provides an example supplementary section and a variable-definition table.
 
 %--------------------------------------------------------
 \section{Related Literature and Hypothesis Development}
@@ -153,11 +162,11 @@ If the paper has a formal model or a richer institutional setting, that material
 
 A data section generally explains the sample period, the data sources, the merge procedure, and the filters applied to construct the final sample. The placeholder sample here contains 2,400 firm-year observations from 2010 through 2022. In your own draft, this paragraph should identify the primary database, describe how missing observations are handled, explain winsorization or trimming choices, and justify the final sample restrictions.
 
-It is often useful to preview the sample with one table and one figure. Table~\ref{tab:summary} provides an example summary-statistics table with a second panel for correlations. Figure~\ref{fig:histograms} provides an example descriptive figure with two panels. Both are purely illustrative; replace the numbers and notes with content that matches your actual data.
+It is often useful to preview the sample with one table and one figure. \autoref{tab:summary} provides an example summary-statistics table with a second panel for correlations. \autoref{fig:histograms} provides an example descriptive figure with two panels. Both are purely illustrative; replace the numbers and notes with content that matches your actual data.
 
 \subsection{Variable Definitions}
 
-The main dependent variable in the example is \textit{Financing Cost}, measured in percentage points. The focal explanatory variable is \textit{Disclosure Quality}, scaled from 0 to 100. The remaining controls are standard placeholders for firm size, leverage, profitability, growth opportunities, asset tangibility, and analyst coverage. Appendix Table~\ref{tab:appendix_variables} shows one way to format a concise variable-definition table.
+The main dependent variable in the example is \textit{Financing Cost}, measured in percentage points. The focal explanatory variable is \textit{Disclosure Quality}, scaled from 0 to 100. The remaining controls are standard placeholders for firm size, leverage, profitability, growth opportunities, asset tangibility, and analyst coverage. \autoref{tab:appendix_variables} shows one way to format a concise variable-definition table.
 
 When writing your own variable section, define variables precisely enough that a reader could replicate them. If the variable is transformed, indicate whether you use logs, percentiles, indicator variables, standardized scores, or industry-adjusted measures. If the construction is lengthy, summarize it briefly here and move the mechanical detail to the appendix.
 
@@ -220,9 +229,9 @@ This is also a good place to explain your inference choices. For example, a fina
 \section{Main Results}
 \label{sec:results}
 
-Table~\ref{tab:baseline} illustrates a common regression layout. In the example, the coefficient on disclosure quality is negative and statistically significant across specifications, consistent with Hypothesis~1. The first column shows a parsimonious relation. Subsequent columns add controls and fixed effects. In a real paper, this text would interpret the coefficient magnitudes, discuss identification, and connect the results back to the economics of the question.
+\autoref{tab:baseline} illustrates a common regression layout. In the example, the coefficient on disclosure quality is negative and statistically significant across specifications, consistent with Hypothesis~1. The first column shows a parsimonious relation. Subsequent columns add controls and fixed effects. In a real paper, this text would interpret the coefficient magnitudes, discuss identification, and connect the results back to the economics of the question.
 
-Figure~\ref{fig:binned_scatter} provides a nonparametric companion to the regression table. Binned-scatter plots are often useful because they show the broad shape of the relation without forcing the reader to infer it from coefficients alone. In your own draft, the figure note should state exactly what has been residualized, which sample restrictions are imposed, and whether the fitted line is linear, quadratic, or produced by another smoother.
+\autoref{fig:binned_scatter} provides a nonparametric companion to the regression table. Binned-scatter plots are often useful because they show the broad shape of the relation without forcing the reader to infer it from coefficients alone. In your own draft, the figure note should state exactly what has been residualized, which sample restrictions are imposed, and whether the fitted line is linear, quadratic, or produced by another smoother.
 
 One paragraph in the main-results section should usually address economic magnitude, not just statistical significance. For instance, if a ten-point increase in disclosure quality corresponds to a 12 to 18 basis-point reduction in financing costs, say so plainly and benchmark the effect against the sample mean or the interquartile range. If the magnitude is small, explain why it may still matter in the setting you study.
 
@@ -230,7 +239,7 @@ One paragraph in the main-results section should usually address economic magnit
 \section{Additional Analyses and Heterogeneity}
 \label{sec:additional}
 
-Table~\ref{tab:heterogeneity} shows an example heterogeneity table using interaction terms. The placeholder coefficients suggest that disclosure quality matters more for firms facing tighter financing conditions or weaker external information environments. Figure~\ref{fig:heterogeneity} then visualizes that heterogeneity using fitted values from the interaction specification.
+\autoref{tab:heterogeneity} shows an example heterogeneity table using interaction terms. The placeholder coefficients suggest that disclosure quality matters more for firms facing tighter financing conditions or weaker external information environments. \autoref{fig:heterogeneity} then visualizes that heterogeneity using fitted values from the interaction specification.
 
 You can repurpose this section for mechanisms, subsample analysis, event-time dynamics, falsification tests, or institutional splits. The key is to keep the logic disciplined: each additional result should answer a specific question raised by the theory, identification, or external validity of the baseline finding.
 
@@ -253,7 +262,7 @@ The conclusion should restate the research question, summarize the main evidence
 \section{Additional Details and Variable Definitions}
 \label{sec:appendix}
 
-Appendix sections are useful for measurement detail, supplementary figures, robustness checks, and institutional background that is important but too lengthy for the main text. Table~\ref{tab:appendix_variables} shows one common appendix layout. Figure~\ref{fig:appendix_hist} gives a simple example of an appendix figure.
+Appendix sections are useful for measurement detail, supplementary figures, robustness checks, and institutional background that is important but too lengthy for the main text. \autoref{tab:appendix_variables} shows one common appendix layout. \autoref{fig:appendix_hist} gives a simple example of an appendix figure.
 
 A longer appendix might also report alternative variable definitions, additional sample screens, timing conventions, or robustness tables that would otherwise interrupt the flow of the main text. If your paper has a separate Internet Appendix, this section can briefly explain what is included there and how it relates to the main manuscript.
 
@@ -291,7 +300,7 @@ A longer appendix might also report alternative variable definitions, additional
 \begin{figure}[!htbp]
 \caption{Predicted Financing Cost by Disclosure Quality and Financial Constraint Status}
 \label{fig:heterogeneity}\vspace{-2.5ex}
-\floatnotes{This figure shows one way to present cross-sectional heterogeneity. The lines can be interpreted as fitted values from the interaction specification in Table~\ref{tab:heterogeneity}. Replace the group labels, fitted values, and confidence intervals so they match your own empirical setting.}
+\floatnotes{This figure shows one way to present cross-sectional heterogeneity. The lines can be interpreted as fitted values from the interaction specification in \autoref{tab:heterogeneity}. Replace the group labels, fitted values, and confidence intervals so they match your own empirical setting.}
 \centering
 \includegraphics[width=15.24cm,height=9.6cm]{./images/fig3.png}
 \end{figure}

@@ -56,6 +56,22 @@ Usage: `0.042\sym{***}` renders as 0.042***
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}  % Left-aligned fixed-width column
 ```
 
+### Autoref name definitions
+
+Capitalized names so `\autoref{}` renders as "Table 3", "Figure 1", "Section 5", etc.:
+
+```latex
+\renewcommand{\figureautorefname}{Figure}
+\renewcommand{\tableautorefname}{Table}
+\renewcommand{\sectionautorefname}{Section}
+\renewcommand{\subsectionautorefname}{Section}
+\newcommand{\propositionautorefname}{Proposition}
+\newcommand{\hypothesisautorefname}{Hypothesis}
+\newcommand{\appendixautorefname}{Appendix}
+```
+
+These are defined in the preamble. The entire label+number becomes a single clickable link in the PDF.
+
 ### Caption setup
 
 Period after caption label (e.g., "Table 1." not "Table 1:"):
@@ -275,14 +291,21 @@ Conventions:
 
 ## Cross-references
 
+Use `\autoref{}` for all cross-references except equations. The label name and number become a single clickable link in the PDF. Equations use `\eqref{}` for the standard "(3)" inline style.
+
 ```latex
-Table~\ref{tab:summary}          % non-breaking space before \ref
-Figure~\ref{fig:binned_scatter}
-Equation~\eqref{eq:baseline}     % \eqref for equations (adds parentheses)
-Section~\ref{sec:results}
+\autoref{tab:summary}            % renders as "Table 1" (clickable)
+\autoref{fig:binned_scatter}     % renders as "Figure 2" (clickable)
+\autoref{sec:results}            % renders as "Section 5" (clickable)
+\autoref{sec:appendix}           % renders as "Appendix A" (clickable)
+Equation~\eqref{eq:baseline}    % renders as "Equation (1)" — equations keep \eqref
 ```
 
-Always use `~` (non-breaking space) before `\ref` and `\eqref`.
+**Rules:**
+- **Do not** use `Table~\ref{}`, `Figure~\ref{}`, or `Section~\ref{}`. Use `\autoref{}` instead.
+- **Do** use `\eqref{}` for equations (preserves the standard parenthesized number style).
+- `\autoref` supplies the label name automatically from the preamble definitions, so do not type "Table" or "Figure" before `\autoref{}`.
+- For equations referenced as a noun, write `Equation~\eqref{eq:baseline}` (the word "Equation" is typed manually since `\eqref` only produces the number).
 
 ## Citation commands
 

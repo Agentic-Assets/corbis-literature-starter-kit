@@ -374,7 +374,7 @@ def summary_stats_latex(df, variables, labels=None, stats=None, filename=None):
 
     lines = [r'\begin{table}[!htbp]', r'\centering', r'\caption{Summary Statistics}',
              r'\label{tab:summary}\vspace{-2.5ex}',
-             r'\floatnotes{This table reports summary statistics for the main variables. The sample period is [PERIOD]. See Appendix Table~\ref{tab:appendix_variables} for variable definitions.}',
+             r'\floatnotes{This table reports summary statistics for the main variables. The sample period is [PERIOD]. See \autoref{tab:appendix_variables} for variable definitions.}',
              r'\small', r'\begin{tabularx}{\textwidth}{@{}X' + 'r' * len(stats) + '@{}}',
              r'\toprule',
              ' & '.join([f'\\textbf{{{h}}}' for h in header]) + r' \\',
