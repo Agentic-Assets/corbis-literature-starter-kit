@@ -1,6 +1,6 @@
 # Skills Use Guide — Powered by Corbis
 
-How to use the 17 Claude research skills across the lifecycle of a finance or real-estate paper. All skills integrate with [Corbis](https://corbis.ai) MCP tools for literature search, economic data, CRE market intelligence, and citation management.
+How to use the 18 Claude research skills across the lifecycle of a finance or real-estate paper. All skills integrate with [Corbis](https://corbis.ai) MCP tools for literature search, economic data, CRE market intelligence, and citation management.
 
 ---
 
@@ -10,6 +10,7 @@ The `latex_template/` folder contains a ready-to-use LaTeX template for empirica
 
 **What's included:**
 - `academic_paper_template.tex` — full paper structure: title page with blind-review toggle (`\blindtrue`/`\blindfalse`), abstract, JEL codes, introduction, literature review, data section, empirical design, results, robustness, conclusion, appendix, and post-reference tables/figures
+- `beamer_template.tex` — presentation template: metropolis theme, navy/gray color scheme, 16:9 aspect ratio, frame templates for every standard slide type (title, motivation, design, results, magnitude, mechanism, robustness, conclusion, backup), speaker notes support, and handout layout option
 - `template_references.bib` — sample BibTeX file (replace with your own; use `export_citations` from Corbis to generate entries)
 - `jf.bst` — Journal of Finance bibliography style
 - `images/` — example figures (histograms, binned scatter, heterogeneity plot, appendix diagnostic)
@@ -56,7 +57,8 @@ The `latex_template/` folder contains a ready-to-use LaTeX template for empirica
 | Write Python code for data, regressions, tables, or figures | `python-empirical-code` |
 | Plan your table sequence, robustness, and mechanism tests | `finance-empirical-analysis` |
 | Design portfolio sorts, alphas, and factor tests | `asset-pricing-test-suite` |
-| Draft an introduction, abstract, or results section | `research-paper-writer` |
+| Draft any paper section (intro, lit review, data, design, results, etc.) | `research-paper-writer` |
+| Remove AI writing patterns and polish prose | `humanizer` |
 | Build a seminar, conference, or job-talk deck | `research-seminar-deck` |
 | Handle an R&R or draft referee responses | `referee-revision-response` |
 | Audit a paper before submission (simulated referee) | `pre-submission-review` |
@@ -87,7 +89,8 @@ Most papers move through these stages. The skills are designed to be used in rou
  5b. Figures      -->  research-figure-design
                        (+ python-empirical-code for implementation)
  6. Writing       -->  research-paper-writer
- 6b. Targeting    -->  /target (journal profiles in references/)
+ 6b. Polish       -->  humanizer (remove AI writing patterns)
+ 6c. Targeting    -->  /target (journal profiles in references/)
  7. Replication   -->  replication-package-builder
  8. Pre-submit    -->  pre-submission-review
  8b. Presenting   -->  research-seminar-deck
@@ -254,11 +257,13 @@ Use `research-pipeline-orchestrator` at any point to get a full roadmap or figur
 - Mandatory implementability section (turnover, capacity, trading costs, short-leg feasibility)
 - Checks signal novelty against the Chen-Zimmermann anomaly zoo
 - Addresses data snooping (Harvey-Liu-Zhu thresholds)
+- **ML robustness module**: variable importance (LightGBM/XGBoost), incremental out-of-sample R-squared, partial dependence plots, double-sort persistence tests, with full Python code templates and training protocol to avoid look-ahead bias
 
 **Example prompts:**
 - "Design the full empirical test suite for this new characteristic."
 - "Is my signal just a relabeled version of profitability?"
 - "Assess the implementability of this high-turnover strategy."
+- "Run the ML robustness battery for my new anomaly signal."
 
 ---
 
@@ -278,6 +283,8 @@ Use `research-pipeline-orchestrator` at any point to get a full roadmap or figur
 - Variable construction standards (winsorization, scaling, date alignment)
 - Reproducible folder and script architecture
 - FRED series reference table for macro controls
+
+**Reference**: See `references/wrds-recipes.md` for CRSP, Compustat, IBES, TRACE, Dealscan, BoardEx, and OptionMetrics table schemas, standard SQL queries, known data gotchas (delisting returns, backfill bias, fiscal year timing, etc.), and the identifier crosswalk table.
 
 **Example prompts:**
 - "Help me merge Compustat, CRSP, and bond data for a capital-structure paper."
@@ -307,6 +314,7 @@ Use `research-pipeline-orchestrator` at any point to get a full roadmap or figur
 - Creates journal-quality figures (event-study plots, coefficient plots, binned scatters) with proper fonts, sizing, and 300 DPI
 - Handles real-estate spatial operations: GeoDataFrame creation, spatial joins, distance calculations, Conley standard errors, repeat-sales indices
 - Scaffolds reproducible project structure (`raw/` → `build/` → `analysis/` → `output/`)
+- **Testing and validation**: `merge_with_validation()` with expected match rates, `validate_variable()` for hard bounds and sanity checks, `SampleTracker` for documenting observation counts through the pipeline, and `data_quality_report()` for missingness, duplicates, panel balance, and outlier detection
 
 **Example prompts:**
 - "Write the Python code to merge CRSP and Compustat via CCM."
@@ -316,7 +324,7 @@ Use `research-pipeline-orchestrator` at any point to get a full roadmap or figur
 - "Build the full portfolio-sort pipeline for this anomaly paper."
 - "Set up the project structure for a corporate-finance paper."
 
-**Tip:** Use `finance-data-construction` to *plan* the data pipeline (which sources, which merges, which variables), then use `python-empirical-code` to *implement* it. Use `finance-empirical-analysis` to *plan* the table sequence and robustness strategy, then use `python-empirical-code` to *write the code*.
+**Tip:** Use `finance-data-construction` to *plan* the data pipeline (which sources, which merges, which variables), then use `python-empirical-code` to *implement* it. Use `finance-empirical-analysis` to *plan* the table sequence and robustness strategy, then use `python-empirical-code` to *write the code*. When building the analysis sample, use the testing and validation tools (`merge_with_validation`, `SampleTracker`, `data_quality_report`) to catch silent errors before they propagate. See `references/wrds-recipes.md` for database-specific gotchas.
 
 ---
 
@@ -377,16 +385,25 @@ Use `research-pipeline-orchestrator` at any point to get a full roadmap or figur
 **Skill:** `research-paper-writer`
 
 **When to invoke:**
-- You need an introduction, abstract, conclusion, or results prose
-- You want title options
+- You need any paper section drafted: introduction, related literature, institutional background, data, empirical design, results, robustness, mechanism, conclusion, or internet appendix
+- You want an abstract, title options, or contribution paragraph
 - You need journal-specific formatting (JF vs. REE vs. JREFE abstract style)
-- You want a contribution paragraph
+- You want to bridge from exploration notes (lab notebook) to a structured paper
 
 **What it does:**
-- 7-paragraph introduction structure with paragraph-by-paragraph guidance
-- Journal-specific abstract specs (JF/JFE/RFS: ~100 words; JREFE: 150-250 words)
-- Results prose following the 5-step interpretation protocol
-- Title generation (3-5 options, descriptive to evocative)
+- **Introduction**: 7-paragraph structure with paragraph-by-paragraph guidance, grounded in recent events
+- **Related literature**: Strand-based organization (3-5 strands), synthesis not enumeration, contribution-building
+- **Institutional background**: For RE papers or unfamiliar settings, with timeline guidance and primary source citations
+- **Data and variables**: Sources, sample construction with observation counts, variable definitions, summary statistics discussion
+- **Empirical design**: Identification challenge, source of variation, numbered specification equation, threat-to-diagnostic mapping, design-specific guidance (DiD, IV, RD, event study)
+- **Main results**: 5-step interpretation protocol per result (state, specify, quantify magnitude in three tiers, interpret, limit), across-column discussion, no column narration
+- **Robustness**: Organized by threat, not by table number, with writing templates
+- **Mechanism and heterogeneity**: Channel logic with testable implications, not kitchen-sink splits
+- **Conclusion**: Forward-looking, 1-2 pages, no mere summary
+- **Internet appendix**: Overflow tables, variable definitions, extra robustness
+- **Abstract**: Journal-specific word counts (JF/JFE/RFS ~100 words; JREFE 150-250 words)
+- **Titles**: 3-5 options, descriptive to evocative
+- **Discovery-to-paper bridge**: Reads lab notebook (`notes/lab_notebook.md`) and project state (`notes/project_state.md`) to build the story spine from exploration notes
 - Citation formatting and BibTeX export via Corbis
 
 **Example prompts:**
@@ -394,6 +411,37 @@ Use `research-pipeline-orchestrator` at any point to get a full roadmap or figur
 - "Draft the abstract and contribution paragraph for a Real Estate Economics submission."
 - "Give me 5 title options for this mortgage default paper."
 - "Rewrite this conclusion to be more forward-looking."
+- "Write the data section for my CRSP-Compustat panel."
+- "Draft the empirical design section for my DiD paper."
+- "Write the related literature section organized by strand."
+- "Draft the mechanism section explaining why the effect operates through information asymmetry."
+- "Write the robustness section addressing the three threats from my design memo."
+
+---
+
+### Stage 6b: Prose polish (humanizer)
+
+**Skill:** `humanizer`
+
+**When to invoke:**
+- After `research-paper-writer` drafts any section, to remove AI writing patterns
+- Before submission, as a final prose pass on the full manuscript
+- When a coauthor flags that text "reads like ChatGPT"
+- When revising prose that feels formulaic or "assembled"
+
+**What it does:**
+- Scans for 21 AI writing patterns adapted for academic papers: significance inflation, hollow contribution claims, promotional language, vague attributions, AI vocabulary words, copula avoidance, synonym cycling, mechanical table narration, hollow mechanism language, formulaic transitions, em dash overuse, and more
+- Rewrites problematic sections while preserving the argument, citations, magnitudes, and LaTeX formatting
+- Runs a referee-lens audit: "What would make a referee suspect this was AI-written?"
+- Can operate on `.tex` files directly (reads and edits in place) or on text in the prompt
+
+**Example prompts:**
+- `/humanize paper/my_paper.tex`
+- `/humanize [paste a paragraph here]`
+- "Run the humanizer on the introduction section of my paper."
+- "Polish the results prose to remove AI tells."
+
+**Tip:** Run this *after* using `research-paper-writer` to draft sections and *before* using `pre-submission-review` for the final audit. The paper-writer focuses on structure and content; the humanizer focuses on making the prose sound like a human researcher wrote it; the pre-submission review focuses on substantive issues.
 
 ---
 
@@ -447,11 +495,15 @@ Produces a consolidated report saved to `PRE_SUBMISSION_REVIEW_[date].md` with p
 - Audience-specific adjustments (finance seminars attack ID; RE audiences want institutional detail)
 - Backup slide organization by question type
 - Speaker notes for each slide
+- **Beamer LaTeX generation**: Produces a complete, compilable Beamer `.tex` file using the metropolis theme with frame templates for every standard slide type (title, contribution, motivation, question, design, results, magnitude, mechanism, robustness, conclusion, backup). Writes to `paper/slides_[format].tex`. Uses the Beamer template at `latex_template/beamer_template.tex`.
+
+When you ask for "slides" or "a deck," the skill generates the Beamer file by default. When you ask for an "outline" or "blueprint," it produces the outline only.
 
 **Example prompts:**
 - "Turn my asset-pricing paper into a 15-minute conference deck."
 - "Build a job-talk outline for this corporate-finance paper."
 - "What backup slides do I need for a hostile identification question?"
+- "Generate Beamer slides for a 20-minute workshop presentation."
 
 ---
 
@@ -496,9 +548,10 @@ Produces a consolidated report saved to `PRE_SUBMISSION_REVIEW_[date].md` with p
 | 5 | `finance-empirical-analysis` | Table plan, baseline interpretation, robustness by threat |
 | 5b | `python-empirical-code` | Regression code, LaTeX tables |
 | 5c | `research-figure-design` | Event-study plots, coefficient plots, binned scatters, mechanism diagrams |
-| 6 | `research-paper-writer` | Copy `latex_template/`, draft JFE-style introduction, abstract, title options, populate `.bib` via `export_citations` |
+| 6 | `research-paper-writer` | Copy `latex_template/`, draft all sections (introduction, literature, data, design, results, robustness, mechanism, conclusion), abstract, title options, populate `.bib` via `export_citations` |
+| 6b | `humanizer` | Remove AI writing patterns from drafted prose, referee-lens audit |
 | 7 | `pre-submission-review` | 6-agent audit: consistency, overclaiming, table notes, simulated JFE referee report |
-| 8 | `research-seminar-deck` | Conference deck blueprint with backup slides |
+| 8 | `research-seminar-deck` | Beamer slides for conference deck + backup slides |
 
 ### Case 2: Real-estate paper on opportunity zones
 
@@ -514,7 +567,7 @@ Produces a consolidated report saved to `PRE_SUBMISSION_REVIEW_[date].md` with p
 | 4b | `python-empirical-code` | Spatial join code (geopandas), distance calculations, Conley SEs |
 | 5 | `finance-empirical-analysis` | Table sequence, heterogeneity by zone characteristics |
 | 5b | `research-figure-design` | Choropleth maps, event-study plots, RD plots for boundary design |
-| 6 | `research-paper-writer` | Copy LaTeX template, draft REE-style introduction and abstract, export BibTeX references |
+| 6 | `research-paper-writer` | Copy LaTeX template, draft all sections (intro, institutional background, data, design, results, robustness, conclusion), REE-style abstract, export BibTeX references |
 
 ### Case 3: Asset-pricing anomaly paper
 
@@ -523,11 +576,11 @@ Produces a consolidated report saved to `PRE_SUBMISSION_REVIEW_[date].md` with p
 | Step | Skill | What you get |
 |---|---|---|
 | 1 | `finance-idea-screening` | Novelty check against anomaly zoo, mechanism assessment |
-| 2 | `asset-pricing-test-suite` | Full test plan: quintile sorts, alphas vs. FF5/q-factor/q5, Fama-MacBeth, implementability |
+| 2 | `asset-pricing-test-suite` | Full test plan: quintile sorts, alphas vs. FF5/q-factor/q5, Fama-MacBeth, implementability, ML robustness |
 | 3 | `literature-positioning-map` | Position against supply-chain finance and concentration literatures |
 | 4 | `finance-data-construction` | Compustat segment data + CRSP merge, customer concentration variable construction |
-| 5 | `research-paper-writer` | RFS-style introduction, ~100-word abstract |
-| 6 | `research-seminar-deck` | 15-minute conference deck with coefficient plots |
+| 5 | `research-paper-writer` | RFS-style introduction, results prose, ~100-word abstract |
+| 6 | `research-seminar-deck` | 15-minute Beamer conference deck with coefficient plots |
 
 ### Case 4: Handling an R&R
 
@@ -539,7 +592,7 @@ Produces a consolidated report saved to `PRE_SUBMISSION_REVIEW_[date].md` with p
 | 2 | `finance-identification-design` | Redesigned robustness battery addressing Referee 1's specific concern |
 | 3 | `finance-empirical-analysis` | New mechanism test plan for Referee 2 |
 | 4 | `literature-positioning-map` | Verify Referee 1's literature claims, find new citations |
-| 5 | `research-paper-writer` | Revised introduction with narrowed claims |
+| 5 | `research-paper-writer` | Revised introduction, robustness section, mechanism section with narrowed claims |
 | 6 | `referee-revision-response` | Final response letter and cover letter draft |
 
 ### Case 5: Job market paper preparation
@@ -550,9 +603,9 @@ Produces a consolidated report saved to `PRE_SUBMISSION_REVIEW_[date].md` with p
 |---|---|---|
 | 1 | `research-pipeline-orchestrator` | Full assessment: what's ready, what needs work, timeline |
 | 2 | `literature-positioning-map` | Updated literature check for recent working papers that could overlap |
-| 3 | `research-paper-writer` | Polished introduction, abstract, and conclusion for JFE/RFS targeting |
-| 4 | `research-seminar-deck` | 90-minute job talk blueprint with 25+ backup slides |
-| 5 | `research-seminar-deck` | 15-minute conference version for AFA/AREUEA |
+| 3 | `research-paper-writer` | Polished introduction, all body sections, abstract, and conclusion for JFE/RFS targeting |
+| 4 | `research-seminar-deck` | 90-minute job talk Beamer deck with 25+ backup slides |
+| 5 | `research-seminar-deck` | 15-minute Beamer conference version for AFA/AREUEA |
 
 ---
 
@@ -564,8 +617,19 @@ You don't need to invoke skills one at a time. Common multi-skill requests:
 - **"Plan the full empirical section"** — triggers `finance-empirical-analysis` + `finance-data-construction` if data questions arise
 - **"Help me respond to this R&R and rewrite the intro"** — triggers `referee-revision-response` + `research-paper-writer`
 - **"I need a design memo and a deck for a workshop next week"** — triggers `finance-identification-design` + `research-seminar-deck`
+- **"Write the full paper from my results"** — triggers `research-paper-writer` for all sections (intro, literature, data, design, results, robustness, mechanism, conclusion)
 
 Use `research-pipeline-orchestrator` when you're unsure which skill to start with — it will diagnose your stage and route you.
+
+### Cross-skill coordination
+
+Skills automatically coordinate via two files:
+
+- **`notes/project_state.md`** — A structured state file that every skill reads at the start and updates at the end. It tracks: the research question, identification strategy, closest papers, data sources, analysis status, and writing progress. This means when you run `/design` after `/lit-search`, the design skill already knows your closest papers and contribution claim. When you run `research-paper-writer` after `/design`, it already knows the specification, threats, and diagnostics.
+
+- **`notes/lab_notebook.md`** — Every skill that produces a deliverable appends a dated entry: what was done, key findings, decisions made, output files, and next steps. This creates a continuous research audit trail. The paper-writer skill can read the lab notebook to bridge from exploration results to a structured paper. The referee-response skill can use it to reconstruct the reasoning behind design choices.
+
+Both files are created automatically the first time a skill needs them. You do not need to set them up manually.
 
 ---
 
@@ -600,3 +664,19 @@ Every skill integrates Corbis MCP tools. The most commonly used:
 | `get_market_data` | CRE market fundamentals | real-estate-empirical-design |
 | `compare_markets` | Cross-metro comparisons | real-estate-empirical-design |
 | `search_datasets` | Discovering available data | finance-data-construction, idea-screening |
+
+## Reference files
+
+| Reference | What it contains | Used by |
+|---|---|---|
+| `references/wrds-recipes.md` | WRDS table schemas, standard SQL queries, data gotchas (delisting returns, backfill, fiscal year timing), identifier crosswalk | finance-data-construction, python-empirical-code |
+| `references/latex-formatting-reference.md` | LaTeX float structure, table/figure templates, custom commands, equation formatting | research-paper-writer, python-empirical-code, research-figure-design |
+| `references/journal-targets.md` | Per-journal profiles: editors, fees, fit inference, red flags, development advice | /target, research-paper-writer, pre-submission-review |
+| `references/journal-profiles.json` | Structured (machine-readable) version of journal-targets.md | /target |
+| `references/journal-review-standards.md` | Referee-lens summary of review norms across 15 journals | pre-submission-review |
+| `references/empirical-standards.md` | General empirical standards: screening, data construction, identification, analysis | All design and analysis skills |
+| `references/asset-pricing-norms.md` | Factor model benchmarks, data snooping thresholds, implementability standards | asset-pricing-test-suite |
+| `references/real-estate-methods.md` | Hedonic, repeat-sales, boundary RD, spatial DiD, mortgage, CRE, climate methods | real-estate-empirical-design |
+| `references/writing-norms.md` | Top journal writing standards, tone, magnitude translation, literature section structure | research-paper-writer |
+| `references/presentation-norms.md` | Seminar and conference presentation standards, slide design, time management | research-seminar-deck |
+| `references/python-finance-packages.md` | Python package reference with versions, API patterns, and common pitfalls | python-empirical-code |

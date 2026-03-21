@@ -17,4 +17,4 @@ Produce:
 8. FRED series needed (use `fred_search` to identify)
 9. Data appendix outline
 
-Use `search_datasets` to discover available data.
+Use `search_datasets` to discover available data. Read `references/wrds-recipes.md` for WRDS table schemas, standard queries, identifier crosswalk, and known data gotchas per database.

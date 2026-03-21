@@ -4,7 +4,7 @@ This project is a template and toolkit for producing empirical research papers t
 
 ## Skill routing — read this first
 
-Before responding to any research-related prompt, check whether one or more of the 17 installed skills (`.claude/skills/`) applies. If a skill matches, follow its workflow, deliverables, guardrails, and tool integration instructions. Multiple skills can be combined in a single response.
+Before responding to any research-related prompt, check whether one or more of the 18 installed skills (`.claude/skills/`) applies. If a skill matches, follow its workflow, deliverables, guardrails, and tool integration instructions. Multiple skills can be combined in a single response.
 
 **Routing quick reference:**
 
@@ -20,6 +20,7 @@ Before responding to any research-related prompt, check whether one or more of t
 | Table plan, robustness, mechanism tests     | `finance-empirical-analysis`     |
 | Anomalies, factors, portfolio sorts, alphas | `asset-pricing-test-suite`       |
 | Writing: any paper section, prose, titles    | `research-paper-writer`          |
+| Remove AI writing patterns, polish prose    | `humanizer`                      |
 | Pre-submission audit, consistency check     | `pre-submission-review`          |
 | Presentation slides, talk outline           | `research-seminar-deck`          |
 | R&R, referee response, revision plan        | `referee-revision-response`      |

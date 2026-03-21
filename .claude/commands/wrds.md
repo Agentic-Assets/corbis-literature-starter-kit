@@ -27,4 +27,5 @@ When downloading data:
 - Save to `raw/` directory as parquet: `df.to_parquet('raw/filename.parquet')`
 - Print shape and column names after download
 - Follow the date alignment and identifier conventions from the `python-empirical-code` skill
+- Read `references/wrds-recipes.md` for table schemas, standard queries, known data gotchas (delisting returns, backfill bias, fiscal year timing, identifier crosswalk), and cleaning recipes per database
 - Do not download more data than needed for the task
