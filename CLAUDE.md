@@ -19,7 +19,7 @@ Before responding to any research-related prompt, check whether one or more of t
 | Python code for data, regressions, figures  | `python-empirical-code`          |
 | Table plan, robustness, mechanism tests     | `finance-empirical-analysis`     |
 | Anomalies, factors, portfolio sorts, alphas | `asset-pricing-test-suite`       |
-| Writing: intro, abstract, results, titles   | `research-paper-writer`          |
+| Writing: any paper section, prose, titles    | `research-paper-writer`          |
 | Pre-submission audit, consistency check     | `pre-submission-review`          |
 | Presentation slides, talk outline           | `research-seminar-deck`          |
 | R&R, referee response, revision plan        | `referee-revision-response`      |
@@ -123,6 +123,106 @@ project/
 ```
 
 **Workflow**: Exploration scripts go in `explore/`. When a test produces a keeper, move the script to `analysis/` and log the result in `notes/lab_notebook.md`. Once the table/figure set is complete, use the lab notebook to transition to writing the paper.
+
+## Lab notebook automation
+
+Every skill that produces a deliverable must append a dated entry to `notes/lab_notebook.md`. This creates a continuous research audit trail that is invaluable for writing the paper, responding to referees, and resuming work after a break.
+
+**When to log**: After completing any skill invocation that produces a deliverable (design memo, table plan, lit search, figure plan, code output, writing draft, review report, etc.).
+
+**Entry format**:
+
+```markdown
+---
+
+### YYYY-MM-DD — [Skill name]: [Brief description]
+
+**What was done**: [1-2 sentences describing the task]
+
+**Key findings**:
+- [Finding 1]
+- [Finding 2]
+
+**Decisions made**: [What was decided and why]
+
+**Output files**: [List of files created or modified]
+
+**Next steps**: [What should happen next]
+```
+
+**Rules**:
+- Use the actual date, not relative dates.
+- If `notes/lab_notebook.md` does not exist, create it with a header: `# Lab Notebook — [Project Name]`.
+- Append at the bottom. Do not overwrite or reorder existing entries.
+- Keep entries concise. The notebook is a log, not a report.
+- Log null results and dead ends too. These inform the paper's robustness discussion and help avoid revisiting failed approaches.
+- When promoting an exploration script to `analysis/`, log the promotion and what the script produces.
+
+## Project state (cross-skill context)
+
+Skills should read and update `notes/project_state.md` to pass context between invocations. This prevents the user from re-explaining decisions that were already made in a prior skill invocation.
+
+**When to read**: At the start of any skill invocation, check whether `notes/project_state.md` exists. If it does, read it to understand the current state of the project before proceeding.
+
+**When to update**: After completing a skill invocation, update the relevant section(s) of `notes/project_state.md` with any new decisions, findings, or outputs.
+
+**File structure**:
+
+```markdown
+# Project State
+
+## Paper metadata
+- **Working title**:
+- **Target journal**:
+- **Track**: [finance / real-estate]
+- **Stage**: [idea / literature / design / data / analysis / writing / pre-submission / revision]
+- **Last updated**: YYYY-MM-DD
+
+## Research question
+[One-sentence question]
+
+## Mechanism and predictions
+[The economic mechanism and testable predictions]
+
+## Identification strategy
+- **Method**: [DiD / IV / RD / portfolio sorts / etc.]
+- **Source of variation**:
+- **Key threats**:
+- **Design memo file**: [path if exists]
+
+## Literature positioning
+- **Closest papers**: [2-3 papers with differentiation]
+- **Contribution claim**: [one sentence]
+- **Literature matrix file**: [path if exists]
+
+## Data
+- **Sources**: [list]
+- **Sample period**:
+- **Key variables**:
+- **Known issues**:
+- **Build scripts**: [paths]
+
+## Analysis status
+- **Table plan**: [path if exists]
+- **Completed tables**: [list]
+- **Completed figures**: [list]
+- **Key results**: [1-2 sentence summary of main finding]
+
+## Writing status
+- **Sections drafted**: [list]
+- **Paper file**: [path]
+
+## Open questions
+- [Question 1]
+- [Question 2]
+```
+
+**Rules**:
+- If `notes/project_state.md` does not exist when a skill needs to update it, create it with the template above and fill in what is known.
+- Only update sections relevant to the current skill. Do not overwrite sections populated by other skills unless the information has changed.
+- Keep entries factual and brief. This is a coordination file, not a narrative.
+- The `Stage` field should reflect the earliest incomplete stage, not the most recent activity.
+- When the user starts a new project, the first skill invoked should initialize this file.
 
 ## What not to do
 

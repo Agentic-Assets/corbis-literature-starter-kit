@@ -95,6 +95,170 @@ For each slide, prepare:
 - One or two anticipated questions and how to handle them
 - The time target for this slide
 
+## Beamer slide generation
+
+When the user requests actual slides (not just an outline), generate a complete Beamer LaTeX document. Use the Beamer template at `latex_template/beamer_template.tex` as the starting point.
+
+### Beamer code conventions
+
+- **Theme**: Use `metropolis` (clean, modern, widely available). Fall back to `Madrid` if metropolis is unavailable.
+- **Colors**: Navy primary (`{RGB}{0,40,85}`), gray accent (`{RGB}{128,128,128}`). Do not use bright or saturated colors.
+- **Fonts**: Serif math, sans-serif text (metropolis default). Do not override font choices.
+- **Frame titles**: Sentence case, not title case. Maximum 6 words.
+- **Content per frame**: Maximum 4-5 bullet points. Each under 10 words. One message per frame.
+- **Figures**: Use `\includegraphics[width=\textwidth]{path}`. Reference files in `output/figures/`.
+- **Tables**: Simplified for projection. Maximum 3-4 columns visible. Use `\footnotesize` or `\scriptsize` for table text. Show only the coefficient of interest.
+- **Equations**: One equation per frame maximum. Use `\begin{equation*}` (unnumbered) unless cross-referencing is needed.
+- **Notes**: Use `\note{}` for speaker notes on each frame.
+
+### Frame templates
+
+#### Title frame
+```latex
+\begin{frame}[plain]
+\titlepage
+\end{frame}
+
+\begin{frame}{Contribution}
+\begin{center}
+\large
+[One-sentence contribution statement]
+\end{center}
+\note{State this clearly in the first 30 seconds. The audience should know exactly what they will learn.}
+\end{frame}
+```
+
+#### Motivation frame
+```latex
+\begin{frame}{[Motivating context]}
+\begin{itemize}
+    \item [Recent event, statistic, or trend]
+    \item [Why this matters economically]
+    \item [The gap or tension this creates]
+\end{itemize}
+\vfill
+\textcolor{gray}{\scriptsize Source: [citation]}
+\note{Connect to something the audience already knows or cares about.}
+\end{frame}
+```
+
+#### Research question frame
+```latex
+\begin{frame}{Research question}
+\begin{center}
+\large
+\textbf{[Precise, testable question]}
+\end{center}
+\vspace{1cm}
+\begin{itemize}
+    \item Prediction 1: [if mechanism A]
+    \item Prediction 2: [if mechanism B]
+\end{itemize}
+\note{Make sure the audience can hold this question in their head for the rest of the talk.}
+\end{frame}
+```
+
+#### Design/specification frame
+```latex
+\begin{frame}{Empirical design}
+\begin{equation*}
+    \textit{Outcome}_{i,t} = \beta \, \textit{Treatment}_{i,t} + \gamma' X_{i,t} + \alpha_i + \delta_t + \varepsilon_{i,t}
+\end{equation*}
+\vspace{0.5cm}
+\begin{itemize}
+    \item $\textit{Treatment}_{i,t}$: [definition]
+    \item Fixed effects: [what they control for]
+    \item Clustering: [level and rationale]
+    \item Identifying variation: [source]
+\end{itemize}
+\note{This is where skeptics decide whether to trust you.}
+\end{frame}
+```
+
+#### Results frame (coefficient plot preferred)
+```latex
+\begin{frame}{Main result: [economic finding]}
+\begin{center}
+    \includegraphics[width=0.85\textwidth]{output/figures/fig_coef_plot.pdf}
+\end{center}
+\vspace{-0.5cm}
+{\scriptsize Controls: [list]. Fixed effects: [list]. Clustered SEs at [level].}
+\note{Show the result, then explain. Do not read the table aloud.}
+\end{frame}
+```
+
+#### Results frame (simplified table)
+```latex
+\begin{frame}{Main result: [economic finding]}
+\begin{center}
+\footnotesize
+\begin{tabular}{lcc}
+\toprule
+ & (1) & (2) \\
+ & Baseline & Full controls \\
+\midrule
+Treatment & $\beta_1$\sym{***} & $\beta_2$\sym{***} \\
+ & ($t_1$) & ($t_2$) \\
+\midrule
+Controls & No & Yes \\
+Fixed effects & Firm, Year & Firm, Year \\
+Observations & $N_1$ & $N_2$ \\
+Adj. $R^2$ & $R_1$ & $R_2$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\note{Highlight the coefficient, the t-stat, and the magnitude in real units.}
+\end{frame}
+```
+
+#### Magnitude frame
+```latex
+\begin{frame}{Economic magnitude}
+\begin{center}
+\large
+A one-SD increase in \textit{Treatment} \\[0.5cm]
+$\Rightarrow$ \textbf{[Y]\% change} in \textit{Outcome} \\[0.5cm]
+$\approx$ \textbf{\$[amount] per [unit]} \\[0.5cm]
+{\normalsize (equivalent to [familiar benchmark])}
+\end{center}
+\note{Translate into units the audience can feel.}
+\end{frame}
+```
+
+#### Conclusion frame
+```latex
+\begin{frame}{Takeaway}
+\begin{enumerate}
+    \item \textbf{Finding}: [main result with magnitude]
+    \item \textbf{Mechanism}: [channel with evidence]
+    \item \textbf{Implication}: [economic lesson or policy relevance]
+\end{enumerate}
+\vfill
+\begin{center}
+{\large [Author email or website]}
+\end{center}
+\note{Do not end with ``thank you.'' End with the idea.}
+\end{frame}
+```
+
+#### Backup frame
+```latex
+\appendix
+\begin{frame}[noframenumbering]{Backup: [topic]}
+[Content addressing the anticipated question]
+\note{Only show if asked.}
+\end{frame}
+```
+
+### Beamer output rules
+
+- Write the complete `.tex` file to `paper/slides_[format].tex` (e.g., `slides_conference.tex`, `slides_seminar.tex`).
+- Include `\usepackage{booktabs}` for tables and `\usepackage{graphicx}` for figures.
+- Include `\pgfpagesuselayout{2 on 1}[a4paper]` as a commented-out option for handouts.
+- Set `\setbeameroption{show notes on second screen=right}` as a commented-out option for dual-screen presenting.
+- If figures referenced in the slides do not exist yet, add a comment `% TODO: generate this figure` next to the includegraphics command.
+- The Beamer file should compile without errors even if figures are missing (use `\IfFileExists` wrapper or draft mode).
+
 ## Deliverables
 
 Produce:
@@ -103,8 +267,9 @@ Produce:
 - presenter notes for each slide
 - appendix backup-slide plan organized by question type
 - anticipated Q&A with suggested responses
+- **Beamer LaTeX file** written to `paper/slides_[format].tex` (when the user requests actual slides, not just a blueprint)
 
-If the environment supports presentation-file creation (LaTeX Beamer, PowerPoint), build the actual deck. Otherwise produce a blueprint.
+When the user asks for "slides," "a deck," or "a presentation," generate the Beamer file by default. When the user asks for an "outline," "blueprint," or "plan," produce the outline only.
 
 ## Output format
 

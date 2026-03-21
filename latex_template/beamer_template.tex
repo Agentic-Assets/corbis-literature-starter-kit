@@ -1,0 +1,252 @@
+% Beamer template for academic finance and real-estate presentations
+% Copy this file and rename for your presentation
+% Compile: pdflatex -> pdflatex (no bibtex needed unless using citations)
+
+\documentclass[aspectratio=169,11pt]{beamer}
+
+% Theme
+\usetheme{metropolis}
+\usepackage{appendixnumberbeamer}
+
+% Colors
+\definecolor{NavyBlue}{RGB}{0,40,85}
+\definecolor{DarkGray}{RGB}{64,64,64}
+\definecolor{MedGray}{RGB}{128,128,128}
+\definecolor{LightGray}{RGB}{220,220,220}
+\definecolor{AccentRed}{RGB}{180,30,30}
+
+\setbeamercolor{frametitle}{bg=NavyBlue}
+\setbeamercolor{progress bar}{fg=NavyBlue}
+\setbeamercolor{alerted text}{fg=AccentRed}
+
+% Packages
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage[natbib=true,style=authoryear-comp,maxcitenames=2,giveninits=true,uniquename=false,uniquelist=false,doi=false,isbn=false,url=false]{biblatex}
+% \addbibresource{references.bib}  % Uncomment and set path to your .bib file
+
+% Custom commands
+\newcommand{\sym}[1]{\ensuremath{^{#1}}}
+\newcommand{\backupbegin}{\newcounter{framenumberappendix}\setcounter{framenumberappendix}{\value{framenumber}}}
+\newcommand{\backupend}{\addtocounter{framenumberappendix}{-\value{framenumber}}\addtocounter{framenumber}{\value{framenumberappendix}}}
+
+% Settings
+\setbeamertemplate{navigation symbols}{}  % Remove navigation buttons
+% \setbeameroption{show notes on second screen=right}  % Uncomment for dual-screen
+% \pgfpagesuselayout{2 on 1}[a4paper]  % Uncomment for handout layout
+
+% Metadata
+\title{Paper Title}
+\subtitle{Subtitle or Conference Name}
+\author{Author Name \\ \small{Affiliation}}
+\date{\today}
+\institute{}
+
+\begin{document}
+
+% ============================================================
+% TITLE
+% ============================================================
+\begin{frame}[plain]
+\titlepage
+\end{frame}
+
+\begin{frame}{Contribution}
+\begin{center}
+\large
+[One-sentence contribution statement]
+\end{center}
+\note{State the contribution clearly in the first 30 seconds.}
+\end{frame}
+
+% ============================================================
+% MOTIVATION
+% ============================================================
+\begin{frame}{Motivation}
+\begin{itemize}
+    \item [Recent event, statistic, or trend that motivates the question]
+    \item [Why this matters economically]
+    \item [The gap or tension this creates]
+\end{itemize}
+\vfill
+\textcolor{MedGray}{\scriptsize Source: [citation or data source]}
+\note{Connect to something the audience already knows or cares about.}
+\end{frame}
+
+% ============================================================
+% RESEARCH QUESTION
+% ============================================================
+\begin{frame}{Research question}
+\begin{center}
+\large
+\textbf{[Precise, testable question]}
+\end{center}
+\vspace{1cm}
+\begin{itemize}
+    \item Prediction 1: [If mechanism A, then...]
+    \item Prediction 2: [If mechanism B, then...]
+\end{itemize}
+\note{The audience should be able to hold this question in their head for the entire talk.}
+\end{frame}
+
+% ============================================================
+% INSTITUTIONAL SETTING / MECHANISM
+% ============================================================
+\begin{frame}{Institutional setting}
+\begin{itemize}
+    \item [Key institutional feature 1]
+    \item [Key institutional feature 2]
+    \item [Why this creates useful variation for identification]
+\end{itemize}
+\note{Build the audience's intuition before showing the design. Do not rush this slide.}
+\end{frame}
+
+% ============================================================
+% PREVIEW (required for conferences, optional for seminars)
+% ============================================================
+\begin{frame}{Preview of results}
+\begin{enumerate}
+    \item [Main finding with magnitude]
+    \item [Key secondary finding]
+    \item [Mechanism evidence summary]
+\end{enumerate}
+\note{Conferences need this early. Seminars can defer to build suspense.}
+\end{frame}
+
+% ============================================================
+% IDENTIFICATION
+% ============================================================
+\begin{frame}{Identification challenge}
+\begin{itemize}
+    \item [What makes this question hard to answer?]
+    \item [What would a naive estimate get wrong?]
+    \item [The specific endogeneity concern]
+\end{itemize}
+\note{Acknowledge the challenge before presenting the solution. Builds credibility.}
+\end{frame}
+
+\begin{frame}{Research design}
+\begin{equation*}
+    \textit{Outcome}_{i,t} = \beta \, \textit{Treatment}_{i,t} + \gamma' X_{i,t} + \alpha_i + \delta_t + \varepsilon_{i,t}
+\end{equation*}
+\vspace{0.5cm}
+\begin{itemize}
+    \item $\textit{Treatment}_{i,t}$: [definition]
+    \item Fixed effects: [what they absorb]
+    \item Clustering: [level]
+    \item Identifying assumption: [in plain language]
+\end{itemize}
+\note{This is the slide where skeptics decide whether to trust you.}
+\end{frame}
+
+% ============================================================
+% DATA
+% ============================================================
+\begin{frame}{Data and sample}
+\begin{itemize}
+    \item Sources: [list]
+    \item Sample period: [dates]
+    \item Observations: [N firms/properties/borrowers $\times$ T periods]
+    \item Key variables: [treatment, outcome, controls]
+\end{itemize}
+\note{Keep brief. One slide unless the data construction is a contribution.}
+\end{frame}
+
+% ============================================================
+% MAIN RESULTS
+% ============================================================
+\begin{frame}{[Economic finding, not ``Main results'']}
+\begin{center}
+    % Prefer coefficient plots or event-study graphs over tables
+    % \includegraphics[width=0.85\textwidth]{output/figures/fig_main_result.pdf}
+    % TODO: Replace with actual figure path
+    \textit{[Coefficient plot or event-study figure here]}
+\end{center}
+\vspace{-0.5cm}
+{\scriptsize Controls: [list]. FE: [list]. SE clustered at [level].}
+\note{Show the result, then explain the magnitude.}
+\end{frame}
+
+% ============================================================
+% MAGNITUDE
+% ============================================================
+\begin{frame}{Economic magnitude}
+\begin{center}
+\large
+A one-SD increase in \textit{Treatment} \\[0.5cm]
+$\Rightarrow$ \textbf{[Y]\% change} in \textit{Outcome} \\[0.5cm]
+$\approx$ \textbf{\$[amount] per [unit]} \\[0.5cm]
+{\normalsize (equivalent to [familiar benchmark])}
+\end{center}
+\note{Three tiers: statistical units, real-world units, anchored comparison.}
+\end{frame}
+
+% ============================================================
+% MECHANISM
+% ============================================================
+\begin{frame}{Mechanism: [channel name]}
+\begin{itemize}
+    \item If [channel A]: expect [pattern 1]
+    \item If [channel B]: expect [pattern 2]
+    \item Evidence: [which pattern we observe and what it rules out]
+\end{itemize}
+% \includegraphics[width=0.7\textwidth]{output/figures/fig_mechanism.pdf}
+\note{Be honest about what the mechanism evidence can and cannot show.}
+\end{frame}
+
+% ============================================================
+% ROBUSTNESS (keep to 1-2 slides)
+% ============================================================
+\begin{frame}{Robustness}
+\begin{itemize}
+    \item \textbf{[Threat 1]}: [test and result]
+    \item \textbf{[Threat 2]}: [test and result]
+    \item \textbf{[Threat 3]}: [test and result]
+\end{itemize}
+\note{Name the threat, show the check, move on. Do not dwell.}
+\end{frame}
+
+% ============================================================
+% CONCLUSION
+% ============================================================
+\begin{frame}{Takeaway}
+\begin{enumerate}
+    \item \textbf{Finding}: [main result with magnitude]
+    \item \textbf{Mechanism}: [channel with supporting evidence]
+    \item \textbf{Implication}: [economic lesson or policy relevance]
+\end{enumerate}
+\vfill
+\begin{center}
+{\large author@university.edu}
+\end{center}
+\note{Do not end with ``thank you.'' End with the idea.}
+\end{frame}
+
+% ============================================================
+% BACKUP SLIDES
+% ============================================================
+\appendix
+\backupbegin
+
+\begin{frame}[noframenumbering]{Backup: Alternative specifications}
+% [Content]
+\end{frame}
+
+\begin{frame}[noframenumbering]{Backup: Pretrend tests}
+% [Content]
+\end{frame}
+
+\begin{frame}[noframenumbering]{Backup: Sample construction}
+% [Content]
+\end{frame}
+
+\begin{frame}[noframenumbering]{Backup: Comparison to [Paper]}
+% [Content]
+\end{frame}
+
+\backupend
+
+\end{document}

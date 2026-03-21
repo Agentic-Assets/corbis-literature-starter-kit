@@ -29,12 +29,15 @@ The `latex_template/` folder contains a ready-to-use LaTeX template for empirica
 |---|---|
 | Abstract | `research-paper-writer` (journal-specific word count) |
 | Introduction | `research-paper-writer` (7-paragraph structure) |
-| Related Literature | `literature-positioning-map` → `research-paper-writer` |
-| Data and Variables | `finance-data-construction` (codebook) → `research-paper-writer` |
-| Empirical Design | `finance-identification-design` (design memo) → `research-paper-writer` |
-| Main Results | `finance-empirical-analysis` (table plan + interpretation) → `research-paper-writer` |
-| Robustness | `finance-empirical-analysis` (threat-mapped checks) |
+| Related Literature | `literature-positioning-map` → `research-paper-writer` (strand-based prose) |
+| Institutional Background | `research-paper-writer` (required for RE, optional for finance) |
+| Data and Variables | `finance-data-construction` (codebook) → `research-paper-writer` (sources, construction, summary stats discussion) |
+| Empirical Design | `finance-identification-design` (design memo) → `research-paper-writer` (challenge, variation, specification, threats) |
+| Main Results | `finance-empirical-analysis` (table plan + interpretation) → `research-paper-writer` (5-step protocol per result) |
+| Robustness | `finance-empirical-analysis` (threat-mapped checks) → `research-paper-writer` (organized by threat) |
+| Mechanism / Heterogeneity | `finance-empirical-analysis` (mechanism plan) → `research-paper-writer` (channel logic, not kitchen-sink) |
 | Conclusion | `research-paper-writer` |
+| Internet Appendix | `research-paper-writer` (overflow tables, variable definitions, extra robustness) |
 | Appendix variable table | `finance-data-construction` (codebook template) |
 | Tables and figures | `finance-empirical-analysis` (table plan) + `research-figure-design` (figure code) |
 
