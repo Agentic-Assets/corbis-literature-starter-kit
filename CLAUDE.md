@@ -4,7 +4,7 @@ This project is a template and toolkit for producing empirical research papers t
 
 ## Skill routing — read this first
 
-Before responding to any research-related prompt, check whether one or more of the 18 installed skills (`.claude/skills/`) applies. If a skill matches, follow its workflow, deliverables, guardrails, and tool integration instructions. Multiple skills can be combined in a single response.
+Before responding to any research-related prompt, check whether one or more of the 20 installed skills (`.claude/skills/`) applies. If a skill matches, follow its workflow, deliverables, guardrails, and tool integration instructions. Multiple skills can be combined in a single response.
 
 **Routing quick reference:**
 
@@ -14,6 +14,7 @@ Before responding to any research-related prompt, check whether one or more of t
 | Screen/evaluate a specific research idea     | `finance-idea-screening`         |
 | Literature, contribution, related work      | `literature-positioning-map`     |
 | Identification, DiD, IV, RD, threats        | `finance-identification-design`  |
+| Theoretical model, mechanism, predictions   | `theoretical-model-builder`      |
 | Real estate design, spatial, hedonic, CRE   | `real-estate-empirical-design`   |
 | Data sources, merges, codebook, sample      | `finance-data-construction`      |
 | Python code for data, regressions, figures  | `python-empirical-code`          |
@@ -21,6 +22,7 @@ Before responding to any research-related prompt, check whether one or more of t
 | Anomalies, factors, portfolio sorts, alphas | `asset-pricing-test-suite`       |
 | Writing: any paper section, prose, titles    | `research-paper-writer`          |
 | Remove AI writing patterns, polish prose    | `humanizer`                      |
+| What tests/elements are missing from paper  | `paper-elevator`                 |
 | Pre-submission audit, consistency check     | `pre-submission-review`          |
 | Presentation slides, talk outline           | `research-seminar-deck`          |
 | R&R, referee response, revision plan        | `referee-revision-response`      |

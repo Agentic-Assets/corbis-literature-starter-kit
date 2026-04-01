@@ -1,6 +1,6 @@
 # Skills Use Guide — Powered by Corbis
 
-How to use the 18 Claude research skills across the lifecycle of a finance or real-estate paper. All skills integrate with [Corbis](https://corbis.ai) MCP tools for literature search, economic data, CRE market intelligence, and citation management.
+How to use the 19 Claude research skills across the lifecycle of a finance or real-estate paper. All skills integrate with [Corbis](https://corbis.ai) MCP tools for literature search, economic data, CRE market intelligence, and citation management.
 
 ---
 
@@ -33,6 +33,7 @@ The `latex_template/` folder contains a ready-to-use LaTeX template for empirica
 | Related Literature | `literature-positioning-map` → `research-paper-writer` (strand-based prose) |
 | Institutional Background | `research-paper-writer` (required for RE, optional for finance) |
 | Data and Variables | `finance-data-construction` (codebook) → `research-paper-writer` (sources, construction, summary stats discussion) |
+| Model / Theory | `theoretical-model-builder` (model + audit) → `research-paper-writer` (economics-first prose, propositions) |
 | Empirical Design | `finance-identification-design` (design memo) → `research-paper-writer` (challenge, variation, specification, threats) |
 | Main Results | `finance-empirical-analysis` (table plan + interpretation) → `research-paper-writer` (5-step protocol per result) |
 | Robustness | `finance-empirical-analysis` (threat-mapped checks) → `research-paper-writer` (organized by threat) |
@@ -52,6 +53,7 @@ The `latex_template/` folder contains a ready-to-use LaTeX template for empirica
 | Screen or evaluate a specific research idea | `finance-idea-screening` |
 | Map the literature and sharpen your contribution | `literature-positioning-map` |
 | Design or stress-test your identification strategy | `finance-identification-design` |
+| Build a theoretical model with testable predictions | `theoretical-model-builder` |
 | Handle spatial, hedonic, repeat-sales, or CRE-specific design | `real-estate-empirical-design` |
 | Plan data sourcing, merges, and codebooks | `finance-data-construction` |
 | Write Python code for data, regressions, tables, or figures | `python-empirical-code` |
@@ -59,6 +61,7 @@ The `latex_template/` folder contains a ready-to-use LaTeX template for empirica
 | Design portfolio sorts, alphas, and factor tests | `asset-pricing-test-suite` |
 | Draft any paper section (intro, lit review, data, design, results, etc.) | `research-paper-writer` |
 | Remove AI writing patterns and polish prose | `humanizer` |
+| Find missing tests and elements to elevate the paper | `paper-elevator` |
 | Build a seminar, conference, or job-talk deck | `research-seminar-deck` |
 | Handle an R&R or draft referee responses | `referee-revision-response` |
 | Audit a paper before submission (simulated referee) | `pre-submission-review` |
@@ -79,6 +82,7 @@ Most papers move through these stages. The skills are designed to be used in rou
  1. Idea screen   -->  finance-idea-screening
  2. Literature    -->  literature-positioning-map
  3. Design        -->  finance-identification-design
+                       (+ theoretical-model-builder if model needed)
                        (+ real-estate-empirical-design if RE)
                        (+ asset-pricing-test-suite if AP)
  4. Data          -->  finance-data-construction
@@ -91,10 +95,11 @@ Most papers move through these stages. The skills are designed to be used in rou
  6. Writing       -->  research-paper-writer
  6b. Polish       -->  humanizer (remove AI writing patterns)
  6c. Targeting    -->  /target (journal profiles in references/)
- 7. Replication   -->  replication-package-builder
+ 7. Elevate       -->  paper-elevator (what tests/elements are missing?)
+ 7b. Replication  -->  replication-package-builder
  8. Pre-submit    -->  pre-submission-review
  8b. Presenting   -->  research-seminar-deck
- 9. Revision      -->  referee-revision-response
+ 9.  Revision     -->  referee-revision-response
 ```
 
 Use `research-pipeline-orchestrator` at any point to get a full roadmap or figure out what stage you're in.
@@ -264,6 +269,32 @@ Use `research-pipeline-orchestrator` at any point to get a full roadmap or figur
 - "Is my signal just a relabeled version of profitability?"
 - "Assess the implementability of this high-turnover strategy."
 - "Run the ML robustness battery for my new anomaly signal."
+
+#### For papers that need a theoretical model: add `theoretical-model-builder`
+
+**When to invoke:**
+- A referee asks for a "simple model" to discipline the empirical design
+- You need testable predictions that distinguish your mechanism from alternatives
+- The paper's contribution rests on a specific economic channel that needs formal articulation
+- You have empirical results and need a model that rationalizes them while generating additional predictions
+- You want to calibrate model predictions against published estimates as a sanity check
+
+**What it does:**
+- Guides you through framework selection (partial equilibrium, contracting, search, signaling, spatial equilibrium, etc.) matched to the economic question
+- Builds the model step by step: agents, timing, frictions, objectives, equilibrium concept, solution, comparative statics
+- Runs a **mathematical consistency audit** (10 structural checks): budget constraints, equilibrium conditions, boundary conditions, SOCs, uniqueness, comparative statics signs, dimensional consistency, limiting cases, existence, logical flow
+- Runs an **empirical reasonableness battery** (10 plausibility checks): calibrated magnitudes, elasticities vs. published estimates, effect sizes, extreme-parameter behavior, agent rationality, timing realism, stylized fact consistency, PE justification, heterogeneity robustness, discriminating power vs. alternatives
+- Produces a prediction-to-test mapping table linking each comparative static to a regression specification
+- Identifies discriminating predictions that separate your mechanism from the top alternative stories
+
+**Example prompts:**
+- "Build a simple model of how information asymmetry about tenant quality affects commercial lease terms."
+- "My referee wants a simple model. Here are my three main results. Build the minimal model that generates all three."
+- "I have a moral hazard model but the comparative statics don't sign cleanly. Help me fix it."
+- "Run the consistency audit on this model before I write it up."
+- "Calibrate my model's key prediction against published estimates of the investment-q sensitivity."
+
+**Tip:** Use `finance-identification-design` to design the *empirical strategy*, then use `theoretical-model-builder` to build the *model that generates predictions tested by that strategy*. Use `research-paper-writer` to *write the model section* in the paper (it coordinates with the model builder on prose style: economics first, notation second).
 
 ---
 
@@ -445,7 +476,36 @@ Use `research-pipeline-orchestrator` at any point to get a full roadmap or figur
 
 ---
 
-### Stage 7: Pre-submission audit
+### Stage 7: Elevate the paper
+
+**Skill:** `paper-elevator`
+
+**When to invoke:**
+- The paper has a baseline result and some robustness, but you want to know what a top-journal referee would still ask for
+- You are transitioning from "working paper" to "submission-ready"
+- You want to audit the test battery before sending to coauthors or presenting
+- A referee gave a vague "needs more work" signal
+
+**What it does:**
+- Reads the paper (`.tex` file or structured description) and classifies it by type, design, and target track
+- Inventories what tests and conceptual elements already exist
+- Checks five layers: universal requirements, design-specific tests, paper-type-specific tests, track-specific expectations, and frontier methods
+- Also checks for conceptual gaps: missing simple model, weak mechanism structure, imprecise contribution, missing external validity discussion, unmotivated heterogeneity
+- Produces a prioritized gap report: **must-have** (fatal if missing), **expected** (referees will ask), **elevating** (signals top-journal quality)
+- Includes a "not recommended" section to prevent wasting time on irrelevant tests
+- Ranks implementation by impact/effort ratio
+
+**Example prompts:**
+- `/what-else` (with a `.tex` file in the project)
+- "What tests does my paper need to be competitive at JFE?"
+- "Read my paper and tell me what's missing for a top RE journal."
+- "I have a staggered DiD paper. What should I add before submitting to RFS?"
+
+**Tip:** Run this *after* writing the paper (`research-paper-writer`) and polishing (`humanizer`), but *before* the pre-submission review. The paper-elevator identifies substantive gaps in the test battery; the pre-submission review checks execution quality. Together they form a two-stage quality gate: first make sure you have the right tests, then make sure they are presented correctly.
+
+---
+
+### Stage 8: Pre-submission audit
 
 **Skill:** `pre-submission-review`
 
@@ -479,7 +539,7 @@ Produces a consolidated report saved to `PRE_SUBMISSION_REVIEW_[date].md` with p
 
 ---
 
-### Stage 8: Presenting
+### Stage 8b: Presenting
 
 **Skill:** `research-seminar-deck`
 
@@ -550,8 +610,10 @@ When you ask for "slides" or "a deck," the skill generates the Beamer file by de
 | 5c | `research-figure-design` | Event-study plots, coefficient plots, binned scatters, mechanism diagrams |
 | 6 | `research-paper-writer` | Copy `latex_template/`, draft all sections (introduction, literature, data, design, results, robustness, mechanism, conclusion), abstract, title options, populate `.bib` via `export_citations` |
 | 6b | `humanizer` | Remove AI writing patterns from drafted prose, referee-lens audit |
-| 7 | `pre-submission-review` | 6-agent audit: consistency, overclaiming, table notes, simulated JFE referee report |
-| 8 | `research-seminar-deck` | Beamer slides for conference deck + backup slides |
+| 7 | `paper-elevator` | Gap report: missing tests, mechanism structure, frontier methods, prioritized by impact |
+| 7b | `python-empirical-code` | Implement the high-priority tests from the gap report |
+| 8 | `pre-submission-review` | 6-agent audit: consistency, overclaiming, table notes, simulated JFE referee report |
+| 9 | `research-seminar-deck` | Beamer slides for conference deck + backup slides |
 
 ### Case 2: Real-estate paper on opportunity zones
 
