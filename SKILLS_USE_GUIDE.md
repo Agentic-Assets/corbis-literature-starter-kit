@@ -52,6 +52,7 @@ The `latex_template/` folder contains a ready-to-use LaTeX template for empirica
 | Generate ideas from a topic area (10 ranked ideas) | `research-idea-generator` |
 | Screen or evaluate a specific research idea | `finance-idea-screening` |
 | Map the literature and sharpen your contribution | `literature-positioning-map` |
+| Write a standalone literature review on a topic | `literature-review` |
 | Design or stress-test your identification strategy | `finance-identification-design` |
 | Build a theoretical model with testable predictions | `theoretical-model-builder` |
 | Handle spatial, hedonic, repeat-sales, or CRE-specific design | `real-estate-empirical-design` |
