@@ -48,3 +48,198 @@
 - Not having backup slides for obvious objections
 - Reading slides verbatim instead of talking to the audience
 - Rushing the motivation to get to results faster (the audience needs motivation to care about results)
+
+---
+
+## The Three Laws of Presentation Design
+
+### Law 1: Beauty Is Function
+- Every element earns its presence.
+- Nothing distracts from the point.
+- The eye knows where to go.
+- The most beautiful slide may be three words on a blank background.
+
+### Law 2: Cognitive Load Is the Enemy
+- One idea per slide. ONE. Not a guideline, the law.
+- Too many points = zero points retained.
+- Dense text = nothing read.
+- Complex charts = confusion, not insight.
+
+### Law 3: The Slide Serves the Spoken Word
+- The slide is the visual anchor, not the content itself.
+- If slides can be understood without you speaking, you wrote a document.
+- If you must read slides aloud, you failed twice.
+
+---
+
+## Assertion-based slide titles
+
+Slide titles should state the finding, not label the category. If someone reads only slide titles in sequence, they should understand your argument.
+
+| Weak (label) | Strong (assertion) |
+|------|--------|
+| "Results" | "Transaction costs eliminate half of momentum alpha" |
+| "Literature Review" | "Prior work assumes costless, instantaneous execution" |
+| "Data" | "CRSP covers 26,000 stocks over 60 years" |
+| "Methodology" | "Double sorts on size and book-to-market isolate the value premium" |
+| "Robustness" | "Results survive alternative breakpoints, weighting, and sample periods" |
+
+---
+
+## The MB/MC framework
+
+Optimal rhetoric equalizes marginal benefit to marginal cognitive cost across all slides:
+
+MB_1/MC_1 = MB_2/MC_2 = ... = MB_n/MC_n
+
+- **Overloaded slides** (MB/MC too low): Text in footer, competing ideas, audience gives up.
+- **Underloaded slides** (MB/MC too high): Wasted attention, captured but unused.
+
+Walk through the deck asking: "If I added one more element, would the benefit justify the cognitive cost?"
+
+---
+
+## The Aristotelian Balance for Finance Seminars
+
+| Mode | Weight | How It Appears |
+|------|--------|----------------|
+| **Logos** (logic) | 45% | Data, econometrics, formal results, tables |
+| **Pathos** (stakes) | 35% | Why the question matters, impact on investors, real-world costs |
+| **Ethos** (credibility) | 20% | Reproducibility, acknowledging limitations, data quality |
+
+---
+
+## Beamer preamble and custom commands
+
+### Professional academic palette
+
+```latex
+% Muted, authoritative house palette
+\definecolor{navy}{HTML}{1A365D}        % Primary text, headers
+\definecolor{darkgray}{HTML}{2D3748}    % Secondary text
+\definecolor{crimson}{HTML}{9B2335}     % Emphasis, key results
+\definecolor{forest}{HTML}{276749}      % Positive/adjusted values
+\definecolor{steel}{HTML}{4A5568}       % Tertiary, captions
+\definecolor{warmgray}{HTML}{E2D8CC}    % Background tint (sparingly)
+\definecolor{lightgray}{HTML}{F7FAFC}   % Slide background
+```
+
+### Beamer setup
+
+```latex
+\documentclass[aspectratio=169,11pt]{beamer}
+\usetheme{default}
+\usecolortheme{default}
+
+% Strip navigation chrome
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+
+% Professional frame styling
+\setbeamercolor{frametitle}{fg=navy,bg=white}
+\setbeamercolor{title}{fg=navy}
+\setbeamercolor{normal text}{fg=darkgray}
+\setbeamercolor{itemize item}{fg=steel}
+\setbeamercolor{alerted text}{fg=crimson}
+
+% Clean typography
+\setbeamerfont{frametitle}{series=\bfseries,size=\large}
+\setbeamerfont{title}{series=\bfseries,size=\Large}
+```
+
+### Custom commands
+
+```latex
+% Highlight a number (crimson, bold)
+\newcommand{\emphnum}[1]{{\color{crimson}\textbf{#1}}}
+
+% Positive result (forest green)
+\newcommand{\goodnum}[1]{{\color{forest}\textbf{#1}}}
+
+% Full-slide transition
+\newcommand{\transitionslide}[1]{
+  \begin{frame}[plain]
+  \vfill\centering
+  {\Large\color{navy}\textbf{#1}}
+  \vfill
+  \end{frame}
+}
+
+% Takeaway box
+\newcommand{\takeaway}[1]{
+  \begin{center}
+  \colorbox{lightgray}{\parbox{0.85\textwidth}{
+    \centering\color{navy}\textbf{#1}
+  }}
+  \end{center}
+}
+
+% Full-page figure
+\newcommand{\fullpage}[2]{
+  \begin{frame}[plain]
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[at=(current page.center)]{\includegraphics[width=\paperwidth,height=\paperheight,keepaspectratio]{#1}};
+  \end{tikzpicture}
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=south,fill=white,opacity=0.8,text opacity=1] at (current page.south) {\footnotesize #2};
+  \end{tikzpicture}
+  \end{frame}
+}
+```
+
+### Backup slide conventions
+
+Use `\backupbegin` and `\backupend` to exclude backup slides from the frame count:
+
+```latex
+\newcommand{\backupbegin}{
+  \newcounter{framenumberappendix}
+  \setcounter{framenumberappendix}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+  \addtocounter{framenumberappendix}{-\value{framenumber}}
+  \addtocounter{framenumber}{\value{framenumberappendix}}
+}
+```
+
+Usage:
+```latex
+\backupbegin
+
+\begin{frame}{Alternative Specification}
+% Backup content here
+\end{frame}
+
+\backupend
+```
+
+Rules for backup slides:
+- One backup slide per likely objection.
+- Title each backup slide with the question it answers.
+- Include full regression tables, extended robustness, data details, and alternative specifications.
+- Finance audiences will ask about endogeneity within the first 10 minutes; have the backup ready.
+
+---
+
+## The Devil's Advocate Slide
+
+Before your conclusion, present the strongest objection:
+
+**Title**: "The strongest objection: [state it clearly]"
+
+Content:
+- The critique, stated fairly and forcefully.
+- Your response, with evidence.
+- What residual uncertainty remains (honesty builds ethos).
+
+---
+
+## Working vs. external decks
+
+| Dimension | External (seminar/conference) | Working (coauthors) |
+|-----------|-------------------------------|---------------------|
+| Density | Sparse, one idea per slide | Can be more detailed |
+| Titles | Assertions only | Can include descriptive titles |
+| Tables | Key rows only | Can show full tables |
+| Tone | Performative, polished | Documentary, preserves uncertainty |
+| Content | 30 slides / 45 min | No limit |

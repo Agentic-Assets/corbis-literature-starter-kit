@@ -88,3 +88,60 @@ The anchored version works because it connects to something the reader already k
 - Hiding the identifying assumption or being vague about what FE absorb
 - Claiming mechanism without addressing competing channels
 - Using "consistent with" as a universal hedge without being specific
+
+---
+
+## Section-specific writing guidance
+
+### Introduction
+- Start with the contribution, not the literature (Cochrane: "put the punchline right up front").
+- Three pages is a good upper limit (Cochrane).
+- Omit or minimize roadmap paragraphs ("Section 2 sets out the model..."). The reader will figure it out (Cochrane). If included, limit to two sentences maximum.
+- Do not start with philosophy ("Financial economists have long wondered...") or abstract literature gaps. Ground paragraph 1 in a concrete, recent event (see CLAUDE.md intro paragraph 1 rule).
+
+### Literature review
+- Place after the contribution is explained, not before. The reader cannot assess differentiation before understanding your paper.
+- Focus on the 2-3 closest papers and give proper credit (Cochrane).
+- Do not write a Journal of Economic Literature style review. Keep it targeted.
+- Be generous in citations. You do not have to say everyone else did it wrong for your approach to be interesting.
+
+### Data and methodology
+- Describe what you do first, then explain why, then compare to alternatives (Cochrane: "first describe, then explain, then compare").
+- Start with the main specification. Do not do warmup exercises, extensive description of well-known datasets, or preliminary estimates before the main result.
+- The theory or model should be the minimum required for the reader to understand the empirical results. Do not write a "general" model and then specialize it.
+
+### Results
+- Start each results section with the main finding, not with table descriptions.
+- Nothing should precede the main result that the reader does not need to understand the main result (Cochrane).
+- Give stylized facts in the data that drive your result, not just estimates and p-values.
+- Follow the main result with robustness, not the other way around.
+
+### Robustness
+- Summarize checks rather than narrating every column.
+- Most robustness details belong in an appendix (Cochrane).
+- If a check fails, discuss what it means rather than burying it.
+
+### Conclusion
+- Keep it short. Do not restate all findings (Cochrane: "one statement in the abstract, one in the introduction, once more in the body should be enough").
+- A short paragraph acknowledging limitations and suggesting implications is appropriate.
+- Do not speculate or write a grant application for future research.
+- End with the economic lesson, not a generic restatement.
+
+---
+
+## Structural AI tells checklist
+
+Use this checklist during revision to catch patterns that flag AI-generated text. These complement the structural tells listed in `references/banned-words.md`.
+
+- [ ] **Paragraph opener variety**: No two consecutive paragraphs begin with the same grammatical construction. Vary: subject-verb, prepositional phrase, dependent clause.
+- [ ] **Sentence length variation**: Mix short declarative sentences (8-12 words) with longer compounds (25-40 words). Five consecutive sentences of similar length is an AI tell.
+- [ ] **Reflexive pronoun check**: Max 2 uses of "itself/themselves" per paper. When the pronoun adds emphasis but no semantic distinction, delete it.
+- [ ] **Gerund density**: Max one gerund-phrase opener ("Using a large dataset, we...") per paragraph.
+- [ ] **Meta-announcements**: Delete any sentence that announces the next topic without providing content ("We now turn to X"). Exception: one orienting sentence at section start if it names the specific question.
+- [ ] **Enumeration overuse**: Max one "First...Second" structure per subsection. For causal chains, use prose.
+- [ ] **Closing-summary paragraphs**: Do not end a section with a paragraph that merely restates. Summary belongs in Conclusion only.
+- [ ] **Symmetric hedges**: Replace "can be positive or negative, depending on..." with the empirical answer when data exist.
+- [ ] **Padding appositives**: Define a concept once. After definition, use the name without restating the definition.
+- [ ] **Uniform paragraph length**: Vary paragraph length (some 2-sentence, some 6-sentence).
+
+See also `references/banned-words.md` for the complete hard-ban and soft-ban word lists with empirical evidence.

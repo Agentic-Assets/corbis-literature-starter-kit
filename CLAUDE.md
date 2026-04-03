@@ -4,7 +4,7 @@ This project is a template and toolkit for producing empirical research papers t
 
 ## Skill routing — read this first
 
-Before responding to any research-related prompt, check whether one or more of the 20 installed skills (`.claude/skills/`) applies. If a skill matches, follow its workflow, deliverables, guardrails, and tool integration instructions. Multiple skills can be combined in a single response.
+Before responding to any research-related prompt, check whether one or more of the 31 installed skills (`.claude/skills/`) applies. If a skill matches, follow its workflow, deliverables, guardrails, and tool integration instructions. Multiple skills can be combined in a single response.
 
 **Routing quick reference:**
 
@@ -29,6 +29,17 @@ Before responding to any research-related prompt, check whether one or more of t
 | Figure planning and design for the paper     | `research-figure-design`         |
 | Replication package, provenance, archiving  | `replication-package-builder`    |
 | Full project roadmap, stage diagnosis       | `research-pipeline-orchestrator` |
+| Audit math proofs and derivations           | `audit-math`                     |
+| Factor construction, look-ahead bias audit  | `factor-construction`            |
+| Panel data lagging, CCM linking, BE rules   | `panel-data-rules`               |
+| Verify citations against bibliography       | `verify-citations`               |
+| Typos, spacing, LaTeX formatting errors     | `proofread`                      |
+| Table/figure caption consistency            | `audit-captions`                 |
+| Cross-section consistency check             | `check-consistency`              |
+| Compare old vs new text versions            | `compare-versions`               |
+| WRDS PostgreSQL queries (local psql)        | `wrds-psql`                      |
+| WRDS schema pre-loading                     | `wrds-schema`                    |
+| SSH to WRDS for SAS/Python batch jobs       | `wrds-ssh`                       |
 
 If unsure which skill applies, use `research-pipeline-orchestrator` to diagnose the stage.
 
@@ -66,6 +77,28 @@ When recommending a journal target or shaping a paper for submission, read `refe
 - **JHE**: housing economics, affordability, zoning, rental markets, policy
 - **RSUE**: urban, spatial, regional economics with clear spatial dimension
 
+## WRDS specialist agents
+
+For deep WRDS domain expertise, specialized agents are available in `.claude/agents/`:
+
+- `crsp-wrds-expert` — CRSP v2 stock data, returns, delistings, CCM linking, Compustat fundamentals
+- `jkp-wrds-expert` — 443 JKP pre-computed global stock characteristics (93 countries, 1926-present)
+- `optionmetrics-wrds-expert` — IvyDB options data, implied volatilities, Greeks, volatility surfaces
+- `ff-wrds-expert` — Fama-French 5+1 factors, date conventions, merging
+- `bonds-wrds-expert` — Dickerson cleaned TRACE corporate bond data, credit spreads, duration
+- `taq-wrds-expert` — NYSE TAQ millisecond tick data (requires SSH/SAS access)
+- `wrds-query-orchestrator` — Multi-database query composition, identifier linking rules
+- `paper-reader` — Academic paper analysis, structured extraction, literature summaries
+
+## Reference files
+
+Before writing LaTeX, read: `references/latex-formatting-reference.md`, `references/grammar-punctuation.md`
+Before writing prose, read: `references/writing-norms.md`, `references/banned-words.md`, `references/cochrane-writing-tips.md`
+For WRDS queries: `references/wrds-recipes.md`
+For citations: `references/latex-citations.md`
+For presentations: `references/presentation-norms.md`
+For referee responses: `references/referee-reply-norms.md`
+
 ## Research tool usage
 
 Corbis MCP tools are available for literature search, data discovery, market data, and citations. **Always search before asserting** — do not guess about novelty, literature, or data availability when you can check. See `CORBIS_API_REFERENCE.md` for the full API and tier details.
@@ -82,14 +115,15 @@ Key principles:
 
 ## Defaults
 
-- **WRDS access**: Set `WRDS_USERNAME` in `.env`. Credentials in `~/.pgpass`. Connect with `wrds.Connection(wrds_username=os.getenv('WRDS_USERNAME'))`. Available: crsp, comp, ibes, tfn, dealscan, tr_dealscan, trace, optionm, boardex, ciq, risk, ff, frb, bank, wrdsapps. Not available: fisd, kld, mfl, rpna, taq.
+- **WRDS access**: Set `WRDS_USERNAME` in `.env`. Credentials in `~/.pgpass`. Connect with `wrds.Connection(wrds_username=os.getenv('WRDS_USERNAME'))`. Available via PostgreSQL: crsp, comp, ibes, tfn, dealscan, tr_dealscan, trace, optionm, boardex, ciq, risk, ff, frb, bank, wrdsapps. Available via SSH/SAS only: taq. Not available: fisd, kld, mfl, rpna.
 - **Public data APIs**: API keys in `.env` (copy from `.env.example`). Packages installed: `fredapi`, `pandas-datareader`, `yfinance`, `sec-edgar-downloader`. Load keys with `from dotenv import load_dotenv; load_dotenv()`. If a key is missing, point user to `.env.example`.
 - **Language**: Python (using `linearmodels`, `statsmodels`, `pandas`, `matplotlib`). See `python-empirical-code` skill for stack and conventions.
 - **LaTeX template**: `latex_template/` — copy this folder when starting a new paper. Uses `jf.bst` bibliography style. **Before writing any LaTeX output, read `references/latex-formatting-reference.md`** for the complete formatting specification (float structure, table/figure templates, custom commands, equations, citations). Follow it exactly.
-- **Output format**: Write LaTeX tables to `output/tables/*.tex` files and figure float wrappers to `output/figures/*.tex` files. Do not put LaTeX content in the chat for the user to copy-paste. Save figures as 300 DPI `.pdf` or `.png`. Paper prose should be written directly into the `.tex` file using the Edit tool.
+- **Output format**: Write LaTeX tables to `output/tables/*.tex` files and figure float wrappers to `output/figures/*.tex` files. Do not put LaTeX content in the chat for the user to copy-paste. Save figures as 600 DPI `.pdf` or `.png` (use `utils/finance.mplstyle` for publication defaults). Paper prose should be written directly into the `.tex` file using the Edit tool.
 - **Statistical significance**: Report t-statistics (in parentheses) as the primary measure of statistical significance in tables and text. Not standard errors, not p-values. t-statistics in parentheses below coefficients in regression tables.
 - **Standard errors**: Cluster at the level of treatment variation. Do not default to heteroskedasticity-robust only.
 - **Econometric methods**: Use modern estimators when appropriate (Callaway-Sant'Anna for staggered DiD, Roth pretrends sensitivity, Oster bounds). Flag when TWFE is inappropriate.
+- **Utility modules** (`utils/`): `table_utils.py` (LaTeX regression and summary stats tables), `figure_utils.py` (event study, binned scatter, coef plot, portfolio bars, recession bands), `data_utils.py` (WRDS connect, winsorize, merge_with_check, fiscal alignment), `regression_utils.py` (explore_reg, portfolio_sort, alpha_table), `betas.py` (Numba rolling OLS for panel betas), `panel_lag.py` (safe panel lagging with date gap validation), `finance.mplstyle` (Okabe-Ito colorblind-safe matplotlib style). Import with `from utils.<module> import <function>`.
 
 ## Writing standards
 

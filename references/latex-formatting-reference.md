@@ -230,7 +230,7 @@ Uses the `L{width}` custom column type for the variable name column.
 Conventions:
 - Full-width figures: `width=15.24cm,height=10.16cm`
 - Narrower figures: `width=12.8cm,height=8.5cm`
-- Save as PDF for LaTeX compilation, PNG at 300 DPI as backup
+- Save as PDF for LaTeX compilation, PNG at 600 DPI as backup
 - Images stored in `./images/` subdirectory (relative to `.tex` file) or `./output/figures/` (relative to project root)
 
 ### Multi-panel figure
@@ -356,12 +356,78 @@ Controls display of author names, affiliations, and emails on the title page.
 |---|---|---|
 | Individual tables | `output/tables/tab_[name].tex` | One `.tex` file per table float |
 | Individual figures | `output/figures/fig_[name].tex` | One `.tex` file per figure float wrapper |
-| Figure images | `output/figures/[name].pdf` or `.png` | 300 DPI minimum, PDF preferred |
+| Figure images | `output/figures/[name].pdf` or `.png` | 600 DPI minimum, PDF preferred |
 | Paper prose | `paper/[paper_name].tex` | Edit directly via the Edit tool |
 
 Include standalone table/figure files in the paper with `\input{output/tables/tab_summary}`.
 
 **Never put LaTeX content in the chat for the user to copy-paste.** Always write to files.
+
+---
+
+## Section markers (`%% BEGIN/END`)
+
+Delimit every section with comment markers to enable programmatic extraction:
+
+```latex
+%% BEGIN introduction
+\section{Introduction}
+...
+%% END introduction
+
+%% BEGIN methodology
+\section{Methodology}
+...
+%% END methodology
+```
+
+Rules:
+- Keys are lowercase, hyphenated: `trade-intensity`, not `Trade_Intensity`
+- Every `\section{}` must have a marker pair
+- `%% END key` goes immediately before the next `%% BEGIN key` or `\end{document}`
+- Projects define their own registered section keys in the project's `CLAUDE.md`
+
+---
+
+## Significant-digits rules
+
+Follow Cochrane: report 2-3 significant digits. Readers cannot distinguish 4.56 from 4.57.
+
+| Quantity | Digits | Example |
+|----------|--------|---------|
+| Coefficients | 3 significant digits | 0.0423, 1.27, -0.185 |
+| t-statistics | 2 significant digits | (2.3), (-4.1), (1.7) |
+| R-squared | 2-3 significant digits | 0.12, 0.096 |
+| Percentages | 1-2 decimal places | 45.2%, 3.1% |
+| Basis points | integers or 1 decimal | 91 bp, 4.2 bp |
+| Observations | integers with commas | 52,656 |
+
+Do not report computer output with 6+ decimal places. Use sensible units: report 2.3 rather than 0.0000023.
+
+---
+
+## Bibliography hygiene
+
+### Proper noun protection
+Wrap proper nouns in braces to prevent BibTeX case folding:
+```bibtex
+title = {The {TRACE} Enhanced Data Set and Corporate Bond Pricing in the {U.S.}},
+title = {The {CAPM} Strikes Back? {A}n Equilibrium Model},
+title = {{NYSE} Market Structure and the Pricing of {IPOs}},
+```
+
+Common protected terms: `{CAPM}`, `{U.S.}`, `{NYSE}`, `{NASDAQ}`, `{S\&P}`, `{CRSP}`, `{TRACE}`, `{FINRA}`, `{OTC}`, `{IPO}`, `{CEO}`, `{GDP}`, `{Gaussian}`, `{Bayesian}`, `{Fama}`, `{French}`, `{Black}`, `{Scholes}`
+
+### Entry type selection
+- `@article` for published journal papers (must have `journal`, `year`, `volume`, `pages`)
+- `@unpublished` or `@misc` with `note = {Working paper}` for working papers
+- `@book` for books, `@incollection` for book chapters
+
+### Pre-submission checks
+- **Duplicates**: Search for papers appearing under multiple keys
+- **Unused entries**: Remove `.bib` entries not cited in any `.tex` file
+- **Consistency**: All `@article` entries must have `journal`, `year`, `volume`, `pages`
+- **Working papers**: Verify current status; update to `@article` if since published
 
 ---
 

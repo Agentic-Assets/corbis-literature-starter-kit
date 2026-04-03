@@ -1,6 +1,6 @@
 # Skills Use Guide — Powered by Corbis
 
-How to use the 19 Claude research skills across the lifecycle of a finance or real-estate paper. All skills integrate with [Corbis](https://corbis.ai) MCP tools for literature search, economic data, CRE market intelligence, and citation management.
+How to use the 31 Claude research skills across the lifecycle of a finance or real-estate paper. All skills integrate with [Corbis](https://corbis.ai) MCP tools for literature search, economic data, CRE market intelligence, and citation management.
 
 ---
 
@@ -70,6 +70,17 @@ The `latex_template/` folder contains a ready-to-use LaTeX template for empirica
 | Recommend the best journal target for a paper | Use `/target` command (routes through journal profiles) |
 | Plan the full project from idea to submission | `research-pipeline-orchestrator` |
 | Stress-test a design or decision via structured debate | `research-debate` (invoke-only: `/debate`) |
+| Audit mathematical proofs and derivations | `audit-math` |
+| Audit factor construction for look-ahead bias | `factor-construction` |
+| Check panel data rules (lagging, CCM, book equity) | `panel-data-rules` |
+| Verify citations against bibliography | `verify-citations` |
+| Mechanical proofread (typos, spacing, formatting) | `proofread` |
+| Audit table/figure caption consistency | `audit-captions` |
+| Quick cross-section consistency check | `check-consistency` |
+| Compare old vs new text versions | `compare-versions` |
+| Query WRDS data via PostgreSQL | `wrds-psql` |
+| Pre-load WRDS schema knowledge | `wrds-schema` |
+| SSH to WRDS for SAS/Python batch jobs | `wrds-ssh` |
 
 ---
 
@@ -87,15 +98,26 @@ Most papers move through these stages. The skills are designed to be used in rou
                        (+ asset-pricing-test-suite if AP)
  4. Data          -->  finance-data-construction
                        (+ python-empirical-code for implementation)
+                       (+ wrds-schema to pre-load table structures)
+                       (+ wrds-psql for SQL queries)
+                       (+ wrds-ssh for SAS/Python batch jobs)
+                       (+ panel-data-rules for safe lagging, CCM, BE)
  5. Analysis      -->  finance-empirical-analysis
                        (+ python-empirical-code for implementation)
                        (+ asset-pricing-test-suite if AP)
+                       (+ factor-construction for portfolio sorts)
  5b. Figures      -->  research-figure-design
                        (+ python-empirical-code for implementation)
  6. Writing       -->  research-paper-writer
  6b. Polish       -->  humanizer (remove AI writing patterns)
+                       (+ proofread for typos, spacing, formatting)
+                       (+ compare-versions for before/after diffs)
  6c. Targeting    -->  /target (journal profiles in references/)
  7. Elevate       -->  paper-elevator (what tests/elements are missing?)
+                       (+ audit-math for proofs and derivations)
+                       (+ verify-citations against bibliography)
+                       (+ audit-captions for caption consistency)
+                       (+ check-consistency for cross-section checks)
  7b. Replication  -->  replication-package-builder
  8. Pre-submit    -->  pre-submission-review
  8b. Presenting   -->  research-seminar-deck
@@ -342,7 +364,7 @@ Use `research-pipeline-orchestrator` at any point to get a full roadmap or figur
 - Generates clean, runnable Python code using `linearmodels`, `statsmodels`, `pandas`, `matplotlib`
 - Includes finance-specific recipes: CCM merges, CRSP-Compustat linking, TRACE cleaning, date alignment to avoid look-ahead bias, NYSE breakpoints for portfolio sorts
 - Produces LaTeX regression tables and summary statistics tables ready for the paper template
-- Creates journal-quality figures (event-study plots, coefficient plots, binned scatters) with proper fonts, sizing, and 300 DPI
+- Creates journal-quality figures (event-study plots, coefficient plots, binned scatters) with proper fonts, sizing, and 600 DPI
 - Handles real-estate spatial operations: GeoDataFrame creation, spatial joins, distance calculations, Conley standard errors, repeat-sales indices
 - Scaffolds reproducible project structure (`raw/` → `build/` → `analysis/` → `output/`)
 - **Testing and validation**: `merge_with_validation()` with expected match rates, `validate_variable()` for hard bounds and sanity checks, `SampleTracker` for documenting observation counts through the pipeline, and `data_quality_report()` for missingness, duplicates, panel balance, and outlier detection
@@ -397,7 +419,7 @@ Use `research-pipeline-orchestrator` at any point to get a full roadmap or figur
 - Catalogs 13 standard figure types for empirical finance and real-estate papers, each with full Python code
 - Provides figure note templates for each type (sample, controls, CI construction, data source)
 - Maps standard figure sets by paper type (corporate finance, asset pricing, real estate, descriptive)
-- Enforces journal defaults: serif fonts, 300 DPI, 6.5x4.5 inches, PDF output, no chartjunk
+- Enforces journal defaults: serif fonts, 600 DPI, 6.5x4.5 inches, PDF output, no chartjunk
 - Integrates with Corbis (`fred_series_batch`, `get_market_data`) for time-series context and market data in figures
 
 **Example prompts:**

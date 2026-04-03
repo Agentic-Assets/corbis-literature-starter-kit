@@ -1,0 +1,64 @@
+# Finance & Economics Publication Style
+# Empirical asset pricing research — clean, minimal, colorblind-safe
+# Usage: plt.style.use('path/to/finance.mplstyle')
+
+# --- Typography ---
+font.family: serif
+font.serif: Times New Roman, STIXGeneral, DejaVu Serif
+mathtext.fontset: stix
+font.size: 9
+axes.labelsize: 9
+axes.titlesize: 10
+xtick.labelsize: 8
+ytick.labelsize: 8
+legend.fontsize: 8
+
+# --- Figure dimensions ---
+figure.figsize: 6.4, 4.0
+figure.dpi: 150
+savefig.dpi: 600
+savefig.format: pdf
+savefig.bbox: tight
+savefig.pad_inches: 0.05
+
+# --- Font embedding (type 42 = TrueType, editable in Illustrator) ---
+pdf.fonttype: 42
+ps.fonttype: 42
+
+# --- Lines and markers ---
+lines.linewidth: 1.2
+lines.markersize: 4
+lines.markeredgewidth: 0.8
+
+# --- Axes (clean minimal: no top/right spines) ---
+axes.linewidth: 0.6
+axes.spines.top: false
+axes.spines.right: false
+axes.grid: false
+axes.axisbelow: true
+axes.prop_cycle: cycler('color', ['#377EB8', '#E41A1C', '#4DAF4A', '#984EA3', '#FF7F00', '#A65628', '#F781BF', '#999999'])
+
+# --- Ticks (outward, readable) ---
+xtick.direction: out
+ytick.direction: out
+xtick.major.size: 4
+ytick.major.size: 4
+xtick.minor.size: 2
+ytick.minor.size: 2
+xtick.major.width: 0.6
+ytick.major.width: 0.6
+xtick.minor.width: 0.4
+ytick.minor.width: 0.4
+xtick.major.pad: 4
+ytick.major.pad: 4
+
+# --- Grid (off by default, tasteful when enabled) ---
+grid.color: cccccc
+grid.linewidth: 0.4
+grid.alpha: 0.5
+
+# --- Legend (frameless, clean) ---
+legend.frameon: false
+legend.borderpad: 0.3
+legend.columnspacing: 1.0
+legend.handlelength: 1.5
