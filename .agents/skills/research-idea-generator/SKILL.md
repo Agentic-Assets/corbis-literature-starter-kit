@@ -7,19 +7,41 @@ description: "Generate novel research ideas in finance and real estate using ten
 
 Generate 10 ranked research ideas from a topic area using structured heuristic lenses. This skill is a generator, not a filter. Use `finance-idea-screening` (via `/idea`) to evaluate the best candidates after generation.
 
-## Ten idea-generation lenses
+## The vector-space principle
 
-Each lens is a distinct heuristic for producing ideas. Apply all ten to the user's topic area. Not every lens will yield a strong candidate for every topic; that is expected. The goal is breadth of attack, not uniformity.
+A good research idea is an arrow from the current literature toward reality. The larger the gap between what economists assume and how the world actually works, the more impactful the idea. Three idea-source strategies, ranked by effectiveness:
 
-### Lens 1: Literature gap
+1. **Starting from anecdotes/practitioner reality** (strongest): Real-world observations from practitioners, news, conversations, and industry reports reveal where reality diverges from what economists assume. These observations mark where reality is, letting you draw the arrow from literature to reality. Ask: "Is the way people actually behave consistent with how economists think they behave?"
+
+2. **Starting from a cool dataset** (risky): A dataset generates many possible directions but no "hook" connecting to a specific literature-reality gap. Without a question, tinkering with data is unproductive. A dataset is a tool, not an idea.
+
+3. **Starting from the literature** (weakest for generation): Reading papers and looking for extensions typically produces marginal additions. You don't know which direction leads toward reality. Literature knowledge is essential for *positioning* an idea, but is a poor *source* of ideas.
+
+**Implication for this skill:** The lenses below are ordered to prioritize reality-first approaches. At least 2 of the top 10 ideas should come from the anecdote/practitioner lens, cross-pollination, or first-principles reasoning, which are the lenses most likely to bridge a literature-reality gap rather than extend the literature marginally.
+
+## Eleven idea-generation lenses
+
+Each lens is a distinct heuristic for producing ideas. Apply all eleven to the user's topic area. Not every lens will yield a strong candidate for every topic; that is expected. The goal is breadth of attack, not uniformity.
+
+### Lens 1: Practitioner-reality gap (anecdote-driven)
+
+Start from how real actors (managers, investors, households, regulators, intermediaries) actually behave, and ask whether this conflicts with what economists assume. The gap between practitioner reality and academic theory IS the idea.
+
+- Ask the user: what have you observed, read, or heard from practitioners that surprised you or conflicted with textbook theory? Probe for specific anecdotes.
+- Search practitioner sources: industry reports, Fed surveys, analyst commentary, trade press, regulatory filings. Use `search_papers` with queries like "[topic] survey evidence" or "[topic] practitioner" to find papers that document real-world behavior.
+- Ask: does the academic literature assume something that practitioners would laugh at? (Example: academics assumed managers maximize NPV, but practitioners optimize EPS. This single observation generated a research program.)
+- The test: can you name a specific assumption in the literature that conflicts with observed behavior? If yes, the paper writes itself: document the gap, provide causal evidence, and explore implications.
+
+### Lens 2: Literature gap
 
 Find questions that survey papers, handbook chapters, or literature reviews flag as open, understudied, or needing new data. The gap must be economically meaningful, not just "nobody has run this regression."
 
 - Search for recent surveys or reviews in the topic area.
 - Read "future research" directions and "open questions" sections.
 - Ask: is the gap real, or has it been filled since the survey was published?
+- **Caution:** Literature-driven ideas tend to produce marginal extensions. Use this lens for positioning, but prefer reality-driven lenses for generation.
 
-### Lens 2: Conflicting findings
+### Lens 3: Conflicting findings
 
 Two credible papers reach opposite conclusions on the same question. The reconciliation is the idea. The moderating variable, sample difference, or identification flaw that explains the conflict becomes the contribution.
 
@@ -27,7 +49,7 @@ Two credible papers reach opposite conclusions on the same question. The reconci
 - Look for papers that challenge or contradict the finding.
 - Ask: what explains the disagreement? Is it a sample, method, or mechanism difference?
 
-### Lens 3: Cross-pollination
+### Lens 4: Cross-pollination
 
 Borrow a well-established concept, method, or finding from one field and apply it to another where it has not been used. The best cross-pollination ideas generate a genuinely different economic prediction in the new setting, not just "X but in field Y."
 
@@ -35,7 +57,7 @@ Borrow a well-established concept, method, or finding from one field and apply i
 - Ask: does this insight have an untested analog in the user's topic area?
 - The test: does the imported concept generate a new prediction that insiders in the target field have not considered?
 
-### Lens 4: First principles / economic logic
+### Lens 5: First principles / economic logic
 
 Start from a fundamental friction (information asymmetry, moral hazard, search costs, limited attention, regulatory distortion, market segmentation) and derive a testable prediction. Then check whether anyone has tested it.
 
@@ -44,7 +66,7 @@ Start from a fundamental friction (information asymmetry, moral hazard, search c
 - Search to verify the prediction has not been tested.
 - The best first-principles ideas feel obvious in retrospect but have not been documented.
 
-### Lens 5: New data x old question
+### Lens 6: New data x old question
 
 Pair a recently available or underexploited data source with a classic question that was previously hard to answer. The data must enable a genuinely better answer, not just a replication with shinier data.
 
@@ -52,7 +74,7 @@ Pair a recently available or underexploited data source with a classic question 
 - Identify a classic question in the topic area that lacked the right data.
 - Ask: does this data source enable a new identification strategy, a new measurement, or a new population, not just a new time period?
 
-### Lens 6: Mechanism decomposition
+### Lens 7: Mechanism decomposition
 
 Take an established empirical result and ask: what is the economic channel? Can you distinguish between competing mechanisms? Many highly cited papers document effects without pinning down why. The mechanism paper is often higher-impact than the documentation paper.
 
@@ -60,7 +82,7 @@ Take an established empirical result and ask: what is the economic channel? Can 
 - Read the paper's mechanism discussion: is it hand-wavy or well-identified?
 - Ask: what test would distinguish mechanism A from mechanism B? Is that test feasible?
 
-### Lens 7: Boundary conditions
+### Lens 8: Boundary conditions
 
 When does a canonical finding break down? The failure of a well-known result in an economically meaningful dimension IS the idea. Heterogeneity that maps to a theory is a contribution; heterogeneity that is just subsample analysis is not.
 
@@ -68,7 +90,7 @@ When does a canonical finding break down? The failure of a well-known result in 
 - Ask: does it hold across market conditions (bull/bear, high/low volatility, crisis/calm), firm types (constrained/unconstrained, public/private), investor types (retail/institutional), or institutional settings (countries, regulatory regimes)?
 - The boundary condition must connect to an economic explanation, not just be an empirical fact.
 
-### Lens 8: Policy / regulatory shock
+### Lens 9: Policy / regulatory shock
 
 A recent policy change, regulatory reform, or institutional event creates a natural experiment for a question that was previously unidentifiable. The policy is the instrument, not the contribution. The question must be bigger than the policy.
 
@@ -76,7 +98,7 @@ A recent policy change, regulatory reform, or institutional event creates a natu
 - Ask: what economic question does this shock help answer? Is the question first-order?
 - Search to see whether the shock has already been exploited.
 
-### Lens 9: Model meets data
+### Lens 10: Model meets data
 
 Theoretical or structural models make quantitative predictions that have not been tested empirically. The paper tests the prediction, potentially rejecting or refining the model.
 
@@ -84,7 +106,7 @@ Theoretical or structural models make quantitative predictions that have not bee
 - Identify predictions that are stated in the model but absent from the empirical record.
 - Ask: is the prediction testable with available data? What would rejection mean for the theory?
 
-### Lens 10: Unification
+### Lens 11: Unification
 
 Multiple individually documented findings are manifestations of the same underlying economic force. The synthesis is the paper. This lens produces the highest-impact ideas but requires the deepest knowledge of the literature.
 
@@ -164,7 +186,8 @@ An idea that lacks any of these should be flagged as Low viability or excluded.
 - Do not generate more than 2 ideas from the same lens. The value of the skill is breadth of attack across multiple heuristics.
 - Do not present 10 equally enthusiastic ideas. Rank honestly. Some ideas will be stronger than others. Say so.
 - Do not overclaim novelty. If the search reveals a close paper, note it and adjust the contribution claim or drop the idea.
-- At least 3 of the 10 ideas must come from non-obvious lenses (cross-pollination, unification, first principles, model meets data). Gap-filling and data-driven ideas are easy to generate but often lower impact.
+- At least 3 of the 10 ideas must come from reality-first lenses (practitioner-reality gap, cross-pollination, first principles, model meets data, unification). Gap-filling and data-driven ideas are easy to generate but often lower impact.
+- An "interesting relationship" between two objects is NOT a research idea. The idea must have a testable tension between theory and reality, not just a correlation to document.
 - Every idea must pass a minimal plausibility check: could this be a seminar paper that changes how people think, or is it just an incremental exercise?
 
 ## Preferred outputs

@@ -49,6 +49,8 @@
 \newcommand{\papertitle}{Reusable Academic Paper Template: Example Layout for Empirical Research}
 \newcommand{\paperauthorone}{First Author}
 \newcommand{\paperauthortwo}{Second Author}
+\newcommand{\paperpositionone}{Assistant Professor of Finance}
+\newcommand{\paperpositiontwo}{Associate Professor of Economics}
 \newcommand{\paperaffilone}{Department of Finance, University A}
 \newcommand{\paperaffiltwo}{Department of Economics, University B}
 \newcommand{\paperemailone}{first.author@university.edu}
@@ -91,14 +93,9 @@
 \ifblind\else
 \vspace{-1.5em}
 \begin{center}
-\paperauthorone\\
-\textit{\paperaffilone}\\
-\href{mailto:\paperemailone}{\paperemailone}
-\vspace{0.7em}
-
-\paperauthortwo\\
-\textit{\paperaffiltwo}\\
-\href{mailto:\paperemailtwo}{\paperemailtwo}
+\paperauthorone\footnote{\paperpositionone, \paperaffilone. Email: \href{mailto:\paperemailone}{\paperemailone}.}
+\quad
+\paperauthortwo\footnote{\paperpositiontwo, \paperaffiltwo. Email: \href{mailto:\paperemailtwo}{\paperemailtwo}.}
 \end{center}
 \vspace{1.0em}
 \fi

@@ -81,13 +81,28 @@ After scoring, list the essential hurdles a referee would raise. Apply this filt
 - If more than **three essential hurdles** are needed to make the paper publishable, default to **Kill** or **Pivot** unless the question is unusually important (Importance = 5) and the contribution is unusually novel (Contribution >= 4).
 - Ask whether a plausible path to publication exists within **one R&R round, or at most two**. If not, the idea is not ready.
 
-## Three quick stress tests
+## Imaginary abstract test
+
+Before running the full scoring workflow, write a 5-part imaginary abstract for the idea:
+
+1. **Motivation/Tension:** What is the gap between what economists assume and what the world actually looks like? What prior would change?
+2. **Empirical Setting and Data:** What is the ideal experiment or setting? What data would you use?
+3. **Results:** What would you expect to find? Be specific about magnitudes if possible.
+4. **Implications:** What does this mean for theory, practice, or policy?
+5. **Conclusion:** One-sentence takeaway.
+
+**Purpose:** The imaginary abstract forces coherence. If you cannot write a plausible 5-part abstract, the idea is not ready. Ideas that sound exciting as a sentence but collapse when spelled out are Type I errors waiting to happen. The goal is not to draft a flawless abstract, but to test whether the idea has substance.
+
+**If the abstract feels impossible to write**, that is diagnostic: the idea lacks a clear question, a plausible test, or a meaningful result. Kill or revise.
+
+## Four quick stress tests
 
 Apply these after scoring. Each should be answerable in one sentence.
 
 1. **Null-result value test:** State what the paper teaches if the main estimate is zero. If the answer is "nothing," the paper is too dependent on a specific result.
 2. **Simultaneous-discovery test:** If a similar working paper appeared on SSRN tomorrow, would this paper still deserve publication because it gives the cleanest, most credible, or most important answer? If not, speed-to-market is the only edge, which is fragile.
 3. **Syllabus test:** Name one sentence in a PhD finance lecture that would have to change if the paper is right. If you cannot, the paper may not be first-order.
+4. **Necessary-conditions test:** Name the one critical first-stage condition that must hold for the project to work (e.g., the shock must show up in the data, the treatment must change behavior, the instrument must have a first stage). Can you check this condition with a few hours of work before committing months? If the necessary condition fails, kill the project early. Treat research like drug development: lab test before clinical trial.
 
 ## Kill criteria
 
@@ -105,17 +120,19 @@ Flag the idea as weak if one or more of these dominate:
 
 1. **Stage 0:** Run the desk-editor screen (four questions above). If weak, stop early.
 2. Restate the idea in one sentence (question-first framing).
-3. Identify the mechanism or friction.
-4. Name the closest 3-5 papers (use `search_papers` to verify — do not guess).
-5. State what is new relative to the closest papers — be specific about whether the novelty is in mechanism, data, identification, setting, or implication. Score contribution honestly.
-6. Sketch the theory-to-evidence bridge (quasi-experiment, model, structural, measurement, or asset-pricing test).
-7. Assess data, measurement, and replication feasibility (use `search_datasets` if needed).
-8. Identify the likely journal track. Read `references/journal-targets.md` for detailed journal profiles.
-9. List the 2-3 biggest fatal risks (these become the essential hurdles).
-10. Apply the six-dimension scoring rubric.
-11. Run the three stress tests (null-result, simultaneous-discovery, syllabus).
-12. Apply the revision-feasibility rule (max 3 hurdles).
-13. Deliver the verdict with the expanded Idea Card.
+3. **Write the imaginary abstract** (5 parts: motivation/tension, setting/data, expected results, implications, takeaway). If you cannot write a coherent abstract, flag the idea as underdeveloped.
+4. Identify the mechanism or friction.
+5. Name the closest 3-5 papers (use `search_papers` to verify — do not guess).
+6. State what is new relative to the closest papers — be specific about whether the novelty is in mechanism, data, identification, setting, or implication. Score contribution honestly.
+7. Sketch the theory-to-evidence bridge (quasi-experiment, model, structural, measurement, or asset-pricing test).
+8. Assess data, measurement, and replication feasibility (use `search_datasets` if needed).
+9. **Necessary-conditions check:** Name the one critical first-stage condition and whether it can be tested quickly.
+10. Identify the likely journal track. Read `references/journal-targets.md` for detailed journal profiles.
+11. List the 2-3 biggest fatal risks (these become the essential hurdles).
+12. Apply the six-dimension scoring rubric.
+13. Run the four stress tests (null-result, simultaneous-discovery, syllabus, necessary-conditions).
+14. Apply the revision-feasibility rule (max 3 hurdles).
+15. Deliver the verdict with the expanded Idea Card.
 
 ## Idea generation guidance
 

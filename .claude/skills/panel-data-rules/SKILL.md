@@ -48,6 +48,7 @@ This converts raw trading dates to calendar month-end. Required for: (1) gap che
 - **Staleness filter:** Ask the user before applying. Some methodologies set earnings variables to NaN if fiscal quarter end is >6 months before panel date.
 - **merge_asof staleness:** `direction='backward'` has **no max-age limit** -- it will match data from years ago if nothing newer exists. Consider capping staleness (e.g., 18-24 months for annual signals), but ask the user first.
 - **Compustat required filters:** Every `comp.funda`/`comp.fundq` query MUST include `indfmt='INDL' AND datafmt='STD' AND popsrc='D' AND consol='C'`. Omitting these creates duplicate gvkey-datadate rows silently.
+- **Macro data for controls:** When the analysis requires macro controls (interest rates, inflation, GDP growth), use `fred_search` to find the correct FRED series ID (e.g., "federal funds rate" → FEDFUNDS) and `fred_series_batch` to fetch the data. Align macro data to the panel using `merge_asof` with `direction='backward'` to reflect real-time availability.
 - **merge_asof pattern:**
   ```python
   # CORRECT -- sort by ON key only (hard requirement)
