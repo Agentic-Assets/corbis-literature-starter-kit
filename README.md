@@ -2,7 +2,7 @@
 
 A lightweight [Claude Code](https://docs.anthropic.com/en/docs/claude-code) project for exploring academic literature, brainstorming research ideas, and managing citations. Clone it, connect [Corbis](https://corbis.ai), and start exploring.
 
-Search 265,000+ academic papers, export BibTeX citations, and discover datasets, all from your terminal.
+Search 250,000+ academic papers, export BibTeX citations, and discover datasets, all from your terminal.
 
 ## What you get
 
@@ -97,8 +97,10 @@ references/      # Writing norms and citation formatting
 |---|---|
 | `CLAUDE.md` | Project instructions loaded every session |
 | `SKILLS_USE_GUIDE.md` | When to use each skill with example workflows |
-| `CORBIS_API_REFERENCE.md` | All 19 Corbis MCP tools with parameters and examples |
+| `CORBIS_MCP_TOOL_REFERENCE.md` | All 21 Corbis MCP tools with parameters and best practices |
+| `CORBIS_MCP_GUIDE.md` | MCP server architecture and authentication |
 | `CORBIS_MCP_CLAUDE_CODE_GUIDE.md` | Step-by-step Corbis setup for Claude Code |
+| `CORBIS_CURSOR_PLUGIN.md` | Corbis plugin setup for Cursor |
 
 ## License
 

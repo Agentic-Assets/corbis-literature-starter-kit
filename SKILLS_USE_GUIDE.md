@@ -1,6 +1,6 @@
 # Skills Guide
 
-How to use the 5 literature and idea skills. All skills search [Corbis](https://corbis.ai) (265,000+ papers) before making claims and export BibTeX citations automatically.
+How to use the 5 literature and idea skills. All skills search [Corbis](https://corbis.ai) (250,000+ papers) before making claims and export BibTeX citations automatically.
 
 ## Which skill to use
 

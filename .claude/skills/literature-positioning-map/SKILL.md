@@ -18,27 +18,27 @@ Your job is not to summarize everything ever written. Your job is to help the pa
 
 ## Tool integration (Corbis MCP) — this is critical
 
-**Always search before writing.** Do not rely on parametric knowledge alone. Corbis searches 265,000+ papers via hybrid semantic+keyword search.
+**Always search before writing.** Do not rely on parametric knowledge alone. Corbis searches 250,000+ papers via hybrid semantic+keyword search.
 
 ### Mandatory search sequence (execute in order)
 
 **Step 1 — Inner ring (direct competitors):**
 - `search_papers` (query: the exact question + method, `matchCount: 15`) → find papers doing the closest thing.
-- `get_paper_details` (paper IDs from top 5 results) → read abstracts to confirm true overlap.
+- `get_paper_details_batch` (paper IDs from top 5 results) → read abstracts to confirm true overlap.
 
 **Step 2 — Middle ring (same question, different methods OR same method, different question):**
 - `search_papers` (query: the same question with alternative methods, `matchCount: 10`)
 - `search_papers` (query: the same method applied to related questions, `matchCount: 10`)
 
 **Step 3 — Outer ring (seminal and contextual):**
-- `top_cited_articles` (field + topic) → identify the canonical papers in each literature bucket.
+- `top_cited_articles` (journalNames + query: topic) → identify the canonical papers on the specific topic within key journals.
 - `search_papers` (multiple queries covering the broader research area) → comprehensive sweep.
 
 **Step 4 — Recent working papers (essential — these are scooping risks):**
 - `search_papers` (same core query, `minYear: 2023`) → very recent published or forthcoming papers.
 
 **Step 5 — Verify specific papers:**
-- `get_paper_details` (paper IDs) → when the user mentions a specific paper or when you need to verify what a close paper actually does vs. what its title suggests.
+- `get_paper_details` or `get_paper_details_batch` (paper IDs) → when the user mentions a specific paper or when you need to verify what a close paper actually does vs. what its title suggests.
 
 ### Citation management
 - `format_citation` (paper ID, style: `apa` or `chicago`) → generate properly formatted citations for individual papers.

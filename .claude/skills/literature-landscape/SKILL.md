@@ -53,7 +53,7 @@ If the user provides a topic but no existing data, run searches to build the dat
 
 Run 4-5 `search_papers` queries with `matchCount: 20` each, varying keywords and year ranges to cover the topic broadly. Goal: 80-100 papers with metadata. For each paper, ensure you have: title, authors, year, journal, citedByCount, abstract.
 
-Call `get_paper_details` on any papers missing citation counts or abstracts (batch by importance: prioritize high-citation and recent papers).
+Call `get_paper_details_batch` (up to 25 IDs per call) on papers missing citation counts or abstracts. Prioritize high-citation and recent papers.
 
 Deduplicate by title similarity or OpenAlex ID.
 
@@ -62,7 +62,7 @@ Deduplicate by title similarity or OpenAlex ID.
 If the user points to a JSON file, reading list markdown, or .bib file from a prior `/lit-review`:
 1. Parse the existing data
 2. Identify papers missing citedByCount or abstract
-3. Call `get_paper_details` to fill gaps
+3. Call `get_paper_details_batch` to fill gaps
 4. Add more papers if the existing set is small (<40): run 2-3 supplementary `search_papers` queries
 
 **Save the dataset:**

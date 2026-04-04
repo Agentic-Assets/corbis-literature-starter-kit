@@ -42,7 +42,7 @@ Run 3-4 Corbis searches to understand the current state of the field:
 2. `search_papers` (same topic, `minYear: 2023`, `matchCount: 15`) to catch the frontier
 3. `search_papers` (topic + "survey" or "review", `matchCount: 10`) to find survey papers
 
-Use `get_paper_details` on the top 5-10 results by citation count to read abstracts and understand what has been established.
+Use `get_paper_details_batch` on the top 5-10 results to read abstracts and understand what has been established. Use `sortBy: "citedByCount"` on search calls to surface the most influential papers first.
 
 Produce a 3-4 sentence internal landscape summary: what is settled, what is actively debated, where the frontier is moving.
 
@@ -215,11 +215,11 @@ Suggest running `/idea` on the most promising candidate for full screening. Note
 1. `search_papers` (broad topic, `matchCount: 15`) — current state
 2. `search_papers` (topic, `minYear: 2023`, `matchCount: 15`) — frontier
 3. `search_papers` (topic + "survey", `matchCount: 10`) — survey papers
-4. `get_paper_details` on top 5-10 results — read abstracts, get citation counts
+4. `get_paper_details_batch` (top 5-10 paper IDs in one call) — read abstracts, get citation counts
 
 ### Per-candidate novelty checks (Phase 3)
 - `search_papers` (the specific idea, `matchCount: 10`) — for each candidate
-- `get_paper_details` on the 1-2 closest results — confirm overlap vs. vocabulary similarity
+- `get_paper_details_batch` on the closest results across candidates — confirm overlap vs. vocabulary similarity
 
 ### Data feasibility
 - `search_datasets` (topic keywords) — discover available datasets

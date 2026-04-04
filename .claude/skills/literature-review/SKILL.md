@@ -37,7 +37,7 @@ If the user provides a topic and format in their initial message, proceed withou
 Target ~50 unique papers for comprehensive scope, ~25 for focused scope. Execute searches in this order:
 
 **Step 1 — Foundational work:**
-- `top_cited_articles` (field: the broad field name, topic: the specific topic) to find seminal papers.
+- `top_cited_articles` (journalNames: relevant journals, query: the specific topic, compact: false) to find seminal papers on the topic within those journals.
 
 **Step 2 — Main body of work:**
 - `search_papers` (query: the core topic as a natural-language research question, `matchCount: 20`) to find the central literature.
@@ -54,7 +54,7 @@ Target ~50 unique papers for comprehensive scope, ~25 for focused scope. Execute
 - `search_papers` (query: methodological approach or adjacent field angle, `matchCount: 10`) for breadth.
 
 **Step 6 — Verify and enrich:**
-- `get_paper_details` on the top 30-40 unique papers to read abstracts, confirm relevance, and extract key findings.
+- `get_paper_details_batch` (up to 25 paper IDs per call) on the top 30-40 unique papers to read abstracts, confirm relevance, and extract key findings. Use 2 batch calls rather than 30+ individual calls.
 - Deduplicate across all searches.
 - If the user provided known key papers, verify they appear. If not found via search, include them manually and use `get_paper_details` to confirm details.
 
@@ -284,7 +284,7 @@ This skill can feed into all of the above. A natural workflow is: `literature-re
 
 - **Search before claiming.** Every assertion about what the literature does or does not contain must be grounded in the Corbis search results. Do not rely on parametric knowledge alone.
 - **Do not pad.** If only 35 papers are genuinely relevant, do not stretch to 50. Quality over count.
-- **Do not fabricate.** If a paper's details are uncertain, use `get_paper_details` to verify before including it. If unavailable, flag it for the user.
+- **Do not fabricate.** If a paper's details are uncertain, use `get_paper_details` or `get_paper_details_batch` to verify before including it. If unavailable, flag it for the user.
 - **Conflicts are features, not bugs.** When papers disagree, present both sides. Do not smooth over genuine disagreements.
 - **Gaps are claims.** Saying "the literature has not studied X" is a strong claim. Support it with search evidence or soften the language.
 - **Respect the checkpoint.** Do not skip Phase 2 approval. The strand structure determines the quality of the review.

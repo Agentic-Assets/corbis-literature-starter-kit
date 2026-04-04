@@ -148,9 +148,9 @@ When asked to generate ideas (not just screen them):
 **Never claim an idea is novel without searching first.** Use this exact sequence:
 
 ### Novelty verification chain
-1. `search_papers` (query: the core question in natural language, `matchCount: 15`) — find closest existing work. Corbis uses hybrid semantic+keyword search over 265,000+ papers, so phrase the query like a research question, not keywords.
-2. `get_paper_details` (paper IDs from top 3-5 results) — read abstracts to confirm whether they truly overlap or just share vocabulary.
-3. `top_cited_articles` (field: e.g., "corporate finance", topic: e.g., "debt covenants") — identify seminal papers the user must know about.
+1. `search_papers` (query: the core question in natural language, `matchCount: 15`) — find closest existing work. Corbis uses hybrid semantic+keyword search over 250,000+ papers, so phrase the query like a research question, not keywords.
+2. `get_paper_details_batch` (paper IDs from top 3-5 results) — read abstracts to confirm whether they truly overlap or just share vocabulary.
+3. `top_cited_articles` (journalNames: relevant journals, query: specific topic) — identify seminal papers the user must know about.
 4. `search_papers` (same query, `minYear: 2023`) — catch recent working papers not yet indexed in OpenAlex.
 
 ### Data feasibility check
