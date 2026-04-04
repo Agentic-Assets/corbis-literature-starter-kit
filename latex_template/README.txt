@@ -1,31 +1,17 @@
-ACADEMIC PAPER TEMPLATE
+Corbis Literature Starter Kit — LaTeX Template
 
-Files
------
-- academic_paper_template.tex : main LaTeX template
-- template_references.bib     : sample BibTeX file
-- jf.bst                      : bibliography style copied from the uploaded package
-- images/                     : example figures used in the template
-- academic_paper_template.pdf : compiled preview
+A clean article template for literature reviews and research notes.
+Uses natbib for citations (\citet{} and \citep{}).
 
-How to reuse
-------------
-1. Open academic_paper_template.tex.
-2. Replace the title, running title, JEL codes, keywords, and abstract.
-3. Toggle the blind-review switch: set \blindfalse to show authors or \blindtrue to anonymize the title page.
-4. Replace the sample section text with your paper content.
-5. Replace the example tables and figures, or keep the formatting and swap in your own numbers.
-6. Replace template_references.bib with your own bibliography database.
+Files:
+  academic_paper_template.tex  — Main document
+  template_references.bib      — Sample bibliography (replace with yours)
 
-Compile
--------
-pdflatex academic_paper_template.tex
-bibtex academic_paper_template
-pdflatex academic_paper_template.tex
-pdflatex academic_paper_template.tex
+How to use:
+  1. Copy this folder: cp -r latex_template/ paper/
+  2. Edit academic_paper_template.tex (title, author, sections)
+  3. Replace template_references.bib with your own .bib file
+     (use Corbis export_citations to generate BibTeX entries)
+  4. Compile: pdflatex -> bibtex -> pdflatex -> pdflatex
 
-Notes
------
-- The example prose, coefficients, and graphics are placeholders only.
-- Figures and tables are placed after the references to mirror the source draft.
-  Move them inline if your target journal prefers that layout.
+Requires a LaTeX distribution (MacTeX, TeX Live, or MikTeX).

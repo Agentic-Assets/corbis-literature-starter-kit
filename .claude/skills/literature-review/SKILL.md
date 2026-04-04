@@ -58,10 +58,20 @@ Target ~50 unique papers for comprehensive scope, ~25 for focused scope. Execute
 - Deduplicate across all searches.
 - If the user provided known key papers, verify they appear. If not found via search, include them manually and use `get_paper_details` to confirm details.
 
-**Ranking criteria** (for deciding which papers to keep):
+**Citation-based tiering:** After deduplication, sort all collected papers by `citedByCount` and assign influence tiers:
+
+| Tier | Label | Rule | Treatment in the review |
+|---|---|---|---|
+| 1 | **Foundational** | Top 5 papers by `citedByCount` OR any paper with 500+ citations | 3-5 sentences each. Describe what they found, how, and why it mattered. These anchor the review. |
+| 2 | **Established** | Next 10-15 papers by `citedByCount` OR 100-499 citations | 1-2 sentences each, or grouped into synthesized claims with 2-3 papers per sentence. |
+| 3 | **Emerging** | Papers with < 100 citations, especially those published in the last 3 years | Grouped into frontier paragraphs. Cited parenthetically to support collective findings. |
+
+A paper that appears across 3+ separate search queries is likely a network hub. Promote it one tier (e.g., Established to Foundational) regardless of raw citation count.
+
+**Ranking criteria** (for deciding which papers to keep when cutting to target count):
 1. Direct relevance to the topic
-2. Citation count (seminal work gets priority)
-3. Recency (recent work that shifts the field gets priority)
+2. Influence tier (Foundational papers are never cut)
+3. Recency (recent work that shifts the field gets priority over older low-citation work)
 4. Methodological contribution (papers that changed how the field studies the topic)
 
 ### Phase 2: Propose strand structure
@@ -75,6 +85,7 @@ After collecting papers, propose 4-6 thematic strands. Present to the user for a
 
 ## Topic: [user's topic]
 ## Scope: [focused/comprehensive] — [N] unique papers collected
+## Influence tiers: [X] Foundational / [Y] Established / [Z] Emerging
 
 ### Proposed strands:
 
@@ -118,13 +129,13 @@ For each strand, write in this order:
 
 1. **Opening frame** (1-2 sentences): State the strand's central question or contribution to understanding the topic. Why does this line of work exist?
 
-2. **Foundational work** (2-4 sentences per seminal paper): Describe the key early papers that established the strand. These get the most individual attention. State what they found, how they found it, and why it mattered.
+2. **Foundational work** (Tier 1 papers, 3-5 sentences each): Describe the key papers that anchor this strand. These get the most individual attention. State what they found, how they found it, and why it mattered. Do not mention citation counts in the review prose; let the depth of treatment signal the paper's importance. Citation counts belong in the reading list, not in the narrative.
 
-3. **Development and evidence** (synthesized, not enumerated): Group the body of subsequent work by finding, not by author. Write about what the literature collectively shows, with citations supporting claims. Example:
+3. **Established evidence** (Tier 2 papers, synthesized, not enumerated): Group the body of work by finding, not by author. Write about what the literature collectively shows, with citations supporting claims. Example:
    - GOOD: "Subsequent work established that credit constraints amplify housing cycles, with effects concentrated among low-income borrowers (Author 2015; Author 2017) and in regions with inelastic housing supply (Author 2016; Author 2019)."
    - BAD: "Author (2015) studies credit constraints and housing. Author (2016) studies housing supply elasticity. Author (2017) also studies credit constraints."
 
-4. **Recent frontier** (2-3 sentences): What has the last 2-3 years added? New data, new methods, new findings that shift understanding?
+4. **Recent frontier** (Tier 3 papers, 2-3 sentences): What has the last 2-3 years added? New data, new methods, new findings that shift understanding? These papers may have low citation counts simply because they are new.
 
 5. **Gaps, tensions, or open questions** (1-2 sentences): What does this strand leave unresolved? Where do findings conflict? What has not been studied?
 
@@ -244,6 +255,7 @@ After all outputs are written, present a brief report in chat:
 ## Topic: [topic]
 ## Scope: [focused/comprehensive]
 ## Papers cited: [N] (of [M] unique papers found)
+## Influence tiers: [X] Foundational / [Y] Established / [Z] Emerging
 ## Strands:
 1. [Strand 1] — [N papers]
 2. [Strand 2] — [N papers]

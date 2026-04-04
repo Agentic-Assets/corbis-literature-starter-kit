@@ -6,14 +6,10 @@
       "Glob",
       "Grep",
       "Write(output/**)",
-      "Write(build/**)",
-      "Write(codebook/**)",
-      "Bash(python *)",
-      "Bash(python3 *)",
+      "Write(notes/**)",
+      "Write(paper/**)",
       "Bash(pdflatex *)",
       "Bash(bibtex *)",
-      "Bash(pip install *)",
-      "Bash(pip3 install *)",
       "Bash(ls *)",
       "Bash(cat *)",
       "Bash(mkdir *)",
@@ -21,9 +17,7 @@
       "Bash(git status*)",
       "Bash(git log*)",
       "Bash(git diff*)",
-      "Bash(git add *)",
-      "Bash(black *)",
-      "Bash(ruff *)"
+      "Bash(git add *)"
     ],
     "deny": []
   },
@@ -48,28 +42,6 @@
             "command": "FILE=\"$CLAUDE_FILE_PATH\"; if [ -n \"$FILE\" ] && echo \"$FILE\" | grep -q '\\.tex$'; then if grep -q '\\\\documentclass' \"$FILE\" 2>/dev/null; then DIR=$(dirname \"$FILE\"); BASE=$(basename \"$FILE\" .tex); cd \"$DIR\" && pdflatex -interaction=nonstopmode -halt-on-error \"$BASE\" > /dev/null 2>&1 && bibtex \"$BASE\" > /dev/null 2>&1 && pdflatex -interaction=nonstopmode \"$BASE\" > /dev/null 2>&1 && pdflatex -interaction=nonstopmode \"$BASE\" > /dev/null 2>&1; fi; fi",
             "timeout": 60,
             "statusMessage": "Compiling LaTeX to PDF..."
-          }
-        ]
-      },
-      {
-        "matcher": "Write",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "FILE=\"$CLAUDE_FILE_PATH\"; if [ -n \"$FILE\" ] && echo \"$FILE\" | grep -q '\\.py$'; then if command -v ruff > /dev/null 2>&1; then ruff format \"$FILE\" > /dev/null 2>&1 && ruff check --fix \"$FILE\" > /dev/null 2>&1; elif command -v black > /dev/null 2>&1; then black -q \"$FILE\" 2>/dev/null; fi; fi",
-            "timeout": 15,
-            "statusMessage": "Formatting Python..."
-          }
-        ]
-      },
-      {
-        "matcher": "Edit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "FILE=\"$CLAUDE_FILE_PATH\"; if [ -n \"$FILE\" ] && echo \"$FILE\" | grep -q '\\.py$'; then if command -v ruff > /dev/null 2>&1; then ruff format \"$FILE\" > /dev/null 2>&1 && ruff check --fix \"$FILE\" > /dev/null 2>&1; elif command -v black > /dev/null 2>&1; then black -q \"$FILE\" 2>/dev/null; fi; fi",
-            "timeout": 15,
-            "statusMessage": "Formatting Python..."
           }
         ]
       }

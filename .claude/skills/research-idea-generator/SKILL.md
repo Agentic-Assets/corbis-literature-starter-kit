@@ -197,12 +197,6 @@ Produce:
 2. **Idea Sketches** — expanded treatment of the top 3 ideas
 3. **Next-step recommendation** — which idea to screen first and why
 
-## Reference files
-
-Read if needed:
-- `references/journal-targets.md` — journal profiles for track recommendations
-- `references/empirical-standards.md` — methodological baselines
-
 ## Example prompts
 
 - "Brainstorm 10 ideas in behavioral asset pricing."

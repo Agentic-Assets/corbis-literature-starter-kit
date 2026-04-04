@@ -127,7 +127,7 @@ Flag the idea as weak if one or more of these dominate:
 7. Sketch the theory-to-evidence bridge (quasi-experiment, model, structural, measurement, or asset-pricing test).
 8. Assess data, measurement, and replication feasibility (use `search_datasets` if needed).
 9. **Necessary-conditions check:** Name the one critical first-stage condition and whether it can be tested quickly.
-10. Identify the likely journal track. Read `references/journal-targets.md` for detailed journal profiles.
+10. Identify the likely journal track (finance generalist, finance specialist, or real-estate/housing).
 11. List the 2-3 biggest fatal risks (these become the essential hurdles).
 12. Apply the six-dimension scoring rubric.
 13. Run the four stress tests (null-result, simultaneous-discovery, syllabus, necessary-conditions).
@@ -183,10 +183,6 @@ Also provide:
 **Real-estate-track ideas** can lean more heavily on institutional setting, property-market detail, and spatial or policy structure, but they still need a clean contribution and a strong empirical design. REE and JREFE value institutional knowledge. RSUE and JHE want broader urban/housing economics framing.
 
 When assessing journal fit, consider mapping the candidate idea to 2-3 recent papers in the target journal that share the closest structure (question type, method, contribution style). If no recent archetype exists, the fit may be weak.
-
-Read if needed:
-- references/journal-targets.md
-- references/empirical-standards.md
 
 ## Guardrails
 

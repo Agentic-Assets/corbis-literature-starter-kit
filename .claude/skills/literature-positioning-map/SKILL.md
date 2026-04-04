@@ -118,7 +118,6 @@ Produce:
 ## Reference files
 Read if needed:
 - references/writing-norms.md
-- references/journal-targets.md
 
 ## Guardrails
 
