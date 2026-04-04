@@ -15,6 +15,7 @@ Search 265,000+ academic papers, export BibTeX citations, and discover datasets,
 | `/brainstorm` | Generate 10 ranked research ideas from a topic area |
 | `/idea` | Screen and score a specific research idea |
 | `/verify-citations` | Audit your .bib file against the literature |
+| `/lit-landscape` | Visualize literature trends, gaps, and methods |
 
 Plus a **paper-reader agent** that can summarize any academic PDF.
 
@@ -36,7 +37,12 @@ cd my-literature-project
 claude
 ```
 
-That's it. No API keys in `.env`, no Python dependencies, no LaTeX required (unless you want to write a paper).
+That's it. No API keys in `.env`, no LaTeX required (unless you want to write
+a paper). For literature landscape figures, install Python dependencies:
+
+```bash
+pip install matplotlib pandas numpy
+```
 
 ## Example workflows
 

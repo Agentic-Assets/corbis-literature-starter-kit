@@ -11,6 +11,7 @@ How to use the 5 literature and idea skills. All skills search [Corbis](https://
 | Generate research ideas in a topic area | `/brainstorm` |
 | Evaluate whether a specific idea is worth pursuing | `/idea` |
 | Check that my citations are correct and complete | `/verify-citations` |
+| Visualize trends, gaps, and methods in a literature | `/lit-landscape` |
 
 ## Common workflows
 
@@ -22,6 +23,10 @@ How to use the 5 literature and idea skills. All skills search [Corbis](https://
 **Positioning an existing idea:**
 1. `/lit-search [your paper's question]` -- find closest work
 2. `/idea [your idea]` -- score and stress-test it
+
+**Visualizing a literature:**
+1. `/lit-review [your topic]` -- build the paper set
+2. `/lit-landscape [your topic]` -- generate trend and gap figures
 
 **Polishing citations:**
 1. `/verify-citations` -- audit your .bib against Corbis

@@ -17,7 +17,11 @@
       "Bash(git status*)",
       "Bash(git log*)",
       "Bash(git diff*)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(python *)",
+      "Bash(python3 *)",
+      "Bash(pip install *)",
+      "Bash(pip3 install *)"
     ],
     "deny": []
   },

@@ -13,6 +13,7 @@ Before responding to any research-related prompt, check whether a skill applies.
 | Brainstorm research ideas from a topic area       | `research-idea-generator`    |
 | Screen or score a specific research idea          | `finance-idea-screening`     |
 | Verify citations in a .bib file                   | `verify-citations`           |
+| Visualize literature trends, gaps, methods          | `literature-landscape`       |
 
 ## Corbis tool usage
 
