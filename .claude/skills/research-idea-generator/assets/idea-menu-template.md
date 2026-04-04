@@ -1,33 +1,45 @@
 # Idea Menu
 
 ## Topic area
-[User's topic area and any constraints]
+[User's topic area]
+
+## User constraints
+- **Data access**: [what they have]
+- **Methods**: [what they can execute]
+- **Journal ambition**: [top-3 / field-journal / any]
+- **Timeline**: [months to working paper]
+- **Coauthor skills**: [if applicable]
 
 ## Landscape summary
-[2-3 sentences on the current state of the field: seminal papers, active debates, recent trends, key open questions]
+[3-4 sentences: what is settled, what is actively debated, where the frontier is moving]
+
+## Generation summary
+- Candidates generated: [N]
+- Failed novelty test: [N]
+- Failed kill test: [N]
+- Survivors ranked: [N] → Top 10 shown below
 
 ## Ranked ideas
 
-| Rank | Idea (one-sentence question) | Lens | Closest paper | Impact | Feasibility | Viability |
-|------|------------------------------|------|---------------|--------|-------------|-----------|
-| 1 | | | | | | |
-| 2 | | | | | | |
-| 3 | | | | | | |
-| 4 | | | | | | |
-| 5 | | | | | | |
-| 6 | | | | | | |
-| 7 | | | | | | |
-| 8 | | | | | | |
-| 9 | | | | | | |
-| 10 | | | | | | |
+| Rank | Idea (one-sentence question) | Lens | Closest paper | Nov | Imp | Exe | Tier | Key risk |
+|------|------------------------------|------|---------------|-----|-----|-----|------|----------|
+| 1 | | | | | | | | |
+| 2 | | | | | | | | |
+| 3 | | | | | | | | |
+| 4 | | | | | | | | |
+| 5 | | | | | | | | |
+| 6 | | | | | | | | |
+| 7 | | | | | | | | |
+| 8 | | | | | | | | |
+| 9 | | | | | | | | |
+| 10 | | | | | | | | |
 
-**Impact:** High / Medium / Low — Would the answer change how the field thinks?
-**Feasibility:** High / Medium / Low — Can this be executed with available data and methods?
-**Viability:** High / Medium / Low — Combined assessment of impact, feasibility, and novelty.
+**Nov** = Novelty (1-5). **Imp** = Importance (1-5). **Exe** = Executability (1-5).
+**Tier**: TJ = top-journal, FJ = field-journal, WS = workshop.
 
 ## Lenses applied
 
-[Note which lenses produced ideas and which did not yield viable candidates for this topic. Brief explanation for skipped lenses.]
+[Note which lenses produced survivors and which did not. Brief explanation for unproductive lenses.]
 
 ---
 
@@ -35,24 +47,33 @@
 
 ## Idea 1: [Title]
 
-**One-sentence question:** [Question-first framing]
+**One-sentence question:**
 
-**Lens:** [Which of the 10 lenses generated this idea]
+**Seminar pitch:** "This paper shows that ___ because ___."
 
 **Core mechanism or friction:**
-[2-3 sentences. Name the economic force. Explain why it generates a testable prediction.]
+[2-3 sentences. Name the economic force. State the testable prediction.]
+
+**Structured breakdown:**
+- **Question**: [one sentence]
+- **Mechanism**: [one sentence]
+- **Testable prediction**: [one sentence]
+- **Identification strategy**: [one sentence]
+- **Data**: [specific sources]
+- **Why now**: [what changed recently that makes this timely]
 
 **Theory-to-evidence bridge:**
-[One paragraph. What is the test? What variation is exploited? What is the comparison group or testable restriction? What would the ideal table or figure show?]
+[One paragraph. What is the test? What variation is exploited? What would the ideal table or figure show?]
 
-**Key data requirements:**
-[Specific datasets, access requirements, coverage period]
+**Contribution tier:** [TJ / FJ / WS] — [why]
 
-**Likely journal track:**
-[Top-3 (JF/JFE/RFS), strong field (JFQA/RoF/MS), or real estate (REE/JREFE/JRER/JHE/RSUE) — and why]
+**Referee vulnerability:** "The hardest challenge is whether ___ is just proxying for ___."
 
-**Skepticism test:**
-[One sentence: what would the toughest referee say?]
+**Why this beats the other top candidates:**
+[One sentence]
+
+**Why this is not dominated by a cleaner adjacent project:**
+[One sentence]
 
 ---
 
@@ -60,17 +81,27 @@
 
 **One-sentence question:**
 
-**Lens:**
+**Seminar pitch:**
 
 **Core mechanism or friction:**
 
+**Structured breakdown:**
+- **Question**:
+- **Mechanism**:
+- **Testable prediction**:
+- **Identification strategy**:
+- **Data**:
+- **Why now**:
+
 **Theory-to-evidence bridge:**
 
-**Key data requirements:**
+**Contribution tier:**
 
-**Likely journal track:**
+**Referee vulnerability:**
 
-**Skepticism test:**
+**Why this beats the other top candidates:**
+
+**Why this is not dominated by a cleaner adjacent project:**
 
 ---
 
@@ -78,19 +109,29 @@
 
 **One-sentence question:**
 
-**Lens:**
+**Seminar pitch:**
 
 **Core mechanism or friction:**
 
+**Structured breakdown:**
+- **Question**:
+- **Mechanism**:
+- **Testable prediction**:
+- **Identification strategy**:
+- **Data**:
+- **Why now**:
+
 **Theory-to-evidence bridge:**
 
-**Key data requirements:**
+**Contribution tier:**
 
-**Likely journal track:**
+**Referee vulnerability:**
 
-**Skepticism test:**
+**Why this beats the other top candidates:**
+
+**Why this is not dominated by a cleaner adjacent project:**
 
 ---
 
 ## Recommended next step
-[Which idea to screen first with `/idea` and why. Note any ideas that would benefit from `/lit-search` or `/design` before full screening.]
+[Which idea to screen first with `/idea` and why. Note any ideas that would benefit from `/lit-search` or `/lit-landscape` before full screening.]

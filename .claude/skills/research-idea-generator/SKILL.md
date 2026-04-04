@@ -1,200 +1,254 @@
 ---
 name: research-idea-generator
-description: "Generate novel research ideas in finance and real estate using ten structured heuristic lenses. Use for brainstorming sessions, topic exploration, and creative idea development."
+description: "Generate novel research ideas in finance and real estate using structured heuristic lenses with internal rejection filtering. Produces a curated Idea Menu of survivors, not a brainstorming list."
 ---
 
 # Research Idea Generator
 
-Generate 10 ranked research ideas from a topic area using structured heuristic lenses. This skill is a generator, not a filter. Use `finance-idea-screening` (via `/idea`) to evaluate the best candidates after generation.
+Generate a broad set of candidate research ideas, kill the weak ones internally, and present only the survivors. This skill is a generator with a built-in filter. The user sees 10 ranked ideas; the model generates 25-30 and discards the rest.
 
 ## The vector-space principle
 
-A good research idea is an arrow from the current literature toward reality. The larger the gap between what economists assume and how the world actually works, the more impactful the idea. Three idea-source strategies, ranked by effectiveness:
+A good research idea is an arrow from the current literature toward reality. The larger the gap between what economists assume and how the world actually works, the more impactful the idea.
 
-1. **Starting from anecdotes/practitioner reality** (strongest): Real-world observations from practitioners, news, conversations, and industry reports reveal where reality diverges from what economists assume. These observations mark where reality is, letting you draw the arrow from literature to reality. Ask: "Is the way people actually behave consistent with how economists think they behave?"
+Three idea-source strategies, ranked by effectiveness:
+
+1. **Starting from practitioner reality** (strongest): Real-world observations reveal where reality diverges from what economists assume. These observations mark where reality is, letting you draw the arrow from literature to reality.
 
 2. **Starting from a cool dataset** (risky): A dataset generates many possible directions but no "hook" connecting to a specific literature-reality gap. Without a question, tinkering with data is unproductive. A dataset is a tool, not an idea.
 
-3. **Starting from the literature** (weakest for generation): Reading papers and looking for extensions typically produces marginal additions. You don't know which direction leads toward reality. Literature knowledge is essential for *positioning* an idea, but is a poor *source* of ideas.
+3. **Starting from the literature** (weakest for generation): Reading papers and looking for extensions typically produces marginal additions. Literature knowledge is essential for positioning an idea, but is a poor source of ideas.
 
-**Implication for this skill:** The lenses below are ordered to prioritize reality-first approaches. At least 2 of the top 10 ideas should come from the anecdote/practitioner lens, cross-pollination, or first-principles reasoning, which are the lenses most likely to bridge a literature-reality gap rather than extend the literature marginally.
+## Phase 0: Collect user constraints
 
-## Eleven idea-generation lenses
+Before generating anything, collect and record these as **hard filters** on ranking. An idea that violates a hard constraint cannot rank in the top 5 regardless of its intellectual appeal.
 
-Each lens is a distinct heuristic for producing ideas. Apply all eleven to the user's topic area. Not every lens will yield a strong candidate for every topic; that is expected. The goal is breadth of attack, not uniformity.
+| Constraint | Question to ask | How it binds |
+|---|---|---|
+| Data access | What databases, proprietary data, or institutional access do you have? | Ideas requiring unavailable data are capped at Medium feasibility |
+| Methods comfort | What empirical methods are you comfortable executing? (DiD, RDD, structural, NLP, etc.) | Ideas requiring unfamiliar methods are downranked unless a coauthor fills the gap |
+| Field comfort | What literatures do you know well enough to position a paper? | Ideas in unfamiliar fields require more literature work |
+| Journal ambition | Are you targeting top-3 (JF/JFE/RFS), strong field (JFQA/RoF), or any good outlet? | Determines contribution bar |
+| Coauthor skills | What complementary skills does a coauthor bring? | Relaxes method or field constraints |
+| Timeline | How soon do you need a working paper? | Long-horizon structural projects vs. quick empirical exercises |
 
-### Lens 1: Practitioner-reality gap (anecdote-driven)
+If the user provides a topic and constraints in their initial message, proceed without asking. Fill defaults for anything not specified (assume broad data access, standard empirical methods, field-journal ambition, solo researcher, 12-month timeline).
 
-Start from how real actors (managers, investors, households, regulators, intermediaries) actually behave, and ask whether this conflicts with what economists assume. The gap between practitioner reality and academic theory IS the idea.
+## Phase 1: Map the landscape
 
-- Ask the user: what have you observed, read, or heard from practitioners that surprised you or conflicted with textbook theory? Probe for specific anecdotes.
-- Search practitioner sources: industry reports, Fed surveys, analyst commentary, trade press, regulatory filings. Use `search_papers` with queries like "[topic] survey evidence" or "[topic] practitioner" to find papers that document real-world behavior.
-- Ask: does the academic literature assume something that practitioners would laugh at? (Example: academics assumed managers maximize NPV, but practitioners optimize EPS. This single observation generated a research program.)
-- The test: can you name a specific assumption in the literature that conflicts with observed behavior? If yes, the paper writes itself: document the gap, provide causal evidence, and explore implications.
+Run 3-4 Corbis searches to understand the current state of the field:
 
-### Lens 2: Literature gap
+1. `search_papers` (broad topic query, `matchCount: 15`) to find the core literature
+2. `search_papers` (same topic, `minYear: 2023`, `matchCount: 15`) to catch the frontier
+3. `search_papers` (topic + "survey" or "review", `matchCount: 10`) to find survey papers
 
-Find questions that survey papers, handbook chapters, or literature reviews flag as open, understudied, or needing new data. The gap must be economically meaningful, not just "nobody has run this regression."
+Use `get_paper_details` on the top 5-10 results by citation count to read abstracts and understand what has been established.
 
-- Search for recent surveys or reviews in the topic area.
-- Read "future research" directions and "open questions" sections.
-- Ask: is the gap real, or has it been filled since the survey was published?
-- **Caution:** Literature-driven ideas tend to produce marginal extensions. Use this lens for positioning, but prefer reality-driven lenses for generation.
+Produce a 3-4 sentence internal landscape summary: what is settled, what is actively debated, where the frontier is moving.
 
-### Lens 3: Conflicting findings
+## Phase 2: Generate candidates (internal, not shown to user)
 
-Two credible papers reach opposite conclusions on the same question. The reconciliation is the idea. The moderating variable, sample difference, or identification flaw that explains the conflict becomes the contribution.
+Apply all eleven lenses to the topic area. Generate 2-3 rough candidates per lens. Target 25-30 total candidates. Most will be discarded.
 
-- Search for the core empirical finding in the topic.
-- Look for papers that challenge or contradict the finding.
-- Ask: what explains the disagreement? Is it a sample, method, or mechanism difference?
+### Stage A: Generative lenses (reality-first)
 
-### Lens 4: Cross-pollination
+These lenses produce the raw material. Apply these first.
 
-Borrow a well-established concept, method, or finding from one field and apply it to another where it has not been used. The best cross-pollination ideas generate a genuinely different economic prediction in the new setting, not just "X but in field Y."
+**Lens 1: Practitioner-reality gap**
 
-- Identify a powerful insight from a neighboring field (labor, IO, macro, behavioral, urban).
-- Ask: does this insight have an untested analog in the user's topic area?
-- The test: does the imported concept generate a new prediction that insiders in the target field have not considered?
+Start from how real actors behave, and ask whether this conflicts with what economists assume. Use these specific elicitation prompts:
 
-### Lens 5: First principles / economic logic
+- What do practitioners optimize that theory says they should not?
+- What variable do practitioners obsess over that papers ignore?
+- What decision rule do people use in practice that would look irrational in a model?
+- What do industry participants know that academics have not documented?
 
-Start from a fundamental friction (information asymmetry, moral hazard, search costs, limited attention, regulatory distortion, market segmentation) and derive a testable prediction. Then check whether anyone has tested it.
+Search with `search_papers` for "[topic] survey evidence" or "[topic] practitioner" to find papers documenting real-world behavior. If the user provided anecdotes, use those as the starting point.
 
-- Name the friction explicitly.
-- State the prediction in one sentence.
-- Search to verify the prediction has not been tested.
-- The best first-principles ideas feel obvious in retrospect but have not been documented.
+The test: can you name a specific assumption in the literature that conflicts with observed behavior? If yes, the idea is well-formed. If not, the observation is interesting but not yet an idea.
 
-### Lens 6: New data x old question
+**Lens 2: Cross-pollination**
 
-Pair a recently available or underexploited data source with a classic question that was previously hard to answer. The data must enable a genuinely better answer, not just a replication with shinier data.
+Borrow a well-established concept, method, or finding from a neighboring field (labor, IO, macro, behavioral, urban, computer science) and apply it where it has not been used. The imported concept must generate a genuinely different economic prediction in the new setting, not just "X but in field Y."
 
-- Identify new or expanding data sources: satellite imagery, web-scraped data, administrative records, fintech/neobank transaction data, NLP/LLM-processed text from filings, alternative workforce data (Revelio, Burning Glass), high-frequency geolocation data, social media signals.
-- Identify a classic question in the topic area that lacked the right data.
-- Ask: does this data source enable a new identification strategy, a new measurement, or a new population, not just a new time period?
+**Lens 3: First principles / economic logic**
 
-### Lens 7: Mechanism decomposition
+Start from a fundamental friction (information asymmetry, moral hazard, search costs, limited attention, regulatory distortion, market segmentation) and derive a testable prediction. Then check whether anyone has tested it. The best first-principles ideas feel obvious in retrospect.
 
-Take an established empirical result and ask: what is the economic channel? Can you distinguish between competing mechanisms? Many highly cited papers document effects without pinning down why. The mechanism paper is often higher-impact than the documentation paper.
+**Lens 4: Unification**
 
-- Use `top_cited_articles` to find seminal papers in the topic.
-- Read the paper's mechanism discussion: is it hand-wavy or well-identified?
-- Ask: what test would distinguish mechanism A from mechanism B? Is that test feasible?
+Multiple individually documented findings are manifestations of the same underlying economic force. The synthesis is the paper. List 3-5 well-known findings and ask: is there a single mechanism that explains all of them? The unification must generate a new testable prediction.
 
-### Lens 8: Boundary conditions
+**Lens 5: Policy / regulatory shock**
 
-When does a canonical finding break down? The failure of a well-known result in an economically meaningful dimension IS the idea. Heterogeneity that maps to a theory is a contribution; heterogeneity that is just subsample analysis is not.
+A recent policy change creates a natural experiment. The policy is the instrument, not the contribution. The question must be bigger than the policy. Search for recent (past 3-5 years) shocks relevant to the topic.
 
-- Identify the canonical finding in the topic area.
-- Ask: does it hold across market conditions (bull/bear, high/low volatility, crisis/calm), firm types (constrained/unconstrained, public/private), investor types (retail/institutional), or institutional settings (countries, regulatory regimes)?
-- The boundary condition must connect to an economic explanation, not just be an empirical fact.
+### Stage B: Refinement lenses (literature-positioned)
 
-### Lens 9: Policy / regulatory shock
+These lenses sharpen, reframe, or find angles on existing knowledge. Apply these second, using the landscape from Phase 1.
 
-A recent policy change, regulatory reform, or institutional event creates a natural experiment for a question that was previously unidentifiable. The policy is the instrument, not the contribution. The question must be bigger than the policy.
+**Lens 6: Literature gap**
 
-- Identify recent (past 3-5 years) policy changes relevant to the topic: Dodd-Frank amendments, SEC rule changes, tax reforms, ESG disclosure mandates, CFPB actions, Fed facility changes, zoning reforms, Opportunity Zones, TCJA provisions, EU regulations.
-- Ask: what economic question does this shock help answer? Is the question first-order?
-- Search to see whether the shock has already been exploited.
+Find questions that survey papers flag as open. The gap must be economically meaningful, not just "nobody has run this regression." Caution: literature-driven ideas tend to produce marginal extensions. This lens should sharpen, not source.
 
-### Lens 10: Model meets data
+**Lens 7: Conflicting findings**
 
-Theoretical or structural models make quantitative predictions that have not been tested empirically. The paper tests the prediction, potentially rejecting or refining the model.
+Two credible papers reach opposite conclusions. The reconciliation is the idea. The moderating variable or identification flaw that explains the conflict becomes the contribution.
 
-- Search for theory papers in the topic (especially recent ones from top-5 journals).
-- Identify predictions that are stated in the model but absent from the empirical record.
-- Ask: is the prediction testable with available data? What would rejection mean for the theory?
+**Lens 8: Mechanism decomposition**
 
-### Lens 11: Unification
+Take an established result and ask: what is the economic channel? Can you distinguish competing mechanisms? Many highly cited papers document effects without pinning down why. Include the measurement-error angle: does a canonical variable mismeasure the intended concept in a systematic way that changes interpretation? (Example: the literature thinks it measures financial constraint, but the proxy is contaminated by firm quality.)
 
-Multiple individually documented findings are manifestations of the same underlying economic force. The synthesis is the paper. This lens produces the highest-impact ideas but requires the deepest knowledge of the literature.
+**Lens 9: Boundary conditions and equilibrium displacement**
 
-- List 3-5 individually well-known findings in the topic area.
-- Ask: is there a single friction, mechanism, or equilibrium force that explains all of them?
-- The unification must generate a new testable prediction that none of the individual papers delivers.
+When does a canonical finding break down? The failure must map to a theory. Include the equilibrium-displacement angle: if agents adapt to the original finding, who absorbs the incidence or where does the effect move? In household finance, asset pricing, and real estate, strategic adjustment often produces deeper questions than simple treatment-effect framing.
 
-## Screening workflow
+**Lens 10: New data x old question**
 
-1. **Gather user input.** The user provides a topic area and optional constraints (data access, method preferences, journal target, coauthor expertise). If the topic is too broad (e.g., "finance"), ask the user to narrow to a subfield.
+Pair a recently available data source with a classic question. The data must enable a genuinely better answer through new identification, new measurement, or a new population, not just a new time period or higher frequency.
 
-2. **Map the landscape.** Run 3-4 initial Corbis searches to understand the current state of the field:
-   - `top_cited_articles` (field and topic) to identify seminal papers
-   - `search_papers` (broad topic query, `matchCount: 15`) to find recent work
-   - `search_papers` (same topic, `minYear: 2023`) to catch the current frontier
-   - `search_papers` (topic + "survey" or "review") to find survey papers
+**Hard constraint on this lens:** Ideas from this lens should almost never produce a top-3 idea unless the data changes measurement or identification in a first-order way. If the only contribution is "now we can observe X more granularly," downrank to field-journal tier.
 
-3. **Apply all ten lenses.** For each lens, generate 1-2 candidate ideas. Use additional `search_papers` calls as needed to verify novelty. Not every lens will produce a viable idea for every topic; skip lenses that yield nothing and note why.
+**Lens 11: Model meets data**
 
-4. **Quick-screen each candidate.** For each idea, provide:
-   - One-sentence question (question-first framing, never "Using X data...")
-   - Lens used to generate it
-   - Closest existing paper (from Corbis search)
-   - Why it matters (one sentence on the economic importance)
-   - Biggest risk (one sentence)
-   - Quick viability: **High** / **Medium** / **Low**
+Theoretical models make quantitative predictions that have not been tested. The paper tests the prediction. What would rejection mean for the theory?
 
-5. **Rank and select.** Rank the candidates by (impact potential) x (feasibility). Select the top 10 for the Idea Menu. Break ties in favor of ideas that use non-obvious lenses (cross-pollination, unification, first principles) over straightforward gap-filling.
+## Phase 3: Three-part novelty test (internal, not shown)
 
-6. **Produce the Idea Menu.** Use `assets/idea-menu-template.md`. All 10 ideas on one page with the quick-screen fields.
+For every candidate idea (all 25-30), run this test using `search_papers`:
 
-7. **Expand top 3 into Idea Sketches.** For the three highest-ranked ideas, provide a half-page Idea Sketch:
-   - One-sentence question
-   - Core mechanism or friction (2-3 sentences)
-   - Theory-to-evidence bridge (one paragraph: what is the test?)
-   - Key data requirements
-   - Likely journal track (top-3, strong field, or RE journals)
-   - One-sentence skepticism test (what would the toughest referee say?)
+1. **Closest existing paper**: Search for the specific idea. Name the single closest paper.
+2. **Not relabeling**: In one sentence, state why this idea is not a relabeling of that paper. What is structurally different: mechanism, prediction, identification, or setting with different economics?
+3. **New prediction**: State the one prediction or finding this paper would produce that the closest paper does not.
 
-8. **Offer next steps.** Suggest running `/idea` on the most promising candidate for full screening, or `/lit-search` to deepen the literature positioning.
+**If you cannot articulate all three clearly, the idea is discarded.** Do not proceed to the kill test.
+
+## Phase 4: Internal kill test (not shown to user)
+
+For each candidate that survives the novelty test, answer three questions:
+
+1. **Already done?** What search result or combination of papers might already cover this? What would you find if you searched harder?
+2. **Identification failure?** What is the most likely reason the causal design fails? (Endogeneity, measurement error, insufficient power, parallel trends violation, weak instrument.)
+3. **Seminar indifference?** Why might a skeptical seminar audience shrug? Is the question first-order, or is it a niche exercise that only the authors care about?
+
+**Decision rule:**
+- Fails 0 of 3: strong survivor, proceed
+- Fails 1 of 3: proceed with the failure noted as a risk
+- Fails 2 of 3: discard
+- Fails 3 of 3: discard
+
+## Phase 5: Score and rank survivors
+
+For each surviving candidate (~10-15), score on three dimensions:
+
+| Dimension | 1 (Low) | 3 (Medium) | 5 (High) | One-line justification required |
+|---|---|---|---|---|
+| **Novelty** | Close paper exists, marginal extension | Adjacent work but distinct angle | No close paper, new prediction | Yes |
+| **Importance** | Niche, small audience | Active field, moderate audience | First-order question, broad audience | Yes |
+| **Executability** | Data unavailable or method beyond reach | Feasible but requires significant investment | Data in hand, method familiar | Yes |
+
+**Composite score** = Novelty + Importance + Executability (max 15). Rank by composite. Break ties in favor of reality-first lenses.
+
+**Apply user constraints as hard filters:**
+- If data access is insufficient and no workaround exists: cap Executability at 2
+- If method is unfamiliar and no coauthor fills the gap: cap Executability at 3
+- If journal ambition is top-3 but Importance < 4: flag as "field-journal tier"
+
+Select the top 10 for the Idea Menu.
+
+## Phase 6: Assign contribution tiers
+
+For each of the 10 survivors, assign one tier:
+
+| Tier | Description | Bar |
+|---|---|---|
+| **Top-journal** | Broad mechanism, general implications, strong identification | Would change how a wide audience thinks about the topic |
+| **Field-journal** | Clean question within an active literature, solid design | Advances the conversation in a specific field |
+| **Workshop** | Feasible and interesting but narrower scope | Good execution, useful contribution, limited breadth |
+
+Be honest. Most ideas are field-journal tier. Labeling everything as top-journal quality is a failure mode.
+
+## Phase 7: Produce the Idea Menu
+
+Use `assets/idea-menu-template.md`. Present all 10 ideas with:
+- Rank
+- One-sentence question (question-first, never "Using X data...")
+- Lens that generated it
+- Closest paper (from novelty test)
+- Novelty / Importance / Executability scores
+- Contribution tier
+- Key risk (from kill test)
+
+## Phase 8: Expand top 3 into Idea Sketches
+
+For the three highest-ranked ideas, provide an Idea Sketch with:
+
+**One-sentence question**
+
+**Seminar pitch**: "This paper shows that ___ because ___." One sentence that states the real contribution. If you cannot write this sentence, the idea is not formed.
+
+**Core mechanism or friction** (2-3 sentences): Name the economic force. State the testable prediction.
+
+**Question / Mechanism / Prediction / Identification / Data / Why now**: Structure these explicitly as six labeled items. If any one is weak, acknowledge it.
+
+**Theory-to-evidence bridge** (one paragraph): What is the test? What variation is exploited? What would the ideal table or figure show?
+
+**Key data requirements**: Specific datasets, access, coverage.
+
+**Contribution tier**: Top-journal / Field-journal / Workshop, and why.
+
+**Referee vulnerability**: "The hardest challenge is whether ___ is just proxying for ___." One sentence stating the toughest objection.
+
+**Why this idea beats the other top candidates**: One sentence on why this ranks above the alternatives.
+
+**Why this idea is not dominated by a cleaner adjacent project**: One sentence.
+
+## Phase 9: Recommend next steps
+
+Suggest running `/idea` on the most promising candidate for full screening. Note any ideas that would benefit from `/lit-search` to deepen positioning, or `/lit-landscape` to visualize the field structure.
 
 ## Tool integration (Corbis MCP)
 
-**Never claim an idea is novel without searching first.** Use this sequence:
+**Never claim an idea is novel without searching first.**
 
-### Landscape mapping (Step 2)
-1. `top_cited_articles` (field: e.g., "corporate finance", topic: e.g., "capital structure") — identify seminal papers the user must know about.
-2. `search_papers` (query: broad topic in natural language, `matchCount: 15`) — find the current state of the field.
-3. `search_papers` (same query, `minYear: 2023`) — catch the frontier and recent working papers.
+### Landscape mapping (Phase 1)
+1. `search_papers` (broad topic, `matchCount: 15`) — current state
+2. `search_papers` (topic, `minYear: 2023`, `matchCount: 15`) — frontier
+3. `search_papers` (topic + "survey", `matchCount: 10`) — survey papers
+4. `get_paper_details` on top 5-10 results — read abstracts, get citation counts
 
-### Per-lens novelty checks (Step 3)
-- `search_papers` (query: the specific idea in natural language, `matchCount: 10`) — for each candidate idea, verify it has not been done.
-- `get_paper_details` (paper IDs from closest results) — read abstracts to confirm overlap vs. vocabulary similarity.
+### Per-candidate novelty checks (Phase 3)
+- `search_papers` (the specific idea, `matchCount: 10`) — for each candidate
+- `get_paper_details` on the 1-2 closest results — confirm overlap vs. vocabulary similarity
 
-### Data feasibility (Lens 5 and general)
-- `search_datasets` (topic keywords) — discover available datasets and coverage.
-- `fred_search` (keywords) — find relevant FRED macro series for context or controls.
+### Data feasibility
+- `search_datasets` (topic keywords) — discover available datasets
+- `fred_search` (keywords) — find relevant macro series
 
 ### After generation
-- `export_citations` (format: `bibtex`) — export BibTeX for the closest papers identified during generation. Offer after the Idea Menu is produced.
-
-## Quality standards for generated ideas
-
-A strong generated idea must have ALL of the following:
-- A **testable question** stated in one sentence, question-first
-- A **named friction or mechanism** (not just a topic or dataset)
-- A **plausible theory-to-evidence bridge** (what is the test? what variation is exploited?)
-- **Verified novelty** (Corbis search confirms no close existing paper)
-- **Data feasibility** (at least one plausible data source identified)
-
-An idea that lacks any of these should be flagged as Low viability or excluded.
+- `export_citations` (format: `bibtex`) — export BibTeX for closest papers identified during generation
 
 ## Guardrails
 
-- Do not generate "X but in country Y" or "X but with newer data" ideas. These are setting variations, not contributions, unless the new setting generates a genuinely different economic prediction.
-- Do not let a clever dataset or natural experiment substitute for a question. The question must come first.
-- Do not generate more than 2 ideas from the same lens. The value of the skill is breadth of attack across multiple heuristics.
-- Do not present 10 equally enthusiastic ideas. Rank honestly. Some ideas will be stronger than others. Say so.
-- Do not overclaim novelty. If the search reveals a close paper, note it and adjust the contribution claim or drop the idea.
-- At least 3 of the 10 ideas must come from reality-first lenses (practitioner-reality gap, cross-pollination, first principles, model meets data, unification). Gap-filling and data-driven ideas are easy to generate but often lower impact.
-- An "interesting relationship" between two objects is NOT a research idea. The idea must have a testable tension between theory and reality, not just a correlation to document.
-- Every idea must pass a minimal plausibility check: could this be a seminar paper that changes how people think, or is it just an incremental exercise?
+These are hard bans. Ideas that violate these rules are discarded regardless of their score.
+
+- **Ban "X but in country Y"** unless the new setting generates a genuinely different economic prediction.
+- **Ban context-only contributions** where the only novelty is applying a known result to a new industry, time period, or population without new economics.
+- **Ban ideas whose identifying variation is more memorable than the question.** If the shock is cleverer than what it identifies, the idea is backwards.
+- **Ban pure heterogeneity mining** unless tied to a theory-derived margin that generates a distinct prediction. "The effect is stronger for constrained firms" is not a paper unless you explain why and what it rules out.
+- **Ban ideas that cannot be explained to a seminar audience in two sentences.** If the contribution requires a paragraph of caveats to state, it is not a contribution.
+- **Do not let a clever dataset or natural experiment substitute for a question.** The question must come first; the design serves the question.
+- **Do not generate more than 2 ideas from the same lens.** Breadth of attack across heuristics is the value of this skill.
+- **Do not present 10 equally enthusiastic ideas.** Rank honestly. Assign tiers honestly. Some ideas are workshop-tier. Say so.
+- **Do not overclaim novelty.** If the search reveals a close paper, note it and adjust or drop the idea.
+- **At least 3 of the 10 survivors must come from Stage A (generative) lenses.** Gap-filling and data-driven ideas are easy to generate but often lower impact.
+- **An "interesting relationship" is NOT a research idea.** The idea must have a testable tension between theory and reality, not just a correlation to document.
 
 ## Preferred outputs
 
 Produce:
-1. **Idea Menu** — 10 ranked ideas using `assets/idea-menu-template.md`
-2. **Idea Sketches** — expanded treatment of the top 3 ideas
+1. **Idea Menu** — 10 ranked survivors using `assets/idea-menu-template.md`
+2. **Idea Sketches** — expanded treatment of the top 3
 3. **Next-step recommendation** — which idea to screen first and why
 
 ## Example prompts
