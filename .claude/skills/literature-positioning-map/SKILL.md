@@ -22,6 +22,11 @@ Your job is not to summarize everything ever written. Your job is to help the pa
 
 ### Mandatory search sequence (execute in order)
 
+**Step 0 — Architecture and frontier (always first):**
+- `search_papers` (query: the core topic, `sortBy: "citedByCount"`, `matchCount: 15`) → immediately see the field's citation hierarchy. The most-cited papers are what referees will compare you to.
+- `search_papers` (query: core topic, `minYear: 2020`, `matchCount: 15`) → the recent frontier and scooping risks.
+- These two searches frame everything that follows. The architecture search reveals which papers define the field. The frontier search reveals who is active now.
+
 **Step 1 — Inner ring (direct competitors):**
 - `search_papers` (query: the exact question + method, `matchCount: 15`) → find papers doing the closest thing.
 - `get_paper_details_batch` (paper IDs from top 5 results) → read abstracts to confirm true overlap.
@@ -31,14 +36,20 @@ Your job is not to summarize everything ever written. Your job is to help the pa
 - `search_papers` (query: the same method applied to related questions, `matchCount: 10`)
 
 **Step 3 — Outer ring (seminal and contextual):**
-- `top_cited_articles` (journalNames + query: topic) → identify the canonical papers on the specific topic within key journals.
-- `search_papers` (multiple queries covering the broader research area) → comprehensive sweep.
+- `top_cited_articles` (journalNames + query: topic) → identify canonical papers within key journals that may not have appeared in keyword searches.
 
-**Step 4 — Recent working papers (essential — these are scooping risks):**
-- `search_papers` (same core query, `minYear: 2023`) → very recent published or forthcoming papers.
-
-**Step 5 — Verify specific papers:**
+**Step 4 — Verify specific papers:**
 - `get_paper_details` or `get_paper_details_batch` (paper IDs) → when the user mentions a specific paper or when you need to verify what a close paper actually does vs. what its title suggests.
+
+### Citation-aware comparison set
+
+The comparison set is what a referee would invoke when evaluating the paper's contribution. This is heavily correlated with citation count:
+
+- **High-citation close papers (500+ citations)** are the biggest positioning challenge. If your paper is close to one of these, the referee already knows that paper and will ask "what's new?" You must differentiate explicitly.
+- **Medium-citation close papers (100-499)** define the active conversation. Your contribution must be stated relative to these.
+- **Low-citation close papers (<100, especially recent)** represent scooping risk. A 2024 paper with 20 citations doing nearly the same thing is a bigger threat to your submission than a 2005 paper with 2,000 citations, because the 2024 paper hasn't been absorbed yet and the referee may not know it.
+
+When identifying the "closest 3-5 papers," include at least one high-citation anchor and at least one recent paper. Do not let the comparison set consist entirely of niche recent work that a referee has never heard of.
 
 ### Citation management
 - `format_citation` (paper ID, style: `apa` or `chicago`) → generate properly formatted citations for individual papers.

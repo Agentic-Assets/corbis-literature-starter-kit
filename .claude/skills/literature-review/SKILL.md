@@ -36,19 +36,20 @@ If the user provides a topic and format in their initial message, proceed withou
 
 Target ~50 unique papers for comprehensive scope, ~25 for focused scope. Execute searches in this order:
 
-**Step 1 — Foundational work:**
-- `top_cited_articles` (journalNames: relevant journals, query: the specific topic, compact: false) to find seminal papers on the topic within those journals.
+**Step 1 — Architecture search (always first):**
+- `search_papers` (query: the core topic, `sortBy: "citedByCount"`, `matchCount: 15`) to immediately see the field's citation hierarchy: which papers define it, which are the most influential.
+- This search reveals the foundational papers. Every subsequent judgment (what to discuss at length, what to group parenthetically, what to cut) is informed by this hierarchy.
 
-**Step 2 — Main body of work:**
-- `search_papers` (query: the core topic as a natural-language research question, `matchCount: 20`) to find the central literature.
+**Step 2 — Frontier search (always second):**
+- `search_papers` (query: core topic, `minYear: 2020`, `matchCount: 15`) to find the latest published and working papers that represent the current edge of the field.
 
 **Step 3 — Thematic angles:**
 - `search_papers` (query: first sub-question or thematic angle, `matchCount: 15`)
 - `search_papers` (query: second sub-question or thematic angle, `matchCount: 15`)
 - If the topic has a third distinct angle, add a third search.
 
-**Step 4 — Recent frontier:**
-- `search_papers` (query: core topic, `minYear: 2023`, `matchCount: 15`) to find the latest published and working papers.
+**Step 4 — Topic-filtered journal search:**
+- `top_cited_articles` (journalNames: relevant top journals, query: the specific topic, compact: false) to find seminal papers on the topic within those journals that may not have appeared in the keyword searches.
 
 **Step 5 — Adjacent or methodological:**
 - `search_papers` (query: methodological approach or adjacent field angle, `matchCount: 10`) for breadth.

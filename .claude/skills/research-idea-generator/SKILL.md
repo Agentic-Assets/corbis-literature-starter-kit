@@ -36,15 +36,15 @@ If the user provides a topic and constraints in their initial message, proceed w
 
 ## Phase 1: Map the landscape
 
-Run 3-4 Corbis searches to understand the current state of the field:
+Always open with the two-search pattern, then supplement:
 
-1. `search_papers` (broad topic query, `matchCount: 15`) to find the core literature
-2. `search_papers` (same topic, `minYear: 2023`, `matchCount: 15`) to catch the frontier
-3. `search_papers` (topic + "survey" or "review", `matchCount: 10`) to find survey papers
+1. **Architecture search**: `search_papers` (broad topic, `sortBy: "citedByCount"`, `matchCount: 15`) — immediately see which papers define this field and its citation hierarchy.
+2. **Frontier search**: `search_papers` (same topic, `minYear: 2020`, `matchCount: 15`) — what's happening now, who is active, what's the edge.
+3. **Survey search**: `search_papers` (topic + "survey" or "review", `matchCount: 10`) — find survey papers that map open questions.
 
-Use `get_paper_details_batch` on the top 5-10 results to read abstracts and understand what has been established. Use `sortBy: "citedByCount"` on search calls to surface the most influential papers first.
+Use `get_paper_details_batch` on the top 5-10 results from the architecture search to read abstracts and understand what has been established.
 
-Produce a 3-4 sentence internal landscape summary: what is settled, what is actively debated, where the frontier is moving.
+Produce a 3-4 sentence internal landscape summary: what is settled, what is actively debated, where the frontier is moving. Note the citation hierarchy: which papers are foundational (500+), which are the active conversation (100-499), which are the emerging frontier (<100).
 
 ## Phase 2: Generate candidates (internal, not shown to user)
 
@@ -213,7 +213,7 @@ Suggest running `/idea` on the most promising candidate for full screening. Note
 
 ### Landscape mapping (Phase 1)
 1. `search_papers` (broad topic, `matchCount: 15`) — current state
-2. `search_papers` (topic, `minYear: 2023`, `matchCount: 15`) — frontier
+2. `search_papers` (topic, `minYear: 2020`, `matchCount: 15`) — frontier
 3. `search_papers` (topic + "survey", `matchCount: 10`) — survey papers
 4. `get_paper_details_batch` (top 5-10 paper IDs in one call) — read abstracts, get citation counts
 

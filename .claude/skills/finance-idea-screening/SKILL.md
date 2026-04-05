@@ -147,11 +147,19 @@ When asked to generate ideas (not just screen them):
 
 **Never claim an idea is novel without searching first.** Use this exact sequence:
 
+### Architecture and frontier (always first)
+1. `search_papers` (query: the core question, `sortBy: "citedByCount"`, `matchCount: 15`) — immediately see which papers define this space. High-citation close papers are the biggest contribution threats.
+2. `search_papers` (query: the core question, `minYear: 2020`, `matchCount: 15`) — catch the recent frontier. Low-citation recent papers are scooping threats.
+
 ### Novelty verification chain
-1. `search_papers` (query: the core question in natural language, `matchCount: 15`) — find closest existing work. Corbis uses hybrid semantic+keyword search over 250,000+ papers, so phrase the query like a research question, not keywords.
-2. `get_paper_details_batch` (paper IDs from top 3-5 results) — read abstracts to confirm whether they truly overlap or just share vocabulary.
-3. `top_cited_articles` (journalNames: relevant journals, query: specific topic) — identify seminal papers the user must know about.
-4. `search_papers` (same query, `minYear: 2023`) — catch recent working papers not yet indexed in OpenAlex.
+3. `search_papers` (query: the specific idea phrased as a research question, `matchCount: 15`) — find closest existing work by relevance. Phrase the query like a research question, not keywords.
+4. `get_paper_details_batch` (paper IDs from top 3-5 results) — read abstracts to confirm whether they truly overlap or just share vocabulary.
+5. `top_cited_articles` (journalNames: relevant journals, query: specific topic) — identify seminal papers the user must know about.
+
+### Citation-aware threat assessment
+- **High-citation close paper (500+)**: Contribution threat. The question may already be answered. You must differentiate on mechanism, identification, or setting with different economics.
+- **Medium-citation close paper (100-499)**: Active conversation. Your paper must advance beyond this work.
+- **Low-citation recent paper (<100, post-2020)**: Scooping threat. A recent paper doing nearly the same thing is more dangerous to your submission than a classic paper, because the referee may see them side by side.
 
 ### Data feasibility check
 - `search_datasets` (topic keywords) — discover available datasets and their coverage.
