@@ -14,6 +14,11 @@
 *.snm
 *.vrb
 
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
 # Data files (in case you store data locally)
 *.csv
 *.dta

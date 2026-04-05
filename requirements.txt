@@ -1,0 +1,4 @@
+# Optional: only needed for /lit-landscape figures
+matplotlib>=3.7
+pandas>=2.0
+numpy>=1.24

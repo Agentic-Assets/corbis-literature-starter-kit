@@ -191,4 +191,4 @@ To rotate your key, go to **Settings > API Keys**, click **Regenerate** on the e
 
 - [Corbis MCP Tool Reference](./CORBIS_MCP_TOOL_REFERENCE.md) — **Detailed parameter reference, output schemas, and recommended workflows for every tool**
 - [Corbis MCP Server Guide](./CORBIS_MCP_GUIDE.md) — Full architecture and multi-platform setup (Cursor, Claude Desktop, ChatGPT)
-- `lib/mcp/CLAUDE.md` — MCP module architecture, OAuth 2.1 flows, auth chain
+- [Corbis Cursor Plugin](./CORBIS_CURSOR_PLUGIN.md) — Cursor plugin setup and troubleshooting

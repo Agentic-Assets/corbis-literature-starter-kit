@@ -9,13 +9,14 @@ user_invocable: true
 Audit citations for correctness. Checks that every \cite{KEY} has a matching BibTeX entry and verifies each entry against online search.
 
 ## Examples
-- `/verify-citations` -- audit all citations in main.tex
+- `/verify-citations` -- auto-detect the .tex and .bib files in the project
+- `/verify-citations paper/my_paper.tex` -- audit a specific file
 - `/verify-citations --key blume1983` -- verify single entry
 
 ## Workflow
 
-1. Read `main.tex` and extract all `\cite{KEY}` and `\citep{KEY}` commands
-2. Read the .bib file to get the full BibTeX database
+1. Find the main `.tex` file: check `paper/`, `latex_template/`, then the project root for files containing `\documentclass`. If multiple candidates exist, ask the user which to audit. Extract all `\cite{KEY}` and `\citep{KEY}` commands.
+2. Find the `.bib` file: check the same directory as the `.tex` file, then the project root. Read the full BibTeX database.
 3. For each citation key:
    a. Check KEY exists in .bib -- if missing, flag as MISSING
    b. Extract: author, title, year, journal from the BibTeX entry
@@ -44,7 +45,7 @@ Audit citations for correctness. Checks that every \cite{KEY} has a matching Bib
 
 6. Output verification report:
    ```
-   Citation Audit: main.tex
+   Citation Audit: [detected .tex file]
    Total: N citations checked
    OK: X | Partial: Y | Mismatch: Z | Missing: W
 
