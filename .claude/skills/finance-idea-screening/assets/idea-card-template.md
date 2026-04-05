@@ -21,7 +21,7 @@
 [Specify: new mechanism, new identification, new measurement, new implication, or new theoretical result. "New data" or "new setting" alone is usually insufficient unless it generates a genuinely different economic prediction.]
 
 ## Candidate data sources
-[Name specific datasets. Note access requirements, sample size, coverage period, and replication feasibility under current top-journal data/code policies.]
+[Name specific datasets. Note access requirements, sample size, coverage period, and replication feasibility under current journal data/code sharing policies.]
 
 ## Theory-to-evidence bridge
 [What is the inferential bridge? This can be a quasi-experiment, structural model, theory proof, validated measurement exercise, or asset-pricing test. State the variation, comparison group, or testable restriction. Explain why the bridge matches the question.]
@@ -43,9 +43,9 @@
 | **Total** | **/30** | |
 
 ## Best journal track
-[Top-3 (JF/JFE/RFS), strong field (JFQA/RoF/MS), or real estate (REE/JREFE/JRER/JHE/RSUE) — and why. Name 2-3 recent papers in the target journal that share a similar structure.]
+[Top generalist, strong field, or specialist — and why. Name 2-3 recent papers in the target journal that share a similar structure.]
 
-## Verdict: Top-3 Go / Field-journal Go / Revise / Kill
+## Verdict: Top Generalist Go / Field-Journal Go / Revise / Kill
 
 ## Essential hurdles (at most 3)
 [List the hurdles a referee would raise. If more than 3 are essential, default to Kill/Pivot.]

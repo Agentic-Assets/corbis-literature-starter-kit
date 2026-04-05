@@ -6,7 +6,7 @@
 ## User constraints
 - **Data access**: [what they have]
 - **Methods**: [what they can execute]
-- **Journal ambition**: [top-3 / field-journal / any]
+- **Journal ambition**: [top generalist / strong field / any]
 - **Timeline**: [months to working paper]
 - **Coauthor skills**: [if applicable]
 
@@ -35,7 +35,7 @@
 | 10 | | | | | | | | |
 
 **Nov** = Novelty (1-5). **Imp** = Importance (1-5). **Exe** = Executability (1-5).
-**Tier**: TJ = top-journal, FJ = field-journal, WS = workshop.
+**Tier**: TG = top generalist, SF = strong field, WS = workshop.
 
 ## Graveyard (3 notable rejects)
 

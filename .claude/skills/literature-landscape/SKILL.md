@@ -174,8 +174,7 @@ For each generated figure, provide a 2-3 sentence interpretation of what it show
 
 ### Publication timeline (fig_timeline.pdf)
 Publication on this topic accelerated sharply after 2005, with output tripling
-between 2010-2015 and 2015-2020. The Journal of Finance and JFE account for
-the largest shares.
+between 2010-2015 and 2015-2020. Two journals account for the largest shares.
 
 ### Coverage gap map (fig_gapmap.pdf)
 Three cells show zero papers: RDD studies in emerging markets, structural

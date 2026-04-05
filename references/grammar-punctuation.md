@@ -1,7 +1,6 @@
 # Grammar and Punctuation
 
-> **Authority**: Chicago Manual of Style (CMS 17th ed.) as baseline; Journal of Finance Style
-> Guidelines (Feb 2017) where JF-specific. These are the conventions for JF, RFS, and JFE.
+> **Authority**: Chicago Manual of Style (CMS 17th ed.) as baseline. These conventions are standard across academic journals in economics and finance.
 
 ---
 
@@ -13,7 +12,7 @@
 **Equation punctuation**: Equations are part of the sentence; punctuate accordingly
 **Compound modifiers**: Hyphenate before nouns ("well-known result"); not after ("the result is well known")
 **Numbers**: Spell out one through nine; digits for 10+; always digits with units or statistics
-**Latin phrases**: Do NOT italicize (JF style): "ex post" not "\textit{ex post}"
+**Latin phrases**: Do NOT italicize (standard academic style): "ex post" not "\textit{ex post}"
 
 ---
 
@@ -79,7 +78,7 @@ Use after an independent clause to introduce an explanation, list, or elaboratio
 - "The result is well known." (not "well-known")
 - "The portfolio is long short." (not "long-short")
 
-### Adverb + Adjective: Do Not Hyphenate (JF Style)
+### Adverb + Adjective: Do Not Hyphenate (Standard Academic Style)
 When the first word is an adverb ending in -ly, never hyphenate:
 - "actively managed fund" (not "actively-managed")
 - "statistically significant result" (not "statistically-significant")
@@ -120,7 +119,7 @@ for all $\Delta \geq 1$.
 
 ---
 
-## 5. Abbreviations in Running Text (JF Style)
+## 5. Abbreviations in Running Text (Standard Academic Style)
 
 ### Spell Out in Text, Abbreviate in Parentheses
 
@@ -132,14 +131,14 @@ for all $\Delta \geq 1$.
 Never use "e.g." or "i.e." in running text without parentheses.
 
 ### Percentage
-Use the % symbol, not the word "percent" (JF style):
+Use the % symbol, not the word "percent" (standard academic style):
 - "The bias is 91%." (not "91 percent")
 
 ---
 
-## 6. Latin Phrases (JF Style)
+## 6. Latin Phrases (Standard Academic Style)
 
-**Do NOT italicize Latin** in JF/RFS/JFE submissions:
+**Do NOT italicize Latin** in academic submissions:
 - "ex post" not "\textit{ex post}"
 - "ex ante" not "\textit{ex ante}"
 - "ceteris paribus" not "\textit{ceteris paribus}"
@@ -208,7 +207,7 @@ This applies to bullet points, enumerated lists, and items joined by correlative
 
 ## 11. Sentence Boundaries
 
-### Do Not Start a Sentence with a Variable (JF Style)
+### Do Not Start a Sentence with a Variable (Standard Academic Style)
 - Bad: "$\rho$ controls the noise share."
 - Good: "The noise share $\rho$ controls..."
 
@@ -233,9 +232,9 @@ Spell out a number that starts a sentence, or restructure to avoid it:
 - Bad: "108 signals span nine clusters."  (fine — 108 is mid-sentence)
 - Bad: "3 approaches are compared." → "Three approaches are compared." or "We compare three approaches."
 
-Use the **% symbol**, not the word "percent" (JF style). Use **commas** as thousands separators: "52,656" not "52656".
+Use the **% symbol**, not the word "percent" (standard academic style). Use **commas** as thousands separators: "52,656" not "52656".
 
-**Date ranges in text**: "1980 to 1990" (JF style). In tables: "1980--1990" is acceptable.
+**Date ranges in text**: "1980 to 1990" (standard academic style). In tables: "1980--1990" is acceptable.
 
 ---
 
@@ -258,6 +257,6 @@ Single quotes only for quotes within quotes: He noted that "the so-called 'momen
 ## Sources
 
 - **Chicago Manual of Style**, 17th ed. (2017). Baseline for academic writing.
-- **Journal of Finance Style Guidelines** (Feb 2017). JF-specific conventions.
+- **Journal of Finance Style Guidelines** (Feb 2017). Referenced for academic writing conventions.
 - **Cochrane, J.** (2005). "Writing Tips for Ph.D. Students." Equation punctuation, concision.
 - **Dupré, L.** (1998). *BUGS in Writing*. Compound modifiers, dangling modifiers, parallel structure.

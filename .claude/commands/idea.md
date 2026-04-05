@@ -14,6 +14,6 @@ Steps:
 5. Apply decision rules: Top-3 Go (importance>=4, contribution>=4, bridge>=4, no dim<3, <=3 hurdles) / Field-journal Go (all>=3, total>=18) / Revise / Kill.
 6. Run the three stress tests (null-result value, simultaneous-discovery, syllabus sentence).
 7. Identify the 2-3 essential hurdles and apply the revision-feasibility rule.
-8. Recommend journal track and describe the killer exhibit.
+8. Recommend contribution tier and describe the killer exhibit.
 
 Produce a complete Idea Card.

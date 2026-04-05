@@ -28,11 +28,11 @@ Before generating anything, collect and record these as **hard filters** on rank
 | Data access | What databases, proprietary data, or institutional access do you have? | Ideas requiring unavailable data are capped at Medium feasibility |
 | Methods comfort | What empirical methods are you comfortable executing? (DiD, RDD, structural, NLP, etc.) | Ideas requiring unfamiliar methods are downranked unless a coauthor fills the gap |
 | Field comfort | What literatures do you know well enough to position a paper? | Ideas in unfamiliar fields require more literature work |
-| Journal ambition | Are you targeting top-3 (JF/JFE/RFS), strong field (JFQA/RoF), or any good outlet? | Determines contribution bar |
+| Journal ambition | Are you targeting a top generalist journal, a strong field journal, or any good outlet? | Determines contribution bar |
 | Coauthor skills | What complementary skills does a coauthor bring? | Relaxes method or field constraints |
 | Timeline | How soon do you need a working paper? | Long-horizon structural projects vs. quick empirical exercises |
 
-If the user provides a topic and constraints in their initial message, proceed without asking. Fill defaults for anything not specified (assume broad data access, standard empirical methods, field-journal ambition, solo researcher, 12-month timeline).
+If the user provides a topic and constraints in their initial message, proceed without asking. Fill defaults for anything not specified (assume broad data access, standard empirical methods, strong field-journal ambition, solo researcher, 12-month timeline).
 
 ## Phase 1: Map the landscape
 
@@ -111,7 +111,7 @@ When does a canonical finding break down? The failure must map to a theory. Incl
 
 Pair a recently available data source with a classic question. The data must enable a genuinely better answer through new identification, new measurement, or a new population, not just a new time period or higher frequency.
 
-**Hard constraint on this lens:** Ideas from this lens should almost never produce a top-3 idea unless the data changes measurement or identification in a first-order way. If the only contribution is "now we can observe X more granularly," downrank to field-journal tier.
+**Hard constraint on this lens:** Ideas from this lens should almost never produce a top-3 idea unless the data changes measurement or identification in a first-order way. If the only contribution is "now we can observe X more granularly," downrank to field-journal tier (a narrower outlet, not a top generalist).
 
 **Lens 11: Model meets data**
 
@@ -156,7 +156,7 @@ For each surviving candidate (~10-15), score on three dimensions:
 **Apply user constraints as hard filters:**
 - If data access is insufficient and no workaround exists: cap Executability at 2
 - If method is unfamiliar and no coauthor fills the gap: cap Executability at 3
-- If journal ambition is top-3 but Importance < 4: flag as "field-journal tier"
+- If journal ambition is top generalist but Importance < 4: flag as "field-journal tier"
 
 Select the top 10 for the Idea Menu.
 
@@ -166,11 +166,11 @@ For each of the 10 survivors, assign one tier:
 
 | Tier | Description | Bar |
 |---|---|---|
-| **Top-journal** | Broad mechanism, general implications, strong identification | Would change how a wide audience thinks about the topic |
-| **Field-journal** | Clean question within an active literature, solid design | Advances the conversation in a specific field |
+| **Top generalist** | Broad mechanism, general implications, strong identification | Would change how a wide audience thinks about the topic |
+| **Strong field** | Clean question within an active literature, solid design | Advances the conversation in a specific field |
 | **Workshop** | Feasible and interesting but narrower scope | Good execution, useful contribution, limited breadth |
 
-Be honest. Most ideas are field-journal tier. Labeling everything as top-journal quality is a failure mode.
+Be honest. Most ideas are strong-field tier. Labeling everything as top-generalist quality is a failure mode.
 
 ## Phase 7: Produce the Idea Menu
 

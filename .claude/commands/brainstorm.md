@@ -13,7 +13,7 @@ Steps:
 4. Quick-screen each candidate (question, lens, closest paper, importance, risk, viability).
 5. Rank by (impact potential) x (feasibility). Select top 10.
 6. Produce the Idea Menu (10 ranked ideas).
-7. Expand the top 3 into Idea Sketches (mechanism, bridge, data, journal track).
+7. Expand the top 3 into Idea Sketches (mechanism, bridge, data, contribution tier).
 8. Recommend which idea to screen first with `/idea`.
 
 Produce a complete Idea Menu with Idea Sketches for the top 3.

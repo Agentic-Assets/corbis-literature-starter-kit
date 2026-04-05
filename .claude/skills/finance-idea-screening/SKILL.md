@@ -14,7 +14,7 @@ Before running the full literature search and scoring workflow, answer four ques
 1. **Prior-changing:** What broad finance prior would change if this paper is right?
 2. **Zero-result value:** Why would the paper still matter if the main estimate is zero or the sign flips?
 3. **Question over method:** Is the question more important than the shock, instrument, or dataset?
-4. **Desk read:** Could this clear a JF/JFE/RFS desk read today?
+4. **Desk read:** Could this clear a top generalist journal's desk read today?
 
 If two or more answers are weak, return **Revise** or **Kill** before investing in the full search chain.
 
@@ -32,7 +32,7 @@ A strong idea scores well on six dimensions:
 6. **Data, measurement, and replication feasibility** — Three sub-checks:
    - **Access:** Can the data realistically be obtained in time?
    - **Construct validity:** Does the empirical measure actually map to the mechanism? Would a skeptic accept it as a reasonable proxy?
-   - **Replication feasibility:** Could the core result be documented and replicated under current top-journal data/code policies (JF data editor review, JFE replication package requirement, RFS Harvard Dataverse deposit)?
+   - **Replication feasibility:** Could the core result be documented and replicated under current top-journal data and code sharing policies?
 
 ## Scoring rubric
 
@@ -47,18 +47,18 @@ Rate each of the six dimensions 1-5:
 - Default to 2 or 3 unless there is a strong, specific case for higher.
 - Use 5 sparingly. A 5 means this dimension would survive the toughest referee in the field.
 - Never rate an idea as top-3 Go if the only clear strength is data access or a clever shock.
-- A paper that is 3 across the board is a plausible working paper or field-journal candidate, not a top-3 finance journal paper.
+- A paper that is 3 across the board is a plausible working paper or field-journal candidate, not a top generalist journal paper.
 
 **Decision rules:**
 
-### Top-3 Go (JF / JFE / RFS track)
+### Top Generalist Go
 - Importance >= 4
 - Contribution >= 4
 - Bridge >= 4
 - No dimension < 3
 - At most 3 essential hurdles to publication
 
-### Strong field-journal Go (JFQA / RoF / MS / RE journals)
+### Strong Field-Journal Go
 - All dimensions >= 3
 - Total >= 18
 - One or more of importance, contribution, or bridge is 3 rather than 4, but the overall package is solid
@@ -189,9 +189,7 @@ Also provide:
 
 ## Journal-fit logic
 
-**Top-3 finance ideas** must change how the field thinks about something. JF, JFE, and RFS want a first-order question with a convincing bridge from theory to evidence. The bridge can be causal identification, a structural model, a measurement innovation, or a theoretical contribution — it does not have to be a quasi-experiment. JFQA and RoF are slightly more receptive to careful empirical work on narrower or cross-disciplinary questions.
-
-**Real-estate-track ideas** can lean more heavily on institutional setting, property-market detail, and spatial or policy structure, but they still need a clean contribution and a strong empirical design. REE and JREFE value institutional knowledge. RSUE and JHE want broader urban/housing economics framing.
+**Top generalist ideas** must change how the field thinks about something. They require a first-order question with a convincing bridge from theory to evidence. The bridge can be causal identification, a structural model, a measurement innovation, or a theoretical contribution. Strong field journals are slightly more receptive to careful empirical work on narrower or cross-disciplinary questions.
 
 When assessing journal fit, consider mapping the candidate idea to 2-3 recent papers in the target journal that share the closest structure (question type, method, contribution style). If no recent archetype exists, the fit may be weak.
 
