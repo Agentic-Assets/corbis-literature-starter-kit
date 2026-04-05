@@ -37,6 +37,16 @@
 **Nov** = Novelty (1-5). **Imp** = Importance (1-5). **Exe** = Executability (1-5).
 **Tier**: TJ = top-journal, FJ = field-journal, WS = workshop.
 
+## Graveyard (3 notable rejects)
+
+These ideas were generated but killed during internal screening. Showing them helps illustrate what makes ideas fail in this topic area.
+
+| Idea | Lens | Why it failed |
+|------|------|---------------|
+| [one-sentence question] | [lens] | [one-line reason: e.g., "Already done by Author (Year)" or "No plausible identification strategy" or "Question is not first-order"] |
+| | | |
+| | | |
+
 ## Lenses applied
 
 [Note which lenses produced survivors and which did not. Brief explanation for unproductive lenses.]

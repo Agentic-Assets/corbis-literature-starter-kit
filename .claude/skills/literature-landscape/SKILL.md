@@ -49,15 +49,19 @@ If the user provides a topic but no existing data, run searches to build the dat
 
 ### Phase 1: Build the paper dataset
 
-**Option A — Fresh search (no existing data):**
+**Option A — Use existing paper_set.json (preferred):**
 
-Run 4-5 `search_papers` queries with `matchCount: 20` each, varying keywords and year ranges to cover the topic broadly. Goal: 80-100 papers with metadata. For each paper, ensure you have: title, authors, year, journal, citedByCount, abstract.
+If `output/paper_set.json` exists, read it. This file is written by `/lit-review`, `/brainstorm`, `/lit-search`, and `/idea`. If it contains 40+ papers on the topic, use it directly. If it's small (<40), supplement with 2-3 `search_papers` queries.
+
+**Option B — Fresh search (no existing data):**
+
+Run 4-5 `search_papers` queries with `matchCount: 20` each, varying keywords and year ranges to cover the topic broadly. Goal: 80-100 papers with metadata. For each paper, ensure you have: title, authors, year, journal, citedByCount, abstract, and fullText when available.
 
 Call `get_paper_details_batch` (up to 25 IDs per call) on papers missing citation counts or abstracts. Prioritize high-citation and recent papers.
 
 Deduplicate by title similarity or OpenAlex ID.
 
-**Option B — Existing data:**
+**Option C — User-provided data:**
 
 If the user points to a JSON file, reading list markdown, or .bib file from a prior `/lit-review`:
 1. Parse the existing data

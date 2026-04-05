@@ -59,13 +59,73 @@ latex_template/  # Clean article template with natbib citations
 references/      # Writing norms, citation formatting
 ```
 
+## Shared data files
+
+Skills produce composable outputs that later skills can reuse. This avoids redundant searches.
+
+### `output/paper_set.json`
+
+Canonical paper dataset. Every skill that searches for papers writes results here. Every skill that needs papers reads this first before running new searches.
+
+Format: JSON array of paper objects:
+```json
+[
+  {
+    "id": "W2002030205",
+    "title": "...",
+    "authors": ["..."],
+    "year": 2001,
+    "journal": "...",
+    "citedByCount": 2962,
+    "abstract": "...",
+    "fullText": "...",
+    "doi": "...",
+    "openalexId": "...",
+    "source_queries": ["query1", "query2"],
+    "tier": "foundational"
+  }
+]
+```
+
+Rules:
+- If `output/paper_set.json` exists when a skill starts, read it and merge new results (deduplicate by `id` or `openalexId`). Do not overwrite.
+- The `fullText` field is included when available from `get_paper_details`. Use it for deeper analysis (method detection, contribution assessment) when present.
+- The `source_queries` field tracks which search queries surfaced this paper (for hub detection).
+- The `tier` field is assigned after collection using relative tiering (see below).
+
+### `output/search_log.md`
+
+Search transparency log. Every skill appends its searches here so the user can see exactly what was queried.
+
+Format per entry:
+```markdown
+### [DATE] — [Skill name]
+| # | Query | Params | Results | Kept |
+|---|-------|--------|---------|------|
+| 1 | "political connections firm value" | sortBy: citedByCount, matchCount: 15 | 15 | 12 |
+| 2 | "political connections finance" | minYear: 2020, matchCount: 15 | 15 | 8 |
+Dedup: removed 5 duplicates. Final set: 35 papers.
+```
+
+### Relative citation tiering
+
+Citation thresholds vary by field. Instead of fixed cutoffs (500/100), use relative ranking within the collected paper set:
+
+| Tier | Label | Rule | Treatment |
+|---|---|---|---|
+| 1 | **Foundational** | Top 10% by `citedByCount` within the collected set | Named and discussed individually (3-5 sentences) |
+| 2 | **Established** | Next 30% by `citedByCount` | Synthesized claims, 1-2 sentences or grouped parenthetically |
+| 3 | **Emerging** | Bottom 60%, especially recent papers | Grouped into frontier paragraphs, cited parenthetically |
+
+A paper that appears in 3+ different search queries (`source_queries` length >= 3) is promoted one tier regardless of citation rank.
+
 ## Lab notebook
 
 Every skill that produces a deliverable appends a dated entry to `notes/lab_notebook.md`. If the file does not exist, create it with a header: `# Lab Notebook`.
 
 ## Paper-reader agent
 
-The paper-reader agent (`.claude/agents/paper-reader.md`) can read and summarize academic PDFs. Useful for understanding papers found during literature searches.
+The paper-reader agent (`.claude/agents/paper-reader.md`) can read and summarize academic PDFs. After a literature search identifies the top 3-5 most central papers, recommend that the user run the paper-reader on those papers for deeper understanding before writing synthesis claims.
 
 ## Defaults
 

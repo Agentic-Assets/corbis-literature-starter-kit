@@ -36,6 +36,8 @@ If the user provides a topic and constraints in their initial message, proceed w
 
 ## Phase 1: Map the landscape
 
+**Check for existing data first:** If `output/paper_set.json` exists, read it. If it contains papers relevant to the user's topic, use them as the starting point and supplement with targeted searches for gaps. This avoids redundant searching when the user has already run `/lit-review` or `/lit-search`.
+
 Always open with the two-search pattern, then supplement:
 
 1. **Architecture search**: `search_papers` (broad topic, `sortBy: "citedByCount"`, `matchCount: 15`) — immediately see which papers define this field and its citation hierarchy.
@@ -44,7 +46,9 @@ Always open with the two-search pattern, then supplement:
 
 Use `get_paper_details_batch` on the top 5-10 results from the architecture search to read abstracts and understand what has been established.
 
-Produce a 3-4 sentence internal landscape summary: what is settled, what is actively debated, where the frontier is moving. Note the citation hierarchy: which papers are foundational (500+), which are the active conversation (100-499), which are the emerging frontier (<100).
+Produce a 3-4 sentence internal landscape summary: what is settled, what is actively debated, where the frontier is moving. Use relative citation tiering (top 10% = foundational, next 30% = established, bottom 60% = emerging).
+
+**Save to shared files:** Write all collected papers to `output/paper_set.json` (merge if exists). Append search queries to `output/search_log.md`.
 
 ## Phase 2: Generate candidates (internal, not shown to user)
 
@@ -170,7 +174,9 @@ Be honest. Most ideas are field-journal tier. Labeling everything as top-journal
 
 ## Phase 7: Produce the Idea Menu
 
-Use `assets/idea-menu-template.md`. Present all 10 ideas with:
+Use `assets/idea-menu-template.md`. Present all 10 surviving ideas plus a "Graveyard" section showing 3 rejected ideas with reasons. The graveyard teaches the user how the filter works and what makes ideas fail in this topic area.
+
+Present all 10 ideas with:
 - Rank
 - One-sentence question (question-first, never "Using X data...")
 - Lens that generated it

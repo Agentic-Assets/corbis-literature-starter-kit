@@ -22,10 +22,11 @@ Your job is not to summarize everything ever written. Your job is to help the pa
 
 ### Mandatory search sequence (execute in order)
 
-**Step 0 — Architecture and frontier (always first):**
+**Step 0 — Check existing data and run architecture + frontier searches:**
+- If `output/paper_set.json` exists, read it first. Papers already collected for this topic can inform the positioning without redundant searches.
 - `search_papers` (query: the core topic, `sortBy: "citedByCount"`, `matchCount: 15`) → immediately see the field's citation hierarchy. The most-cited papers are what referees will compare you to.
 - `search_papers` (query: core topic, `minYear: 2020`, `matchCount: 15`) → the recent frontier and scooping risks.
-- These two searches frame everything that follows. The architecture search reveals which papers define the field. The frontier search reveals who is active now.
+- These two searches frame everything that follows. Save results to `output/paper_set.json` (merge if exists) and append queries to `output/search_log.md`.
 
 **Step 1 — Inner ring (direct competitors):**
 - `search_papers` (query: the exact question + method, `matchCount: 15`) → find papers doing the closest thing.

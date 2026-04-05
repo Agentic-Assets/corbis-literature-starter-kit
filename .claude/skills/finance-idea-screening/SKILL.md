@@ -147,9 +147,12 @@ When asked to generate ideas (not just screen them):
 
 **Never claim an idea is novel without searching first.** Use this exact sequence:
 
-### Architecture and frontier (always first)
+### Check existing data, then architecture and frontier (always first)
+0. If `output/paper_set.json` exists, read it. Papers already collected for this topic reduce redundant searching.
 1. `search_papers` (query: the core question, `sortBy: "citedByCount"`, `matchCount: 15`) — immediately see which papers define this space. High-citation close papers are the biggest contribution threats.
 2. `search_papers` (query: the core question, `minYear: 2020`, `matchCount: 15`) — catch the recent frontier. Low-citation recent papers are scooping threats.
+
+Save results to `output/paper_set.json` (merge if exists) and append queries to `output/search_log.md`.
 
 ### Novelty verification chain
 3. `search_papers` (query: the specific idea phrased as a research question, `matchCount: 15`) — find closest existing work by relevance. Phrase the query like a research question, not keywords.

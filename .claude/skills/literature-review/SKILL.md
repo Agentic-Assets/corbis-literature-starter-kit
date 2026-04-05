@@ -21,7 +21,7 @@ Before starting, confirm these with the user:
 |---|---|---|
 | Topic or research question | Yes | — |
 | Output format: `markdown` / `latex-section` / `latex-standalone` | Yes | `markdown` |
-| Scope: `focused` (~25 papers) / `comprehensive` (~50 papers) | No | `comprehensive` |
+| Scope: `quick` (~15 papers, field orientation) / `focused` (~25 papers) / `comprehensive` (~50 papers) | No | `comprehensive` |
 | Target `.tex` file (if `latex-section`) | If applicable | — |
 | Existing `.bib` file path | No | Auto-detect or create new |
 | Known key papers to include | No | — |
@@ -31,6 +31,37 @@ Before starting, confirm these with the user:
 If the user provides a topic and format in their initial message, proceed without asking. Fill defaults for anything not specified.
 
 ## Workflow
+
+### Phase 0 (quick scope only): Field Orientation
+
+If scope is `quick`, skip the full review workflow. Instead:
+
+1. Run the architecture search (`sortBy: "citedByCount"`, `matchCount: 15`) and frontier search (`minYear: 2020`, `matchCount: 15`).
+2. Use `get_paper_details_batch` on the top 10 results from the architecture search.
+3. Produce a field orientation document at `output/field_orientation.md`:
+
+```markdown
+# Field Orientation: [Topic]
+
+## 10 Must-Read Papers
+[Ranked by citation count. For each: author (year), title, journal, 1-sentence contribution.]
+
+## 3 Main Debates
+[What the field disagrees about, with papers on each side.]
+
+## 3 Dominant Methods
+[How this field typically does empirical work.]
+
+## 3 Common Datasets
+[What data most papers use, via search_datasets.]
+
+## 5 Frontier Questions
+[What the recent papers (2020+) are working on that remains unresolved.]
+```
+
+4. Save the paper set to `output/paper_set.json` and log searches to `output/search_log.md`.
+5. Log to lab notebook and suggest next steps: `/lit-review [topic]` with focused or comprehensive scope, `/brainstorm [topic]`, or paper-reader on the top 3 papers.
+6. Stop. Do not proceed to the full review phases.
 
 ### Phase 1: Search and collect
 
@@ -59,15 +90,21 @@ Target ~50 unique papers for comprehensive scope, ~25 for focused scope. Execute
 - Deduplicate across all searches.
 - If the user provided known key papers, verify they appear. If not found via search, include them manually and use `get_paper_details` to confirm details.
 
-**Citation-based tiering:** After deduplication, sort all collected papers by `citedByCount` and assign influence tiers:
+**Save to shared data files:**
+- Write all collected papers (with `id`, `title`, `authors`, `year`, `journal`, `citedByCount`, `abstract`, `fullText` when available, `doi`, `openalexId`, `source_queries`) to `output/paper_set.json`. If the file exists, merge and deduplicate.
+- Append all search queries with parameters and result counts to `output/search_log.md`.
+
+**Relative citation tiering:** After deduplication, sort all collected papers by `citedByCount` and assign influence tiers using relative ranking within the collected set:
 
 | Tier | Label | Rule | Treatment in the review |
 |---|---|---|---|
-| 1 | **Foundational** | Top 5 papers by `citedByCount` OR any paper with 500+ citations | 3-5 sentences each. Describe what they found, how, and why it mattered. These anchor the review. |
-| 2 | **Established** | Next 10-15 papers by `citedByCount` OR 100-499 citations | 1-2 sentences each, or grouped into synthesized claims with 2-3 papers per sentence. |
-| 3 | **Emerging** | Papers with < 100 citations, especially those published in the last 3 years | Grouped into frontier paragraphs. Cited parenthetically to support collective findings. |
+| 1 | **Foundational** | Top 10% by citation count within the collected set | 3-5 sentences each. Describe what they found, how, and why it mattered. These anchor the review. |
+| 2 | **Established** | Next 30% by citation count | 1-2 sentences each, or grouped into synthesized claims with 2-3 papers per sentence. |
+| 3 | **Emerging** | Bottom 60%, especially papers published in the last 5 years | Grouped into frontier paragraphs. Cited parenthetically to support collective findings. |
 
-A paper that appears across 3+ separate search queries is likely a network hub. Promote it one tier (e.g., Established to Foundational) regardless of raw citation count.
+A paper that appears across 3+ separate search queries is likely a network hub. Promote it one tier (e.g., Established to Foundational) regardless of citation rank.
+
+When a paper has `fullText` available in the paper set, use it (not just the abstract) to make more informed judgments about mechanism, method, and contribution.
 
 **Ranking criteria** (for deciding which papers to keep when cutting to target count):
 1. Direct relevance to the topic
@@ -213,7 +250,12 @@ For papers where `export_citations` does not return a result (e.g., the paper wa
 For all output formats, also produce a reading list using `assets/reading-list-template.md`. This is a curated table of the 10-15 most important papers with one-line descriptions of their key contributions.
 
 - Write to `notes/reading_list_[topic_slug].md`
-- Organize into: Foundational papers (5-7), Recent frontier (4-5), Methodological advances (2-3)
+- Organize into these sections:
+  - **Read first** (3-5): The papers you must read before doing anything else in this field
+  - **Foundational** (5-7): The highest-cited papers that define the field
+  - **Closest to [user's question]** (3-5): The papers most directly relevant to the user's specific interest (if one was stated)
+  - **Best empirical designs** (3-5): Papers with the cleanest identification strategies, worth studying for methodology
+  - **Recent frontier** (4-5): The most important work from the last 5 years
 
 ### Phase 5: Log and state
 
