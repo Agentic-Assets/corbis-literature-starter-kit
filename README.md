@@ -252,7 +252,7 @@ When you need empirical data alongside literature work, Corbis hosts **[Open Dat
 | [`CORBIS_CURSOR_PLUGIN.md`](CORBIS_CURSOR_PLUGIN.md) | Cursor plugin and Cursor MCP setup notes |
 | [`CORBIS_MCP_TOOL_REFERENCE.md`](CORBIS_MCP_TOOL_REFERENCE.md) | Tool-by-tool parameters, outputs, and workflow tips |
 | [`CORBIS_MCP_GUIDE.md`](CORBIS_MCP_GUIDE.md) | MCP architecture, auth modes, and multi-client integration |
-| [https://www.corbis.ai/docs](https://www.corbis.ai/docs) | Complete documentation and guides for Corbis |
+| [corbis.ai/docs](https://www.corbis.ai/docs) | Complete documentation and guides for Corbis |
 
 ---
 
