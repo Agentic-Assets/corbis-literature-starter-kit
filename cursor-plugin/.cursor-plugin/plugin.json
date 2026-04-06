@@ -1,0 +1,33 @@
+{
+  "name": "corbis-literature-starter-kit",
+  "displayName": "Corbis Literature Starter Kit",
+  "version": "0.1.0",
+  "description": "Literature review, positioning, idea screening, citation verification, and landscape figures for finance and real estate research using Corbis MCP.",
+  "author": {
+    "name": "Agentic Assets"
+  },
+  "homepage": "https://github.com/csirmans/corbis-literature-starter-kit",
+  "repository": "https://github.com/csirmans/corbis-literature-starter-kit",
+  "license": "MIT",
+  "keywords": [
+    "corbis",
+    "literature-review",
+    "research",
+    "finance",
+    "real-estate",
+    "citations",
+    "bibtex",
+    "mcp"
+  ],
+  "category": "research",
+  "tags": [
+    "academic",
+    "papers",
+    "corbis-mcp"
+  ],
+  "skills": "./skills/",
+  "rules": "./rules/",
+  "commands": "./commands/",
+  "agents": "./agents/",
+  "mcpServers": ".mcp.json"
+}

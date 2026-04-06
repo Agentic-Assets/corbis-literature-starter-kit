@@ -1,0 +1,45 @@
+---
+description: Route Corbis literature workflows, enforce search-before-assert, and point to repo writing norms when the workspace is the starter kit.
+alwaysApply: false
+globs:
+  - "**/*"
+---
+
+# Corbis Literature Starter Kit (Cursor)
+
+## Skill routing
+
+Before answering research-heavy prompts, pick the matching skill (see `cursor-plugin/skills/`):
+
+| User intent | Skill |
+| --- | --- |
+| Survey a topic, write a literature review | `literature-review` |
+| Position a paper, closest work, contribution | `literature-positioning-map` |
+| Brainstorm ideas from a topic | `research-idea-generator` |
+| Screen or score one research idea | `finance-idea-screening` |
+| Verify LaTeX or `.bib` citations | `verify-citations` |
+| Trends, gaps, methods, landmark papers (figures) | `literature-landscape` |
+
+## Corbis MCP
+
+**Search before asserting.** Use Corbis tools instead of guessing about the literature or novelty.
+
+- Literature: `search_papers`, `get_paper_details`, `get_paper_details_batch`, `top_cited_articles`
+- Citations: `export_citations` (e.g. BibTeX), `format_citation`
+- Idea context: `search_datasets`, `fred_search`, `fred_series_batch`, CRE market tools as needed
+
+Principles:
+
+- Prefer `compact: true` on `search_papers` when only metadata is needed.
+- Use `sortBy: "citedByCount"` for influential papers; batch details with `get_paper_details_batch` (up to 25 IDs).
+
+Full parameters and shapes: repository root `CORBIS_MCP_TOOL_REFERENCE.md`. Auth and architecture: `CORBIS_MCP_GUIDE.md`.
+
+## Shared outputs (when this repo is the workspace)
+
+- `output/paper_set.json`: canonical merged paper list; read before new searches, merge and dedupe on write.
+- `output/search_log.md`: append queries for transparency.
+
+## Writing quality
+
+For synthesized reviews and memos, follow repository `references/writing-norms.md` and `references/banned-words.md`: thematic synthesis, no paper-by-paper laundry lists, no filler intensifiers or promotional hype, cite to support claims.

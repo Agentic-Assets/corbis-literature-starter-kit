@@ -1,50 +1,51 @@
-# Corbis Cursor Plugin
+# Corbis Cursor plugin
 
-The **Corbis** Cursor plugin (ID: `corbis`) is a unified toolkit for Cursor users, providing documentation-first guidance, specialized agents, and runnable MCP tool integration.
+Use Cursor with **Corbis MCP** and the **Corbis Literature Starter Kit** workflows (skills, commands, rules, and a paper-reader agent).
 
-If you are using Codex instead of Cursor, start with [`CORBIS_MCP_CODEX_GUIDE.md`](./CORBIS_MCP_CODEX_GUIDE.md). The same Corbis MCP endpoint powers both clients.
+If you use **Codex** instead of Cursor, start with [`CORBIS_MCP_CODEX_GUIDE.md`](./CORBIS_MCP_CODEX_GUIDE.md). The same Corbis MCP endpoint powers both clients.
 
-- **Author**: Agentic Assets
-- **Local Path**: `~/.cursor/plugins/local/corbis/` (when enabled)
-- **Version**: 0.1.0
+## Recommended: bundled plugin in this repository
 
-### Disabling the Plugin
+The Cursor plugin that matches this starter kit lives in **[`cursor-plugin/`](./cursor-plugin/)** (versioned with the repo).
 
-If the plugin causes "Rate limit exceeded for client registration" or other OAuth/DCR errors, disable it by renaming the folder:
+| Field | Value |
+| --- | --- |
+| **Plugin ID** | `corbis-literature-starter-kit` |
+| **Author** | Agentic Assets |
+| **Version** | See [`cursor-plugin/.cursor-plugin/plugin.json`](./cursor-plugin/.cursor-plugin/plugin.json) |
+| **Install path** | Copy or symlink `cursor-plugin/` → `~/.cursor/plugins/local/corbis-literature-starter-kit/` |
+
+Full install steps, authentication, and maintenance notes: [`cursor-plugin/README.md`](./cursor-plugin/README.md).
+
+### What it includes
+
+- **Skills**: literature review, positioning map, idea generator, idea screening, verify citations, literature landscape (mirrored from `.claude/skills/` for Cursor).
+- **Commands**: wrappers that invoke those skills (same names as the Claude Code slash workflows).
+- **Agents**: `paper-reader` for academic PDFs and summaries.
+- **Rules**: `corbis-literature.mdc` for routing and Corbis usage reminders.
+- **MCP**: `.mcp.json` registers the Corbis Universal endpoint (`https://www.corbis.ai/api/mcp/universal`). You still add your API key via URL query or headers in Cursor (see plugin README).
+
+Open the **cloned starter kit** as your workspace so paths like `references/`, `output/`, and `utils/` match the skills.
+
+### Disabling or troubleshooting
+
+If you see errors such as "Rate limit exceeded for client registration" or duplicate MCP registrations, disable the plugin or rename the folder:
 
 ```bash
-mv ~/.cursor/plugins/local/corbis ~/.cursor/plugins/local/corbis.disabled
+mv ~/.cursor/plugins/local/corbis-literature-starter-kit ~/.cursor/plugins/local/corbis-literature-starter-kit.disabled
 ```
 
-Restart Cursor or reload the window. To re-enable later:
+Restart Cursor or reload the window. To re-enable:
 
 ```bash
-mv ~/.cursor/plugins/local/corbis.disabled ~/.cursor/plugins/local/corbis
+mv ~/.cursor/plugins/local/corbis-literature-starter-kit.disabled ~/.cursor/plugins/local/corbis-literature-starter-kit
 ```
 
-## Key Components
+If you also added Corbis manually under **Settings → MCP Servers**, use **either** the plugin’s bundled MCP **or** the manual entry, not both with the same server name, to avoid conflicts.
 
-### 1. Agents
-- **corbis-general**: A specialized agent for Corbis architecture guidance, MCP tool selection, and implementation workflows.
+## Direct MCP setup (no plugin)
 
-### 2. Skills
-- **corbis-core-guidance**: Provides logic-first guidance on using Corbis MCP tools, authentication/scopes, and platform integration patterns.
-
-### 3. MCP Servers
-- **corbis**: Pre-configured connection to the Corbis Universal MCP endpoint (`https://www.corbis.ai/api/mcp/universal`).
-- Requires `CORBIS_MCP_API_KEY` for authenticated tool access.
-
-## Local Setup & Development
-
-The plugin is currently scaffolded in the user's local plugin directory. To modify or extend:
-
-1. Navigate to `~/.cursor/plugins/local/corbis/`.
-2. Edit `.cursor-plugin/plugin.json` to add new components.
-3. Reload Cursor or use the plugin discovery mechanism to pick up changes.
-
-## Direct MCP Setup in Cursor
-
-If you do not want the local plugin, you can connect Corbis directly from Cursor's MCP settings:
+If you only want Corbis tools without the starter-kit skills and commands, add the server in Cursor:
 
 ```json
 {
@@ -57,19 +58,11 @@ If you do not want the local plugin, you can connect Corbis directly from Cursor
 }
 ```
 
-That setup gives Cursor direct access to the same Corbis research tools described throughout this repo.
+You still get the same research tools; use repo docs ([`SKILLS_USE_GUIDE.md`](./SKILLS_USE_GUIDE.md), [`CLAUDE.md`](./CLAUDE.md)) as prompt context.
 
-## Future Roadmap
+## Related documentation
 
-The plugin is architected for expansion:
-- **commands/**: Planned slash commands for common tasks.
-- **hooks/**: Lifecycle hooks for automated context injection.
-- **rules/**: Domain-specific persistent guidance rules (.mdc).
-
-## Related Documentation
-
-- [README.md](./README.md) - Starter-kit overview and workflow tour.
-- [CORBIS_MCP_CODEX_GUIDE.md](./CORBIS_MCP_CODEX_GUIDE.md) - Codex setup using `config.toml`.
-- [CORBIS_MCP_GUIDE.md](./CORBIS_MCP_GUIDE.md) - Technical guide for the MCP server architecture.
-- [CORBIS_MCP_TOOL_REFERENCE.md](./CORBIS_MCP_TOOL_REFERENCE.md) - Tool-by-tool parameters, output shapes, and usage tips.
-- `PUBLISHING_GUIDE.md` (inside plugin folder) - Steps for future public distribution.
+- [README.md](./README.md) — Starter-kit overview and workflow tour.
+- [CORBIS_MCP_CODEX_GUIDE.md](./CORBIS_MCP_CODEX_GUIDE.md) — Codex setup using `config.toml`.
+- [CORBIS_MCP_GUIDE.md](./CORBIS_MCP_GUIDE.md) — MCP architecture and authentication.
+- [CORBIS_MCP_TOOL_REFERENCE.md](./CORBIS_MCP_TOOL_REFERENCE.md) — Tool parameters, outputs, and workflow tips.

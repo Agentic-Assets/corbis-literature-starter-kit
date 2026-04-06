@@ -103,14 +103,16 @@ Full guide: [`CORBIS_MCP_CLAUDE_CODE_GUIDE.md`](CORBIS_MCP_CLAUDE_CODE_GUIDE.md)
 git clone https://github.com/csirmans/corbis-literature-starter-kit.git my-project
 ```
 
-Then in Cursor: **Settings > MCP Servers > Add**
+**Option A (recommended):** Install the bundled Cursor plugin from [`cursor-plugin/`](./cursor-plugin/) into `~/.cursor/plugins/local/corbis-literature-starter-kit/` (copy or symlink), enable it in Cursor, then add your Corbis API key to the MCP URL or headers as described in [`cursor-plugin/README.md`](./cursor-plugin/README.md).
+
+**Option B:** Skip the plugin and add Corbis only: **Settings > MCP Servers > Add**
 
 - Name: `corbis`
 - URL: `https://www.corbis.ai/api/mcp/universal?apikey=YOUR_KEY`
 
 Open the project after connecting the server. Cursor can use the same Corbis MCP tools and repo guidance.
 
-More options: [`CORBIS_CURSOR_PLUGIN.md`](CORBIS_CURSOR_PLUGIN.md)
+More detail: [`CORBIS_CURSOR_PLUGIN.md`](CORBIS_CURSOR_PLUGIN.md)
 </details>
 
 <details>
@@ -193,6 +195,7 @@ Every search is also logged to `output/search_log.md` so you can see what the as
 ```text
 .claude/skills/     Workflow definitions and prompts
 .claude/commands/   Slash-command wrappers
+cursor-plugin/      Cursor plugin (skills, commands, agents, rules, MCP; manifest in .cursor-plugin/)
 .claude/agents/     Paper-reader prompt
 notes/              Lab notebook
 output/             Reviews, memos, figures, paper_set.json
@@ -209,6 +212,7 @@ references/         Writing norms and citation formatting
 | [`CORBIS_MCP_CODEX_GUIDE.md`](CORBIS_MCP_CODEX_GUIDE.md) | Codex setup with `config.toml`, env vars, and troubleshooting |
 | [`CORBIS_MCP_CLAUDE_CODE_GUIDE.md`](CORBIS_MCP_CLAUDE_CODE_GUIDE.md) | Claude Code setup in a few minutes |
 | [`CORBIS_CURSOR_PLUGIN.md`](CORBIS_CURSOR_PLUGIN.md) | Cursor plugin and Cursor MCP setup notes |
+| [`cursor-plugin/README.md`](cursor-plugin/README.md) | Install the bundled Cursor plugin from this repo |
 | [`CORBIS_MCP_TOOL_REFERENCE.md`](CORBIS_MCP_TOOL_REFERENCE.md) | Tool-by-tool parameters, outputs, and workflow tips |
 | [`CORBIS_MCP_GUIDE.md`](CORBIS_MCP_GUIDE.md) | MCP architecture, auth modes, and multi-client integration |
 
