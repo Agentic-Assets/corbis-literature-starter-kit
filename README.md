@@ -1,8 +1,9 @@
 <div align="center">
 
-# Corbis Literature Starter Kit
+# Corbis Literature Starter Kit 
 
-**Turn your AI assistant into a literature-review machine. Search 400,000+ papers, map a field, test ideas, and come back with citations instead of 37 half-read browser tabs.**
+**Turn your AI assistant into a literature-review machine. Search 400,000+ papers,  
+map a field, test ideas, and come back with citations instead of 37 half-read browser tabs.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Corbis](https://img.shields.io/badge/Powered%20by-Corbis-purple)](https://www.corbis.ai)
@@ -10,11 +11,19 @@
 [![Claude Code](https://img.shields.io/badge/Works%20with-Claude%20Code-orange)](https://docs.anthropic.com/en/docs/claude-code)
 [![Cursor](https://img.shields.io/badge/Works%20with-Cursor-green)](https://cursor.sh)
 
-[Quick Setup](#quick-setup) | [Workflows](#the-workbench) | [Documentation](#documentation) | [Get a Corbis Key](https://app.corbis.ai)
+[corbis.ai](https://www.corbis.ai/) | [Quick Setup](#quick-setup) | [Workflows](#the-workbench) | [Documentation](#documentation) | [Get a Corbis Key](https://www.corbis.ai) | [Corbis Research Database](#research-insights) | [Open Datasets](#open-datasets)
+
+[![Corbis landing page: research-first AI for finance and real estate](images/corbis-landing-page.png)](https://www.corbis.ai/)
 
 </div>
 
 ---
+
+## What is Corbis ([corbis.ai](https://www.corbis.ai/))
+
+[Corbis](https://www.corbis.ai/) is **research-first AI** for finance, real estate, and economics. You ask in plain language; it **searches a large, domain-specific index** (hundreds of thousands of peer-reviewed papers, plus industry reports and market data in the product) and returns **answers with citations** you can open and check. The goal is evidence you can stand behind, not unattributed claims. For a journal-level snapshot of publications and what the corpus includes, see [Research Insights](https://www.corbis.ai/insights).
+
+The full platform adds chat, guided workflows, and exports (for example PDF, Word, LaTeX, and citation formats). **MCP** (Model Context Protocol) exposes the same underlying tools to external clients (Cursor, Claude Code, Codex, and other compatible agents). **This repository is a literature starter kit** for that path: it focuses on surveying literature, mapping a field, screening ideas, and keeping citations and search trails explicit in your repo.
 
 ## Why This Exists
 
@@ -55,9 +64,17 @@ If your client does not support slash commands directly, use the same workflow n
 
 ### 1. Get a Corbis API key
 
-Open **[the Corbis app](https://app.corbis.ai)**, go to **Settings > API Keys**, and create a key.
+Open the **[Corbis app](https://www.corbis.ai)**, go to **Settings > API Keys**, and create a key.
 
 Corbis MCP keys start with `corbis_mcp_`. Copy the key when it is created. It is shown once.
+
+<div align="center">
+
+[![Corbis Settings, API Keys tab: MCP URL, create key, and your keys](images/corbis-api-keys.png)](https://www.corbis.ai/settings?tab=keys)
+
+[https://www.corbis.ai/settings?tab=keys](https://www.corbis.ai/settings?tab=keys)
+
+</div>
 
 ### 2. Connect your assistant
 
@@ -110,7 +127,6 @@ Then in Cursor: **Settings > MCP Servers > Add**
 
 Open the project after connecting the server. Cursor can use the same Corbis MCP tools and repo guidance.
 
-More options: [`CORBIS_CURSOR_PLUGIN.md`](CORBIS_CURSOR_PLUGIN.md)
 </details>
 
 <details>
@@ -201,6 +217,30 @@ utils/              Figure-generation helpers
 references/         Writing norms and citation formatting
 ```
 
+## Research Insights
+
+Journal-level publication stats, bibliometrics, and corpus overview in the Corbis research database ([open in Corbis](https://www.corbis.ai/insights)).
+
+<div align="center">
+
+[![Research Insights: journal analytics and bibliometrics in Corbis](images/corbis-research-insights.png)](https://www.corbis.ai/insights)
+
+[https://www.corbis.ai/insights](https://www.corbis.ai/insights)
+
+</div>
+
+## Open Datasets
+
+When you need empirical data alongside literature work, Corbis hosts **[Open Datasets](https://www.corbis.ai/datasets)**: a curated collection of (mostly) free finance research datasets you can search by topic, region, or use case. It lives in the Corbis product, not in this repo, but pairs naturally with `/idea` and related workflows.
+
+<div align="center">
+
+[![Open Datasets: curated finance research datasets in Corbis](images/corbis-datasets.png)](https://www.corbis.ai/datasets)
+
+[https://www.corbis.ai/datasets](https://www.corbis.ai/datasets)
+
+</div>
+
 ## Documentation
 
 | File | What it covers |
@@ -208,9 +248,9 @@ references/         Writing norms and citation formatting
 | [`SKILLS_USE_GUIDE.md`](SKILLS_USE_GUIDE.md) | Which workflow to use, when, and how to chain them |
 | [`CORBIS_MCP_CODEX_GUIDE.md`](CORBIS_MCP_CODEX_GUIDE.md) | Codex setup with `config.toml`, env vars, and troubleshooting |
 | [`CORBIS_MCP_CLAUDE_CODE_GUIDE.md`](CORBIS_MCP_CLAUDE_CODE_GUIDE.md) | Claude Code setup in a few minutes |
-| [`CORBIS_CURSOR_PLUGIN.md`](CORBIS_CURSOR_PLUGIN.md) | Cursor plugin and Cursor MCP setup notes |
 | [`CORBIS_MCP_TOOL_REFERENCE.md`](CORBIS_MCP_TOOL_REFERENCE.md) | Tool-by-tool parameters, outputs, and workflow tips |
 | [`CORBIS_MCP_GUIDE.md`](CORBIS_MCP_GUIDE.md) | MCP architecture, auth modes, and multi-client integration |
+| [`www.corbis.ai/docs`](https://www.corbis.ai/docs) | Complete documentation and guides for Corbis |
 
 ---
 
@@ -218,6 +258,6 @@ references/         Writing norms and citation formatting
 
 **Built by [Corbis](https://www.corbis.ai)**
 
-[Quick Setup](#quick-setup) | [Documentation](#documentation) | [Get a Corbis Key](https://app.corbis.ai) | [MIT License](LICENSE)
+[corbis.ai](https://www.corbis.ai/) | [Quick Setup](#quick-setup) | [Workflows](#the-workbench) | [Documentation](#documentation) | [Get a Corbis Key](https://www.corbis.ai) | [Corbis Research Database](#research-insights) | [Open Datasets](#open-datasets) | [MIT License](LICENSE)
 
 </div>
