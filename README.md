@@ -259,6 +259,6 @@ When you need empirical data alongside literature work, Corbis hosts **[Open Dat
 
 **Built by [Corbis](https://www.corbis.ai)**
 
-[Quick Setup](#quick-setup) | [Documentation](#documentation) | [Get a Corbis Key](https://www.corbis.ai) | [MIT License](LICENSE)
+[corbis.ai](https://www.corbis.ai/) | [Quick Setup](#quick-setup) | [Workflows](#the-workbench) | [Documentation](#documentation) | [Get a Corbis Key](https://www.corbis.ai) | [Corbis Research Database](#research-insights) | [Open Datasets](#open-datasets) | [MIT License](LICENSE)
 
 </div>
