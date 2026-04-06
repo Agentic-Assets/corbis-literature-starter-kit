@@ -1,6 +1,6 @@
 # Corbis MCP Server Guide
 
-The Corbis MCP (Model Context Protocol) server exposes Corbis research, economic data, market intelligence, and AI tools to external AI agents including Codex, Cursor, Claude Code, ChatGPT, and custom clients. This guide covers both the internal architecture and user-facing setup.
+The Corbis MCP (Model Context Protocol) server exposes Corbis research, economic data, market intelligence, and AI tools to AI platforms like ChatGPT, Claude, and Grok, plus code editors and agents like Codex and Cursor. This guide covers both the internal architecture and user-facing setup.
 
 ---
 
@@ -81,21 +81,45 @@ Defined in `app/api/mcp/universal/route.ts` (TOOL_SCOPES):
 
 ### What Users Get
 
-When you connect an AI agent (Codex, Cursor, Claude Code, ChatGPT, or another MCP client) to the Corbis MCP server, the agent gains access to:
+When you connect an AI agent or platform (Codex, Cursor, Claude, ChatGPT, Grok, or another MCP client) to the Corbis MCP server, the agent gains access to:
 
 - **21 tools** for research, economic data, market intel, web search, citations, and open-ended queries
 - **read-only documentation resources** for setup, tool reference, pricing, and workflow guidance
 
 Agents use tools by name (e.g. `search_papers`, `fred_search`, `query_corbis`) and receive JSON results. Some tools also return inline guidance to help the agent use the output correctly.
 
+### MCP API Keys
+
+For the standard Corbis MCP setup, you need to include a Corbis MCP API key for tools to be accessible. Generate the key in Corbis under **Settings → API Keys**, then copy it immediately. Tokens are shown only once when created.
+
+For most users, the default connection method is the Streamable HTTP MCP URL with the key embedded in the query string:
+
+```text
+https://www.corbis.ai/api/mcp/universal?apikey=YOUR_TOKEN
+```
+
+If your client requires an SSE endpoint instead of Streamable HTTP, use the legacy SSE endpoint:
+
+```text
+https://www.corbis.ai/api/mcp/sse
+```
+
+Claude Code users can use this command directly:
+
+```bash
+claude mcp add corbis --transport http https://www.corbis.ai/api/mcp/universal?apikey=YOUR_TOKEN
+```
+
+Many other platforms only ask for the MCP URL and your key. Start with the Streamable HTTP URL above unless the client explicitly requires SSE.
+
 ### Authentication Options
 
-1. **Personal MCP API Key** (recommended for Codex, Cursor, Claude Code, and Claude Desktop):
+1. **Personal MCP API Key** (recommended default for ChatGPT, Claude, Grok, Codex, Cursor, Claude Code, and Claude Desktop):
    - Generate in Corbis: **Settings → API Keys → Create MCP Key**
    - Format: `corbis_mcp_xxxxxxxxxxxx` (displayed once at creation)
    - Include via `Authorization: Bearer <key>` or `?apikey=<key>`
 
-2. **OAuth 2.1** (for external platforms like ChatGPT):
+2. **OAuth 2.1** (advanced option for custom integrations that support OAuth):
    - Register client at `POST /api/mcp/oauth/register`
    - User approves scopes at consent URL
    - Exchange code for JWT at `POST /api/mcp/oauth/token`
@@ -106,6 +130,8 @@ Agents use tools by name (e.g. `search_papers`, `fred_search`, `query_corbis`) a
    - Supports internal Corbis web flows
 
 ### Connecting from Cursor IDE
+
+Cursor users can either use Corbis's one-click **Add to Cursor** button for instant installation or download the JSON configuration manually. The exported Cursor config uses the URL-only Streamable HTTP method with the API key embedded in the query string.
 
 1. Open **Cursor Settings → MCP** (or edit `.cursor/mcp.json`).
 2. Add the Corbis server:
@@ -125,6 +151,8 @@ Replace `YOUR_MCP_API_KEY` with your personal key from Corbis.
 
 3. Restart Cursor or reload MCP servers.
 4. In chat, the agent can call tools when relevant (e.g. “Search for papers on commercial real estate cap rates”).
+
+This is the same Streamable HTTP URL pattern Corbis exports from the app.
 
 **Note**: For local development, use `http://localhost:3000/api/mcp/universal?apikey=YOUR_KEY` instead.
 
@@ -156,6 +184,13 @@ For Claude Desktop-style JSON configuration, use:
 ```
 
 For a fuller Claude Code walkthrough, see [CORBIS_MCP_CLAUDE_CODE_GUIDE.md](./CORBIS_MCP_CLAUDE_CODE_GUIDE.md).
+
+### Connecting from Other Platforms
+
+Some clients only ask for an MCP URL and a key. In that case:
+
+- use `https://www.corbis.ai/api/mcp/universal?apikey=YOUR_TOKEN` when Streamable HTTP is supported
+- use `https://www.corbis.ai/api/mcp/sse` only if the client explicitly requires the legacy SSE transport
 
 ### Tool Usage Patterns
 
