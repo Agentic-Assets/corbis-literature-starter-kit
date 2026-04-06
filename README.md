@@ -26,7 +26,7 @@
 
 ## Why This Exists
 
-Most assistants are good at sounding confident and weak at careful literature work. Corbis addresses the research side with live search, data, and citation tools over MCP. This repo is the other half: a **literature starter kit** that turns those capabilities into repeatable workflows (reviews, positioning, exports, and logs) instead of one-off prompts.
+Most AI assistants are good at sounding confident and bad at doing literature work carefully. Corbis fixes the first part by giving them live research, data, and citation tools through MCP. This repo fixes the second part by packaging those tools into reusable research workflows.
 
 Use it to:
 
