@@ -127,7 +127,6 @@ Then in Cursor: **Settings > MCP Servers > Add**
 
 Open the project after connecting the server. Cursor can use the same Corbis MCP tools and repo guidance.
 
-More options: [`CORBIS_CURSOR_PLUGIN.md`](CORBIS_CURSOR_PLUGIN.md)
 </details>
 
 <details>
@@ -249,7 +248,6 @@ When you need empirical data alongside literature work, Corbis hosts **[Open Dat
 | [`SKILLS_USE_GUIDE.md`](SKILLS_USE_GUIDE.md) | Which workflow to use, when, and how to chain them |
 | [`CORBIS_MCP_CODEX_GUIDE.md`](CORBIS_MCP_CODEX_GUIDE.md) | Codex setup with `config.toml`, env vars, and troubleshooting |
 | [`CORBIS_MCP_CLAUDE_CODE_GUIDE.md`](CORBIS_MCP_CLAUDE_CODE_GUIDE.md) | Claude Code setup in a few minutes |
-| [`CORBIS_CURSOR_PLUGIN.md`](CORBIS_CURSOR_PLUGIN.md) | Cursor plugin and Cursor MCP setup notes |
 | [`CORBIS_MCP_TOOL_REFERENCE.md`](CORBIS_MCP_TOOL_REFERENCE.md) | Tool-by-tool parameters, outputs, and workflow tips |
 | [`CORBIS_MCP_GUIDE.md`](CORBIS_MCP_GUIDE.md) | MCP architecture, auth modes, and multi-client integration |
 | [`www.corbis.ai/docs`](https://www.corbis.ai/docs) | Complete documentation and guides for Corbis |
