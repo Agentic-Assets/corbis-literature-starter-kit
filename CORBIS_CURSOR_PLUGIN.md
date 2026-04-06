@@ -1,4 +1,4 @@
-# Corbis Cursor Plugin
+# Corbis Cursor Plugin (coming soon)
 
 The **Corbis** Cursor plugin (ID: `corbis`) is a unified toolkit for Cursor users, providing documentation-first guidance, specialized agents, and runnable MCP tool integration.
 
