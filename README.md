@@ -10,11 +10,11 @@
 [![Claude Code](https://img.shields.io/badge/Works%20with-Claude%20Code-orange)](https://docs.anthropic.com/en/docs/claude-code)
 [![Cursor](https://img.shields.io/badge/Works%20with-Cursor-green)](https://cursor.sh)
 
-[Quick Setup](#quick-setup) | [Workflows](#the-workbench) | [Documentation](#documentation) | [Get a Corbis Key](https://app.corbis.ai)
+[Quick Setup](#quick-setup) | [Workflows](#the-workbench) | [Documentation](#documentation) | [Get a Corbis Key](https://www.corbis.ai)
 
 [![Corbis landing page: research-first AI for finance and real estate](images/corbis-landing-page.png)](https://www.corbis.ai/)
 
-[corbis.ai](https://www.corbis.ai/) · [GitHub](https://github.com/Agentic-Assets/corbis-literature-starter-kit)
+[corbis.ai](https://www.corbis.ai/)
 
 </div>
 
@@ -63,7 +63,7 @@ If your client does not support slash commands directly, use the same workflow n
 
 ### 1. Get a Corbis API key
 
-Open **[the Corbis app](https://app.corbis.ai)**, go to **Settings > API Keys**, and create a key.
+Open **[the Corbis app](https://www.corbis.ai)**, go to **Settings > API Keys**, and create a key.
 
 Corbis MCP keys start with `corbis_mcp_`. Copy the key when it is created. It is shown once.
 
@@ -226,6 +226,6 @@ references/         Writing norms and citation formatting
 
 **Built by [Corbis](https://www.corbis.ai)**
 
-[Quick Setup](#quick-setup) | [Documentation](#documentation) | [Get a Corbis Key](https://app.corbis.ai) | [MIT License](LICENSE)
+[Quick Setup](#quick-setup) | [Documentation](#documentation) | [Get a Corbis Key](https://www.corbis.ai) | [MIT License](LICENSE)
 
 </div>
