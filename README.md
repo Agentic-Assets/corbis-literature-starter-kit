@@ -15,8 +15,6 @@ map a field, test ideas, and come back with citations instead of 37 half-read br
 
 [![Corbis landing page: research-first AI for finance and real estate](images/corbis-landing-page.png)](https://www.corbis.ai/)
 
-[corbis.ai](https://www.corbis.ai/)
-
 </div>
 
 ---
