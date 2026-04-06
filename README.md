@@ -10,7 +10,7 @@
 [![Claude Code](https://img.shields.io/badge/Works%20with-Claude%20Code-orange)](https://docs.anthropic.com/en/docs/claude-code)
 [![Cursor](https://img.shields.io/badge/Works%20with-Cursor-green)](https://cursor.sh)
 
-[Quick Setup](#quick-setup) | [Workflows](#the-workbench) | [Documentation](#documentation) | [Get a Corbis Key](https://www.corbis.ai) | [Corbis Research Database](https://www.corbis.ai/insights)
+[Quick Setup](#quick-setup) | [Workflows](#the-workbench) | [Documentation](#documentation) | [corbis.ai](https://www.corbis.ai/) | [Get a Corbis Key](https://www.corbis.ai) | [Corbis Research Database](https://www.corbis.ai/insights)
 
 [![Corbis landing page: research-first AI for finance and real estate](images/corbis-landing-page.png)](https://www.corbis.ai/)
 
