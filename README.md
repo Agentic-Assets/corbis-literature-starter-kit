@@ -89,7 +89,7 @@ Full guide: [`CORBIS_MCP_CODEX_GUIDE.md`](CORBIS_MCP_CODEX_GUIDE.md)
 
 ```bash
 claude mcp add corbis --transport http https://www.corbis.ai/api/mcp/universal?apikey=YOUR_KEY
-git clone https://github.com/csirmans/corbis-literature-starter-kit.git my-project
+git clone https://github.com/Agentic-Assets/corbis-literature-starter-kit.git my-project
 cd my-project && claude
 ```
 
@@ -100,7 +100,7 @@ Full guide: [`CORBIS_MCP_CLAUDE_CODE_GUIDE.md`](CORBIS_MCP_CLAUDE_CODE_GUIDE.md)
 <summary><b>Cursor</b></summary>
 
 ```bash
-git clone https://github.com/csirmans/corbis-literature-starter-kit.git my-project
+git clone https://github.com/Agentic-Assets/corbis-literature-starter-kit.git my-project
 ```
 
 Then in Cursor: **Settings > MCP Servers > Add**
