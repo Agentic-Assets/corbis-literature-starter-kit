@@ -10,7 +10,7 @@
 [![Claude Code](https://img.shields.io/badge/Works%20with-Claude%20Code-orange)](https://docs.anthropic.com/en/docs/claude-code)
 [![Cursor](https://img.shields.io/badge/Works%20with-Cursor-green)](https://cursor.sh)
 
-[Quick Setup](#quick-setup) | [Workflows](#the-workbench) | [Documentation](#documentation) | [Get a Corbis Key](https://www.corbis.ai)
+[Quick Setup](#quick-setup) | [Workflows](#the-workbench) | [Documentation](#documentation) | [corbis.ai](https://www.corbis.ai/) | [Get a Corbis Key](https://www.corbis.ai) | [Corbis Research Database](https://www.corbis.ai/insights)
 
 [![Corbis landing page: research-first AI for finance and real estate](images/corbis-landing-page.png)](https://www.corbis.ai/)
 
@@ -20,7 +20,7 @@
 
 ---
 
-## What is Corbis
+## What is Corbis ([corbis.ai](https://www.corbis.ai/))
 
 [Corbis](https://www.corbis.ai/) is **research-first AI** for finance, real estate, and economics. You ask in plain language; it **searches a large, domain-specific index** (hundreds of thousands of peer-reviewed papers, plus industry reports and market data in the product) and returns **answers with citations** you can open and check. The goal is evidence you can stand behind, not unattributed claims. For a journal-level snapshot of publications and what the corpus includes, see [Research Insights](https://www.corbis.ai/insights).
 
