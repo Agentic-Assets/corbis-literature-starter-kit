@@ -12,17 +12,21 @@
 
 [Quick Setup](#quick-setup) | [Workflows](#the-workbench) | [Documentation](#documentation) | [Get a Corbis Key](https://app.corbis.ai)
 
-![Corbis landing page: research-first AI for finance and real estate](images/corbis-landing-page.png)
+[![Corbis landing page: research-first AI for finance and real estate](images/corbis-landing-page.png)](https://www.corbis.ai/)
 
-[https://github.com/Agentic-Assets/corbis-literature-starter-kit](https://github.com/Agentic-Assets/corbis-literature-starter-kit)
+[corbis.ai](https://www.corbis.ai/) · [GitHub](https://github.com/Agentic-Assets/corbis-literature-starter-kit)
 
 </div>
 
 ---
 
+## What is Corbis
+
+[Corbis](https://www.corbis.ai/) is a research-first AI platform for finance, real estate, and economics. It searches a large corpus spanning leading academic and industry journals, returns synthesized answers with inspectable citations, and connects the same research tools to editors and agents over **MCP** (Model Context Protocol) so your assistant can search papers, pull details, and export citations in your project.
+
 ## Why This Exists
 
-Most AI assistants are good at sounding confident and bad at doing literature work carefully. Corbis fixes the first part by giving them live research, data, and citation tools through MCP. This repo fixes the second part by packaging those tools into reusable research workflows.
+Most assistants are good at sounding confident and weak at careful literature work. Corbis addresses the research side with live search, data, and citation tools over MCP. This repo is the other half: a **literature starter kit** that turns those capabilities into repeatable workflows (reviews, positioning, exports, and logs) instead of one-off prompts.
 
 Use it to:
 
