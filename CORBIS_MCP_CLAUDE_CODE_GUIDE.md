@@ -2,6 +2,8 @@
 
 Connect Claude Code to Corbis to give your AI assistant direct access to academic research, economic data, market intelligence, and web search tools — all from your terminal.
 
+If you are using Codex instead, see [`CORBIS_MCP_CODEX_GUIDE.md`](./CORBIS_MCP_CODEX_GUIDE.md). The endpoint, API key format, and tool set are the same. The client configuration is different.
+
 ---
 
 ## Prerequisites
@@ -189,6 +191,8 @@ To rotate your key, go to **Settings > API Keys**, click **Regenerate** on the e
 
 ## Related Guides
 
+- [README.md](./README.md) — Starter-kit overview, workflows, and quick setup
+- [Corbis MCP Setup Guide for Codex](./CORBIS_MCP_CODEX_GUIDE.md) — Codex-specific `config.toml` setup and troubleshooting
 - [Corbis MCP Tool Reference](./CORBIS_MCP_TOOL_REFERENCE.md) — **Detailed parameter reference, output schemas, and recommended workflows for every tool**
-- [Corbis MCP Server Guide](./CORBIS_MCP_GUIDE.md) — Full architecture and multi-platform setup (Cursor, Claude Desktop, ChatGPT)
-- [Corbis Cursor Plugin](./CORBIS_CURSOR_PLUGIN.md) — Cursor plugin setup and troubleshooting
+- [Corbis Cursor Plugin](./CORBIS_CURSOR_PLUGIN.md) — Cursor plugin setup and direct MCP configuration
+- [Corbis MCP Server Guide](./CORBIS_MCP_GUIDE.md) — Full architecture and multi-platform setup (Codex, Cursor, Claude, ChatGPT)

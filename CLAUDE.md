@@ -36,6 +36,7 @@ Key principles:
 
 See `CORBIS_MCP_TOOL_REFERENCE.md` for full tool documentation.
 See `CORBIS_MCP_GUIDE.md` for MCP server architecture and authentication.
+See `CORBIS_MCP_CODEX_GUIDE.md` for Codex setup.
 See `CORBIS_MCP_CLAUDE_CODE_GUIDE.md` for Claude Code setup.
 See `CORBIS_CURSOR_PLUGIN.md` for Cursor plugin setup.
 

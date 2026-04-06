@@ -1,6 +1,8 @@
 # Skills Guide
 
-How to use the 5 literature and idea skills. All skills search [Corbis](https://corbis.ai) (250,000+ papers) before making claims and export BibTeX citations automatically.
+How to use the 6 research workflows in this starter kit. All workflows search [Corbis](https://www.corbis.ai) (250,000+ papers) before making claims and export BibTeX citations automatically.
+
+In Claude Code, these are available as slash commands. In Codex, Cursor, and other MCP clients, use the same workflow names and examples below as prompt templates.
 
 ## Which skill to use
 
@@ -33,11 +35,11 @@ How to use the 5 literature and idea skills. All skills search [Corbis](https://
 
 **Reading a paper:**
 
-Ask Claude to use the paper-reader agent:
+If your assistant supports repo-defined agents, use the paper-reader prompt:
 > "Read and summarize the paper at ~/Downloads/fama_french_1993.pdf"
 
 ## Notes
 
 - Literature reviews produce BibTeX citations automatically via `export_citations`
 - Results are saved to `notes/` and `output/` with lab notebook entries
-- You do not need to invoke skills manually. Claude routes your request automatically based on `CLAUDE.md`. The slash commands are shortcuts.
+- If your client reads `CLAUDE.md` and `.claude/` directly, it can route requests automatically. Otherwise, use the table above as the manual workflow guide.

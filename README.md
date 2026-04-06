@@ -2,58 +2,98 @@
 
 # Corbis Literature Starter Kit
 
-**Search 250,000+ academic papers. Brainstorm ideas. Write literature reviews. All from your terminal.**
+**Turn your AI assistant into a literature-review machine. Search 250,000+ papers, map a field, test ideas, and come back with citations instead of 37 half-read browser tabs.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Corbis](https://img.shields.io/badge/Powered%20by-Corbis-purple)](https://corbis.ai)
+[![Corbis](https://img.shields.io/badge/Powered%20by-Corbis-purple)](https://www.corbis.ai)
+[![Codex](https://img.shields.io/badge/Works%20with-Codex-black)](./CORBIS_MCP_CODEX_GUIDE.md)
 [![Claude Code](https://img.shields.io/badge/Works%20with-Claude%20Code-orange)](https://docs.anthropic.com/en/docs/claude-code)
 [![Cursor](https://img.shields.io/badge/Works%20with-Cursor-green)](https://cursor.sh)
 
-[Get Started](#quick-setup) | [Examples](#see-it-in-action) | [Get a Corbis Key](https://app.corbis.ai)
+[Quick Setup](#quick-setup) | [Workflows](#the-workbench) | [Documentation](#documentation) | [Get a Corbis Key](https://app.corbis.ai)
 
 </div>
 
 ---
 
-## What is this?
+## Why This Exists
 
-A starter kit that turns your AI coding assistant into a research co-pilot. Clone this repo, connect [Corbis](https://corbis.ai), and you get 6 research workflows that search the academic literature, brainstorm ideas, write reviews, and generate figures.
+Most AI assistants are good at sounding confident and bad at doing literature work carefully. Corbis fixes the first part by giving them live research, data, and citation tools through MCP. This repo fixes the second part by packaging those tools into reusable research workflows.
 
-Works with **Claude Code**, **Cursor**, and any **MCP-compatible agent**.
+Use it to:
 
-## 6 Research Workflows
+- survey a literature fast
+- find the closest papers before you pitch an idea
+- brainstorm ideas and kill weak ones early
+- export citations without formatting them by hand
+- generate literature figures and keep a transparent search trail
 
-```
-/lit-review      Write a structured literature review on any topic
-/lit-search      Map the closest papers and sharpen your contribution
-/brainstorm      Generate ranked research ideas (with internal rejection filtering)
-/idea            Screen and score a specific research idea
-/verify-citations   Audit your .bib file against the literature
-/lit-landscape   Visualize literature trends, gaps, and methods
-```
+It works with **Codex**, **Claude Code**, **Cursor**, and other **MCP-compatible agents**.
 
-Plus a **paper-reader agent** that summarizes any academic PDF you throw at it.
+Claude Code gets the smoothest out-of-the-box slash-command experience. Codex, Cursor, and other MCP clients can use the same Corbis tools and the same workflow prompts from this repo.
+
+## The Workbench
+
+These are the six workflows bundled with the kit:
+
+| Workflow | What it is good for |
+|---|---|
+| `/lit-review` | Write a structured literature review on any topic |
+| `/lit-search` | Find the closest papers and sharpen your contribution |
+| `/brainstorm` | Generate ranked research ideas with rejection filtering |
+| `/idea` | Stress-test one specific research idea |
+| `/verify-citations` | Audit a `.bib` file against the literature |
+| `/lit-landscape` | Visualize trends, gaps, methods, and landmark papers |
+
+Plus a **paper-reader agent prompt** for assistants that support repo-defined agents.
+
+If your client does not support slash commands directly, use the same workflow names as prompt starters or follow the examples in [`SKILLS_USE_GUIDE.md`](SKILLS_USE_GUIDE.md).
 
 ## Quick Setup
 
-> **You need two things:** an AI coding assistant and a Corbis API key.
+> You need two things: an AI assistant with MCP support and a Corbis MCP API key.
 
-### 1. Get a Corbis API key (free)
+### 1. Get a Corbis API key
 
-Go to **[corbis.ai](https://app.corbis.ai)** > Settings > API Keys > Create a key.
+Open **[the Corbis app](https://app.corbis.ai)**, go to **Settings > API Keys**, and create a key.
 
-It starts with `corbis_mcp_` and you'll use it in step 2.
+Corbis MCP keys start with `corbis_mcp_`. Copy the key when it is created. It is shown once.
 
-### 2. Connect and start
+### 2. Connect your assistant
+
+<details>
+<summary><b>Codex</b></summary>
+
+Add Corbis to `~/.codex/config.toml` for global use, or `.codex/config.toml` for a project-local setup:
+
+```toml
+[mcp_servers.corbis]
+url = "https://www.corbis.ai/api/mcp/universal"
+bearer_token_env_var = "CORBIS_MCP_API_KEY"
+startup_timeout_sec = 20
+tool_timeout_sec = 120
+```
+
+Then export your key before starting Codex:
+
+```bash
+export CORBIS_MCP_API_KEY="corbis_mcp_..."
+codex
+```
+
+Full guide: [`CORBIS_MCP_CODEX_GUIDE.md`](CORBIS_MCP_CODEX_GUIDE.md)
+</details>
 
 <details>
 <summary><b>Claude Code</b></summary>
 
 ```bash
-claude mcp add corbis --transport http https://app.corbis.ai/api/mcp/universal?apikey=YOUR_KEY
+claude mcp add corbis --transport http https://www.corbis.ai/api/mcp/universal?apikey=YOUR_KEY
 git clone https://github.com/csirmans/corbis-literature-starter-kit.git my-project
 cd my-project && claude
 ```
+
+Full guide: [`CORBIS_MCP_CLAUDE_CODE_GUIDE.md`](CORBIS_MCP_CLAUDE_CODE_GUIDE.md)
 </details>
 
 <details>
@@ -62,114 +102,122 @@ cd my-project && claude
 ```bash
 git clone https://github.com/csirmans/corbis-literature-starter-kit.git my-project
 ```
-Then in Cursor: **Settings > MCP Servers > Add**
-- Name: `corbis`
-- URL: `https://app.corbis.ai/api/mcp/universal?apikey=YOUR_KEY`
 
-Open the project. Cursor reads `CLAUDE.md` automatically.
+Then in Cursor: **Settings > MCP Servers > Add**
+
+- Name: `corbis`
+- URL: `https://www.corbis.ai/api/mcp/universal?apikey=YOUR_KEY`
+
+Open the project after connecting the server. Cursor can use the same Corbis MCP tools and repo guidance.
+
+More options: [`CORBIS_CURSOR_PLUGIN.md`](CORBIS_CURSOR_PLUGIN.md)
 </details>
 
 <details>
-<summary><b>Codex / Other MCP Agents</b></summary>
+<summary><b>Other MCP clients</b></summary>
 
-Connect to the Corbis MCP endpoint:
+Connect to this MCP endpoint:
+
+```text
+https://www.corbis.ai/api/mcp/universal
 ```
-https://app.corbis.ai/api/mcp/universal?apikey=YOUR_KEY
-```
-Clone this repo. The `CLAUDE.md` file provides instructions most agents read automatically.
+
+Authenticate with either:
+
+- `Authorization: Bearer YOUR_KEY`
+- `?apikey=YOUR_KEY`
+
+Architecture and client notes: [`CORBIS_MCP_GUIDE.md`](CORBIS_MCP_GUIDE.md)
 </details>
 
-That's it. No Python required. No LaTeX required. Just clone, connect, go.
+No Python is required for search, review, idea screening, or citation workflows. Python is only needed for the figure-generation workflow.
 
 ---
 
-## See It In Action
+## First Prompts Worth Stealing
 
-**Survey a new field in minutes:**
-```
+**Map a field before you pretend to know it**
+
+```text
 /lit-review climate risk and commercial real estate pricing
 ```
-> Searches Corbis, collects ~50 papers, proposes thematic strands, writes a synthesized review with BibTeX citations. Not a list of papers. A real narrative.
 
-**Brainstorm research ideas:**
-```
-/brainstorm behavioral biases in household mortgage decisions
-```
-> Generates 25-30 candidates internally, runs a novelty test and kill test on each, shows you only the 10 survivors ranked by novelty, importance, and executability. Includes 3 rejected ideas so you can see what failed and why.
+Builds a paper set, clusters the literature into themes, and writes a synthesized review with citations.
 
-**Screen a specific idea:**
-```
+**Pressure-test an idea before it eats a month of your life**
+
+```text
 /idea Do bank branch closures reduce small business lending through relationship destruction?
 ```
-> Searches for the closest existing papers, scores on 6 dimensions, runs stress tests, and delivers a verdict: Go, Revise, or Kill.
 
-**Visualize the structure of a literature:**
+Finds the closest papers, scores the idea across multiple dimensions, and returns a go, revise, or kill recommendation.
+
+**Generate ideas, but keep only the survivors**
+
+```text
+/brainstorm behavioral biases in household mortgage decisions
 ```
+
+Creates a wider internal idea pool, rejects weak candidates, and ranks the survivors by novelty, importance, and executability.
+
+**Turn a messy literature into figures**
+
+```text
 /lit-landscape corporate governance and firm performance
 ```
-> Generates publication timelines, citation landmark charts, journal distributions, thematic evolution heatmaps, method timelines, and coverage gap maps. All rendered as publication-ready PDFs.
 
-**Get oriented fast:**
-```
-/lit-review housing supply elasticity --scope quick
-```
-> Returns 10 must-read papers, 3 main debates, 3 dominant methods, 3 common datasets, and 5 frontier questions. A 5-minute field orientation.
+Produces timelines, landmark-paper charts, method views, journal distributions, and gap maps from the shared paper set.
 
----
+## How The Workflows Connect
 
-## How Skills Work Together
+Skills share data through `output/paper_set.json`, so one workflow can hand off to the next without repeating the same searches:
 
-Skills share data through `output/paper_set.json`. Run one, and the next picks up where it left off:
-
-```
-/lit-review [topic]       -->  Builds the paper set (50 papers with metadata)
-/lit-landscape [topic]    -->  Reads paper_set.json, generates figures
-/brainstorm [topic]       -->  Reads paper_set.json, checks novelty against it
-/idea [specific idea]     -->  Reads paper_set.json, finds closest papers
+```text
+/lit-review [topic]       -> builds the paper set
+/lit-landscape [topic]    -> reads the paper set and generates figures
+/brainstorm [topic]       -> tests idea novelty against the paper set
+/idea [specific idea]     -> finds the closest papers from the paper set
 ```
 
-Every search is logged to `output/search_log.md` for full transparency.
-
----
+Every search is also logged to `output/search_log.md` so you can see what the assistant actually looked up.
 
 ## Optional Extras
 
-| Dependency | What for | Install |
+| Dependency | What it is for | Install |
 |---|---|---|
 | Python 3.10+ | `/lit-landscape` figures | `pip install -r requirements.txt` |
-| LaTeX | Writing papers | Copy `latex_template/` to `paper/` |
-
-Neither is required to use the literature search and brainstorming workflows.
+| LaTeX | Drafting papers | Copy `latex_template/` to `paper/` |
 
 ## Project Structure
 
-```
-.claude/skills/     6 research workflow definitions
-.claude/commands/   6 slash commands (shortcuts)
-.claude/agents/     Paper-reader agent
-notes/              Lab notebook (auto-populated)
+```text
+.claude/skills/     Workflow definitions and prompts
+.claude/commands/   Slash-command wrappers
+.claude/agents/     Paper-reader prompt
+notes/              Lab notebook
 output/             Reviews, memos, figures, paper_set.json
 latex_template/     Clean article template (natbib + plainnat)
-utils/              Python figure generator
-references/         Writing norms, citation formatting
+utils/              Figure-generation helpers
+references/         Writing norms and citation formatting
 ```
 
 ## Documentation
 
 | File | What it covers |
 |---|---|
-| [`SKILLS_USE_GUIDE.md`](SKILLS_USE_GUIDE.md) | When to use each workflow, with examples |
-| [`CORBIS_MCP_TOOL_REFERENCE.md`](CORBIS_MCP_TOOL_REFERENCE.md) | All 21 Corbis tools: params, outputs, tips |
-| [`CORBIS_MCP_CLAUDE_CODE_GUIDE.md`](CORBIS_MCP_CLAUDE_CODE_GUIDE.md) | Claude Code setup (2 min) |
-| [`CORBIS_CURSOR_PLUGIN.md`](CORBIS_CURSOR_PLUGIN.md) | Cursor plugin setup |
-| [`CORBIS_MCP_GUIDE.md`](CORBIS_MCP_GUIDE.md) | MCP server architecture (for developers) |
+| [`SKILLS_USE_GUIDE.md`](SKILLS_USE_GUIDE.md) | Which workflow to use, when, and how to chain them |
+| [`CORBIS_MCP_CODEX_GUIDE.md`](CORBIS_MCP_CODEX_GUIDE.md) | Codex setup with `config.toml`, env vars, and troubleshooting |
+| [`CORBIS_MCP_CLAUDE_CODE_GUIDE.md`](CORBIS_MCP_CLAUDE_CODE_GUIDE.md) | Claude Code setup in a few minutes |
+| [`CORBIS_CURSOR_PLUGIN.md`](CORBIS_CURSOR_PLUGIN.md) | Cursor plugin and Cursor MCP setup notes |
+| [`CORBIS_MCP_TOOL_REFERENCE.md`](CORBIS_MCP_TOOL_REFERENCE.md) | Tool-by-tool parameters, outputs, and workflow tips |
+| [`CORBIS_MCP_GUIDE.md`](CORBIS_MCP_GUIDE.md) | MCP architecture, auth modes, and multi-client integration |
 
 ---
 
 <div align="center">
 
-**Built by [Corbis](https://corbis.ai)**
+**Built by [Corbis](https://www.corbis.ai)**
 
-[Get Started](#quick-setup) | [Get a Corbis Key](https://app.corbis.ai) | [MIT License](LICENSE)
+[Quick Setup](#quick-setup) | [Documentation](#documentation) | [Get a Corbis Key](https://app.corbis.ai) | [MIT License](LICENSE)
 
 </div>

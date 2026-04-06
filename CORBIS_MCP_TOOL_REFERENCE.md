@@ -2,7 +2,7 @@
 
 Complete reference for all Corbis MCP tools. Use this guide to understand each tool's parameters, output shape, and best practices.
 
-> **Setup**: See [CORBIS_MCP_CLAUDE_CODE_GUIDE.md](./CORBIS_MCP_CLAUDE_CODE_GUIDE.md) for connection setup.
+> **Setup**: Use [CORBIS_MCP_CODEX_GUIDE.md](./CORBIS_MCP_CODEX_GUIDE.md) for Codex, [CORBIS_MCP_CLAUDE_CODE_GUIDE.md](./CORBIS_MCP_CLAUDE_CODE_GUIDE.md) for Claude Code, or [CORBIS_MCP_GUIDE.md](./CORBIS_MCP_GUIDE.md) for general MCP client setup.
 > **Tier 1** = all users. **Tier 2** = enterprise only. Every tool call costs **1 credit**.
 
 ---

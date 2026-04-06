@@ -1,6 +1,6 @@
 # Corbis MCP Server Guide
 
-The Corbis MCP (Model Context Protocol) server exposes Corbis research, economic data, market intelligence, and AI tools to external AI agents—Cursor, Claude Desktop, ChatGPT Developer Mode, and custom clients. This guide covers both the internal architecture and user-facing setup.
+The Corbis MCP (Model Context Protocol) server exposes Corbis research, economic data, market intelligence, and AI tools to external AI agents including Codex, Cursor, Claude Code, ChatGPT, and custom clients. This guide covers both the internal architecture and user-facing setup.
 
 ---
 
@@ -11,7 +11,7 @@ The Corbis MCP (Model Context Protocol) server exposes Corbis research, economic
 The Corbis MCP server is a **universal endpoint** built with `mcp-handler` v1.0.7. It serves:
 
 - **Tools** (21): Functions agents can call (search papers, fetch FRED data, web search, etc.)
-- **Resources** (3): Read-only context (system docs, tool reference, auth guide)
+- **Resources**: Read-only documentation and setup context for MCP clients
 - **Transports**: Streamable HTTP (JSON-RPC) and SSE (Server-Sent Events)
 
 Protocol versions: `2024-11-05`, `2025-03-26`, `2025-06-18`.
@@ -23,7 +23,7 @@ Protocol versions: `2024-11-05`, `2025-03-26`, `2025-06-18`.
 | **API route** | `app/api/mcp/universal/route.ts` | Main MCP handler; GET (discovery/SSE), POST (JSON-RPC), DELETE (session cleanup) |
 | **Tool registry** | `lib/mcp/tools/registry.ts` | Central export of all 21 tools via `MCP_TOOLS` array |
 | **Tool definitions** | `lib/mcp/tools/*.ts` | Individual tools (e.g. `search-papers.ts`, `fred-search.ts`, `query-corbis.ts`) |
-| **Resources** | `lib/mcp/resources/docs.ts` | `MCP_RESOURCES` and `RESOURCE_REGISTRY` for `docs://system`, `docs://tools`, `docs://auth` |
+| **Resources** | `lib/mcp/resources/docs.ts` | `MCP_RESOURCES` and `RESOURCE_REGISTRY` for documentation URIs such as `docs://system`, `docs://tools`, `docs://auth`, and related setup docs |
 | **Auth** | `lib/mcp/auth.ts` | `authenticateMCPRequest`, `verifyToken`, `extractToken`, rate limiter |
 | **Guidance** | `lib/mcp/guidance.ts` | Extra prompts appended to tool responses only for MCP clients |
 | **OAuth** | `app/api/mcp/oauth/register/route.ts`, `app/api/mcp/oauth/token/route.ts` | Dynamic client registration and token exchange |
@@ -81,16 +81,16 @@ Defined in `app/api/mcp/universal/route.ts` (TOOL_SCOPES):
 
 ### What Users Get
 
-When you connect an AI agent (Cursor, Claude Desktop, ChatGPT) to the Corbis MCP server, the agent gains access to:
+When you connect an AI agent (Codex, Cursor, Claude Code, ChatGPT, or another MCP client) to the Corbis MCP server, the agent gains access to:
 
 - **21 tools** for research, economic data, market intel, web search, citations, and open-ended queries
-- **3 read-only resources** for context (system docs, tool reference, auth guide)
+- **read-only documentation resources** for setup, tool reference, pricing, and workflow guidance
 
 Agents use tools by name (e.g. `search_papers`, `fred_search`, `query_corbis`) and receive JSON results. Some tools also return inline guidance to help the agent use the output correctly.
 
 ### Authentication Options
 
-1. **Personal MCP API Key** (recommended for Cursor/Claude Desktop):
+1. **Personal MCP API Key** (recommended for Codex, Cursor, Claude Code, and Claude Desktop):
    - Generate in Corbis: **Settings → API Keys → Create MCP Key**
    - Format: `corbis_mcp_xxxxxxxxxxxx` (displayed once at creation)
    - Include via `Authorization: Bearer <key>` or `?apikey=<key>`
@@ -128,9 +128,21 @@ Replace `YOUR_MCP_API_KEY` with your personal key from Corbis.
 
 **Note**: For local development, use `http://localhost:3000/api/mcp/universal?apikey=YOUR_KEY` instead.
 
-### Connecting from Claude Desktop
+If you want the plugin-oriented setup that ships with this starter kit, see [CORBIS_CURSOR_PLUGIN.md](./CORBIS_CURSOR_PLUGIN.md).
 
-Configure in `claude_desktop_config.json`:
+### Connecting from Codex
+
+Codex supports streamable HTTP MCP servers through `config.toml`. For Corbis-specific setup, environment-variable auth, verification steps, and troubleshooting, see [CORBIS_MCP_CODEX_GUIDE.md](./CORBIS_MCP_CODEX_GUIDE.md).
+
+### Connecting from Claude Code and Claude Desktop
+
+For Claude Code, the quickest path is:
+
+```bash
+claude mcp add corbis --transport http "https://www.corbis.ai/api/mcp/universal?apikey=YOUR_MCP_API_KEY"
+```
+
+For Claude Desktop-style JSON configuration, use:
 
 ```json
 {
@@ -143,11 +155,7 @@ Configure in `claude_desktop_config.json`:
 }
 ```
 
-Or with `mcp-remote` (if your client expects SSE):
-
-```bash
-claude mcp add corbis --transport http "https://www.corbis.ai/api/mcp/universal?apikey=YOUR_MCP_API_KEY"
-```
+For a fuller Claude Code walkthrough, see [CORBIS_MCP_CLAUDE_CODE_GUIDE.md](./CORBIS_MCP_CLAUDE_CODE_GUIDE.md).
 
 ### Tool Usage Patterns
 
@@ -178,11 +186,18 @@ Agents can read these resources for context:
 - `docs://system` – System overview, tool summaries, auth notes
 - `docs://tools` – Per-tool reference (params, return shapes)
 - `docs://auth` – Authentication setup and API key usage
+- `docs://quickstart` – 5-minute getting started guide
+- `docs://data-sources` – Market data sources (BLS, Census, FHFA, HUD, BEA, IRS)
+- `docs://workflows` – Research workflows and deliverable patterns
+- `docs://mcp-guide` – Multi-platform MCP integration guide
+- `docs://pricing` – Subscription tiers and credit details
 
 ---
 
 ## Related Documentation
 
-- `lib/mcp/CLAUDE.md` – MCP module overview
-- `app/.well-known/` – OAuth discovery endpoints
-- `lib/mcp/CLAUDE.md`, `lib/auth/CLAUDE.md`, `app/CLAUDE.md` – Auth and MCP patterns
+- [README.md](./README.md) – Starter-kit overview and workflow tour
+- [CORBIS_MCP_CODEX_GUIDE.md](./CORBIS_MCP_CODEX_GUIDE.md) – Codex-specific setup and troubleshooting
+- [CORBIS_MCP_CLAUDE_CODE_GUIDE.md](./CORBIS_MCP_CLAUDE_CODE_GUIDE.md) – Claude Code setup
+- [CORBIS_CURSOR_PLUGIN.md](./CORBIS_CURSOR_PLUGIN.md) – Cursor plugin and direct MCP setup notes
+- [CORBIS_MCP_TOOL_REFERENCE.md](./CORBIS_MCP_TOOL_REFERENCE.md) – Tool-by-tool params, outputs, and workflow guidance
