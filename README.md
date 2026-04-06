@@ -25,6 +25,14 @@ map a field, test ideas, and come back with citations instead of 37 half-read br
 
 The full platform adds chat, guided workflows, and exports (for example PDF, Word, LaTeX, and citation formats). **MCP** (Model Context Protocol) exposes the same underlying tools to external clients (Cursor, Claude Code, Codex, and other compatible agents). **This repository is a literature starter kit** for that path: it focuses on surveying literature, mapping a field, screening ideas, and keeping citations and search trails explicit in your repo.
 
+<div align="center">
+
+[![Research Insights: journal analytics and bibliometrics in Corbis](images/corbis-research-insights.png)](https://www.corbis.ai/insights)
+
+[https://www.corbis.ai/insights](https://www.corbis.ai/insights)
+
+</div>
+
 ## Why This Exists
 
 Most AI assistants are good at sounding confident and bad at doing literature work carefully. Corbis fixes the first part by giving them live research, data, and citation tools through MCP. This repo fixes the second part by packaging those tools into reusable research workflows.
@@ -221,6 +229,14 @@ references/         Writing norms and citation formatting
 ## Open Datasets
 
 When you need empirical data alongside literature work, Corbis hosts **[Open Datasets](https://www.corbis.ai/datasets)**: a curated collection of (mostly) free finance research datasets you can search by topic, region, or use case. It lives in the Corbis product, not in this repo, but pairs naturally with `/idea` and related workflows.
+
+<div align="center">
+
+[![Open Datasets: curated finance research datasets in Corbis](images/corbis-datasets.png)](https://www.corbis.ai/datasets)
+
+[https://www.corbis.ai/datasets](https://www.corbis.ai/datasets)
+
+</div>
 
 ## Documentation
 
