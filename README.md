@@ -68,6 +68,10 @@ Open **[the Corbis app](https://www.corbis.ai)**, go to **Settings > API Keys**,
 
 Corbis MCP keys start with `corbis_mcp_`. Copy the key when it is created. It is shown once.
 
+[![Corbis Settings, API Keys tab: MCP URL, create key, and your keys](images/corbis-api-keys.png)](https://www.corbis.ai/settings?tab=keys)
+
+[https://www.corbis.ai/settings?tab=keys](https://www.corbis.ai/settings?tab=keys)
+
 ### 2. Connect your assistant
 
 <details>
