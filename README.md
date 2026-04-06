@@ -22,7 +22,9 @@
 
 ## What is Corbis
 
-[Corbis](https://www.corbis.ai/) is a research-first AI platform for finance, real estate, and economics. It searches a large corpus spanning leading academic and industry journals, returns synthesized answers with inspectable citations, and connects the same research tools to editors and agents over **MCP** (Model Context Protocol) so your assistant can search papers, pull details, and export citations in your project.
+[Corbis](https://www.corbis.ai/) is **research-first AI** for finance, real estate, and economics. You ask in plain language; it **searches a large, domain-specific index** (hundreds of thousands of peer-reviewed papers, plus industry reports and market data in the product) and returns **answers with citations** you can open and check. The goal is evidence you can stand behind, not unattributed claims. For a journal-level snapshot of publications and what the corpus includes, see [Research Insights](https://www.corbis.ai/insights).
+
+The full platform adds chat, guided workflows, and exports (for example PDF, Word, LaTeX, and citation formats). **MCP** (Model Context Protocol) exposes the same underlying tools to external clients (Cursor, Claude Code, Codex, and other compatible agents). **This repository is a literature starter kit** for that path: it focuses on surveying literature, mapping a field, screening ideas, and keeping citations and search trails explicit in your repo.
 
 ## Why This Exists
 
@@ -208,6 +210,10 @@ latex_template/     Clean article template (natbib + plainnat)
 utils/              Figure-generation helpers
 references/         Writing norms and citation formatting
 ```
+
+## Open Datasets
+
+When you need empirical data alongside literature work, Corbis hosts **[Open Datasets](https://www.corbis.ai/datasets)**: a curated collection of (mostly) free finance research datasets you can search by topic, region, or use case. It lives in the Corbis product, not in this repo, but pairs naturally with `/idea` and related workflows.
 
 ## Documentation
 
