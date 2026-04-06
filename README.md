@@ -2,7 +2,7 @@
 
 # Corbis Literature Starter Kit
 
-**Turn your AI assistant into a literature-review machine. Search 400,000+ papers, 
+**Turn your AI assistant into a literature-review machine. Search 400,000+ papers,  
 map a field, test ideas, and come back with citations instead of 37 half-read browser tabs.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
