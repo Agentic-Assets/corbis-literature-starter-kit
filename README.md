@@ -64,7 +64,7 @@ If your client does not support slash commands directly, use the same workflow n
 
 ### 1. Get a Corbis API key
 
-Open **[the Corbis app](https://www.corbis.ai)**, go to **Settings > API Keys**, and create a key.
+Open the **[Corbis app](https://www.corbis.ai)**, go to **Settings > API Keys**, and create a key.
 
 Corbis MCP keys start with `corbis_mcp_`. Copy the key when it is created. It is shown once.
 
