@@ -12,6 +12,10 @@
 
 [Quick Setup](#quick-setup) | [Workflows](#the-workbench) | [Documentation](#documentation) | [Get a Corbis Key](https://app.corbis.ai)
 
+![Corbis landing page: research-first AI for finance and real estate](images/corbis-landing-page.png)
+
+[https://github.com/Agentic-Assets/corbis-literature-starter-kit](https://github.com/Agentic-Assets/corbis-literature-starter-kit)
+
 </div>
 
 ---
