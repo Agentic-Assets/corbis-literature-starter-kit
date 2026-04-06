@@ -59,7 +59,7 @@ Run 4-5 `search_papers` queries with `matchCount: 20` each, varying keywords and
 
 Call `get_paper_details_batch` (up to 25 IDs per call) on papers missing citation counts or abstracts. Prioritize high-citation and recent papers.
 
-Deduplicate by title similarity or OpenAlex ID.
+Deduplicate by `id` or title similarity.
 
 **Option C — User-provided data:**
 

@@ -81,7 +81,6 @@ Format: JSON array of paper objects:
     "abstract": "...",
     "fullText": "...",
     "doi": "...",
-    "openalexId": "...",
     "source_queries": ["query1", "query2"],
     "tier": "foundational"
   }
@@ -89,7 +88,7 @@ Format: JSON array of paper objects:
 ```
 
 Rules:
-- If `output/paper_set.json` exists when a skill starts, read it and merge new results (deduplicate by `id` or `openalexId`). Do not overwrite.
+- If `output/paper_set.json` exists when a skill starts, read it and merge new results (deduplicate by `id`). Do not overwrite.
 - The `fullText` field is included when available from `get_paper_details`. Use it for deeper analysis (method detection, contribution assessment) when present.
 - The `source_queries` field tracks which search queries surfaced this paper (for hub detection).
 - The `tier` field is assigned after collection using relative tiering (see below).

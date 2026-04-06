@@ -91,7 +91,7 @@ Target ~50 unique papers for comprehensive scope, ~25 for focused scope. Execute
 - If the user provided known key papers, verify they appear. If not found via search, include them manually and use `get_paper_details` to confirm details.
 
 **Save to shared data files:**
-- Write all collected papers (with `id`, `title`, `authors`, `year`, `journal`, `citedByCount`, `abstract`, `fullText` when available, `doi`, `openalexId`, `source_queries`) to `output/paper_set.json`. If the file exists, merge and deduplicate.
+- Write all collected papers (with `id`, `title`, `authors`, `year`, `journal`, `citedByCount`, `abstract`, `fullText` when available, `doi`, `source_queries`) to `output/paper_set.json`. If the file exists, merge and deduplicate by `id`.
 - Append all search queries with parameters and result counts to `output/search_log.md`.
 
 **Relative citation tiering:** After deduplication, sort all collected papers by `citedByCount` and assign influence tiers using relative ranking within the collected set:
