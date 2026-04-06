@@ -220,7 +220,7 @@ references/         Writing norms and citation formatting
 
 ## Research Insights
 
-Journal-level publication stats, bibliometrics, and corpus overview in the Corbis Research Database ([open in Corbis](https://www.corbis.ai/insights)).
+Journal-level publication stats, bibliometrics, and corpus overview in the Corbis research database ([open in Corbis](https://www.corbis.ai/insights)).
 
 <div align="center">
 
