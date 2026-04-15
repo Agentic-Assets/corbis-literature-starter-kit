@@ -1,0 +1,20 @@
+{
+  "name": "corbis-literature-starter-kit-marketplace",
+  "interface": {
+    "displayName": "Corbis Literature Starter Kit Plugins"
+  },
+  "plugins": [
+    {
+      "name": "corbis-literature-starter-kit",
+      "source": {
+        "source": "local",
+        "path": "./plugins/corbis-literature-starter-kit"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Research"
+    }
+  ]
+}
