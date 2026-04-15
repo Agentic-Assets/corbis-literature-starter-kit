@@ -204,12 +204,32 @@ Every search is also logged to `output/search_log.md` so you can see what the as
 | Python 3.10+ | `/lit-landscape` figures | `pip install -r requirements.txt` |
 | LaTeX | Drafting papers | Copy `latex_template/` to `paper/` |
 
+## Install as a Claude Code Plugin
+
+The repository is packaged as a Claude Code plugin. Installing it adds the six skills, six slash commands, the paper-reader subagent, and the Corbis MCP server to any project in one step.
+
+```bash
+# From a Claude Code session, pointed at a local clone of this repo:
+/plugin install ./
+```
+
+Alternatively, install directly from GitHub:
+
+```bash
+/plugin install github:Agentic-Assets/corbis-literature-starter-kit
+```
+
+The plugin manifest lives at `.claude-plugin/plugin.json` and references the skills and commands that already reside under `.claude/`. A parallel Codex manifest is provided at `.codex-plugin/plugin.json` for Codex users. Set the `CORBIS_MCP_API_KEY` environment variable before using any of the literature tools.
+
 ## Project Structure
 
 ```text
-.claude/skills/     Workflow definitions and prompts
+.claude-plugin/     Claude Code plugin manifest
+.codex-plugin/      Codex plugin manifest
+.claude/skills/     Workflow definitions and prompts (Claude Code)
 .claude/commands/   Slash-command wrappers
 .claude/agents/     Paper-reader prompt
+.agents/skills/     Workflow definitions (Codex / other MCP agents)
 notes/              Lab notebook
 output/             Reviews, memos, figures, paper_set.json
 latex_template/     Clean article template (natbib + plainnat)

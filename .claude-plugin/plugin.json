@@ -1,0 +1,34 @@
+{
+  "name": "corbis-literature-starter-kit",
+  "displayName": "Corbis Literature Starter Kit",
+  "version": "0.1.0",
+  "description": "Literature review and idea-screening starter kit for Claude Code, powered by the Corbis MCP. Bundles the repo's six research skills — literature review, positioning, landscape figures, idea generation, idea screening, and citation verification — alongside six slash commands and a paper-reader subagent.",
+  "author": {
+    "name": "Agentic Assets",
+    "url": "https://www.corbis.ai/"
+  },
+  "homepage": "https://github.com/Agentic-Assets/corbis-literature-starter-kit",
+  "repository": "https://github.com/Agentic-Assets/corbis-literature-starter-kit",
+  "license": "MIT",
+  "keywords": [
+    "corbis",
+    "literature-review",
+    "research",
+    "academia",
+    "citations",
+    "economics",
+    "finance",
+    "real-estate"
+  ],
+  "skills": [
+    ".claude/skills/literature-review",
+    ".claude/skills/literature-positioning-map",
+    ".claude/skills/literature-landscape",
+    ".claude/skills/research-idea-generator",
+    ".claude/skills/finance-idea-screening",
+    ".claude/skills/verify-citations"
+  ],
+  "commands": ".claude/commands/",
+  "agents": ".claude/agents/",
+  "mcpServers": "./.mcp.json"
+}
