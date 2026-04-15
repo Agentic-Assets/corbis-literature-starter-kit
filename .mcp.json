@@ -1,8 +1,8 @@
 {
   "mcpServers": {
-    "exa": {
+    "corbis": {
       "type": "http",
-      "url": "https://www.corbis.ai/api/mcp/universal?apikey=YOUR_TOKEN"
+      "url": "https://www.corbis.ai/api/mcp/universal?apikey=${CORBIS_MCP_API_KEY}"
     }
   }
 }

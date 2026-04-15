@@ -1,0 +1,43 @@
+{
+  "name": "corbis-literature-starter-kit",
+  "version": "0.1.0",
+  "description": "Literature review and idea-screening starter kit for Codex, powered by Corbis MCP. Bundles reusable research skills for literature reviews, positioning, idea generation, citation checks, and literature landscapes.",
+  "author": {
+    "name": "Agentic Assets",
+    "url": "https://www.corbis.ai/"
+  },
+  "homepage": "https://github.com/Agentic-Assets/corbis-literature-starter-kit",
+  "repository": "https://github.com/Agentic-Assets/corbis-literature-starter-kit",
+  "license": "MIT",
+  "keywords": [
+    "corbis",
+    "literature-review",
+    "research",
+    "academia",
+    "citations",
+    "economics",
+    "finance",
+    "real-estate"
+  ],
+  "skills": "./.agents/skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Corbis Literature Starter Kit",
+    "shortDescription": "Corbis-powered literature workflows for Codex.",
+    "longDescription": "A lightweight Codex plugin for literature reviews, idea screening, citation verification, and literature landscapes. Includes six repo-defined skills and Corbis MCP connectivity for academic search and citation workflows.",
+    "developerName": "Agentic Assets",
+    "category": "Research",
+    "capabilities": [
+      "Skills",
+      "MCP",
+      "Research"
+    ],
+    "websiteURL": "https://www.corbis.ai/",
+    "defaultPrompt": [
+      "Write a literature review on climate risk and commercial real estate.",
+      "Position my paper against the closest literature.",
+      "Verify the citations in my BibTeX file."
+    ],
+    "brandColor": "#7C3AED"
+  }
+}

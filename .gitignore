@@ -40,6 +40,9 @@ Thumbs.db
 .vscode/
 .idea/
 
+# Claude Code session worktrees (per-session, do not commit)
+.claude/worktrees/
+
 # Credentials
 .env
 *.pgpass
