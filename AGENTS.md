@@ -1,6 +1,6 @@
 # Corbis Literature Starter Kit
 
-A lightweight toolkit for exploring academic literature, brainstorming research ideas, and managing citations. Powered by [Corbis](https://corbis.ai) MCP for literature search across 250,000+ academic papers.
+A lightweight toolkit for exploring academic literature, brainstorming research ideas, and managing citations. Powered by [Corbis](https://corbis.ai) MCP for literature search across 400,000+ academic papers.
 
 ## Skill routing
 
