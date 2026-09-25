@@ -119,7 +119,7 @@ AI assistants are fluent but undisciplined: they skip searches, hide provenance,
 \begin{block}{Required}
 \begin{itemize}
   \item A Corbis account
-  \item A Corbis MCP API key
+  \item OAuth sign-in to Corbis
   \item An MCP-capable AI client
 \end{itemize}
 \end{block}
@@ -136,6 +136,7 @@ AI assistants are fluent but undisciplined: they skip searches, hide provenance,
 \begin{itemize}
   \item Python 3.10+ for figure generation
   \item LaTeX for manuscript drafting
+  \item An MCP API key for key-based authentication
   \item Codex or Cursor as alternative clients
 \end{itemize}
 \end{block}
@@ -150,21 +151,23 @@ Always search before asserting novelty, importance, or data availability.
 \small
 \begin{columns}[T,onlytextwidth]
 \column{0.48\textwidth}
-\begin{block}{Step 1: Create the key}
-Open Corbis, go to \textbf{Settings > API Keys}, and create an MCP key. It starts with \texttt{corbis\_mcp\_} and is shown once.
+\begin{block}{Step 1: Use your Corbis account}
+OAuth sign-in works without an MCP API key. The repository's MCP configuration contains only the Corbis server URL.
 \end{block}
 \begin{block}{Step 2: Connect Claude Code}
 {\scriptsize\ttfamily
-claude mcp add corbis --transport http\\
-https://www.corbis.ai/api/mcp/\\
-universal?apikey=YOUR\_KEY
+cd corbis-literature-starter-kit\\
+claude
 }
 \end{block}
+Complete the OAuth sign-in when prompted.
 \begin{block}{Step 3: Work inside this repo}
 Clone the starter kit, open it in Claude Code, and run your first workflow: \texttt{/lit-review [your topic]}.
 \end{block}
 \column{0.43\textwidth}
-\includegraphics[width=\linewidth,height=0.58\textheight,keepaspectratio]{../images/corbis-api-keys.png}
+\begin{exampleblock}{Optional key-based setup}
+If your client cannot use OAuth, create an MCP API key in Corbis Settings and configure a private Authorization header. Never place a key in a URL or a committed file.
+\end{exampleblock}
 \end{columns}
 \end{frame}
 
@@ -175,8 +178,8 @@ Clone the starter kit, open it in Claude Code, and run your first workflow: \tex
 \begin{block}{Codex}
 \begin{itemize}
   \item Add Corbis to your \texttt{config.toml} (global or project-level)
-  \item Set the MCP server URL and a bearer token env var
-  \item Export your key, restart Codex, verify with \texttt{codex mcp list}
+  \item Add the MCP server URL, then run \texttt{codex mcp login corbis}
+  \item Verify the connection with \texttt{codex mcp list}
   \item Full guide: \texttt{CORBIS\_MCP\_CODEX\_GUIDE.md}
 \end{itemize}
 \end{block}
@@ -185,7 +188,7 @@ Clone the starter kit, open it in Claude Code, and run your first workflow: \tex
 \begin{itemize}
   \item Open \textbf{Settings > MCP Servers > Add}
   \item Name: \texttt{corbis}
-  \item Paste the MCP endpoint URL with your API key
+  \item Paste the MCP endpoint URL and complete OAuth sign-in
   \item Reload, then use workflow names as prompts
   \item Full guide: \texttt{CORBIS\_CURSOR\_PLUGIN.md}
 \end{itemize}

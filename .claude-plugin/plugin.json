@@ -21,14 +21,14 @@
     "real-estate"
   ],
   "skills": [
-    ".claude/skills/literature-review",
-    ".claude/skills/literature-positioning-map",
-    ".claude/skills/literature-landscape",
-    ".claude/skills/research-idea-generator",
-    ".claude/skills/finance-idea-screening",
-    ".claude/skills/verify-citations"
+    "./.claude/skills/literature-review",
+    "./.claude/skills/literature-positioning-map",
+    "./.claude/skills/literature-landscape",
+    "./.claude/skills/research-idea-generator",
+    "./.claude/skills/finance-idea-screening",
+    "./.claude/skills/verify-citations"
   ],
-  "commands": ".claude/commands/",
-  "agents": ".claude/agents/",
+  "commands": "./.claude/commands/",
+  "agents": ["./.claude/agents/paper-reader.md"],
   "mcpServers": "./.mcp.json"
 }

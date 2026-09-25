@@ -10,39 +10,39 @@ Corbis exposes a streamable HTTP MCP server at `/api/mcp/universal`, and Codex s
 
 - A Corbis account with MCP connections enabled for your plan
 - Codex installed and working
-- A Corbis MCP API key from **Settings > API Keys**
+
+An MCP API key from **Settings > API Keys** is optional.
 
 Corbis MCP API keys start with `corbis_mcp_` and are shown only once when created.
 
 ---
 
-## Recommended Setup
+## Recommended Setup: OAuth
 
 Codex stores MCP servers in `~/.codex/config.toml` for global use, or `.codex/config.toml` for a trusted project.
+
+The current CLI can add the server directly with `codex mcp add corbis --url https://www.corbis.ai/api/mcp/universal`. The equivalent configuration is:
 
 Add this server entry:
 
 ```toml
 [mcp_servers.corbis]
 url = "https://www.corbis.ai/api/mcp/universal"
-bearer_token_env_var = "CORBIS_MCP_API_KEY"
 startup_timeout_sec = 20
 tool_timeout_sec = 120
 ```
 
-Then export your key before starting Codex:
+Authenticate through Codex's OAuth flow:
 
 ```bash
-export CORBIS_MCP_API_KEY="corbis_mcp_..."
+codex mcp login corbis
 ```
 
-Restart Codex after setting the variable so the MCP server inherits it.
+This path does not require an MCP API key. Codex can open a browser for sign-in and store the resulting authorization in its own credential store.
 
-### Why this setup
+### Optional API-key setup
 
-- It keeps the API key out of `config.toml`
-- It uses Codex's native streamable HTTP MCP support
-- The same config works for both the Codex CLI and IDE extension
+If you choose key authentication, add `bearer_token_env_var = "CORBIS_MCP_API_KEY"` to the server entry instead of using OAuth, then set the variable before launching Codex. This keeps the key out of `config.toml` and sends it in a request header.
 
 ---
 
@@ -104,15 +104,14 @@ Use the same environment variable approach for auth.
 
 ## Troubleshooting
 
-### `codex mcp add` only accepts commands
+### The server is missing from Codex
 
-Some Codex builds expose `codex mcp add` as a stdio-oriented command helper. In that case, editing `config.toml` directly is the correct path for HTTP MCP servers like Corbis.
+Run `codex mcp list`. If Corbis is absent, add it with `codex mcp add corbis --url https://www.corbis.ai/api/mcp/universal`, then run `codex mcp login corbis`.
 
 ### `401 Unauthorized`
 
-- Confirm `CORBIS_MCP_API_KEY` is set in the same shell environment that launched Codex
-- Confirm the key still exists in Corbis **Settings > API Keys**
-- Regenerate the key if needed and restart Codex
+- For OAuth, run `codex mcp login corbis` again and confirm the account has access.
+- For API-key auth, confirm `CORBIS_MCP_API_KEY` is set in the environment that launched Codex and the key still exists in Corbis **Settings > API Keys**.
 
 ### Server appears, but tools do not work
 

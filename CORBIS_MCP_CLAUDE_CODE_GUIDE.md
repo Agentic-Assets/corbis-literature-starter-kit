@@ -2,7 +2,7 @@
 
 Connect Claude Code to Corbis to give your AI assistant direct access to academic research, economic data, market intelligence, and web search tools — all from your terminal.
 
-If you are using Codex instead, see [`CORBIS_MCP_CODEX_GUIDE.md`](./CORBIS_MCP_CODEX_GUIDE.md). The endpoint, API key format, and tool set are the same. The client configuration is different.
+If you are using Codex instead, see [`CORBIS_MCP_CODEX_GUIDE.md`](./CORBIS_MCP_CODEX_GUIDE.md). Both clients use the same endpoint and tool set, with client-specific setup.
 
 ---
 
@@ -13,27 +13,25 @@ If you are using Codex instead, see [`CORBIS_MCP_CODEX_GUIDE.md`](./CORBIS_MCP_C
 
 ---
 
-## Step 1: Generate an API Key
+## Step 1: Connect with OAuth
 
-1. Open Corbis and go to **Settings > API Keys**.
-2. Under **Create a new key**, enter a name (e.g. "Claude Code").
-3. Click **Create key**.
-4. **Copy the key immediately** — it is only shown once. The key starts with `corbis_mcp_`.
-
-> Tip: Create one key per device (e.g. "Laptop", "Desktop") so you can revoke a single device without disrupting others.
-
----
-
-## Step 2: Add the MCP Server to Claude Code
-
-This repository already defines Corbis in `.mcp.json`. Set the key in your environment before starting Claude Code:
+This repository's `.mcp.json` contains the Corbis HTTP URL without credentials. Open Claude Code from the repository root and complete the OAuth sign-in when prompted:
 
 ```bash
-export CORBIS_MCP_API_KEY="corbis_mcp_..."
 claude
 ```
 
-The project configuration sends the key in an Authorization header. Do not put the key in a URL or a committed file. Claude Code supports environment expansion in HTTP MCP headers.
+No Corbis MCP API key is required for this path.
+
+### Optional API-key connection
+
+If you prefer a key, create one under Corbis **Settings > API Keys**. It starts with `corbis_mcp_` and is shown only once. Put it in your secret store or shell environment as `CORBIS_MCP_API_KEY`, then create a local-scope override that sends it in an Authorization header:
+
+```bash
+claude mcp add-json --scope local corbis '{"type":"http","url":"https://www.corbis.ai/api/mcp/universal","headers":{"Authorization":"Bearer ${CORBIS_MCP_API_KEY}"}}'
+```
+
+The single quotes keep the placeholder literal in the saved configuration. Set the environment variable before launching Claude Code. Do not put the key in a URL or a committed file.
 
 ### Verify the Connection
 
@@ -41,7 +39,7 @@ Run `claude mcp list` to confirm `corbis` appears in your server list. You can a
 
 ---
 
-## Step 3: Start Using Corbis Tools
+## Step 2: Start Using Corbis Tools
 
 Once connected, Claude Code can call Corbis tools automatically when relevant. You can also ask for them directly.
 
@@ -156,8 +154,8 @@ Get national macro indicators for the US housing market
 ## Troubleshooting
 
 ### "401 Unauthorized" errors
-- Your API key may be invalid or revoked. Generate a new one in **Settings > API Keys**.
-- Confirm `CORBIS_MCP_API_KEY` is set in the environment that launched Claude Code and the project's `.mcp.json` is loaded.
+- For OAuth, use `/mcp` in Claude Code to reconnect and complete sign-in.
+- For the optional API-key override, confirm `CORBIS_MCP_API_KEY` is set in the environment that launched Claude Code and the key still exists under Corbis **Settings > API Keys**.
 
 ### Tools not appearing
 - Run `claude mcp list` to verify the server is registered.
@@ -183,7 +181,7 @@ claude mcp list
 # Remove the Corbis server
 claude mcp remove corbis
 
-# Restart Claude Code after updating CORBIS_MCP_API_KEY in your secret store or shell environment
+# The repository's URL-only .mcp.json uses OAuth; no key rotation is needed for that path
 ```
 
 To rotate your key, go to **Settings > API Keys**, click **Regenerate** on the existing key, then update `CORBIS_MCP_API_KEY` in your secret store or shell environment and restart Claude Code.

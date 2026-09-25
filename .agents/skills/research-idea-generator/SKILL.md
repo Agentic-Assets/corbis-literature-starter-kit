@@ -48,7 +48,7 @@ Use `get_paper_details_batch` on the top 5-10 results from the architecture sear
 
 Produce a 3-4 sentence internal landscape summary: what is settled, what is actively debated, where the frontier is moving. Use relative citation tiering (top 10% = foundational, next 30% = established, bottom 60% = emerging).
 
-**Save to shared files:** Write all collected papers to `output/paper_set.json` (merge by ID, preserving the union of `source_queries` and `topics`). Append search queries to `output/search_log.md`.
+**Save to shared files:** For each search, put relevant papers in a JSON array and run `python utils/paper_set.py merge --input <selected-results.json> --topic <stable-topic-slug> --query <search-query>`. Append queries to `output/search_log.md`; select the topic subset before scoring ideas.
 
 ## Phase 2: Generate candidates (internal, not shown to user)
 

@@ -88,9 +88,9 @@ When you connect an AI agent or platform (Codex, Cursor, Claude, ChatGPT, Grok, 
 
 Agents use tools by name (e.g. `search_papers`, `fred_search`, `query_corbis`) and receive JSON results. Some tools also return inline guidance to help the agent use the output correctly.
 
-### MCP API Keys
+### Authentication
 
-For the standard Corbis MCP setup, you need to include a Corbis MCP API key for tools to be accessible. Generate the key in Corbis under **Settings → API Keys**, then copy it immediately. Tokens are shown only once when created.
+OAuth is the default for clients that support it. Add the server URL and complete the client's sign-in flow; no Corbis MCP API key is needed. An API key is an optional alternative. Generate one in Corbis under **Settings → API Keys** only when you choose key authentication; it is shown once.
 
 Use the Streamable HTTP MCP URL without credentials in it:
 
@@ -104,27 +104,19 @@ If your client requires an SSE endpoint instead of Streamable HTTP, use the lega
 https://www.corbis.ai/api/mcp/sse
 ```
 
-Claude Code users can use the committed `.mcp.json`, which reads `CORBIS_MCP_API_KEY` from the environment and sends it in an Authorization header:
+Claude Code users can use the committed URL-only `.mcp.json` and complete OAuth sign-in:
 
 ```bash
-export CORBIS_MCP_API_KEY="corbis_mcp_..."
 claude
 ```
 
-For other clients, use OAuth when supported or configure an Authorization header. Do not place credentials in the URL.
+For other clients, use OAuth when supported. If using an API key, configure an Authorization header. Do not place credentials in the URL.
 
 ### Authentication Options
 
-1. **Personal MCP API Key** (recommended default for ChatGPT, Claude, Grok, Codex, Cursor, Claude Code, and Claude Desktop):
-   - Generate in Corbis: **Settings → API Keys → Create MCP Key**
-   - Format: `corbis_mcp_xxxxxxxxxxxx` (displayed once at creation)
-   - Send `Authorization: Bearer <key>` as a request header.
+1. **OAuth 2.1** (recommended for supported clients): add the server URL and complete the client-led sign-in. The client manages token storage and refresh.
 
-2. **OAuth 2.1** (advanced option for custom integrations that support OAuth):
-   - Register client at `POST /api/mcp/oauth/register`
-   - User approves scopes at consent URL
-   - Exchange code for JWT at `POST /api/mcp/oauth/token`
-   - Use JWT in `Authorization: Bearer <token>`
+2. **Personal MCP API Key** (optional): generate under **Settings → API Keys → Create MCP Key**. Keys start with `corbis_mcp_` and are displayed once. Send `Authorization: Bearer <key>` as a request header.
 
 3. **Supabase JWT** (web app context):
    - Active session token from `auth.users`
@@ -142,10 +134,9 @@ Codex supports streamable HTTP MCP servers through `config.toml`. For Corbis-spe
 
 ### Connecting from Claude Code and Claude Desktop
 
-For Claude Code, the quickest path is:
+For Claude Code, the quickest path from this repository is:
 
 ```bash
-export CORBIS_MCP_API_KEY="corbis_mcp_..."
 claude
 ```
 
@@ -156,8 +147,7 @@ For Claude Desktop-style JSON configuration, use:
   "mcpServers": {
     "corbis": {
       "type": "http",
-      "url": "https://www.corbis.ai/api/mcp/universal",
-      "headers": {"Authorization": "Bearer ${CORBIS_MCP_API_KEY}"}
+      "url": "https://www.corbis.ai/api/mcp/universal"
     }
   }
 }

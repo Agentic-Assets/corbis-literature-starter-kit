@@ -91,9 +91,9 @@ Target ~50 unique papers for comprehensive scope, ~25 for focused scope. Execute
 - If the user provided known key papers, verify they appear. If not found via search, include them manually and use `get_paper_details` to confirm details.
 
 **Save to shared data files:**
-- Write all collected papers (with `id`, `title`, `authors`, `year`, `journal`, `citedByCount`, `abstract` when available, `doi`, `source_queries`, and `topics`) to `output/paper_set.json`. If the file exists, merge and deduplicate by `id`, preserving the union of queries and topics. Add the current topic only to papers verified relevant to it.
+- Write selected relevant papers (with `id`, `title`, `authors`, `year`, `journal`, `citedByCount`, `abstract` when available, and `doi`) to a JSON array. Run `python utils/paper_set.py merge --input <selected-results.json> --topic <stable-topic-slug> --query <search-query>` for each search. The helper merges by ID and preserves the union of queries and topics.
 - Append all search queries with parameters and result counts to `output/search_log.md`.
-- Select only the current topic's relevant papers for this review and the tier ranking. Treat untagged legacy papers as candidates that need a relevance check before tagging.
+- Run `python utils/paper_set.py select --topic <stable-topic-slug> --output <topic-data.json>` and use only that subset for this review and tier ranking. Treat untagged legacy papers as candidates that need a relevance check before merging with the current topic.
 
 **Relative citation tiering:** After deduplication, sort papers selected for the current topic by `citedByCount` and assign influence tiers within that topic subset:
 

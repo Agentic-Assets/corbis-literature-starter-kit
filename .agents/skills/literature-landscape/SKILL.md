@@ -71,7 +71,7 @@ If the user points to a JSON file, reading list markdown, or .bib file from a pr
 
 **Save the dataset:**
 
-Merge newly found papers into `output/paper_set.json` by ID, preserving the union of `source_queries` and `topics`; add the current topic only to relevant papers. Append every new search to `output/search_log.md`. Select the current topic's relevant papers for figures, keeping unrelated topics out of this analysis.
+Put newly found relevant papers in a JSON array and run `python utils/paper_set.py merge --input <selected-results.json> --topic <stable-topic-slug> --query <search-query>` for each search. Append every new search to `output/search_log.md`. Then run `python utils/paper_set.py select --topic <stable-topic-slug> --output output/lit_landscape_data.json`; use that current-topic subset for figures.
 
 Write that selected subset to `output/lit_landscape_data.json` (or a topic-specific name) as a figure input snapshot. Format:
 

@@ -60,11 +60,11 @@ If your client does not support slash commands directly, use the same workflow n
 
 ## Quick Setup
 
-> You need two things: an AI assistant with MCP support and a Corbis MCP API key.
+> You need an AI assistant with MCP support and a Corbis account. OAuth works without an MCP API key in clients that support it.
 
-### 1. Get a Corbis API key
+### 1. Choose authentication
 
-Open the **[Corbis app](https://www.corbis.ai)**, go to **Settings > API Keys**, and create a key.
+Use OAuth when your MCP client offers it. To use an API key instead, open the **[Corbis app](https://www.corbis.ai)**, go to **Settings > API Keys**, and create a key.
 
 Corbis MCP keys start with `corbis_mcp_`. Copy the key when it is created. It is shown once.
 
@@ -86,31 +86,28 @@ Add Corbis to `~/.codex/config.toml` for global use, or `.codex/config.toml` for
 ```toml
 [mcp_servers.corbis]
 url = "https://www.corbis.ai/api/mcp/universal"
-bearer_token_env_var = "CORBIS_MCP_API_KEY"
 startup_timeout_sec = 20
 tool_timeout_sec = 120
 ```
 
-Then export your key before starting Codex:
+Then authenticate with OAuth:
 
 ```bash
-export CORBIS_MCP_API_KEY="corbis_mcp_..."
-codex
+codex mcp login corbis
 ```
 
-Full guide: [`CORBIS_MCP_CODEX_GUIDE.md`](CORBIS_MCP_CODEX_GUIDE.md)
+An API key is an optional alternative; the [full guide](CORBIS_MCP_CODEX_GUIDE.md) shows the bearer-token configuration.
 </details>
 
 <details>
 <summary><b>Claude Code</b></summary>
 
 ```bash
-export CORBIS_MCP_API_KEY="corbis_mcp_..."
 git clone https://github.com/Agentic-Assets/corbis-literature-starter-kit.git my-project
 cd my-project && claude
 ```
 
-The committed `.mcp.json` uses an Authorization header and reads the key from the environment.
+The committed `.mcp.json` contains only the server URL. Claude Code prompts for OAuth sign-in. The [full guide](CORBIS_MCP_CLAUDE_CODE_GUIDE.md) explains the optional API-key path.
 
 Full guide: [`CORBIS_MCP_CLAUDE_CODE_GUIDE.md`](CORBIS_MCP_CLAUDE_CODE_GUIDE.md)
 </details>
@@ -122,7 +119,7 @@ Full guide: [`CORBIS_MCP_CLAUDE_CODE_GUIDE.md`](CORBIS_MCP_CLAUDE_CODE_GUIDE.md)
 git clone https://github.com/Agentic-Assets/corbis-literature-starter-kit.git my-project
 ```
 
-Then connect the URL `https://www.corbis.ai/api/mcp/universal` in Cursor and authenticate with OAuth or an Authorization header. See [`CORBIS_CURSOR_PLUGIN.md`](CORBIS_CURSOR_PLUGIN.md) for setup.
+Then connect the URL `https://www.corbis.ai/api/mcp/universal` in Cursor and authenticate with OAuth. An Authorization header is an optional API-key alternative. See [`CORBIS_CURSOR_PLUGIN.md`](CORBIS_CURSOR_PLUGIN.md) for setup.
 
 Open the project after connecting the server. Cursor can use the same Corbis MCP tools and repo guidance.
 
@@ -137,7 +134,7 @@ Connect to this MCP endpoint:
 https://www.corbis.ai/api/mcp/universal
 ```
 
-Authenticate through OAuth when supported, or send `Authorization: Bearer YOUR_KEY` in a header. Keep keys out of URLs.
+Authenticate through OAuth when supported. An API key sent as `Authorization: Bearer YOUR_KEY` is an optional alternative. Keep keys out of URLs.
 
 Architecture and client notes: [`CORBIS_MCP_GUIDE.md`](CORBIS_MCP_GUIDE.md)
 </details>
@@ -215,7 +212,7 @@ Alternatively, install directly from GitHub:
 /plugin install github:Agentic-Assets/corbis-literature-starter-kit
 ```
 
-The plugin manifest lives at `.claude-plugin/plugin.json` and references the skills and commands that already reside under `.claude/`. A parallel Codex manifest is provided at `.codex-plugin/plugin.json` for Codex users. Set the `CORBIS_MCP_API_KEY` environment variable before using any of the literature tools.
+The plugin manifest lives at `.claude-plugin/plugin.json` and references the skills and commands that already reside under `.claude/`. A parallel Codex manifest is provided at `.codex-plugin/plugin.json` for Codex users. OAuth works without an MCP API key; set `CORBIS_MCP_API_KEY` only if you choose key authentication.
 
 ## Project Structure
 

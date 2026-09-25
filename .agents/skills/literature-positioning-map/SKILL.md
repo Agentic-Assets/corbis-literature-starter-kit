@@ -26,7 +26,7 @@ Your job is not to summarize everything ever written. Your job is to help the pa
 - If `output/paper_set.json` exists, read it first. Reuse only papers verified relevant to this topic; tag selected papers with this topic and keep other topics out of the comparison set.
 - `search_papers` (query: the core topic, `sortBy: "citedByCount"`, `matchCount: 15`) → immediately see the field's citation hierarchy. The most-cited papers are what referees will compare you to.
 - `search_papers` (query: core topic, `minYear: 2020`, `matchCount: 15`) → the recent frontier and scooping risks.
-- These two searches frame everything that follows. Save results to `output/paper_set.json` (merge by ID, preserving the union of `source_queries` and `topics`) and append queries to `output/search_log.md`.
+- These two searches frame everything that follows. For each, put relevant papers in a JSON array and run `python utils/paper_set.py merge --input <selected-results.json> --topic <stable-topic-slug> --query <search-query>`. Append queries to `output/search_log.md`, then select only this topic's papers for comparison.
 
 **Step 1 — Inner ring (direct competitors):**
 - `search_papers` (query: the exact question + method, `matchCount: 15`) → find papers doing the closest thing.
