@@ -9,7 +9,7 @@ from utils.paper_set import merge, read_papers, select, write_papers
 class PaperSetTests(unittest.TestCase):
     def test_merge_preserves_provenance_and_topic_selection(self):
         existing = [
-            {"id": "W1", "title": "Shared paper", "abstract": "Existing abstract", "topics": ["climate"], "source_queries": ["old query"]},
+            {"id": "W1", "title": "Shared paper", "abstract": "Existing abstract", "topics": ["climate"], "source_queries": ["old query"], "tier": "foundational"},
             {"id": "W2", "title": "Unrelated paper", "topics": ["banking"]},
         ]
         incoming = [
@@ -23,8 +23,21 @@ class PaperSetTests(unittest.TestCase):
         self.assertEqual(result[0]["abstract"], "Existing abstract")
         self.assertEqual(result[0]["topics"], ["climate", "insurance"])
         self.assertEqual(result[0]["source_queries"], ["old query", "new query"])
+        self.assertEqual(result[0]["source_queries_by_topic"], {"insurance": ["new query"]})
+        self.assertNotIn("tier", result[0])
         self.assertEqual([paper["id"] for paper in select(result, "insurance")], ["W1", "W3"])
         self.assertEqual([paper["id"] for paper in select(result, "banking")], ["W2"])
+
+    def test_select_discards_legacy_global_tier(self):
+        papers = [{"id": "W1", "title": "Shared", "topics": ["insurance"], "tier": "foundational"}]
+        self.assertNotIn("tier", select(papers, "insurance")[0])
+
+    def test_topic_query_count_does_not_include_other_topics(self):
+        papers = merge([], [{"id": "W1", "title": "Shared"}], "climate", "climate one")
+        papers = merge(papers, [{"id": "W1", "title": "Shared"}], "climate", "climate two")
+        papers = merge(papers, [{"id": "W1", "title": "Shared"}], "insurance", "insurance one")
+        self.assertEqual(len(papers[0]["source_queries"]), 3)
+        self.assertEqual(papers[0]["source_queries_by_topic"]["insurance"], ["insurance one"])
 
     def test_read_accepts_mcp_results_and_rejects_invalid_ids(self):
         with tempfile.TemporaryDirectory() as folder:

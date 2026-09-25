@@ -42,16 +42,31 @@ def merge(existing: list[dict], incoming: list[dict], topic: str, query: str | N
         prior = merged.get(paper_id, {})
         combined = dict(prior)
         combined.update({key: value for key, value in paper.items() if value not in (None, "", [])})
+        combined.pop("tier", None)  # Influence tiers depend on the selected topic set.
         combined["topics"] = union_strings(prior.get("topics"), paper.get("topics"), topic)
         combined["source_queries"] = union_strings(
             prior.get("source_queries"), paper.get("source_queries"), query
         )
+        prior_by_topic = prior.get("source_queries_by_topic")
+        incoming_by_topic = paper.get("source_queries_by_topic")
+        by_topic: dict[str, list[str]] = {}
+        for source in (prior_by_topic, incoming_by_topic):
+            if isinstance(source, dict):
+                for name, queries in source.items():
+                    if isinstance(name, str):
+                        by_topic[name] = union_strings(by_topic.get(name), queries)
+        by_topic[topic] = union_strings(by_topic.get(topic), query)
+        combined["source_queries_by_topic"] = by_topic
         merged[paper_id] = combined
     return list(merged.values())
 
 
 def select(papers: list[dict], topic: str) -> list[dict]:
-    return [paper for paper in papers if isinstance(paper.get("topics"), list) and topic in paper["topics"]]
+    return [
+        {key: value for key, value in paper.items() if key != "tier"}
+        for paper in papers
+        if isinstance(paper.get("topics"), list) and topic in paper["topics"]
+    ]
 
 
 def write_papers(path: Path, papers: list[dict]) -> None:

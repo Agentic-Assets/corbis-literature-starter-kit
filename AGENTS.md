@@ -81,21 +81,21 @@ Format: JSON array of paper objects:
     "journal": "...",
     "citedByCount": 2962,
     "abstract": "...",
-    "doi": "...",
+    "doi": "10.1234/example",
     "source_queries": ["query1", "query2"],
-    "topics": ["topic slug"],
-    "tier": "foundational"
+    "source_queries_by_topic": {"topic slug": ["query1", "query2"]},
+    "topics": ["topic slug"]
   }
 ]
 ```
 
 Rules:
 - If `output/paper_set.json` exists when a skill starts, read it and merge new results (deduplicate by `id`). Preserve the union of `source_queries` and `topics`; do not overwrite.
-- For the current task, use only papers verified relevant to its topic. Add that topic to each selected paper's `topics` array, including relevant legacy papers without tags. Assign citation tiers within this topic subset, not the entire shared file.
+- For the current task, use only papers verified relevant to its topic. Add that topic to each selected paper's `topics` array, including relevant legacy papers without tags. Assign citation tiers within this topic subset, not the entire shared file. Do not store a global `tier` on a shared paper.
 - Use `python utils/paper_set.py merge --input <selected-results.json> --topic <stable-topic-slug> --query <search-query>` to preserve topic and search provenance, then `python utils/paper_set.py select --topic <stable-topic-slug> --output <topic-data.json>` before ranking or plotting. The merge input contains only papers checked for relevance to that topic.
 - Corbis paper-detail tools may provide metadata and abstracts without full text. Read a paper PDF or another primary source before making claims that require its body text.
-- The `source_queries` field tracks which search queries surfaced this paper (for hub detection).
-- The `tier` field is assigned after collection using relative tiering (see below).
+- The `source_queries` field tracks all search queries that surfaced this paper. Use `source_queries_by_topic[current_topic]` for hub detection within the current topic.
+- Assign `tier` only after selecting the current topic's papers; the shared paper set omits it.
 
 ### `output/search_log.md`
 
@@ -121,7 +121,7 @@ Citation thresholds vary by field. Instead of fixed cutoffs (500/100), use relat
 | 2 | **Established** | Next 30% by `citedByCount` | Synthesized claims, 1-2 sentences or grouped parenthetically |
 | 3 | **Emerging** | Bottom 60%, especially recent papers | Grouped into frontier paragraphs, cited parenthetically |
 
-A paper that appears in 3+ different search queries (`source_queries` length >= 3) is promoted one tier regardless of citation rank.
+A paper that appears in 3+ different searches for the current topic (`source_queries_by_topic[current_topic]` length >= 3) is promoted one tier regardless of citation rank. Do not count queries from another topic.
 
 ## Lab notebook
 

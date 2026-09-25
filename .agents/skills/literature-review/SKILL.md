@@ -93,7 +93,7 @@ Target ~50 unique papers for comprehensive scope, ~25 for focused scope. Execute
 **Save to shared data files:**
 - Write selected relevant papers (with `id`, `title`, `authors`, `year`, `journal`, `citedByCount`, `abstract` when available, and `doi`) to a JSON array. Run `python utils/paper_set.py merge --input <selected-results.json> --topic <stable-topic-slug> --query <search-query>` for each search. The helper merges by ID and preserves the union of queries and topics.
 - Append all search queries with parameters and result counts to `output/search_log.md`.
-- Run `python utils/paper_set.py select --topic <stable-topic-slug> --output <topic-data.json>` and use only that subset for this review and tier ranking. Treat untagged legacy papers as candidates that need a relevance check before merging with the current topic.
+- Run `python utils/paper_set.py select --topic <stable-topic-slug> --output <topic-data.json>` and use only that subset for this review and tier ranking. Count only `source_queries_by_topic[<stable-topic-slug>]` for hub promotion. Treat untagged legacy papers as candidates that need a relevance check before merging with the current topic.
 
 **Relative citation tiering:** After deduplication, sort papers selected for the current topic by `citedByCount` and assign influence tiers within that topic subset:
 
@@ -103,7 +103,7 @@ Target ~50 unique papers for comprehensive scope, ~25 for focused scope. Execute
 | 2 | **Established** | Next 30% by citation count | 1-2 sentences each, or grouped into synthesized claims with 2-3 papers per sentence. |
 | 3 | **Emerging** | Bottom 60%, especially papers published in the last 5 years | Grouped into frontier paragraphs. Cited parenthetically to support collective findings. |
 
-A paper that appears across 3+ separate search queries is likely a network hub. Promote it one tier (e.g., Established to Foundational) regardless of citation rank.
+A paper that appears in 3+ separate searches for this topic, as recorded in `source_queries_by_topic[<stable-topic-slug>]`, is likely a network hub. Promote it one tier (e.g., Established to Foundational) regardless of citation rank. Do not count another topic's queries.
 
 Corbis paper-detail tools may return only metadata and abstracts. Use a paper PDF or another primary source before making claims about its full methods, mechanism, or results beyond the abstract.
 
