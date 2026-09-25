@@ -1,9 +1,14 @@
 import json
+import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
 
 from utils.paper_set import merge, read_papers, select, write_papers
+
+
+SCRIPT = Path(__file__).resolve().parents[1] / "utils" / "paper_set.py"
 
 
 class PaperSetTests(unittest.TestCase):
@@ -53,6 +58,46 @@ class PaperSetTests(unittest.TestCase):
             path = Path(folder) / "paper_set.json"
             write_papers(path, [{"id": "W1", "title": "Yönder"}])
             self.assertEqual(read_papers(path)[0]["title"], "Yönder")
+
+    def test_cli_missing_required_input_fails_without_writing_dataset(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            dataset = root / "paper_set.json"
+            result = subprocess.run(
+                [sys.executable, str(SCRIPT), "merge", "--dataset", str(dataset),
+                 "--input", str(root / "missing.json"), "--topic", "banking"],
+                capture_output=True, text=True, check=False,
+            )
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("Paper set operation failed", result.stderr)
+            self.assertFalse(dataset.exists())
+
+    def test_cli_merge_bootstraps_new_dataset_from_existing_input(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            dataset = root / "paper_set.json"
+            incoming = root / "selected.json"
+            incoming.write_text(json.dumps([{"id": "W1", "title": "Paper"}]), encoding="utf-8")
+            result = subprocess.run(
+                [sys.executable, str(SCRIPT), "merge", "--dataset", str(dataset),
+                 "--input", str(incoming), "--topic", "banking", "--query", "bank lending"],
+                capture_output=True, text=True, check=False,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(read_papers(dataset)[0]["source_queries_by_topic"], {"banking": ["bank lending"]})
+
+    def test_cli_missing_select_dataset_fails_without_writing_output(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            output = root / "selected.json"
+            result = subprocess.run(
+                [sys.executable, str(SCRIPT), "select", "--dataset", str(root / "missing.json"),
+                 "--topic", "banking", "--output", str(output)],
+                capture_output=True, text=True, check=False,
+            )
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("Paper set operation failed", result.stderr)
+            self.assertFalse(output.exists())
 
 
 if __name__ == "__main__":

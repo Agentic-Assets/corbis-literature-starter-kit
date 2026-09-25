@@ -7,9 +7,11 @@ import json
 from pathlib import Path
 
 
-def read_papers(path: Path) -> list[dict]:
+def read_papers(path: Path, *, allow_missing: bool = False) -> list[dict]:
     if not path.exists():
-        return []
+        if allow_missing:
+            return []
+        raise FileNotFoundError(path)
     value = json.loads(path.read_text(encoding="utf-8"))
     if isinstance(value, dict):
         value = value.get("results")
@@ -90,12 +92,12 @@ def main() -> int:
     select_parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     try:
-        papers = read_papers(args.dataset)
         if args.action == "merge":
+            papers = read_papers(args.dataset, allow_missing=True)
             papers = merge(papers, read_papers(args.input), args.topic, args.query)
             write_papers(args.dataset, papers)
         else:
-            papers = select(papers, args.topic)
+            papers = select(read_papers(args.dataset), args.topic)
             write_papers(args.output, papers)
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         parser.exit(2, f"Paper set operation failed: {exc}\n")
