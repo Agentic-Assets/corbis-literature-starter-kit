@@ -152,7 +152,7 @@ When asked to generate ideas (not just screen them):
 1. `search_papers` (query: the core question, `sortBy: "citedByCount"`, `matchCount: 15`) — immediately see which papers define this space. High-citation close papers are the biggest contribution threats.
 2. `search_papers` (query: the core question, `minYear: 2020`, `matchCount: 15`) — catch the recent frontier. Low-citation recent papers are scooping threats.
 
-Save results to `output/paper_set.json` (merge by ID, preserving the union of `source_queries` and `topics`) and append queries to `output/search_log.md`.
+For each search, put relevant papers in a JSON array and run `python utils/paper_set.py merge --input <selected-results.json> --topic <stable-topic-slug> --query <search-query>`. Append queries to `output/search_log.md` and use only papers selected for this topic in novelty judgments.
 
 ### Novelty verification chain
 3. `search_papers` (query: the specific idea phrased as a research question, `matchCount: 15`) — find closest existing work by relevance. Phrase the query like a research question, not keywords.

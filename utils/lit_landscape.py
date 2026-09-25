@@ -170,6 +170,11 @@ def load_papers(path: str) -> pd.DataFrame:
     with open(path) as f:
         papers = json.load(f)
 
+    if not isinstance(papers, list) or not papers or not all(
+        isinstance(paper, dict) for paper in papers
+    ):
+        raise ValueError("Input must be a nonempty JSON array of paper objects")
+
     df = pd.DataFrame(papers)
 
     # Ensure required columns exist
@@ -184,8 +189,12 @@ def load_papers(path: str) -> pd.DataFrame:
 
     df["year"] = pd.to_numeric(df["year"], errors="coerce")
     df["citedByCount"] = pd.to_numeric(df["citedByCount"], errors="coerce").fillna(0)
-    df = df.dropna(subset=["year"])
+    df = df[np.isfinite(df["year"])]
+    if df.empty:
+        raise ValueError("No papers have a valid year; no figures can be generated")
     df["year"] = df["year"].astype(int)
+    df["abstract"] = df["abstract"].fillna("").astype(str)
+    df["journal"] = df["journal"].fillna("Unknown").astype(str)
 
     return df
 
@@ -233,6 +242,18 @@ def extract_features(df: pd.DataFrame) -> pd.DataFrame:
     df["methods"] = df["abstract"].apply(detect_methods)
     df["setting"] = df["abstract"].apply(detect_setting)
     return df
+
+
+def year_bins(years: pd.Series, bin_size: int) -> tuple[list[int], list[str]]:
+    """Return left-closed bins that include the latest observed year."""
+    if bin_size < 1:
+        raise ValueError("Year bin size must be a positive integer")
+    min_year = int(years.min())
+    max_year = int(years.max())
+    starts = list(range(min_year, max_year + 1, bin_size))
+    bins = starts + [starts[-1] + bin_size]
+    labels = [f"{start}-{min(start + bin_size - 1, max_year)}" for start in starts]
+    return bins, labels
 
 
 # ---------------------------------------------------------------------------
@@ -339,18 +360,11 @@ def fig_journals(df: pd.DataFrame, outdir: Path, top_n: int = 12):
 
 def fig_themes(df: pd.DataFrame, outdir: Path, top_n: int = 15, bin_size: int = 3):
     """Thematic evolution heatmap: keyword frequency across year bins."""
-    # Create year bins
-    min_year = int(df["year"].min())
-    max_year = int(df["year"].max())
-    bins = list(range(min_year, max_year + bin_size, bin_size))
-    bin_labels = [f"{b}-{min(b + bin_size - 1, max_year)}" for b in bins[:-1]]
-    if not bin_labels:
-        bin_labels = [f"{min_year}-{max_year}"]
-        bins = [min_year, max_year + 1]
+    bins, bin_labels = year_bins(df["year"], bin_size)
 
     df_copy = df.copy()
     df_copy["year_bin"] = pd.cut(
-        df_copy["year"], bins=bins, labels=bin_labels[: len(bins) - 1], right=False
+        df_copy["year"], bins=bins, labels=bin_labels, right=False
     )
 
     # Get top keywords across all abstracts
@@ -361,7 +375,7 @@ def fig_themes(df: pd.DataFrame, outdir: Path, top_n: int = 15, bin_size: int = 
     matrix = []
     for kw in keyword_list:
         row = []
-        for label in bin_labels[: len(bins) - 1]:
+        for label in bin_labels:
             subset = df_copy[df_copy["year_bin"] == label]
             count = sum(
                 1
@@ -379,8 +393,8 @@ def fig_themes(df: pd.DataFrame, outdir: Path, top_n: int = 15, bin_size: int = 
     fig, ax = plt.subplots(figsize=(10, max(5, top_n * 0.35)))
     im = ax.imshow(matrix, aspect="auto", cmap="YlOrRd")
 
-    ax.set_xticks(range(len(bin_labels[: len(bins) - 1])))
-    ax.set_xticklabels(bin_labels[: len(bins) - 1], rotation=45, ha="right", fontsize=8)
+    ax.set_xticks(range(len(bin_labels)))
+    ax.set_xticklabels(bin_labels, rotation=45, ha="right", fontsize=8)
     ax.set_yticks(range(len(keyword_list)))
     ax.set_yticklabels(keyword_list, fontsize=8)
     ax.set_title("Thematic Evolution")
@@ -404,22 +418,16 @@ def fig_themes(df: pd.DataFrame, outdir: Path, top_n: int = 15, bin_size: int = 
 
 def fig_methods(df: pd.DataFrame, outdir: Path, bin_size: int = 3):
     """Methods evolution: stacked area of identification strategies over time."""
-    min_year = int(df["year"].min())
-    max_year = int(df["year"].max())
-    bins = list(range(min_year, max_year + bin_size, bin_size))
-    bin_labels = [f"{b}-{min(b + bin_size - 1, max_year)}" for b in bins[:-1]]
-    if not bin_labels:
-        print("  Skipped fig_methods: not enough year range")
-        return None
+    bins, bin_labels = year_bins(df["year"], bin_size)
 
     df_copy = df.copy()
     df_copy["year_bin"] = pd.cut(
-        df_copy["year"], bins=bins, labels=bin_labels[: len(bins) - 1], right=False
+        df_copy["year"], bins=bins, labels=bin_labels, right=False
     )
 
     methods_list = list(METHOD_PATTERNS.keys())
     data = defaultdict(list)
-    for label in bin_labels[: len(bins) - 1]:
+    for label in bin_labels:
         subset = df_copy[df_copy["year_bin"] == label]
         for method in methods_list:
             count = sum(1 for methods in subset["methods"] if method in methods)
@@ -432,7 +440,7 @@ def fig_methods(df: pd.DataFrame, outdir: Path, bin_size: int = 3):
         return None
 
     fig, ax = plt.subplots(figsize=(10, 5))
-    x = range(len(bin_labels[: len(bins) - 1]))
+    x = range(len(bin_labels))
     bottom = np.zeros(len(x))
 
     for i, method in enumerate(active_methods):
@@ -448,7 +456,7 @@ def fig_methods(df: pd.DataFrame, outdir: Path, bin_size: int = 3):
         bottom += values
 
     ax.set_xticks(list(x))
-    ax.set_xticklabels(bin_labels[: len(bins) - 1], rotation=45, ha="right", fontsize=8)
+    ax.set_xticklabels(bin_labels, rotation=45, ha="right", fontsize=8)
     ax.set_ylabel("Number of papers")
     ax.set_title("Research Methods Over Time")
     ax.legend(fontsize=8, loc="upper left", frameon=False)
@@ -555,7 +563,7 @@ FIGURE_REGISTRY = {
 }
 
 
-def main():
+def main() -> int:
     parser = argparse.ArgumentParser(description="Literature Landscape Figure Generator")
     parser.add_argument("data", help="Path to JSON file with paper metadata")
     parser.add_argument(
@@ -581,6 +589,8 @@ def main():
     )
 
     args = parser.parse_args()
+    if args.bin_size < 1:
+        parser.error("--bin-size must be a positive integer")
 
     # Resolve figures
     if "all" in args.figures:
@@ -590,7 +600,11 @@ def main():
 
     # Load and process
     print(f"Loading papers from {args.data}...")
-    df = load_papers(args.data)
+    try:
+        df = load_papers(args.data)
+    except (OSError, ValueError) as exc:
+        print(f"ERROR loading papers: {exc}", file=sys.stderr)
+        return 1
     print(f"  {len(df)} papers loaded ({int(df['year'].min())}-{int(df['year'].max())})")
 
     df = extract_features(df)
@@ -604,22 +618,23 @@ def main():
 
     # Generate figures
     print(f"\nGenerating {len(figures)} figures...")
+    failures = []
     for fig_key in figures:
         name, func = FIGURE_REGISTRY[fig_key]
         print(f"\n  [{fig_key}] {name}")
         try:
             if fig_key == "timeline":
-                func(df, outdir, group_by=args.group_timeline_by)
+                result = func(df, outdir, group_by=args.group_timeline_by)
             elif fig_key == "citations":
-                func(df, outdir, label_top_n=args.label_top_n)
+                result = func(df, outdir, label_top_n=args.label_top_n)
             elif fig_key == "themes":
-                func(df, outdir, bin_size=args.bin_size)
+                result = func(df, outdir, bin_size=args.bin_size)
             elif fig_key == "methods":
-                func(df, outdir, bin_size=args.bin_size)
+                result = func(df, outdir, bin_size=args.bin_size)
             elif fig_key == "gapmap":
                 row_labels = None if args.gapmap_rows == "setting" else args.gapmap_rows.split(",")
                 col_labels = None if args.gapmap_cols == "methods" else args.gapmap_cols.split(",")
-                func(
+                result = func(
                     df,
                     outdir,
                     row_dim="setting" if row_labels is None else "custom",
@@ -628,12 +643,19 @@ def main():
                     col_labels=col_labels,
                 )
             else:
-                func(df, outdir)
+                result = func(df, outdir)
+            if result is None:
+                failures.append(fig_key)
         except Exception as e:
-            print(f"  ERROR generating {fig_key}: {e}")
+            failures.append(fig_key)
+            print(f"  ERROR generating {fig_key}: {e}", file=sys.stderr)
 
+    if failures:
+        print(f"\nIncomplete. Figures not generated: {', '.join(failures)}", file=sys.stderr)
+        return 1
     print(f"\nDone. Figures saved to {outdir}/")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
