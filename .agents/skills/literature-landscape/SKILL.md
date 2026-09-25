@@ -51,11 +51,11 @@ If the user provides a topic but no existing data, run searches to build the dat
 
 **Option A — Use existing paper_set.json (preferred):**
 
-If `output/paper_set.json` exists, read it. This file is written by `/lit-review`, `/brainstorm`, `/lit-search`, and `/idea`. If it contains 40+ papers on the topic, use it directly. If it's small (<40), supplement with 2-3 `search_papers` queries.
+If `output/paper_set.json` exists, read it. Select only papers verified relevant to the current topic, including relevant legacy papers without topic tags. If the selected set has 40+ papers, use it directly. If it is small (<40), supplement with 2-3 `search_papers` queries.
 
 **Option B — Fresh search (no existing data):**
 
-Run 4-5 `search_papers` queries with `matchCount: 20` each, varying keywords and year ranges to cover the topic broadly. Goal: 80-100 papers with metadata. For each paper, ensure you have: title, authors, year, journal, citedByCount, abstract, and fullText when available.
+Run 4-5 `search_papers` queries with `matchCount: 20` each, varying keywords and year ranges to cover the topic broadly. Goal: 80-100 papers with metadata. For each paper, collect title, authors, year, journal, citedByCount, and abstract when available. Corbis paper-detail tools may not return full text.
 
 Call `get_paper_details_batch` (up to 25 IDs per call) on papers missing citation counts or abstracts. Prioritize high-citation and recent papers.
 
@@ -71,7 +71,9 @@ If the user points to a JSON file, reading list markdown, or .bib file from a pr
 
 **Save the dataset:**
 
-Write the paper data to a JSON file at `output/lit_landscape_data.json` (or a topic-specific name). Format:
+Merge newly found papers into `output/paper_set.json` by ID, preserving the union of `source_queries` and `topics`; add the current topic only to relevant papers. Append every new search to `output/search_log.md`. Select the current topic's relevant papers for figures, keeping unrelated topics out of this analysis.
+
+Write that selected subset to `output/lit_landscape_data.json` (or a topic-specific name) as a figure input snapshot. Format:
 
 ```json
 [

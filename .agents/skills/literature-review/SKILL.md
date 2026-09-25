@@ -15,12 +15,12 @@ Write a comprehensive, structured literature review on a user-specified topic. T
 
 ## Inputs to collect
 
-Before starting, confirm these with the user:
+Use the following defaults when the user provides a topic. Ask only for an input that is required by the chosen output format and cannot be inferred from the project.
 
 | Input | Required? | Default |
 |---|---|---|
 | Topic or research question | Yes | — |
-| Output format: `markdown` / `latex-section` / `latex-standalone` | Yes | `markdown` |
+| Output format: `markdown` / `latex-section` / `latex-standalone` | No | `markdown` |
 | Scope: `quick` (~15 papers, field orientation) / `focused` (~25 papers) / `comprehensive` (~50 papers) | No | `comprehensive` |
 | Target `.tex` file (if `latex-section`) | If applicable | — |
 | Existing `.bib` file path | No | Auto-detect or create new |
@@ -28,7 +28,7 @@ Before starting, confirm these with the user:
 | Time period filter | No | All years |
 | Specific journals to emphasize | No | — |
 
-If the user provides a topic and format in their initial message, proceed without asking. Fill defaults for anything not specified.
+If the user provides a topic, proceed with defaults for anything not specified.
 
 ## Workflow
 
@@ -91,10 +91,11 @@ Target ~50 unique papers for comprehensive scope, ~25 for focused scope. Execute
 - If the user provided known key papers, verify they appear. If not found via search, include them manually and use `get_paper_details` to confirm details.
 
 **Save to shared data files:**
-- Write all collected papers (with `id`, `title`, `authors`, `year`, `journal`, `citedByCount`, `abstract`, `fullText` when available, `doi`, `source_queries`) to `output/paper_set.json`. If the file exists, merge and deduplicate by `id`.
+- Write all collected papers (with `id`, `title`, `authors`, `year`, `journal`, `citedByCount`, `abstract` when available, `doi`, `source_queries`, and `topics`) to `output/paper_set.json`. If the file exists, merge and deduplicate by `id`, preserving the union of queries and topics. Add the current topic only to papers verified relevant to it.
 - Append all search queries with parameters and result counts to `output/search_log.md`.
+- Select only the current topic's relevant papers for this review and the tier ranking. Treat untagged legacy papers as candidates that need a relevance check before tagging.
 
-**Relative citation tiering:** After deduplication, sort all collected papers by `citedByCount` and assign influence tiers using relative ranking within the collected set:
+**Relative citation tiering:** After deduplication, sort papers selected for the current topic by `citedByCount` and assign influence tiers within that topic subset:
 
 | Tier | Label | Rule | Treatment in the review |
 |---|---|---|---|
@@ -104,7 +105,7 @@ Target ~50 unique papers for comprehensive scope, ~25 for focused scope. Execute
 
 A paper that appears across 3+ separate search queries is likely a network hub. Promote it one tier (e.g., Established to Foundational) regardless of citation rank.
 
-When a paper has `fullText` available in the paper set, use it (not just the abstract) to make more informed judgments about mechanism, method, and contribution.
+Corbis paper-detail tools may return only metadata and abstracts. Use a paper PDF or another primary source before making claims about its full methods, mechanism, or results beyond the abstract.
 
 **Ranking criteria** (for deciding which papers to keep when cutting to target count):
 1. Direct relevance to the topic
@@ -207,8 +208,8 @@ Follow all project writing norms (`references/writing-norms.md`, `references/ban
 
 After writing the review:
 
-1. Collect all paper IDs cited in the review.
-2. `export_citations` (list of paper IDs, format: `bibtex`) to generate BibTeX entries.
+1. Collect all paper IDs cited in the review and confirm their metadata with `get_paper_details_batch` (up to 25 IDs per call).
+2. Call `export_citations` with `citations: [verified paper metadata objects]` and `formats: ["bibtex"]`. This formats supplied metadata; it does not verify it. Write the returned BibTeX content to the chosen file, then run `verify_bibtex` on that content and reconcile any corrections or unresolved entries.
 3. Check for an existing `.bib` file:
    - If the user specified one, read it and append new entries (skip duplicates by checking cite keys).
    - If none specified, look for `*.bib` files in the project. If found, ask the user which to use.
@@ -218,7 +219,7 @@ After writing the review:
      - `latex-standalone` format: `paper/literature_review/references.bib`
 4. Write the `.bib` file.
 
-For papers where `export_citations` does not return a result (e.g., the paper was mentioned by the user but not found in Corbis), construct a manual BibTeX entry from known information and flag it for the user to verify.
+For papers that cannot be verified against Corbis or another primary source, flag the missing reference and leave it out of the verified bibliography until its metadata is checked.
 
 #### Output by format
 

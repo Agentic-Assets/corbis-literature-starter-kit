@@ -17,4 +17,4 @@ Produce:
 - Closest 3-5 papers with specific differentiation
 - A draft contribution paragraph
 - A related-literature outline
-- BibTeX export of all cited papers via `export_citations`
+- BibTeX export of verified paper metadata via `export_citations` (`citations` objects, `formats: ["bibtex"]`), followed by `verify_bibtex`

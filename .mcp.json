@@ -2,7 +2,10 @@
   "mcpServers": {
     "corbis": {
       "type": "http",
-      "url": "https://www.corbis.ai/api/mcp/universal?apikey=${CORBIS_MCP_API_KEY}"
+      "url": "https://www.corbis.ai/api/mcp/universal",
+      "headers": {
+        "Authorization": "Bearer ${CORBIS_MCP_API_KEY}"
+      }
     }
   }
 }

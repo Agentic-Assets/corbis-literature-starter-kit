@@ -1,6 +1,6 @@
 # Skills Guide
 
-How to use the 6 research workflows in this starter kit. All workflows search [Corbis](https://www.corbis.ai) (250,000+ papers) before making claims and export BibTeX citations automatically.
+How to use the 6 research workflows in this starter kit. Research workflows search [Corbis](https://www.corbis.ai) before making literature claims. Check the live site before quoting a corpus size. Citation workflows verify records before exporting BibTeX.
 
 In Claude Code, these are available as slash commands. In Codex, Cursor, and other MCP clients, use the same workflow names and examples below as prompt templates.
 
@@ -40,6 +40,6 @@ If your assistant supports repo-defined agents, use the paper-reader prompt:
 
 ## Notes
 
-- Literature reviews produce BibTeX citations automatically via `export_citations`
+- Literature reviews verify discovered paper metadata, then format it via `export_citations`; the export tool alone does not verify a record.
 - Results are saved to `notes/` and `output/` with lab notebook entries
 - If your client reads `CLAUDE.md` and `.claude/` directly, it can route requests automatically. Otherwise, use the table above as the manual workflow guide.
