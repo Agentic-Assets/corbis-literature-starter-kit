@@ -1,6 +1,8 @@
+READ ~/AGENTS.md FIRST (skip if missing).
+
 # Corbis Literature Starter Kit
 
-A lightweight toolkit for exploring academic literature, brainstorming research ideas, and managing citations. Powered by [Corbis](https://corbis.ai) MCP for literature search across 400,000+ academic papers.
+A lightweight toolkit for exploring academic literature, brainstorming research ideas, and managing citations. Powered by [Corbis](https://corbis.ai) MCP. Check the live Corbis site before quoting a corpus size.
 
 ## Skill routing
 
@@ -21,7 +23,7 @@ Before responding to any research-related prompt, check whether a skill applies.
 
 Available tools:
 - `search_papers`, `get_paper_details`, `get_paper_details_batch`, `top_cited_articles` -- literature search
-- `export_citations`, `format_citation` -- citation management
+- `export_citations`, `format_citation`, `verify_bibtex` -- citation management
 - `search_datasets` -- data discovery (for idea screening)
 - `fred_search`, `fred_series_batch` -- macro data context
 - `get_market_data`, `compare_markets`, `search_markets`, `get_market_trends` -- CRE market intelligence
@@ -32,13 +34,13 @@ Key principles:
 - Use `sortBy: "citedByCount"` to find the most influential papers on a topic
 - Use `get_paper_details_batch` (up to 25 IDs) instead of repeated `get_paper_details` calls
 - Use `top_cited_articles` with the `query` parameter to find highly cited papers on a specific topic within journals
-- Use `export_citations` (format: `bibtex`) to generate bibliography entries
+- Verify discovered paper metadata, then use `export_citations` with `citations: [paper objects]` and `formats: ["bibtex"]`. Export alone does not verify supplied metadata.
 
 See `CORBIS_MCP_TOOL_REFERENCE.md` for full tool documentation.
 See `CORBIS_MCP_GUIDE.md` for MCP server architecture and authentication.
 See `CORBIS_MCP_CODEX_GUIDE.md` for Codex setup.
-See `CORBIS_MCP_CLAUDE_CODE_GUIDE.md` for Codex setup.
-See `CORBIS_CURSOR_PLUGIN.md` for Cursor plugin setup.
+See `CORBIS_MCP_CLAUDE_CODE_GUIDE.md` for Claude Code setup.
+See `CORBIS_CURSOR_PLUGIN.md` for Cursor MCP setup.
 
 ## Writing quality
 
@@ -79,17 +81,18 @@ Format: JSON array of paper objects:
     "journal": "...",
     "citedByCount": 2962,
     "abstract": "...",
-    "fullText": "...",
     "doi": "...",
     "source_queries": ["query1", "query2"],
+    "topics": ["topic slug"],
     "tier": "foundational"
   }
 ]
 ```
 
 Rules:
-- If `output/paper_set.json` exists when a skill starts, read it and merge new results (deduplicate by `id`). Do not overwrite.
-- The `fullText` field is included when available from `get_paper_details`. Use it for deeper analysis (method detection, contribution assessment) when present.
+- If `output/paper_set.json` exists when a skill starts, read it and merge new results (deduplicate by `id`). Preserve the union of `source_queries` and `topics`; do not overwrite.
+- For the current task, use only papers verified relevant to its topic. Add that topic to each selected paper's `topics` array, including relevant legacy papers without tags. Assign citation tiers within this topic subset, not the entire shared file.
+- Corbis paper-detail tools may provide metadata and abstracts without full text. Read a paper PDF or another primary source before making claims that require its body text.
 - The `source_queries` field tracks which search queries surfaced this paper (for hub detection).
 - The `tier` field is assigned after collection using relative tiering (see below).
 
@@ -125,7 +128,7 @@ Every skill that produces a deliverable appends a dated entry to `notes/lab_note
 
 ## Paper-reader agent
 
-The paper-reader agent (`.Codex/agents/paper-reader.md`) can read and summarize academic PDFs. After a literature search identifies the top 3-5 most central papers, recommend that the user run the paper-reader on those papers for deeper understanding before writing synthesis claims.
+The paper-reader agent (`.claude/agents/paper-reader.md`) can read and summarize academic PDFs. After a literature search identifies the top 3-5 most central papers, recommend that the user run the paper-reader on those papers for deeper understanding before writing synthesis claims.
 
 ## Defaults
 

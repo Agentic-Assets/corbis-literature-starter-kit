@@ -1,16 +1,9 @@
 ---
-description: Verify all citations against bibliography
+description: Verify every BibTeX entry and check manuscript citation keys when available
 ---
 
-Run the `verify-citations` skill on this paper.
+Run the `verify-citations` skill for the following file or project:
 
 $ARGUMENTS
 
-Steps:
-1. Find the main `.tex` file in the project (check `paper/`, `latex_template/`, or the root directory). If multiple `.tex` files exist, ask the user which one to audit. Extract all `\cite{KEY}` and `\citep{KEY}` commands.
-2. Find the `.bib` file (check the same directory as the `.tex` file, then the project root). Read the full BibTeX database.
-3. For each citation key, check it exists in `.bib` and verify author, title, year, journal via `search_papers` and `get_paper_details`.
-4. Classify each citation: OK, PARTIAL, MISMATCH, UNVERIFIED, or MISSING.
-5. Output a verification report with flagged entries.
-
-Process citations in batches of 5 to respect rate limits.
+Audit the complete `.bib` file with `verify_bibtex`, including uncited entries. If a manuscript is present, check its citation keys, including `\citet`, against that bibliography. Report corrections, unresolved entries, parse errors, missing keys, and unused entries. Do not silently change references.

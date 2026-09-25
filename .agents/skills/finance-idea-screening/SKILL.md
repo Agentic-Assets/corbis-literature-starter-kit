@@ -148,11 +148,11 @@ When asked to generate ideas (not just screen them):
 **Never claim an idea is novel without searching first.** Use this exact sequence:
 
 ### Check existing data, then architecture and frontier (always first)
-0. If `output/paper_set.json` exists, read it. Papers already collected for this topic reduce redundant searching.
+0. If `output/paper_set.json` exists, read it. Reuse only papers verified relevant to this topic; tag those papers with the topic and leave unrelated papers out of novelty judgments.
 1. `search_papers` (query: the core question, `sortBy: "citedByCount"`, `matchCount: 15`) — immediately see which papers define this space. High-citation close papers are the biggest contribution threats.
 2. `search_papers` (query: the core question, `minYear: 2020`, `matchCount: 15`) — catch the recent frontier. Low-citation recent papers are scooping threats.
 
-Save results to `output/paper_set.json` (merge if exists) and append queries to `output/search_log.md`.
+Save results to `output/paper_set.json` (merge by ID, preserving the union of `source_queries` and `topics`) and append queries to `output/search_log.md`.
 
 ### Novelty verification chain
 3. `search_papers` (query: the specific idea phrased as a research question, `matchCount: 15`) — find closest existing work by relevance. Phrase the query like a research question, not keywords.
@@ -171,8 +171,8 @@ Save results to `output/paper_set.json` (merge if exists) and append queries to 
 ### For real-estate ideas specifically
 - `get_market_data` (metro name) — current CRE fundamentals to assess whether the phenomenon is economically relevant now.
 - `search_markets` (criteria) — find markets with the characteristics needed for the natural experiment.
-- `export_citations` (format: `bibtex`) — export BibTeX entries for the 3-5 closest papers identified during the novelty verification chain. Offer this after the Idea Card is produced.
-- `format_citation` — format individual references from the screening results for inclusion in notes or memos.
+- After confirming the 3-5 closest papers with `get_paper_details_batch`, call `export_citations` with `citations: [paper metadata objects]` and `formats: ["bibtex"]`. Check the returned content with `verify_bibtex`; export alone does not verify metadata.
+- `format_citation` takes `papers: [paper metadata objects]` and a `style` such as `"apa"` for references in notes or memos.
 
 ## Preferred outputs
 

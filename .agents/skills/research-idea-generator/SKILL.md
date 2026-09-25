@@ -36,7 +36,7 @@ If the user provides a topic and constraints in their initial message, proceed w
 
 ## Phase 1: Map the landscape
 
-**Check for existing data first:** If `output/paper_set.json` exists, read it. If it contains papers relevant to the user's topic, use them as the starting point and supplement with targeted searches for gaps. This avoids redundant searching when the user has already run `/lit-review` or `/lit-search`.
+**Check for existing data first:** If `output/paper_set.json` exists, read it. Reuse only papers verified relevant to the user's topic; add that topic to selected papers' `topics` arrays. Supplement with targeted searches for gaps.
 
 Always open with the two-search pattern, then supplement:
 
@@ -48,7 +48,7 @@ Use `get_paper_details_batch` on the top 5-10 results from the architecture sear
 
 Produce a 3-4 sentence internal landscape summary: what is settled, what is actively debated, where the frontier is moving. Use relative citation tiering (top 10% = foundational, next 30% = established, bottom 60% = emerging).
 
-**Save to shared files:** Write all collected papers to `output/paper_set.json` (merge if exists). Append search queries to `output/search_log.md`.
+**Save to shared files:** Write all collected papers to `output/paper_set.json` (merge by ID, preserving the union of `source_queries` and `topics`). Append search queries to `output/search_log.md`.
 
 ## Phase 2: Generate candidates (internal, not shown to user)
 
@@ -232,7 +232,7 @@ Suggest running `/idea` on the most promising candidate for full screening. Note
 - `fred_search` (keywords) — find relevant macro series
 
 ### After generation
-- `export_citations` (format: `bibtex`) — export BibTeX for closest papers identified during generation
+- For the closest verified papers, call `export_citations` with `citations: [paper metadata objects]` and `formats: ["bibtex"]`; run `verify_bibtex` on the returned content before calling the bibliography verified.
 
 ## Guardrails
 

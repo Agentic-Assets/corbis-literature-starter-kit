@@ -11,7 +11,7 @@ Complete reference for all Corbis MCP tools. Use this guide to understand each t
 
 ### `search_papers` (Tier 1)
 
-Hybrid semantic + keyword search across ~250K academic papers. Uses Reciprocal Rank Fusion (RRF) to combine vector similarity and full-text search.
+Hybrid semantic and keyword search across the live Corbis paper corpus. Check corbis.ai during the task before quoting a corpus size. Uses Reciprocal Rank Fusion (RRF) to combine vector similarity and full-text search.
 
 | Param | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -42,7 +42,7 @@ Full metadata for a single paper. Accepts UUID, OpenAlex ID (`W123456`), DOI, or
 |-------|------|----------|-------|
 | `paperId` | string | Yes | UUID, OpenAlex ID, DOI, or URL containing one of these. |
 
-**Returns**: `id`, `title`, `authors`, `year`, `journal`, `abstract`, `fullText`, `doi`, `openalexId`, `url`, `citedByCount`, `metadata`.
+**Returns**: `id`, `title`, `authors`, `year`, `journal`, `abstract` when available, `doi`, `openalexId`, `url`, `citedByCount`, and `metadata`. The current MCP response does not guarantee full text; inspect the paper itself for body-text claims.
 
 **Tips**:
 - Accepts URLs directly: `https://openalex.org/W123456` or `https://doi.org/10.1234/...`
@@ -291,7 +291,7 @@ Format 1–50 papers in APA 7, MLA 9, Chicago 17, Harvard, or BibTeX.
 
 ### `export_citations` (Tier 1)
 
-Generate citation files (BibTeX `.bib`, Markdown `.md`, JSON `.json`). Output `content` is ready to write to disk.
+Format supplied citation metadata as BibTeX `.bib`, Markdown `.md`, or JSON `.json`. Output `content` is ready to write to disk. This tool does not verify records against the Corbis corpus; confirm metadata first or run `verify_bibtex` on the result.
 
 | Param | Type | Required | Default | Notes |
 |-------|------|----------|---------|-------|
@@ -301,6 +301,20 @@ Generate citation files (BibTeX `.bib`, Markdown `.md`, JSON `.json`). Output `c
 | `includeAbstract` | boolean | No | `false` | Include abstracts in BibTeX/JSON output. |
 
 **Returns**: `exports[]` with `format`, `filename`, `content` (write directly to disk), `bytes`.
+
+---
+
+### `verify_bibtex`
+
+Parse a complete BibTeX file or inline BibTeX content and check each entry against the Corbis paper index. Availability depends on the active MCP connection and account access.
+
+| Param | Type | Required | Notes |
+|-------|------|----------|-------|
+| `bibtexContent` | string | One of content or URL | Raw BibTeX content. |
+| `bibtexUrl` | string | One of content or URL | URL of an uploaded `.bib` file supported by the service. |
+| `maxEntries` | number | No | Default 50, maximum 200. Split larger files into complete-entry batches. |
+
+**Returns**: `totalEntries`, `parsedCount`, `resolvedCount`, `unresolvedCount`, `parseErrors`, and per-entry `corrections` with field, current value, suggested value, reason, and severity. Inspect counts so no entry is silently skipped; confirm consequential corrections against the publisher, DOI landing page, or PDF.
 
 ---
 

@@ -2,7 +2,7 @@
 
 # Corbis Literature Starter Kit 
 
-**Turn your AI assistant into a literature-review machine. Search 400,000+ papers,  
+**Turn your AI assistant into a literature-review machine. Search the live Corbis paper corpus,
 map a field, test ideas, and come back with citations instead of 37 half-read browser tabs.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
@@ -105,10 +105,12 @@ Full guide: [`CORBIS_MCP_CODEX_GUIDE.md`](CORBIS_MCP_CODEX_GUIDE.md)
 <summary><b>Claude Code</b></summary>
 
 ```bash
-claude mcp add corbis --transport http https://www.corbis.ai/api/mcp/universal?apikey=YOUR_KEY
+export CORBIS_MCP_API_KEY="corbis_mcp_..."
 git clone https://github.com/Agentic-Assets/corbis-literature-starter-kit.git my-project
 cd my-project && claude
 ```
+
+The committed `.mcp.json` uses an Authorization header and reads the key from the environment.
 
 Full guide: [`CORBIS_MCP_CLAUDE_CODE_GUIDE.md`](CORBIS_MCP_CLAUDE_CODE_GUIDE.md)
 </details>
@@ -120,10 +122,7 @@ Full guide: [`CORBIS_MCP_CLAUDE_CODE_GUIDE.md`](CORBIS_MCP_CLAUDE_CODE_GUIDE.md)
 git clone https://github.com/Agentic-Assets/corbis-literature-starter-kit.git my-project
 ```
 
-Then in Cursor: **Settings > MCP Servers > Add**
-
-- Name: `corbis`
-- URL: `https://www.corbis.ai/api/mcp/universal?apikey=YOUR_KEY`
+Then connect the URL `https://www.corbis.ai/api/mcp/universal` in Cursor and authenticate with OAuth or an Authorization header. See [`CORBIS_CURSOR_PLUGIN.md`](CORBIS_CURSOR_PLUGIN.md) for setup.
 
 Open the project after connecting the server. Cursor can use the same Corbis MCP tools and repo guidance.
 
@@ -138,10 +137,7 @@ Connect to this MCP endpoint:
 https://www.corbis.ai/api/mcp/universal
 ```
 
-Authenticate with either:
-
-- `Authorization: Bearer YOUR_KEY`
-- `?apikey=YOUR_KEY`
+Authenticate through OAuth when supported, or send `Authorization: Bearer YOUR_KEY` in a header. Keep keys out of URLs.
 
 Architecture and client notes: [`CORBIS_MCP_GUIDE.md`](CORBIS_MCP_GUIDE.md)
 </details>

@@ -26,13 +26,14 @@ If you are using Codex instead, see [`CORBIS_MCP_CODEX_GUIDE.md`](./CORBIS_MCP_C
 
 ## Step 2: Add the MCP Server to Claude Code
 
-Run this command in your terminal, replacing `YOUR_API_KEY` with the key you just copied:
+This repository already defines Corbis in `.mcp.json`. Set the key in your environment before starting Claude Code:
 
 ```bash
-claude mcp add corbis --transport http https://www.corbis.ai/api/mcp/universal?apikey=YOUR_API_KEY
+export CORBIS_MCP_API_KEY="corbis_mcp_..."
+claude
 ```
 
-That's it. Claude Code will connect to Corbis on your next session.
+The project configuration sends the key in an Authorization header. Do not put the key in a URL or a committed file. Claude Code supports environment expansion in HTTP MCP headers.
 
 ### Verify the Connection
 
@@ -44,7 +45,7 @@ Run `claude mcp list` to confirm `corbis` appears in your server list. You can a
 
 Once connected, Claude Code can call Corbis tools automatically when relevant. You can also ask for them directly.
 
-### Available Tools (21 total)
+### Available Tools
 
 **Research & Papers**
 | Tool | What It Does |
@@ -55,6 +56,7 @@ Once connected, Claude Code can call Corbis tools automatically when relevant. Y
 | `literature_search` | Multi-query literature discovery with synthesis* |
 | `top_cited_articles` | Highest-cited papers for a topic |
 | `search_datasets` | Search research datasets |
+| `verify_bibtex` | Check complete BibTeX content against the paper index, when available to the connection |
 
 **Economic Data (FRED)**
 | Tool | What It Does |
@@ -155,7 +157,7 @@ Get national macro indicators for the US housing market
 
 ### "401 Unauthorized" errors
 - Your API key may be invalid or revoked. Generate a new one in **Settings > API Keys**.
-- Make sure the key is passed correctly in the URL (`?apikey=YOUR_KEY`).
+- Confirm `CORBIS_MCP_API_KEY` is set in the environment that launched Claude Code and the project's `.mcp.json` is loaded.
 
 ### Tools not appearing
 - Run `claude mcp list` to verify the server is registered.
@@ -181,11 +183,10 @@ claude mcp list
 # Remove the Corbis server
 claude mcp remove corbis
 
-# Re-add with a new key
-claude mcp add corbis --transport http https://www.corbis.ai/api/mcp/universal?apikey=NEW_API_KEY
+# Restart Claude Code after updating CORBIS_MCP_API_KEY in your secret store or shell environment
 ```
 
-To rotate your key, go to **Settings > API Keys**, click **Regenerate** on the existing key, then update your Claude Code config with the new key.
+To rotate your key, go to **Settings > API Keys**, click **Regenerate** on the existing key, then update `CORBIS_MCP_API_KEY` in your secret store or shell environment and restart Claude Code.
 
 ---
 
@@ -194,5 +195,5 @@ To rotate your key, go to **Settings > API Keys**, click **Regenerate** on the e
 - [README.md](./README.md) — Starter-kit overview, workflows, and quick setup
 - [Corbis MCP Setup Guide for Codex](./CORBIS_MCP_CODEX_GUIDE.md) — Codex-specific `config.toml` setup and troubleshooting
 - [Corbis MCP Tool Reference](./CORBIS_MCP_TOOL_REFERENCE.md) — **Detailed parameter reference, output schemas, and recommended workflows for every tool**
-- [Corbis Cursor Plugin](./CORBIS_CURSOR_PLUGIN.md) — Cursor plugin setup and direct MCP configuration
+- [Corbis Cursor MCP Setup](./CORBIS_CURSOR_PLUGIN.md) — Cursor connection guidance
 - [Corbis MCP Server Guide](./CORBIS_MCP_GUIDE.md) — Full architecture and multi-platform setup (Codex, Cursor, Claude, ChatGPT)
